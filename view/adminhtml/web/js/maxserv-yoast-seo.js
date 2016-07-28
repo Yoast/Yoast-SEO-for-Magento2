@@ -100,7 +100,7 @@ define([
                 $(this).on('change', function () {
                     widget.update();
                 });
-            });
+            })
         },
         saveSnippetData: function(data) {
             this.setTitleValue(data.title);
@@ -124,35 +124,35 @@ define([
             return '';
         },
         setTitleValue: function(value) {
-            this.pageMetaTitleInputElement.val(value).change();
+            this.pageMetaTitleInputElement.val(value);
             return this;
         },
         getIdentifierValue: function() {
             return this.pageIdentifierInputElement.val();
         },
         setIdentifierValue: function(value) {
-            this.pageIdentifierInputElement.val(value).change();
+            this.pageIdentifierInputElement.val(value);
             return this;
         },
         getKeywordValue: function() {
             return this.pageMetaKeywordInputElement.val();
         },
         setKeywordValue: function(value) {
-            this.pageMetaKeywordInputElement.val(value).change();
+            this.pageMetaKeywordInputElement.val(value);
             return this;
         },
         getContentValue: function() {
             return this.pageContentInputElement.val();
         },
         setContentValue: function(value) {
-            this.pageMetaDescriptionInputElement.val(value).change();
+            this.pageMetaDescriptionInputElement.val(value);
             return this;
         },
         getDescriptionValue: function() {
             return this.pageMetaDescriptionInputElement.val();
         },
         setDescriptionValue: function(value) {
-            this.pageMetaDescriptionInputElement.val(value).change();
+            this.pageMetaDescriptionInputElement.val(value);
             return this;
         }
     });
