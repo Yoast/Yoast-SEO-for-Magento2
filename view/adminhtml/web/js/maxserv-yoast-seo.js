@@ -124,35 +124,35 @@ define([
             return '';
         },
         setTitleValue: function(value) {
-            this.pageMetaTitleInputElement.val(value);
+            this.pageMetaTitleInputElement.val(value).change();
             return this;
         },
         getIdentifierValue: function() {
             return this.pageIdentifierInputElement.val();
         },
         setIdentifierValue: function(value) {
-            this.pageIdentifierInputElement.val(value);
+            this.pageIdentifierInputElement.val(value).change();
             return this;
         },
         getKeywordValue: function() {
             return this.pageMetaKeywordInputElement.val();
         },
         setKeywordValue: function(value) {
-            this.pageMetaKeywordInputElement.val(value);
+            this.pageMetaKeywordInputElement.val(value).change();
             return this;
         },
         getContentValue: function() {
             return this.pageContentInputElement.val();
         },
         setContentValue: function(value) {
-            this.pageMetaDescriptionInputElement.val(value);
+            this.pageMetaDescriptionInputElement.val(value).change();
             return this;
         },
         getDescriptionValue: function() {
             return this.pageMetaDescriptionInputElement.val();
         },
         setDescriptionValue: function(value) {
-            this.pageMetaDescriptionInputElement.val(value);
+            this.pageMetaDescriptionInputElement.val(value).change();
             return this;
         }
     });
