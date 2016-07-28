@@ -1,0 +1,9 @@
+# exclude IDE files
+nbproject
+.~lock.*
+.buildpath
+.idea
+.project
+.settings
+
+/node_modules/

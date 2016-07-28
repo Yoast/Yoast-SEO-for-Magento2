@@ -1,0 +1,12 @@
+<div>
+    Yoast SEO
+    <div id="yoast-seo-wrapper">
+        <div id="yoast-seo-snippet-preview"></div>
+        <div id="yoast-seo-output"></div>
+    </div>
+</div>
+<script>
+    require(['yoastSeo'], function(msys) {
+        msys([], $('#yoast-seo-wrapper'));
+    });
+</script>
