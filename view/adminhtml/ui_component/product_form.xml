@@ -20,19 +20,13 @@
   -->
 
 <form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
-    <fieldset name="search_engine_optimisation">
-        <field name="focus_keyword">
+    <fieldset name="search-engine-optimization">
+        <container name="maxserv_yoast_seo_container">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="dataType" xsi:type="string">string</item>
-                    <item name="label" xsi:type="string" translate="true">Focus Keyword</item>
-                    <item name="formElement" xsi:type="string">input</item>
-                    <item name="source" xsi:type="string">page</item>
-                    <item name="dataScope" xsi:type="string">focus_keyword</item>
+                    <item name="sortOrder" xsi:type="number">100</item>
                 </item>
             </argument>
-        </field>
-        <container name="maxserv_yoast_seo_container">
             <htmlContent name="maxserv_yoast_seo_html_content">
                 <argument name="block" xsi:type="object">MaxServ\YoastSeo\Block\Adminhtml\Cms\Page\Edit</argument>
             </htmlContent>

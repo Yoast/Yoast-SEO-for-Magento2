@@ -1,0 +1,15 @@
+<?php
+/** @var MaxServ\YoastSeo\Block\Adminhtml\Catalog\Product\Edit $block */
+?>
+<div>
+    Yoast SEO
+    <div id="yoast-seo-wrapper">
+        <div id="yoast-seo-snippet-preview"></div>
+        <div id="yoast-seo-output"></div>
+    </div>
+</div>
+<script>
+    require(['yoastSeo'], function(msys) {
+        msys({"itemUrl":"<?php echo $block->getProductUrl(); ?>"}, $('#yoast-seo-wrapper'));
+    });
+</script>

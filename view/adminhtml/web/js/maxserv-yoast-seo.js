@@ -29,22 +29,16 @@ define([
         _create: function() {
             var widget = this;
             this.snippetPreviewElement = $('#yoast-seo-snippet-preview')[0];
-            this.pageTitleInputElement = $('input[type=text][name=title]');
-            this.pageIdentifierInputElement = $('input[type=text][name=identifier]');
-            this.pageContentHeadingInputElement = $('input[type=text][name=content_heading]');
-            this.pageContentInputElement = $('textarea[name=content]');
-            this.pageMetaTitleInputElement = $('input[type=text][name=meta_title]');
-            this.pageMetaKeywordInputElement = $('textarea[name=meta_keywords]');
-            this.pageMetaDescriptionInputElement = $('textarea[name=meta_description]');
+            this.getInputElements();
 
             this.inputElements = [
-                this.pageTitleInputElement,
-                this.pageIdentifierInputElement,
-                this.pageContentHeadingInputElement,
-                this.pageContentInputElement,
-                this.pageMetaTitleInputElement,
-                this.pageMetaKeywordInputElement,
-                this.pageMetaDescriptionInputElement
+                this.titleInputElement,
+                this.urlKeyInputElement,
+                this.contentHeadingInputElement,
+                this.contentInputElement,
+                this.metaTitleInputElement,
+                this.focusKeywordInputElement,
+                this.metaDescriptionInputElement
             ];
 
             this.snippetPreview = new YoastSEO.SnippetPreview({
@@ -70,7 +64,7 @@ define([
                 },
                 callbacks: {
                     updateSnippetValues: function() {
-                        console.log(arguments);
+                        console.log('here');
                     },
                     getData: function() {
                         return {
@@ -100,7 +94,7 @@ define([
                 $(this).on('change', function () {
                     widget.update();
                 });
-            })
+            });
         },
         saveSnippetData: function(data) {
             this.setTitleValue(data.title);
@@ -108,12 +102,50 @@ define([
             this.setIdentifierValue(data.urlPath);
         },
         getBaseUrl: function() {
-            return 'http://moetnog.nl/';
+            return window.location.protocol + "//" + window.location.hostname + "/";
+        },
+        getInputElements: function() {
+            var body = $('body');
+            if (body.hasClass('cms-page-edit')) {
+                this.getCmsPageInputElements();
+            } else if (body.hasClass('catalog-product-edit')) {
+                this.getProductInputElements();
+            } else if (body.hasClass('catalog-category-edit')) {
+                console.log('get category input elements');
+                this.getCategoryInputElements();
+            }
+        },
+        getCmsPageInputElements: function() {
+            this.titleInputElement = $('input[type=text][name=title]');
+            this.urlKeyInputElement = $('input[type=text][name=identifier]');
+            this.contentHeadingInputElement = $('input[type=text][name=content_heading]');
+            this.contentInputElement = $('textarea[name=content]');
+            this.metaTitleInputElement = $('input[type=text][name=meta_title]');
+            this.focusKeywordInputElement = $('input[type=text][name=focus_keyword]');
+            this.metaDescriptionInputElement = $('textarea[name=meta_description]');
+        },
+        getProductInputElements: function() {
+            this.titleInputElement = $('input[type=text][name="product[name]"]');
+            this.urlKeyInputElement = $('input[type=text][name="product[url_key]"]');
+            this.contentHeadingInputElement = false;
+            this.contentInputElement = $('textarea[name=description]');
+            this.metaTitleInputElement = $('input[type=text][name="product[meta_title]"]');
+            this.focusKeywordInputElement = $('input[type=text][name="product[focus_keyword]"]');
+            this.metaDescriptionInputElement = $('textarea[name="product[meta_description]"]');
+        },
+        getCategoryInputElements: function() {
+            this.titleInputElement = $('input[type=text][name="name"]');
+            this.urlKeyInputElement = $('input[type=text][name="url_key"]');
+            this.contentHeadingInputElement = false;
+            this.contentInputElement = $('textarea[name=description]');
+            this.metaTitleInputElement = $('input[type=text][name="meta_title"]');
+            this.focusKeywordInputElement = $('input[type=text][name="focus_keyword"]');
+            this.metaDescriptionInputElement = $('textarea[name="meta_description"]');
         },
         getTitleValue: function() {
-            var metaTitle = this.pageMetaTitleInputElement.val(),
-                pageTitle = this.pageTitleInputElement.val(),
-                contentHeading = this.pageContentHeadingInputElement.val();
+            var metaTitle = this.metaTitleInputElement.val(),
+                pageTitle = this.titleInputElement.val(),
+                contentHeading = this.contentHeadingInputElement ? this.contentHeadingInputElement.val() : false;
             if (metaTitle) {
                 return metaTitle;
             } else if (pageTitle) {
@@ -124,35 +156,39 @@ define([
             return '';
         },
         setTitleValue: function(value) {
-            this.pageMetaTitleInputElement.val(value);
+            this.metaTitleInputElement.val(value);
             return this;
         },
         getIdentifierValue: function() {
-            return this.pageIdentifierInputElement.val();
+            return this.urlKeyInputElement.val();
         },
         setIdentifierValue: function(value) {
-            this.pageIdentifierInputElement.val(value);
+            this.urlKeyInputElement.val(value);
             return this;
         },
         getKeywordValue: function() {
-            return this.pageMetaKeywordInputElement.val();
+            return this.focusKeywordInputElement.val();
         },
         setKeywordValue: function(value) {
-            this.pageMetaKeywordInputElement.val(value);
+            this.focusKeywordInputElement.val(value);
             return this;
         },
         getContentValue: function() {
-            return this.pageContentInputElement.val();
+            var contentValue = this.contentInputElement.val();
+            if (!contentValue) {
+                contentValue = this.metaDescriptionInputElement.val();
+            }
+            return contentValue;
         },
         setContentValue: function(value) {
-            this.pageMetaDescriptionInputElement.val(value);
+            this.metaDescriptionInputElement.val(value);
             return this;
         },
         getDescriptionValue: function() {
-            return this.pageMetaDescriptionInputElement.val();
+            return this.metaDescriptionInputElement.val();
         },
         setDescriptionValue: function(value) {
-            this.pageMetaDescriptionInputElement.val(value);
+            this.metaDescriptionInputElement.val(value);
             return this;
         }
     });

@@ -19,26 +19,30 @@
  *
  */
 
-namespace MaxServ\YoastSeo\Setup;
+namespace MaxServ\YoastSeo\Helper;
 
-use Magento\Framework\Setup\InstallSchemaInterface;
-use Magento\Framework\Setup\ModuleContextInterface;
-use Magento\Framework\Setup\SchemaSetupInterface;
-
-class InstallInstall extends AbstractInstall implements InstallSchemaInterface
+class EditProductHelper
 {
 
-    public function install(SchemaSetupInterface $setup, ModuleContextInterface $context)
-    {
-        $this->setup = $setup;
+    /**
+     * @var Context
+     */
+    protected $context;
+
+    public function __construct(
+        Context $context
+    ) {
         $this->context = $context;
-
-        $this->updateCmsPageColumns();
     }
 
-    protected function updateCmsPageColumns()
+    /**
+     * @return Context
+     */
+    public function getContext()
     {
-        $this->addCmsPageColumn('focus_keyword', ['comment' => 'Focus Keyword']);
+        return $this->context;
     }
+
+
 
 }

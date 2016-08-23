@@ -19,19 +19,35 @@
  *
  */
 
-namespace MaxServ\YoastSeo\Block\Adminhtml\Cms\Page;
-
+namespace MaxServ\YoastSeo\Block\Adminhtml\Catalog\Product;
 
 use Magento\Backend\Block\Template;
+use Magento\Backend\Block\Template\Context;
+use Magento\Catalog\Api\Data\ProductInterface;
+use MaxServ\YoastSeo\Helper\EditProductHelper;
 
 class Edit extends Template
 {
+
     /**
-     * @return $this
+     * @var EditProductHelper
      */
-    protected function _prepareLayout()
+    protected $editProductHelper;
+
+    public function __construct(
+        Context $context,
+        EditProductHelper $editProductHelper,
+        array $data
+    ) {
+        parent::__construct($context, $data);
+        $this->editProductHelper = $editProductHelper;
+    }
+
+    public function getProductUrl()
     {
-        $this->setTemplate('cms/page/edit.phtml');
-        return parent::_prepareLayout();
+        /** @var Product $product */
+        $product = $this->editProductHelper->getContext()->getRegistry()->registry('current_product');
+
+        return $product->getProductUrl();
     }
 }
