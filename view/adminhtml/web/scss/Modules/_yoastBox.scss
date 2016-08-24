@@ -1,0 +1,53 @@
+.yoastBox {
+
+  width: 80%;
+  margin-right: auto;
+  margin-left: auto;
+
+  .yoastBox-tabs {
+
+    position: relative;
+    z-index: 2;
+    list-style:none;
+    margin-bottom:0;
+
+    &:after {
+      content: "";
+      display:table;
+      clear:both;
+    }
+
+    li {
+      float: left;
+      padding: 5px 10px;
+      border: 1px solid transparent;
+
+      &:not(:first-child) {
+        margin-left: 2px;
+      }
+    }
+
+    a {
+      display:block;
+      color: $adminTextColor;
+      transition: color 0.3s linear;
+    }
+    li.ui-state-active {
+      border-top-color: $adminTextColor;
+      border-right-color: $adminTextColor;
+      border-bottom-color: #ffffff;
+      border-left-color: $adminTextColor;
+
+      a {
+        color: $adminTextActiveColor;
+      }
+    }
+  }
+
+  .yoastBox-tab {
+
+    position: relative;
+    z-index: 1;
+    border: 1px solid $adminTextColor;
+  }
+}

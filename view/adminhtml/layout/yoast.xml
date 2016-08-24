@@ -23,5 +23,6 @@
     <head>
         <script src="MaxServ_YoastSeo::js/yoast-seo.min.js" />
         <css src="MaxServ_YoastSeo::css/yoast-seo.min.css" />
+        <css src="MaxServ_YoastSeo::css/maxserv-yoast-seo.min.css" />
     </head>
 </page>

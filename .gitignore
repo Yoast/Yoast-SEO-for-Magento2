@@ -6,4 +6,6 @@ nbproject
 .project
 .settings
 
-/node_modules/
+/build/grunt/node_modules/
+/view/adminhtml/web/css/maxserv-yoast-seo.min.css
+/view/adminhtml/web/css/maxserv-yoast-seo.min.css.map

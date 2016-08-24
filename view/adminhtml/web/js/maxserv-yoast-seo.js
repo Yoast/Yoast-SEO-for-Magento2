@@ -30,6 +30,10 @@ define([
             var widget = this;
             this.snippetPreviewElement = $('#yoast-seo-snippet-preview')[0];
             this.getInputElements();
+            $('#yoast-seo-wrapper').tabs({
+                active: 0,
+                collapsible: true
+            });
 
             this.inputElements = [
                 this.titleInputElement,

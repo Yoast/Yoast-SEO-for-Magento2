@@ -1,0 +1,28 @@
+<div id="yoast-seo-wrapper" class="yoastBox">
+    <ul class="yoastBox-tabs">
+        <li class="yoastBox-tabs-tab">
+            <a href="#yoast-seo-overview" title="<?php echo __('Overview'); ?>"><?php echo __('Overview'); ?></a>
+        </li>
+        <li class="yoastBox-tabs-tab">
+            <a href="#yoast-seo-facebook" title="<?php echo __('Facebook'); ?>"><?php echo __('Facebook'); ?></a>
+        </li>
+        <li class="yoastBox-tabs-tab">
+            <a href="#yoast-seo-twitter" title="<?php echo __('Twitter'); ?>"><?php echo __('Twitter'); ?></a>
+        </li>
+    </ul>
+    <div id="yoast-seo-overview" class="yoastBox-tab">
+        <div id="yoast-seo-snippet-preview"></div>
+        <div id="yoast-seo-output"></div>
+    </div>
+    <div id="yoast-seo-facebook" class="yoastBox-tab">
+        facebook
+    </div>
+    <div id="yoast-seo-twitter" class="yoastBox-tab">
+        twitter
+    </div>
+</div>
+<script>
+    require(['yoastSeo'], function(yoastSeo) {
+        yoastSeo($('yoast-seo-wrapper'));
+    });
+</script>

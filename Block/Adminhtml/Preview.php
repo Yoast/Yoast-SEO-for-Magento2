@@ -16,22 +16,22 @@
  * @author      Vincent Hornikx <vincent.hornikx@maxser.com>
  * @copyright   Copyright (c) 2016 MaxServ (http://www.maxserv.com)
  * @license     http://opensource.org/licenses/gpl-3.0.en.php General Public License (GPL 3.0)
- *
+ *  
  */
 
-namespace MaxServ\YoastSeo\Block\Adminhtml\Cms\Page;
+namespace MaxServ\YoastSeo\Block\Adminhtml;
 
 
 use Magento\Backend\Block\Template;
 
-class Edit extends Template
+class Preview extends Template
 {
     /**
      * @return $this
      */
     protected function _prepareLayout()
     {
-        $this->setTemplate('cms/page/edit.phtml');
+        $this->setTemplate('preview.phtml');
         return parent::_prepareLayout();
     }
 }

@@ -28,7 +28,7 @@
                 </item>
             </argument>
             <htmlContent name="maxserv_yoast_seo_html_content">
-                <argument name="block" xsi:type="object">MaxServ\YoastSeo\Block\Adminhtml\Cms\Page\Edit</argument>
+                <argument name="block" xsi:type="object">MaxServ\YoastSeo\Block\Adminhtml\Preview</argument>
             </htmlContent>
         </container>
     </fieldset>
