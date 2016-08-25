@@ -33,10 +33,10 @@
       transition: color 0.3s linear;
     }
     li.ui-state-active {
-      border-top-color: $adminTextColor;
-      border-right-color: $adminTextColor;
+      border-top-color: $adminBorderColor;
+      border-right-color: $adminBorderColor;
       border-bottom-color: #ffffff;
-      border-left-color: $adminTextColor;
+      border-left-color: $adminBorderColor;
 
       a {
         color: $adminTextActiveColor;
@@ -48,6 +48,14 @@
 
     position: relative;
     z-index: 1;
-    border: 1px solid $adminTextColor;
+    border: 1px solid $adminBorderColor;
+
+    .admin__field-label {
+      width: calc(100% * 0.15 - 30px);
+    }
+
+    .admin__field-control {
+      width: calc(100% * .8 - 30px);
+    }
   }
 }

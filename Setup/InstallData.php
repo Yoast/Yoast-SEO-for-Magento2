@@ -25,7 +25,7 @@ use Magento\Framework\Setup\InstallDataInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
 
-class InstallData extends AbstractInstall implements InstallDataInterface
+class InstallSchemaData extends AbstractInstallData implements InstallDataInterface
 {
 
     public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
@@ -40,7 +40,6 @@ class InstallData extends AbstractInstall implements InstallDataInterface
     protected function updateProductAttributes()
     {
         $this->addProductAttribute('focus_keyword', [
-            'type' => 'varchar',
             'label' => 'Focus Keyword',
             'group' => 'Search Engine Optimization',
             'sort_order' => 100

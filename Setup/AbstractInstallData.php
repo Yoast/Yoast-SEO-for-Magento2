@@ -25,14 +25,10 @@ use Magento\Catalog\Model\Category;
 use Magento\Catalog\Model\Product;
 use Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface;
 use Magento\Eav\Setup\EavSetup;
-use Magento\Eav\Setup\EavSetupFactory;
-use Magento\Framework\DB\Adapter\AdapterInterface;
-use Magento\Framework\DB\Ddl\Table;
 use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
-use Magento\Framework\Setup\SchemaSetupInterface;
 
-class AbstractInstall
+class AbstractInstallData
 {
 
     /**
@@ -41,14 +37,9 @@ class AbstractInstall
     protected $context;
 
     /**
-     * @var SchemaSetupInterface
+     * @var ModuleDataSetupInterface
      */
     protected $setup;
-
-    /**
-     * @var AdapterInterface
-     */
-    protected $setupConnection;
 
     /**
      * @var EavSetupFactory
@@ -75,32 +66,6 @@ class AbstractInstall
             $this->eavSetup = $this->eavSetupFactory->create(['setup' => $this->setup]);
         }
         return $this->eavSetup;
-    }
-
-    /**
-     * Add a column to the cms_page table if it does not exist yet.
-     *
-     * @param string $columnName
-     * @param array $columnDefinition
-     */
-    protected function addCmsPageColumn($columnName, $columnDefinition = [])
-    {
-        $tableName = $this->setupConnection->getTableName('cms_page');
-        if (!$this->setupConnection->tableColumnExists($tableName, $columnName)) {
-            $columnDefinition = array_merge(
-                [
-                    "type" => Table::TYPE_TEXT,
-                    "length" => 255,
-                    "comment" => "No Comment"
-                ],
-                $columnDefinition
-            );
-            $this->setupConnection->addColumn(
-                $tableName,
-                $columnName,
-                $columnDefinition
-            );
-        }
     }
 
     /**
@@ -181,5 +146,4 @@ class AbstractInstall
             );
         }
     }
-
 }

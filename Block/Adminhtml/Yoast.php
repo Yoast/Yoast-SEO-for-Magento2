@@ -16,23 +16,22 @@
  * @author      Vincent Hornikx <vincent.hornikx@maxser.com>
  * @copyright   Copyright (c) 2016 MaxServ (http://www.maxserv.com)
  * @license     http://opensource.org/licenses/gpl-3.0.en.php General Public License (GPL 3.0)
- *
+ *  
  */
 
-namespace MaxServ\YoastSeo\Setup;
+namespace MaxServ\YoastSeo\Block\Adminhtml;
 
-use Magento\Framework\Setup\InstallSchemaInterface;
-use Magento\Framework\Setup\ModuleContextInterface;
-use Magento\Framework\Setup\SchemaSetupInterface;
 
-class InstallInstallSchema extends AbstractInstallSchema implements InstallSchemaInterface
+use Magento\Backend\Block\Template;
+
+class Yoast extends Template
 {
-
-    public function install(SchemaSetupInterface $setup, ModuleContextInterface $context)
+    /**
+     * @return $this
+     */
+    protected function _prepareLayout()
     {
-        $this->setup = $setup;
-        $this->context = $context;
-
-        $this->updateCmsPageColumns();
+        $this->setTemplate('preview.phtml');
+        return parent::_prepareLayout();
     }
 }

@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!--
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the General Public License (GPL 3.0).
+  ~ This license is available through the world-wide-web at this URL:
+  ~ http://opensource.org/licenses/gpl-3.0.en.php
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this module to newer
+  ~ versions in the future.
+  ~
+  ~ @category    Maxserv: MaxServ_YoastSeo
+  ~ @package     Maxserv: MaxServ_YoastSeo
+  ~ @author      Vincent Hornikx <vincent.hornikx@maxser.com>
+  ~ @copyright   Copyright (c) 2016 MaxServ (http://www.maxserv.com)
+  ~ @license     http://opensource.org/licenses/gpl-3.0.en.php General Public License (GPL 3.0)
+  ~
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="MaxServ\YoastSeo\Model\ImageUploader" type="Magento\Catalog\Model\ImageUploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="string">yoast/tmp</argument>
+            <argument name="basePath" xsi:type="string">yoast/img</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="gif" xsi:type="string">gif</item>
+                <item name="png" xsi:type="string">png</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="MaxServ\YoastSeo\Controller\Adminhtml\Image\Upload">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">MaxServ\YoastSeo\Model\ImageUploader</argument>
+        </arguments>
+    </type>
+    <type name="MaxServ\YoastSeo\Plugin\Cms\PagePlugin">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">MaxServ\YoastSeo\Model\ImageUploader</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Cms\Model\Page">
+        <plugin name="maxserv_yoastseo_cms_pageplugin" type="MaxServ\YoastSeo\Plugin\Cms\PagePlugin" sortOrder="1"
+                disabled="false"/>
+    </type>
+    <type name="Magento\Cms\Model\Page\DataProvider">
+        <plugin name="maxserv_yoastseo_cms_page_dataproviderplugin"
+                type="MaxServ\YoastSeo\Plugin\Cms\Page\DataProviderPlugin" sortOrder="1" disabled="false"/>
+    </type>
+</config>

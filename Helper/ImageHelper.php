@@ -16,22 +16,34 @@
  * @author      Vincent Hornikx <vincent.hornikx@maxser.com>
  * @copyright   Copyright (c) 2016 MaxServ (http://www.maxserv.com)
  * @license     http://opensource.org/licenses/gpl-3.0.en.php General Public License (GPL 3.0)
- *  
+ *
  */
 
-namespace MaxServ\YoastSeo\Block\Adminhtml;
+namespace MaxServ\YoastSeo\Helper;
 
+use Magento\Framework\UrlInterface;
+use Magento\Store\Model\StoreManagerInterface;
 
-use Magento\Backend\Block\Template;
-
-class Preview extends Template
+class ImageHelper
 {
+
     /**
-     * @return $this
+     * @var StoreManagerInterface
      */
-    protected function _prepareLayout()
+    protected $storeManager;
+
+    public function __construct(
+        StoreManagerInterface $storeManager
+    ) {
+        $this->storeManager = $storeManager;
+    }
+
+    /**
+     * @param string $image
+     * @return string
+     */
+    public function getYoastImage($image)
     {
-        $this->setTemplate('preview.phtml');
-        return parent::_prepareLayout();
+        return $this->storeManager->getStore()->getBaseUrl(UrlInterface::URL_TYPE_MEDIA) . 'yoast/img/' . $image;
     }
 }

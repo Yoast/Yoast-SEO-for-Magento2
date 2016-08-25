@@ -31,8 +31,7 @@ define([
             this.snippetPreviewElement = $('#yoast-seo-snippet-preview')[0];
             this.getInputElements();
             $('#yoast-seo-wrapper').tabs({
-                active: 0,
-                collapsible: true
+                active: 0
             });
 
             this.inputElements = [
@@ -45,33 +44,43 @@ define([
                 this.metaDescriptionInputElement
             ];
 
-            this.snippetPreview = new YoastSEO.SnippetPreview({
-                data : {
+            this.setupSnippetPreview();
+            this.setupApp();
+            this.setupFacebook();
+            this.setupEventListeners();
+        },
+        setupSnippetPreview: function() {
+            var widget = this;
+            widget.snippetPreview = new YoastSEO.SnippetPreview({
+                data: {
                     title: widget.getTitleValue(),
                     keyword: widget.getKeywordValue(),
                     metaDesc: widget.getDescriptionValue(),
                     urlPath: widget.getIdentifierValue()
                 },
                 callbacks: {
-                    saveSnippetData: function(data) {
+                    saveSnippetData: function (data) {
                         widget.saveSnippetData(data);
                     }
                 },
                 baseUrl: widget.getBaseUrl(),
-                targetElement: this.snippetPreviewElement
+                targetElement: widget.snippetPreviewElement
             });
-
+        },
+        setupApp: function() {
+            var widget = this;
             this.app = new YoastSEO.App({
-                snippetPreview: this.snippetPreview,
+                snippetPreview: widget.snippetPreview,
                 targets: {
                     output: 'yoast-seo-output'
                 },
                 callbacks: {
                     updateSnippetValues: function() {
-                        console.log('here');
+
                     },
                     getData: function() {
                         return {
+                            baseUrl: widget.getBaseUrl(),
                             title: widget.getTitleValue(),
                             metaTitle: widget.getTitleValue(),
                             keyword: widget.getKeywordValue(),
@@ -82,9 +91,14 @@ define([
                     }
                 }
             });
-            this.app.refresh();
-            
-            this.setupEventListeners();
+            widget.app.refresh();
+        },
+        setupFacebook: function() {
+            $('#yoast-seo-facebook fieldset').append(
+                $('.yoastBox-facebookTitle'),
+                $('.yoastBox-facebookDescription'),
+                $('.yoastBox-facebookImage')
+            );
         },
         update: function() {
             this.app.refresh();
@@ -106,7 +120,11 @@ define([
             this.setIdentifierValue(data.urlPath);
         },
         getBaseUrl: function() {
-            return window.location.protocol + "//" + window.location.hostname + "/";
+            var url = window.location.origin;
+            if (url.substring(url.length-1, 1) !== '/') {
+                url += '/';
+            }
+            return url;
         },
         getInputElements: function() {
             var body = $('body');
@@ -120,6 +138,7 @@ define([
             }
         },
         getCmsPageInputElements: function() {
+            // fields for overview tab
             this.titleInputElement = $('input[type=text][name=title]');
             this.urlKeyInputElement = $('input[type=text][name=identifier]');
             this.contentHeadingInputElement = $('input[type=text][name=content_heading]');
@@ -127,6 +146,10 @@ define([
             this.metaTitleInputElement = $('input[type=text][name=meta_title]');
             this.focusKeywordInputElement = $('input[type=text][name=focus_keyword]');
             this.metaDescriptionInputElement = $('textarea[name=meta_description]');
+
+            // fields for facebook tab
+            this.facebookTitleInputElement = $('input[type=hidden][name=yoast_facebook_title]');
+            this.facebookDescriptionInputElement = $('input[type=hidden][name=yoast_facebook_description]');
         },
         getProductInputElements: function() {
             this.titleInputElement = $('input[type=text][name="product[name]"]');

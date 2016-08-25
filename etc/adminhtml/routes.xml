@@ -19,7 +19,10 @@
   ~
   -->
 
-<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
-    <update handle="yoast"/>
-
-</page>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="admin">
+        <route id="yoast" frontName="yoast">
+            <module name="MaxServ_YoastSeo" before="Magento_Backend" />
+        </route>
+    </router>
+</config>
