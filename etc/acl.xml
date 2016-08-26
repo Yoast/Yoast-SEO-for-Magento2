@@ -23,7 +23,14 @@
     <acl>
         <resources>
             <resource id="Magento_Backend::admin">
-                <resource id="MaxServ_YoastSeo::admin" title="Yoast SEO admin" translate="title" sortOrder="100" />
+                <resource id="MaxServ_YoastSeo::admin" title="Yoast SEO admin" translate="title" sortOrder="100"/>
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="MaxServ_YoastSeo::config" title="Yoast SEO Settings" translate="title" />
+                        </resource>
+                    </resource>
+                </resource>
             </resource>
         </resources>
     </acl>

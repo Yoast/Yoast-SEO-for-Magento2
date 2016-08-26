@@ -46,7 +46,19 @@ class PagePlugin
      */
     public function beforeSave(Page $subject)
     {
-        $image = $subject->getData('yoast_facebook_image', null);
+        $this->updateImage($subject, 'facebook');
+        $this->updateImage($subject, 'twitter');
+
+        return [];
+    }
+
+    /**
+     * @param Page $subject
+     * @param string $type
+     */
+    protected function updateImage($subject, $type)
+    {
+        $image = $subject->getData('yoast_' . $type . '_image', null);
 
         if (is_array($image)) {
             if (isset($image[0]['name'])) {
@@ -54,7 +66,7 @@ class PagePlugin
             } else {
                 $image = null;
             }
-            $subject->setData('yoast_facebook_image', $image);
+            $subject->setData('yoast_' . $type . '_image', $image);
         }
 
         if ($image !== null) {
@@ -64,7 +76,5 @@ class PagePlugin
                 //$this->_logger->critical($e);
             }
         }
-
-        return [];
     }
 }

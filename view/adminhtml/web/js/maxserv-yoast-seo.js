@@ -46,7 +46,7 @@ define([
 
             this.setupSnippetPreview();
             this.setupApp();
-            this.setupFacebook();
+            this.updateFieldsets();
             this.setupEventListeners();
         },
         setupSnippetPreview: function() {
@@ -93,11 +93,12 @@ define([
             });
             widget.app.refresh();
         },
-        setupFacebook: function() {
-            $('#yoast-seo-facebook fieldset').append(
-                $('.yoastBox-facebookTitle'),
-                $('.yoastBox-facebookDescription'),
-                $('.yoastBox-facebookImage')
+        updateFieldsets: function() {
+            $('#yoast-seo-facebook').append(
+                $('.yoastBox-facebook-fieldset')
+            );
+            $('#yoast-seo-twitter').append(
+                $('.yoastBox-twitter-fieldset')
             );
         },
         update: function() {
@@ -139,17 +140,13 @@ define([
         },
         getCmsPageInputElements: function() {
             // fields for overview tab
-            this.titleInputElement = $('input[type=text][name=title]');
-            this.urlKeyInputElement = $('input[type=text][name=identifier]');
-            this.contentHeadingInputElement = $('input[type=text][name=content_heading]');
-            this.contentInputElement = $('textarea[name=content]');
-            this.metaTitleInputElement = $('input[type=text][name=meta_title]');
-            this.focusKeywordInputElement = $('input[type=text][name=focus_keyword]');
-            this.metaDescriptionInputElement = $('textarea[name=meta_description]');
-
-            // fields for facebook tab
-            this.facebookTitleInputElement = $('input[type=hidden][name=yoast_facebook_title]');
-            this.facebookDescriptionInputElement = $('input[type=hidden][name=yoast_facebook_description]');
+            this.titleInputElement = $('.yoastBox-title .admin__control-text');
+            this.urlKeyInputElement = $('.yoastBox-urlKey .admin__control-text');
+            this.contentHeadingInputElement = $('.yoastBox-contentHeading .admin__control-text');
+            this.contentInputElement = $('.yoastBox-content .textarea');
+            this.metaTitleInputElement = $('.yoastBox-metaTitle .admin__control-text');
+            this.focusKeywordInputElement = $('.yoastBox-focusKeyword .admin__control-text');
+            this.metaDescriptionInputElement = $('.yoastBox-metaDescription .admin__control-textarea');
         },
         getProductInputElements: function() {
             this.titleInputElement = $('input[type=text][name="product[name]"]');

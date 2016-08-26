@@ -67,8 +67,14 @@ class Upload extends Action
      */
     public function execute()
     {
+        $field = null;
+        if (isset($_FILES['yoast_facebook_image'])) {
+            $field = 'yoast_facebook_image';
+        } elseif (isset($_FILES['yoast_twitter_image'])) {
+            $field = 'yoast_twitter_image';
+        }
         try {
-            $result = $this->imageUploader->saveFileToTmpDir('yoast_facebook_image');
+            $result = $this->imageUploader->saveFileToTmpDir($field);
 
             $result['cookie'] = [
                 'name' => $this->_getSession()->getName(),

@@ -41,17 +41,28 @@ class DataProviderPlugin
     public function afterGetData(DataProvider $subject, $result)
     {
         foreach ($result as &$item) {
-            $image = [];
-            if (isset($item['yoast_facebook_image']) && $item['yoast_facebook_image']) {
-                $img = $item['yoast_facebook_image'];
-                $image[] = [
-                    'name' => $img,
-                    'url' => $this->imageHelper->getYoastImage($img)
-                ];
-            }
-            $item['yoast_facebook_image'] = $image;
+            $this->updateImage($item, 'facebook');
+            $this->updateImage($item, 'twitter');
         }
 
         return $result;
+    }
+
+    protected function updateImage(&$item, $type)
+    {
+        $field = "yoast_{$type}_image";
+        $image = [];
+        if (isset($item[$field]) && $item[$field]) {
+            $img = $item[$field];
+            $image[] = [
+                'name' => $img,
+                'url' => $this->imageHelper->getYoastImage($img)
+            ];
+        }
+        if ($image) {
+            $item[$field] = $image;
+        } else {
+            unset($item[$field]);
+        }
     }
 }

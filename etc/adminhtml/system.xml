@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!--
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the General Public License (GPL 3.0).
+  ~ This license is available through the world-wide-web at this URL:
+  ~ http://opensource.org/licenses/gpl-3.0.en.php
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this module to newer
+  ~ versions in the future.
+  ~
+  ~ @category    Maxserv: MaxServ_YoastSeo
+  ~ @package     Maxserv: MaxServ_YoastSeo
+  ~ @author      Vincent Hornikx <vincent.hornikx@maxser.com>
+  ~ @copyright   Copyright (c) 2016 MaxServ (http://www.maxserv.com)
+  ~ @license     http://opensource.org/licenses/gpl-3.0.en.php General Public License (GPL 3.0)
+  ~
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="web">
+            <group id="seo">
+                <field id="twitter_company" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Company Twitter Account</label>
+                </field>
+                <field id="twitter_user" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Content Manager Twitter Account</label>
+                </field>
+                <field id="facebook_app_id" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Facebook App Id</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

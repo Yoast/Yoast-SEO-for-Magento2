@@ -50,6 +50,10 @@
     z-index: 1;
     border: 1px solid $adminBorderColor;
 
+    .fieldset-wrapper {
+      padding-bottom: 0;
+    }
+
     .admin__field-label {
       width: calc(100% * 0.15 - 30px);
     }
