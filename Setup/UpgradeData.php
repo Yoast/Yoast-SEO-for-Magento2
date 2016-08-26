@@ -21,14 +21,14 @@
 
 namespace MaxServ\YoastSeo\Setup;
 
-use Magento\Framework\Setup\InstallDataInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
+use Magento\Framework\Setup\UpgradeDataInterface;
 
-class InstallSchemaData extends AbstractInstallData implements InstallDataInterface
+class UpgradeData extends AbstractInstallData implements UpgradeDataInterface
 {
 
-    public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
+    public function upgrade(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
     {
         $this->setup = $setup;
         $this->context = $context;

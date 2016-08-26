@@ -128,18 +128,6 @@ define([
             return url;
         },
         getInputElements: function() {
-            var body = $('body');
-            if (body.hasClass('cms-page-edit')) {
-                this.getCmsPageInputElements();
-            } else if (body.hasClass('catalog-product-edit')) {
-                this.getProductInputElements();
-            } else if (body.hasClass('catalog-category-edit')) {
-                console.log('get category input elements');
-                this.getCategoryInputElements();
-            }
-        },
-        getCmsPageInputElements: function() {
-            // fields for overview tab
             this.titleInputElement = $('.yoastBox-title .admin__control-text');
             this.urlKeyInputElement = $('.yoastBox-urlKey .admin__control-text');
             this.contentHeadingInputElement = $('.yoastBox-contentHeading .admin__control-text');
@@ -147,15 +135,6 @@ define([
             this.metaTitleInputElement = $('.yoastBox-metaTitle .admin__control-text');
             this.focusKeywordInputElement = $('.yoastBox-focusKeyword .admin__control-text');
             this.metaDescriptionInputElement = $('.yoastBox-metaDescription .admin__control-textarea');
-        },
-        getProductInputElements: function() {
-            this.titleInputElement = $('input[type=text][name="product[name]"]');
-            this.urlKeyInputElement = $('input[type=text][name="product[url_key]"]');
-            this.contentHeadingInputElement = false;
-            this.contentInputElement = $('textarea[name=description]');
-            this.metaTitleInputElement = $('input[type=text][name="product[meta_title]"]');
-            this.focusKeywordInputElement = $('input[type=text][name="product[focus_keyword]"]');
-            this.metaDescriptionInputElement = $('textarea[name="product[meta_description]"]');
         },
         getCategoryInputElements: function() {
             this.titleInputElement = $('input[type=text][name="name"]');
@@ -169,7 +148,7 @@ define([
         getTitleValue: function() {
             var metaTitle = this.metaTitleInputElement.val(),
                 pageTitle = this.titleInputElement.val(),
-                contentHeading = this.contentHeadingInputElement ? this.contentHeadingInputElement.val() : false;
+                contentHeading = this.contentHeadingInputElement.val();
             if (metaTitle) {
                 return metaTitle;
             } else if (pageTitle) {

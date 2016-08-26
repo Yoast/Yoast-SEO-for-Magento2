@@ -58,6 +58,10 @@
       width: calc(100% * 0.15 - 30px);
     }
 
+    .admin__control-checkbox + .admin__field-label {
+      width: auto;
+    }
+
     .admin__field-control {
       width: calc(100% * .8 - 30px);
     }

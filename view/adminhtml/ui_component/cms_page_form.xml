@@ -84,8 +84,8 @@
                 </item>
             </argument>
         </field>
-        <container name="yoastBox-wrapper">
-            <htmlContent name="maxserv_yoast_seo_html_content">
+        <container name="yoastBox">
+            <htmlContent name="yoastBox-block">
                 <argument name="block" xsi:type="object">MaxServ\YoastSeo\Block\Adminhtml\YoastBox</argument>
             </htmlContent>
             <fieldset name="yoastBox-facebook">
@@ -134,6 +134,9 @@
                             <item name="sortOrder" xsi:type="number">40</item>
                             <item name="uploaderConfig" xsi:type="array">
                                 <item name="url" xsi:type="url" path="yoast/image/upload"/>
+                                <item name="formData" xsi:type="array">
+                                    <item name="yoast_image_key" xsi:type="string">yoast_facebook_image</item>
+                                </item>
                             </item>
                         </item>
                     </argument>
@@ -185,6 +188,9 @@
                             <item name="sortOrder" xsi:type="number">40</item>
                             <item name="uploaderConfig" xsi:type="array">
                                 <item name="url" xsi:type="url" path="yoast/image/upload"/>
+                                <item name="formData" xsi:type="array">
+                                    <item name="yoast_image_key" xsi:type="string">yoast_twitter_image</item>
+                                </item>
                             </item>
                         </item>
                     </argument>

@@ -23,6 +23,7 @@ namespace MaxServ\YoastSeo\Controller\Adminhtml\Image;
 
 use Magento\Backend\App\Action\Context;
 use Magento\Catalog\Model\ImageUploader;
+use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Backend\App\Action;
 
@@ -67,12 +68,7 @@ class Upload extends Action
      */
     public function execute()
     {
-        $field = null;
-        if (isset($_FILES['yoast_facebook_image'])) {
-            $field = 'yoast_facebook_image';
-        } elseif (isset($_FILES['yoast_twitter_image'])) {
-            $field = 'yoast_twitter_image';
-        }
+        $field = $this->getField();
         try {
             $result = $this->imageUploader->saveFileToTmpDir($field);
 
@@ -87,5 +83,11 @@ class Upload extends Action
             $result = ['error' => $e->getMessage(), 'errorcode' => $e->getCode()];
         }
         return $this->resultFactory->create(ResultFactory::TYPE_JSON)->setData($result);
+    }
+
+    protected function getField()
+    {
+        $key = $this->_request->getPost('yoast_image_key', false);
+        return $key;
     }
 }

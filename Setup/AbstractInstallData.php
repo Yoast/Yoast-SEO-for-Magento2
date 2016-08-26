@@ -25,6 +25,7 @@ use Magento\Catalog\Model\Category;
 use Magento\Catalog\Model\Product;
 use Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface;
 use Magento\Eav\Setup\EavSetup;
+use Magento\Eav\Setup\EavSetupFactory;
 use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
 
@@ -66,6 +67,63 @@ class AbstractInstallData
             $this->eavSetup = $this->eavSetupFactory->create(['setup' => $this->setup]);
         }
         return $this->eavSetup;
+    }
+
+    protected function updateProductAttributes()
+    {
+        $this->addProductAttribute('focus_keyword', [
+            'label' => 'Focus Keyword',
+            'group' => 'Search Engine Optimization',
+            'sort_order' => 100
+        ]);
+        $this->addProductAttribute('yoast_facebook_title', [
+            'label' => 'Facebook title',
+            'group' => 'Yoast Facebook',
+            'sort_order' => 10
+        ]);
+        $this->addProductAttribute('yoast_facebook_description', [
+            'label' => 'Facebook description',
+            'type' => 'text',
+            'input' => 'textarea',
+            'group' => 'Yoast Facebook',
+            'sort_order' => 20
+        ]);
+        $this->addProductAttribute('yoast_facebook_image', [
+            'input' => 'fileUploader',
+            'backend' => 'MaxServ\YoastSeo\Model\Attribute\Backend\Image',
+            'label' => 'Facebook image',
+            'group' => 'Yoast Facebook',
+            'sort_order' => 20
+        ]);
+        $this->addProductAttribute('yoast_twitter_title', [
+            'label' => 'Twitter title',
+            'group' => 'Yoast Twitter',
+            'sort_order' => 10
+        ]);
+        $this->addProductAttribute('yoast_twitter_description', [
+            'label' => 'Twitter description',
+            'type' => 'text',
+            'input' => 'textarea',
+            'group' => 'Yoast Twitter',
+            'sort_order' => 20
+        ]);
+        $this->addProductAttribute('yoast_twitter_image', [
+            'input' => 'fileUploader',
+            'backend' => 'MaxServ\YoastSeo\Model\Attribute\Backend\Image',
+            'label' => 'Twitter image',
+            'group' => 'Yoast Twitter',
+            'sort_order' => 20
+        ]);
+    }
+
+    protected function updateCategoryAttributes()
+    {
+        $this->addCategoryAttribute('focus_keyword', [
+            'type' => 'varchar',
+            'label' => 'Focus Keyword',
+            'group' => 'Search Engine Optimization',
+            'sort_order' => 100
+        ]);
     }
 
     /**

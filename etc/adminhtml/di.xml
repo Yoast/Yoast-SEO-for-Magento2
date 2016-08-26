@@ -43,6 +43,11 @@
             <argument name="imageUploader" xsi:type="object">MaxServ\YoastSeo\Model\ImageUploader</argument>
         </arguments>
     </type>
+    <type name="MaxServ\YoastSeo\Model\Attribute\Backend\Image">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">MaxServ\YoastSeo\Model\ImageUploader</argument>
+        </arguments>
+    </type>
     <type name="Magento\Cms\Model\Page">
         <plugin name="maxserv_yoastseo_cms_pageplugin" type="MaxServ\YoastSeo\Plugin\Cms\PagePlugin" sortOrder="1"
                 disabled="false"/>
@@ -51,4 +56,14 @@
         <plugin name="maxserv_yoastseo_cms_page_dataproviderplugin"
                 type="MaxServ\YoastSeo\Plugin\Cms\Page\DataProviderPlugin" sortOrder="1" disabled="false"/>
     </type>
+    <virtualType name="Magento\Catalog\Ui\DataProvider\Product\Form\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="yoastseo" xsi:type="array">
+                    <item name="class" xsi:type="string">MaxServ\YoastSeo\Ui\Catalog\DataProvider\Product\Form\Modifier\YoastSeo</item>
+                    <item name="sortOrder" xsi:type="number">130</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
 </config>
