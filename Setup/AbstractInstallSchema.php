@@ -59,12 +59,12 @@ class AbstractInstallSchema
 
     protected function updateCmsPageColumns()
     {
-        $this->addCmsPageColumn('focus_keyword', ['comment' => 'Focus Keyword', 'length' => -1]);
+        $this->addCmsPageColumn('focus_keyword', ['comment' => 'Focus Keyword']);
         $this->addCmsPageColumn('yoast_facebook_title', ['comment' => 'Yoast Facebook Title']);
-        $this->addCmsPageColumn('yoast_facebook_description', ['comment' => 'Yoast Facebook Description']);
+        $this->addCmsPageColumn('yoast_facebook_description', ['comment' => 'Yoast Facebook Description', 'length' => 0]);
         $this->addCmsPageColumn('yoast_facebook_image', ['comment' => 'Yoast Facebook Image']);
         $this->addCmsPageColumn('yoast_twitter_title', ['comment' => 'Yoast Twitter Title']);
-        $this->addCmsPageColumn('yoast_twitter_description', ['comment' => 'Yoast Twitter Description']);
+        $this->addCmsPageColumn('yoast_twitter_description', ['comment' => 'Yoast Twitter Description', 'length' => 0]);
         $this->addCmsPageColumn('yoast_twitter_image', ['comment' => 'Yoast Twitter Image']);
     }
 

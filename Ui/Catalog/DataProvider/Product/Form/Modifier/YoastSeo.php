@@ -94,6 +94,9 @@ class YoastSeo extends AbstractModifier
         return $meta;
     }
 
+    /**
+     * @param array $meta
+     */
     protected function setYoastFieldClasses(&$meta)
     {
         // general settings
@@ -116,10 +119,12 @@ class YoastSeo extends AbstractModifier
         $meta['yoast-twitter']['arguments']['data']['config']['collapsible'] = false;
         $meta['yoast-twitter']['arguments']['data']['config']['additionalClasses'] = 'yoastBox-twitter-fieldset';
         $this->updateImageConfiguration($meta['yoast-twitter']['children']['container_yoast_twitter_image']['children']['yoast_twitter_image']['arguments']['data']['config'], 'twitter');
-
-
     }
 
+    /**
+     * @param array $image
+     * @param string $type
+     */
     protected function updateImageConfiguration(&$image, $type)
     {
         $image = array_merge($image, [

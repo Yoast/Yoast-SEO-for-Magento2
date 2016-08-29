@@ -28,6 +28,10 @@ use Magento\Framework\Setup\UpgradeSchemaInterface;
 class UpgradeSchema extends AbstractInstallSchema implements UpgradeSchemaInterface
 {
 
+    /**
+     * @param SchemaSetupInterface $setup
+     * @param ModuleContextInterface $context
+     */
     public function upgrade(SchemaSetupInterface $setup, ModuleContextInterface $context)
     {
         $this->setup = $setup;

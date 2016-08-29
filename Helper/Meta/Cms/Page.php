@@ -68,14 +68,11 @@ class Page extends Meta
     public function getTitle()
     {
         if (empty($this->title)) {
-            $metaTitle = $this->getPage()->getMetaTitle();
-
-            // fallback to page title
-            if (empty ($metaTitle) || $metaTitle == '') {
-                $metaTitle = $this->getPage()->getTitle();
-            }
-
-            $this->title = $metaTitle;
+            $this->title = $this->getFirstAvailableValue(
+                $this->getPage()->getMetaTitle(),
+                $this->getPage()->getTitle(),
+                $this->getPage()->getContentHeading()
+            );
         }
 
         return $this->title;
@@ -87,11 +84,10 @@ class Page extends Meta
     public function getDescription()
     {
         if (empty($this->description)) {
-            $metaDescription = $this->getPage()->getMetaDescription();
-
-            // fallback to page content ?
-
-            $this->description = $metaDescription;
+            $this->description = $this->getFirstAvailableValue(
+                $this->getPage()->getMetaDescription()
+                // fallback to page content ?
+            );
         }
 
         return $this->description;
@@ -110,14 +106,10 @@ class Page extends Meta
      */
     public function getOpenGraphTitle()
     {
-        $openGraphTitle = $this->getPage()->getYoastFacebookTitle();
-
-        // fallback to default title
-        if (empty($openGraphTitle) || $openGraphTitle == '') {
-            $openGraphTitle = $this->getTitle();
-        }
-
-        return $openGraphTitle;
+        return $this->getFirstAvailableValue(
+            $this->getPage()->getYoastFacebookTitle(),
+            $this->getTitle()
+        );
     }
 
     /**
@@ -125,14 +117,10 @@ class Page extends Meta
      */
     public function getOpenGraphDescription()
     {
-        $openGraphDescription = $this->getPage()->getYoastFacebookDescription();
-
-        // fallback to default description
-        if (empty($openGraphDescription) || $openGraphDescription == '') {
-            $openGraphDescription = $this->getDescription();
-        }
-
-        return $openGraphDescription;
+        return $this->getFirstAvailableValue(
+            $this->getPage()->getYoastFacebookDescription(),
+            $this->getDescription()
+        );
     }
 
     /**
@@ -154,14 +142,10 @@ class Page extends Meta
      */
     public function getTwitterTitle()
     {
-        $twitterTitle = $this->getPage()->getYoastTwitterTitle();
-
-        // fallback to default title
-        if (empty($twitterTitle) || $twitterTitle == '') {
-            $twitterTitle = $this->getTitle();
-        }
-
-        return $twitterTitle;
+        return $this->getFirstAvailableValue(
+            $this->getPage()->getYoastTwitterTitle(),
+            $this->getTitle()
+        );
     }
 
     /**
@@ -169,14 +153,10 @@ class Page extends Meta
      */
     public function getTwitterDescription()
     {
-        $twitterDescription = $this->getPage()->getYoastTwitterDescription();
-
-        // fallback to default description
-        if (empty($twitterDescription) || $twitterDescription == '') {
-            $twitterDescription = $this->getDescription();
-        }
-
-        return $twitterDescription;
+        return $this->getFirstAvailableValue(
+            $this->getPage()->getYoastTwitterDescription(),
+            $this->getDescription()
+        );
     }
 
     /**

@@ -31,12 +31,20 @@ class DataProviderPlugin
      */
     protected $imageHelper;
 
+    /**
+     * @param ImageHelper $imageHelper
+     */
     public function __construct(
         ImageHelper $imageHelper
     ) {
         $this->imageHelper = $imageHelper;
     }
 
+    /**
+     * @param DataProvider $subject
+     * @param array $result
+     * @return array
+     */
     public function afterGetData(DataProvider $subject, $result)
     {
         foreach ($result as &$item) {

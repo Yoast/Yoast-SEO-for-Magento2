@@ -41,7 +41,6 @@ class YoastSeo extends Template
     protected $metaPool;
 
     /**
-     * YoastSeo constructor.
      * @param Context $context
      * @param array $metaPool
      * @param array $data

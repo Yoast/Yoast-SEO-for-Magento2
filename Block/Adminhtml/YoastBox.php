@@ -30,7 +30,7 @@ class YoastBox extends Template
      */
     protected function _prepareLayout()
     {
-        $this->setTemplate('yoastbox.phtml');
+        $this->setTemplate('MaxServ_YoastSeo::yoastbox.phtml');
         return parent::_prepareLayout();
     }
 }

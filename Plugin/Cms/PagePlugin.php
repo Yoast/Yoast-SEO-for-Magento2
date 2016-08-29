@@ -34,6 +34,9 @@ class PagePlugin
      */
     protected $imageUploader;
 
+    /**
+     * @param ImageUploader $imageUploader
+     */
     public function __construct(
         ImageUploader $imageUploader
     ) {

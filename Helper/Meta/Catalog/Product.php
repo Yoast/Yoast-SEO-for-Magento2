@@ -84,16 +84,11 @@ class Product extends Meta
     public function getTitle()
     {
         if (empty($this->title)) {
-            $metaTitle = $this->getProduct()->getMetaTitle();
-
-            // fallback to product name
-            if (empty($metaTitle) || $metaTitle == '') {
-                $metaTitle = $this->getProduct()->getName();
-            }
-
-            $this->title = $metaTitle;
+            $this->title = $this->getFirstAvailableValue(
+                $this->getProduct()->getMetaTitle(),
+                $this->getProduct()->getName()
+            );
         }
-
         return $this->title;
     }
 
@@ -103,19 +98,12 @@ class Product extends Meta
     public function getDescription()
     {
         if (empty($this->description)) {
-            $metaDescription = $this->getProduct()->getMetaDescription();
 
-            // fallback to short description
-            if (empty($metaDescription) || $metaDescription == '') {
-                $metaDescription = $this->getProduct()->getShortDescription();
-            }
-
-            // fallback to long description
-            if (empty($metaDescription) || $metaDescription == '') {
-                $metaDescription = $this->getProduct()->getDescription();
-            }
-
-            $this->description = $metaDescription;
+            $this->description = $this->getFirstAvailableValue(
+                $this->getProduct()->getMetaDescription(),
+                $this->getProduct()->getShortDescription(),
+                $this->getProduct()->getDescription()
+            );
         }
 
         return $this->description;
@@ -148,14 +136,10 @@ class Product extends Meta
      */
     public function getOpenGraphTitle()
     {
-        $openGraphTitle = $this->getProduct()->getYoastFacebookTitle();
-
-        // fallback to default title
-        if (empty($openGraphTitle) || $openGraphTitle == '') {
-            $openGraphTitle = $this->getTitle();
-        }
-
-        return $openGraphTitle;
+        return $this->getFirstAvailableValue(
+            $this->getProduct()->getYoastFacebookTitle(),
+            $this->getTitle()
+        );
     }
 
     /**
@@ -163,14 +147,10 @@ class Product extends Meta
      */
     public function getOpenGraphDescription()
     {
-        $openGraphDescription = $this->getProduct()->getYoastFacebookDescription();
-
-        // fallback to default description
-        if (empty($openGraphDescription) || $openGraphDescription == '') {
-            $openGraphDescription = $this->getDescription();
-        }
-
-        return $openGraphDescription;
+        return $this->getFirstAvailableValue(
+            $this->getProduct()->getYoastFacebookDescription(),
+            $this->getDescription()
+        );
     }
 
     /**
@@ -194,14 +174,10 @@ class Product extends Meta
      */
     public function getTwitterTitle()
     {
-        $twitterTitle = $this->getProduct()->getYoastTwitterTitle();
-
-        // fallback to default title
-        if (empty($twitterTitle) || $twitterTitle == '') {
-            $twitterTitle = $this->getTitle();
-        }
-
-        return $twitterTitle;
+        return $this->getFirstAvailableValue(
+            $this->getProduct()->getYoastTwitterTitle(),
+            $this->getTitle()
+        );
     }
 
     /**
@@ -209,14 +185,10 @@ class Product extends Meta
      */
     public function getTwitterDescription()
     {
-        $twitterDescription = $this->getProduct()->getYoastTwitterDescription();
-
-        // fallback to default description
-        if (empty($twitterDescription) || $twitterDescription == '') {
-            $twitterDescription = $this->getDescription();
-        }
-
-        return $twitterDescription;
+        return $this->getFirstAvailableValue(
+            $this->getProduct()->getYoastTwitterDescription(),
+            $this->getDescription()
+        );
     }
 
     /**

@@ -26,6 +26,7 @@ use Magento\Catalog\Model\ImageUploader;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Backend\App\Action;
+use Magento\Framework\Controller\ResultInterface;
 
 class Upload extends Action
 {
@@ -38,8 +39,6 @@ class Upload extends Action
     protected $imageUploader;
 
     /**
-     * Upload constructor.
-     *
      * @param Context $context
      * @param ImageUploader $imageUploader
      */
@@ -64,13 +63,13 @@ class Upload extends Action
     /**
      * Upload file controller action
      *
-     * @return \Magento\Framework\Controller\ResultInterface
+     * @return ResultInterface
      */
     public function execute()
     {
-        $field = $this->getField();
+        $fieldKey = $this->getFieldKey();
         try {
-            $result = $this->imageUploader->saveFileToTmpDir($field);
+            $result = $this->imageUploader->saveFileToTmpDir($fieldKey);
 
             $result['cookie'] = [
                 'name' => $this->_getSession()->getName(),
@@ -85,7 +84,10 @@ class Upload extends Action
         return $this->resultFactory->create(ResultFactory::TYPE_JSON)->setData($result);
     }
 
-    protected function getField()
+    /**
+     * @return getFieldKey
+     */
+    protected function getFieldKey()
     {
         $key = $this->_request->getPost('yoast_image_key', false);
         return $key;

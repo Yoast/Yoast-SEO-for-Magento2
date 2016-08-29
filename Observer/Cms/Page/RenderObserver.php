@@ -33,6 +33,9 @@ class RenderObserver implements ObserverInterface
      */
     protected $registry;
 
+    /**
+     * @param Registry $registry
+     */
     public function __construct(
         Registry $registry
     ) {

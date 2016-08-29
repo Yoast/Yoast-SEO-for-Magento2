@@ -28,6 +28,10 @@ use Magento\Framework\Setup\ModuleDataSetupInterface;
 class InstallSchemaData extends AbstractInstallData implements InstallDataInterface
 {
 
+    /**
+     * @param ModuleDataSetupInterface $setup
+     * @param ModuleContextInterface $context
+     */
     public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
     {
         $this->setup = $setup;

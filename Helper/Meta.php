@@ -59,6 +59,11 @@ abstract class Meta extends AbstractHelper
      */
     protected $imageHelper;
 
+    /**
+     * @param Context $context
+     * @param Registry $registry
+     * @param ImageHelper $imageHelper
+     */
     public function __construct(
         Context $context,
         Registry $registry,
@@ -140,6 +145,23 @@ abstract class Meta extends AbstractHelper
      * @return string
      */
     abstract public function getTwitterImage();
+
+    /**
+     * @return null|string
+     */
+    public function getFirstAvailableValue()
+    {
+        $args = func_get_args();
+        $result = null;
+        foreach ($args as $arg) {
+            if (!is_empty($arg) && is_string($arg) && $arg !== '') {
+                $result = $arg;
+                break;
+            }
+        }
+
+        return $result;
+    }
 
     /**
      * @return string

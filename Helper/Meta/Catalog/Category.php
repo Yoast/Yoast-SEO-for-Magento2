@@ -65,14 +65,10 @@ class Category extends Meta
     public function getTitle()
     {
         if (empty($this->title)) {
-            $metaTitle = $this->getCategory()->getMetaTitle();
-
-            // fallback to category name
-            if (empty($metaTitle) || $metaTitle == '') {
-                $metaTitle = $this->getCategory()->getName();
-            }
-
-            $this->title = $metaTitle;
+            $this->title = $this->getFirstAvailableValue(
+                $this->getCategory()->getMetaTitle(),
+                $this->getCategory()->getName()
+            );
         }
 
         return $this->title;
@@ -84,13 +80,11 @@ class Category extends Meta
     public function getDescription()
     {
         if (empty($this->description)) {
-            $metaDescription = $this->getCategory()->getMetaDescription();
-
-            // fallback to cms block if category is configured to show cms block?
-
-            // fallback to category content?
-
-            $this->description = $metaDescription;
+            $this->description = $this->getFirstAvailableValue(
+                $this->getCategory()->getMetaDescription()
+                // fallback to cms block if category is configured to show cms block?
+                // fallback to category content?
+            );
         }
 
         return $this->description;
@@ -113,14 +107,10 @@ class Category extends Meta
      */
     public function getOpenGraphTitle()
     {
-        $openGraphTitle = $this->getCategory()->getYoastFacebookTitle();
-
-        // fallback to default title
-        if (empty($openGraphTitle) || $openGraphTitle == '') {
-            $openGraphTitle = $this->getTitle();
-        }
-
-        return $openGraphTitle;
+        return $this->getFirstAvailableValue(
+            $this->getCategory()->getYoastFacebookTitle(),
+            $this->getTitle()
+        );
     }
 
     /**
@@ -128,14 +118,10 @@ class Category extends Meta
      */
     public function getOpenGraphDescription()
     {
-        $openGraphDescription = $this->getCategory()->getYoastFacebookDescription();
-
-        // fallback to default description
-        if (empty($openGraphDescription) || $openGraphDescription == '') {
-            $openGraphDescription = $this->getDescription();
-        }
-
-        return $openGraphDescription;
+        return $this->getFirstAvailableValue(
+            $this->getCategory()->getYoastFacebookDescription(),
+            $this->getDescription()
+        );
     }
 
     /**
@@ -159,14 +145,10 @@ class Category extends Meta
      */
     public function getTwitterTitle()
     {
-        $twitterTitle = $this->getCategory()->getYoastTwitterTitle();
-
-        // fallback to default title
-        if (empty($twitterTitle) || $twitterTitle == '') {
-            $twitterTitle = $this->getTitle();
-        }
-
-        return $twitterTitle;
+        return $this->getFirstAvailableValue(
+            $this->getCategory()->getYoastTwitterTitle(),
+            $this->getTitle()
+        );
     }
 
     /**
@@ -174,14 +156,10 @@ class Category extends Meta
      */
     public function getTwitterDescription()
     {
-        $twitterDescription = $this->getCategory()->getYoastTwitterDescription();
-
-        // fallback to default description
-        if (empty($twitterDescription) || $twitterDescription == '') {
-            $twitterDescription = $this->getDescription();
-        }
-
-        return $twitterDescription;
+        return $this->getFirstAvailableValue(
+            $this->getCategory()->getYoastTwitterDescription(),
+            $this->getDescription()
+        );
     }
 
     /**

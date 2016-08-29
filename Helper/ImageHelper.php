@@ -38,6 +38,12 @@ class ImageHelper
         $this->storeManager = $storeManager;
     }
 
+    /**
+     * Convert image filename into a format which the editor understands.
+     *
+     * @param array $item
+     * @param string $type
+     */
     public function updateImageDataForDataProvider(&$item, $type)
     {
         $field = "yoast_{$type}_image";

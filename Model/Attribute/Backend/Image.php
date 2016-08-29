@@ -33,6 +33,9 @@ class Image extends AbstractBackend
      */
     private $imageUploader;
 
+    /**
+     * @param ImageUploader $imageUploader
+     */
     public function __construct(
         ImageUploader $imageUploader
     ) {
@@ -72,7 +75,7 @@ class Image extends AbstractBackend
             try {
                 $this->imageUploader->moveFileFromTmp($image);
             } catch (\Exception $e) {
-                //$this->_logger->critical($e);
+                //todo: $this->_logger->critical($e);
             }
         }
     }
