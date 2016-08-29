@@ -81,9 +81,8 @@ class Category extends Meta
     {
         if (empty($this->description)) {
             $this->description = $this->getFirstAvailableValue(
-                $this->getCategory()->getMetaDescription()
-                // fallback to cms block if category is configured to show cms block?
-                // fallback to category content?
+                $this->getCategory()->getMetaDescription(),
+                $this->getCategory()->getDescription()
             );
         }
 
