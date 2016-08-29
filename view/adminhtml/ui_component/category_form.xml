@@ -39,6 +39,11 @@
         </field>
     </fieldset>
     <fieldset name="search_engine_optimization">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Search Engine Optimization by Yoast</item>
+            </item>
+        </argument>
         <field name="url_key">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
