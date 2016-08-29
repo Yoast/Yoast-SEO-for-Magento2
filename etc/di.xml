@@ -48,13 +48,4 @@
             <argument name="imageUploader" xsi:type="object">MaxServ\YoastSeo\Model\ImageUploader</argument>
         </arguments>
     </type>
-
-    <!-- meta renderer pool for YoastSeo block -->
-    <type name="MaxServ\YoastSeo\Block\YoastSeo">
-        <arguments>
-            <argument name="metaPool" xsi:type="array">
-                <item name="product" xsi:type="object">MaxServ\YoastSeo\Helper\Meta\Catalog\Product</item>
-            </argument>
-        </arguments>
-    </type>
 </config>
