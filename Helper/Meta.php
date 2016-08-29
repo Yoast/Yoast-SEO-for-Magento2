@@ -154,7 +154,7 @@ abstract class Meta extends AbstractHelper
         $args = func_get_args();
         $result = null;
         foreach ($args as $arg) {
-            if (!is_empty($arg) && is_string($arg) && $arg !== '') {
+            if (!empty($arg) && is_string($arg) && $arg !== '') {
                 $result = $arg;
                 break;
             }
