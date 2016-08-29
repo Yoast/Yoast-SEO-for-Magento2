@@ -1,0 +1,28 @@
+<?php
+
+use MaxServ\YoastSeo\Helper\Meta;
+
+/** @var MaxServ\YoastSeo\Block\YoastSeo $block */
+
+/** @var Meta $meta */
+$meta = $block->getMeta();
+?>
+
+<meta property="og:type" content="<?php echo $meta->getType(); ?>" />
+<meta property="og:title" content="<?php echo $meta->getOpenGraphTitle(); ?>" />
+<meta property="og:description" content="<?php echo $meta->getOpenGraphDescription(); ?>" />
+<meta property="og:image" content="<?php echo $meta->getOpenGraphImage(); ?>" />
+<meta property="og:url" content="<?php echo $meta->getUrl(); ?>" />
+<meta property="fb:app_id" content="<?php echo $block->getAppId(); ?>" />
+<?php if ($block->getPageType() == 'product' && $finalPrice = $meta->getProduct()->getFinalPrice()): ?>
+    <?php // todo: get price from meta object? switch template for product? ?>
+    <meta property="product:price:amount" content="<?php echo $finalPrice; ?>" />
+    <?php echo $block->getChildHtml('meta.currency'); ?>
+<?php endif; ?>
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="<?php echo $block->getTwitterSite(); ?>" />
+<meta name="twitter:creator" content="<?php echo $block->getTwitterCreator(); ?>" />
+<meta name="twitter:title" content="<?php echo $meta->getTwitterTitle(); ?>" />
+<meta name="twitter:description" content="<?php echo $meta->getTwitterDescription(); ?>" />
+<meta name="twitter:image" content="<?php echo $meta->getTwitterImage(); ?>" />

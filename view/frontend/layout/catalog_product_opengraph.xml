@@ -19,11 +19,14 @@
   ~
   -->
 
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
-    <module name="MaxServ_YoastSeo" setup_version="1.0.0">
-        <sequence>
-            <module name="Magento_Cms" />
-            <module name="Magento_Catalog" />
-        </sequence>
-    </module>
-</config>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="maxserv_yoastseo" />
+    <body>
+        <referenceBlock name="opengraph.general" remove="true" />
+        <referenceBlock name="maxserv.yoastseo">
+            <arguments>
+                <argument name="page_type" xsi:type="string">product</argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>
