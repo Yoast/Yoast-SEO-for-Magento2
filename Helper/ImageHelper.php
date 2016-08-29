@@ -38,6 +38,24 @@ class ImageHelper
         $this->storeManager = $storeManager;
     }
 
+    public function updateImageDataForDataProvider(&$item, $type)
+    {
+        $field = "yoast_{$type}_image";
+        $image = [];
+        if (isset($item[$field]) && $item[$field]) {
+            $img = $item[$field];
+            $image[] = [
+                'name' => $img,
+                'url' => $this->getYoastImage($img)
+            ];
+        }
+        if ($image) {
+            $item[$field] = $image;
+        } else {
+            unset($item[$field]);
+        }
+    }
+
     /**
      * @param string $image
      * @return string

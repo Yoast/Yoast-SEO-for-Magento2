@@ -19,14 +19,13 @@
  *
  */
 
-namespace MaxServ\YoastSeo\Plugin\Cms\Page;
+namespace MaxServ\YoastSeo\Plugin\Catalog\Category;
 
-use Magento\Cms\Model\Page\DataProvider;
+use Magento\Catalog\Model\Category\DataProvider;
 use MaxServ\YoastSeo\Helper\ImageHelper;
 
 class DataProviderPlugin
 {
-
     /**
      * @var ImageHelper
      */

@@ -56,6 +56,10 @@
         <plugin name="maxserv_yoastseo_cms_page_dataproviderplugin"
                 type="MaxServ\YoastSeo\Plugin\Cms\Page\DataProviderPlugin" sortOrder="1" disabled="false"/>
     </type>
+    <type name="Magento\Catalog\Model\Category\DataProvider">
+        <plugin name="maxserv_yoastseo_catalog_category_dataproviderplugin"
+                type="MaxServ\YoastSeo\Plugin\Catalog\Category\DataProviderPlugin" sortOrder="1" disabled="false"/>
+    </type>
     <virtualType name="Magento\Catalog\Ui\DataProvider\Product\Form\Modifier\Pool">
         <arguments>
             <argument name="modifiers" xsi:type="array">

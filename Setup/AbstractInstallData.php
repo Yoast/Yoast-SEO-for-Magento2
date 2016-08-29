@@ -124,6 +124,44 @@ class AbstractInstallData
             'group' => 'Search Engine Optimization',
             'sort_order' => 100
         ]);
+        $this->addCategoryAttribute('yoast_facebook_title', [
+            'label' => 'Facebook title',
+            'group' => 'Yoast Facebook',
+            'sort_order' => 10
+        ]);
+        $this->addCategoryAttribute('yoast_facebook_description', [
+            'label' => 'Facebook description',
+            'type' => 'text',
+            'input' => 'textarea',
+            'group' => 'Yoast Facebook',
+            'sort_order' => 20
+        ]);
+        $this->addCategoryAttribute('yoast_facebook_image', [
+            'input' => 'fileUploader',
+            'backend' => 'MaxServ\YoastSeo\Model\Attribute\Backend\Image',
+            'label' => 'Facebook image',
+            'group' => 'Yoast Facebook',
+            'sort_order' => 20
+        ]);
+        $this->addCategoryAttribute('yoast_twitter_title', [
+            'label' => 'Twitter title',
+            'group' => 'Yoast Twitter',
+            'sort_order' => 10
+        ]);
+        $this->addCategoryAttribute('yoast_twitter_description', [
+            'label' => 'Twitter description',
+            'type' => 'text',
+            'input' => 'textarea',
+            'group' => 'Yoast Twitter',
+            'sort_order' => 20
+        ]);
+        $this->addCategoryAttribute('yoast_twitter_image', [
+            'input' => 'fileUploader',
+            'backend' => 'MaxServ\YoastSeo\Model\Attribute\Backend\Image',
+            'label' => 'Twitter image',
+            'group' => 'Yoast Twitter',
+            'sort_order' => 20
+        ]);
     }
 
     /**
