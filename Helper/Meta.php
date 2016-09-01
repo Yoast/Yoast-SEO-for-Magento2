@@ -1,5 +1,4 @@
-
-        // todo: defaults<?php
+<?php
 /**
  * NOTICE OF LICENSE
  *

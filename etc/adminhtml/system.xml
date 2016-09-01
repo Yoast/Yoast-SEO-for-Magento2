@@ -32,6 +32,9 @@
                 <field id="facebook_app_id" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Facebook App Id</label>
                 </field>
+                <field id="facebook_admins" translate="label" type="text" sortOrder="45" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Facebook Admin Ids</label>
+                </field>
                 <field id="analysis_templates" translate="label" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Analysis templates</label>
                     <frontend_model>MaxServ\YoastSeo\Block\Adminhtml\Config\Form\Field\AnalysisTemplates</frontend_model>

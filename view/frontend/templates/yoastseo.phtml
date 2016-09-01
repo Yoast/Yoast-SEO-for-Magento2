@@ -51,7 +51,8 @@ if ($block->getPageType() == 'product') {
     <meta property="og:image" content="<?php echo $openGraphImage; ?>"/>
 <?php endif; ?>
 <meta property="og:url" content="<?php echo $meta->getUrl(); ?>"/>
-<meta property="fb:app_id" content="<?php echo $block->getAppId(); ?>"/>
+<meta property="fb:admins" content="<?php echo $block->getFacebookAdmins(); ?>"
+<meta property="fb:app_id" content="<?php echo $block->getFacebookAppId(); ?>"/>
 <?php if ($finalPrice): ?>
     <meta property="product:price:amount" content="<?php echo $finalPrice; ?>"/>
     <?php echo $block->getChildHtml('meta.currency'); ?>

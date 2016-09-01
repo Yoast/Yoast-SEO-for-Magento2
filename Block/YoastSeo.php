@@ -76,9 +76,17 @@ class YoastSeo extends Template
     /**
      * @return string
      */
-    public function getAppId()
+    public function getFacebookAppId()
     {
         return $this->_scopeConfig->getValue('web/seo/facebook_app_id', ScopeInterface::SCOPE_STORE);
+    }
+
+    /**
+     * @return string
+     */
+    public function getFacebookAdmins()
+    {
+        return $this->_scopeConfig->getValue('web/seo/facebook_admins', ScopeInterface::SCOPE_STORE);
     }
 
     /**
