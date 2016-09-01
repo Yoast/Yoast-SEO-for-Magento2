@@ -57,7 +57,7 @@
                     <p>{{images}}</p>]]>
                 </item>
                 <item name="catalog_category" xsi:type="string">
-                    <![CDATA[<h1>{{input[type="text"][name="name"]]}}</h1>
+                    <![CDATA[<h1>{{input[type="text"][name="name"]}}</h1>
 <p>{{textarea[name="description"]}}</p>
 <p>{{images}}</p>]]>
                 </item>
@@ -68,6 +68,7 @@
             </argument>
             <argument name="imagesHelpers" xsi:type="array">
                 <item name="catalog_product" xsi:type="object">MaxServ\YoastSeo\Helper\Analysis\Images\Product</item>
+                <item name="catalog_category" xsi:type="object">MaxServ\YoastSeo\Helper\Analysis\Images\Category</item>
             </argument>
         </arguments>
     </type>
