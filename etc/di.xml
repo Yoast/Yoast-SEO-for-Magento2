@@ -48,23 +48,26 @@
             <argument name="imageUploader" xsi:type="object">MaxServ\YoastSeo\Model\ImageUploader</argument>
         </arguments>
     </type>
-    <type name="MaxServ\YoastSeo\Helper\TemplatesHelper">
+    <type name="MaxServ\YoastSeo\Helper\Analysis\TemplatesHelper">
         <arguments>
-            <argument name="templates" xsi:type="array">
+            <argument name="defaultTemplates" xsi:type="array">
                 <item name="catalog_product" xsi:type="string">
-                    <![CDATA[<h1>{{name}}</h1>
-                    <p>{{content}}</p>
+                    <![CDATA[<h1>{{input[type="text"][name="product[name]"]}}</h1>
+                    <p>{{textarea[name="description"]}}</p>
                     <p>{{images}}</p>]]>
                 </item>
                 <item name="catalog_category" xsi:type="string">
-                    <![CDATA[<h1>{{name}}</h1>
-<p>{{description}}</p>
-<p>{{image}}</p>]]>
+                    <![CDATA[<h1>{{input[type="text"][name="name"]]}}</h1>
+<p>{{textarea[name="description"]}}</p>
+<p>{{images}}</p>]]>
                 </item>
                 <item name="cms_page" xsi:type="string">
-                    <![CDATA[<h1>{{title}}</h1>
-<p>{{content}}</p>]]>
+                    <![CDATA[<h1>{{input[type="text"][name="title"]}}</h1>
+<p>{{textarea[name="content"]}}</p>]]>
                 </item>
+            </argument>
+            <argument name="imagesHelpers" xsi:type="array">
+                <item name="catalog_product" xsi:type="object">MaxServ\YoastSeo\Helper\Analysis\Images\Product</item>
             </argument>
         </arguments>
     </type>

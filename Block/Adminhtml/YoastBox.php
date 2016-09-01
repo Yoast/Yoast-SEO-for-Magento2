@@ -25,12 +25,12 @@ use Magento\Backend\Block\Template;
 
 class YoastBox extends Template
 {
-    /**
-     * @return $this
-     */
-    protected function _prepareLayout()
+
+    protected function _construct()
     {
         $this->setTemplate('MaxServ_YoastSeo::yoastbox.phtml');
-        return parent::_prepareLayout();
+        $this->setNameInLayout('maxserv_yoast_block');
+
+        parent::_construct();
     }
 }

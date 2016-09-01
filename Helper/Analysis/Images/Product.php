@@ -19,34 +19,38 @@
  *
  */
 
-namespace MaxServ\YoastSeo\Helper;
+namespace MaxServ\YoastSeo\Helper\Analysis\Images;
 
-use Magento\Framework\App\Helper\AbstractHelper;
-use Magento\Framework\App\Helper\Context;
+use Magento\Framework\Registry;
 
-class TemplatesHelper extends AbstractHelper
+class Product
 {
 
     /**
-     * @var array
+     * @var Registry
      */
-    protected $templates;
+    protected $registry;
 
     public function __construct(
-        Context $context,
-        array $templates = []
+        Registry $registry
     ) {
-        parent::__construct($context);
-        $this->templates = $templates;
+        $this->registry = $registry;
     }
 
-    public function getTemplate($entityType)
+    public function getImages()
     {
-        if (!isset($this->templates[$entityType])) {
-            return '';
+        /** @var \Magento\Catalog\Model\Product $product */
+        $product = $this->registry->registry('current_product');
+        $images = [];
+
+        $gallery = $product->getMediaGalleryImages();
+        if (is_array($gallery)) {
+            foreach ($gallery as $item) {
+                $images[] = sprintf("<img src='%s' alt='%s' />", $item->getUrl(), $product->getName());
+            }
         }
 
-        return $this->templates[$entityType];
+        return $images;
     }
 
 }

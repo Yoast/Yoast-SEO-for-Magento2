@@ -17,7 +17,7 @@
  * @license     http://opensource.org/licenses/gpl-3.0.en.php General Public License (GPL 3.0)
  *
  */
-/* global YoastSEO */
+/* global YoastSEO, window */
 
 define([
     'jquery',
@@ -27,7 +27,8 @@ define([
 
     $.widget('maxServ.yoastSeo', {
         _create: function() {
-            var widget = this;
+            this.element = $('#yoast-seo-wrapper');
+            this.config = window.yoastBoxConfig;
             this.snippetPreviewElement = $('#yoast-seo-snippet-preview')[0];
             this.getInputElements();
             $('#yoast-seo-wrapper').tabs({
@@ -38,16 +39,43 @@ define([
                 this.titleInputElement,
                 this.urlKeyInputElement,
                 this.contentHeadingInputElement,
-                this.contentInputElement,
                 this.metaTitleInputElement,
                 this.focusKeywordInputElement,
                 this.metaDescriptionInputElement
             ];
 
+            this.getTemplateElements();
             this.setupSnippetPreview();
             this.setupApp();
             this.updateFieldsets();
             this.setupEventListeners();
+        },
+        getInputElements: function() {
+            this.titleInputElement = $('.yoastBox-title .admin__control-text');
+            this.urlKeyInputElement = $('.yoastBox-urlKey .admin__control-text');
+            this.contentHeadingInputElement = $('.yoastBox-contentHeading .admin__control-text');
+            this.metaTitleInputElement = $('.yoastBox-metaTitle .admin__control-text');
+            this.focusKeywordInputElement = $('.yoastBox-focusKeyword .admin__control-text');
+            this.metaDescriptionInputElement = $('.yoastBox-metaDescription .admin__control-textarea');
+        },
+        getTemplateElements: function() {
+            // template input elements
+            var widget = this,
+                template = this.config.contentTemplate,
+                matches = template.match(/\{\{([\sa-zA-Z0-9\-_\[\]"=]+)}}/g),
+                selector, inputElement;
+
+            widget.templateElements = {};
+            $(matches).each(function() {
+                if (this !== '{{images}}') {
+                    selector = this.replace(/(\{\{|}})/g, '');
+                    inputElement = $(selector);
+                    if (inputElement.length) {
+                        widget.templateElements[this] = inputElement;
+                        widget.inputElements.push(inputElement);
+                    }
+                }
+            });
         },
         setupSnippetPreview: function() {
             var widget = this;
@@ -127,20 +155,10 @@ define([
             }
             return url;
         },
-        getInputElements: function() {
-            this.titleInputElement = $('.yoastBox-title .admin__control-text');
-            this.urlKeyInputElement = $('.yoastBox-urlKey .admin__control-text');
-            this.contentHeadingInputElement = $('.yoastBox-contentHeading .admin__control-text');
-            this.contentInputElement = $('.yoastBox-content .textarea');
-            this.metaTitleInputElement = $('.yoastBox-metaTitle .admin__control-text');
-            this.focusKeywordInputElement = $('.yoastBox-focusKeyword .admin__control-text');
-            this.metaDescriptionInputElement = $('.yoastBox-metaDescription .admin__control-textarea');
-        },
         getCategoryInputElements: function() {
             this.titleInputElement = $('input[type=text][name="name"]');
             this.urlKeyInputElement = $('input[type=text][name="url_key"]');
             this.contentHeadingInputElement = false;
-            this.contentInputElement = $('textarea[name=description]');
             this.metaTitleInputElement = $('input[type=text][name="meta_title"]');
             this.focusKeywordInputElement = $('input[type=text][name="focus_keyword"]');
             this.metaDescriptionInputElement = $('textarea[name="meta_description"]');
@@ -177,11 +195,32 @@ define([
             return this;
         },
         getContentValue: function() {
-            var contentValue = this.contentInputElement.val();
-            if (!contentValue) {
-                contentValue = this.metaDescriptionInputElement.val();
+            var widget = this,
+                template = widget.config.contentTemplate,
+                selector;
+            for (selector in widget.templateElements) {
+                template = template.split(selector).join(widget.getElementValue(widget.templateElements[selector]));
             }
-            return contentValue;
+            template = template.replace('{{images}}', widget.config.images.join('<br />'));
+
+            return template;
+        },
+        getElementValue: function(inputElement) {
+            var tag = inputElement.prop('tagName').toLowerCase(),
+                value = '';
+            switch(tag) {
+                case 'input':
+                case 'textarea':
+                    value = inputElement.val();
+                    break;
+                case 'select':
+                    inputElement.find('option:selected').each(function() {
+                        value += (value !== '' ? ', ' : '') + $(this).text();
+                    });
+                    break;
+            }
+
+            return value;
         },
         setContentValue: function(value) {
             this.metaDescriptionInputElement.val(value);

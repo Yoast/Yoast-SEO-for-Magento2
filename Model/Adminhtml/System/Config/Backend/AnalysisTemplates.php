@@ -30,7 +30,7 @@ use Magento\Framework\Math\Random;
 use Magento\Framework\Model\Context;
 use Magento\Framework\Model\ResourceModel\AbstractResource;
 use Magento\Framework\Registry;
-use MaxServ\YoastSeo\Helper\TemplatesHelper;
+use MaxServ\YoastSeo\Helper\Analysis\TemplatesHelper;
 
 class AnalysisTemplates extends Value
 {
@@ -61,6 +61,9 @@ class AnalysisTemplates extends Value
         $this->templatesHelper = $templatesHelper;
     }
 
+    /**
+     * Unserialize and format configuration for adminhtml config
+     */
     protected function _afterLoad()
     {
         $value = $this->getValue();
@@ -85,13 +88,16 @@ class AnalysisTemplates extends Value
             $resultId = $this->mathRandom->getUniqueHash('_');
             $result[$resultId] = [
                 'entity_type' => $entityType,
-                'template' => $this->templatesHelper->getTemplate($entityType)
+                'template' => $this->templatesHelper->getDefaultTemplate($entityType)
             ];
         }
 
         $this->setValue($result);
     }
 
+    /**
+     * Format and serialize configuration as [<entityType> => <template>]
+     */
     public function beforeSave()
     {
         $value = $this->getValue();
