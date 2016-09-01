@@ -23,14 +23,19 @@
     <system>
         <section id="web">
             <group id="seo">
-                <field id="twitter_company" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                <field id="twitter_company" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Company Twitter Account</label>
                 </field>
-                <field id="twitter_user" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                <field id="twitter_user" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Content Manager Twitter Account</label>
                 </field>
-                <field id="facebook_app_id" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                <field id="facebook_app_id" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Facebook App Id</label>
+                </field>
+                <field id="analysis_templates" translate="label" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Analysis templates</label>
+                    <frontend_model>MaxServ\YoastSeo\Block\Adminhtml\Config\Form\Field\AnalysisTemplates</frontend_model>
+                    <backend_model>MaxServ\YoastSeo\Model\Adminhtml\System\Config\Backend\AnalysisTemplates</backend_model>
                 </field>
             </group>
         </section>

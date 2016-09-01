@@ -1,0 +1,108 @@
+<?php
+/**
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the General Public License (GPL 3.0).
+ * This license is available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/gpl-3.0.en.php
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this module to newer
+ * versions in the future.
+ *
+ * @category    Maxserv: MaxServ_YoastSeo
+ * @package     Maxserv: MaxServ_YoastSeo
+ * @author      Vincent Hornikx <vincent.hornikx@maxser.com>
+ * @copyright   Copyright (c) 2016 MaxServ (http://www.maxserv.com)
+ * @license     http://opensource.org/licenses/gpl-3.0.en.php General Public License (GPL 3.0)
+ *
+ */
+
+namespace MaxServ\YoastSeo\Model\Adminhtml\System\Config\Backend;
+
+
+use Magento\Framework\App\Cache\TypeListInterface;
+use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\App\Config\Value;
+use Magento\Framework\Data\Collection\AbstractDb;
+use Magento\Framework\Math\Random;
+use Magento\Framework\Model\Context;
+use Magento\Framework\Model\ResourceModel\AbstractResource;
+use Magento\Framework\Registry;
+use MaxServ\YoastSeo\Helper\TemplatesHelper;
+
+class AnalysisTemplates extends Value
+{
+
+    /**
+     * @var Random
+     */
+    protected $mathRandom;
+
+    /**
+     * @var TemplatesHelper
+     */
+    protected $templatesHelper;
+
+    public function __construct(
+        Context $context,
+        Registry $registry,
+        ScopeConfigInterface $config,
+        TypeListInterface $cacheTypeList,
+        AbstractResource $resource = null,
+        AbstractDb $resourceCollection = null,
+        Random $mathRandom,
+        TemplatesHelper $templatesHelper,
+        array $data = []
+    ) {
+        parent::__construct($context, $registry, $config, $cacheTypeList, $resource, $resourceCollection, $data);
+        $this->mathRandom = $mathRandom;
+        $this->templatesHelper = $templatesHelper;
+    }
+
+    protected function _afterLoad()
+    {
+        $value = $this->getValue();
+
+        if (!empty($value) && is_string($value)) {
+            $value = unserialize($value);
+        }
+
+        $result = [];
+        $entityTypes = [];
+        foreach ($value as $entityType => $template) {
+            $resultId = $this->mathRandom->getUniqueHash('_');
+            $result[$resultId] = [
+                'entity_type' => $entityType,
+                'template' => $template
+            ];
+            $entityTypes[] = $entityType;
+        }
+
+        $requiredEntityTypes = ['catalog_product', 'catalog_category', 'cms_page'];
+        foreach (array_diff($requiredEntityTypes, $entityTypes) as $entityType) {
+            $resultId = $this->mathRandom->getUniqueHash('_');
+            $result[$resultId] = [
+                'entity_type' => $entityType,
+                'template' => $this->templatesHelper->getTemplate($entityType)
+            ];
+        }
+
+        $this->setValue($result);
+    }
+
+    public function beforeSave()
+    {
+        $value = $this->getValue();
+
+        unset($value['__empty']);
+        $result = [];
+        foreach ($value as $row) {
+            $result[$row['entity_type']] = $row['template'];
+        }
+        $value = serialize($result);
+
+        $this->setValue($value);
+    }
+}
