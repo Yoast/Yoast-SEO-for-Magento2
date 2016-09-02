@@ -56,18 +56,17 @@ class YoastSeo extends Template
 
     /**
      * @return Meta
+     * @throws \ErrorException
      */
     public function getMeta()
     {
         $pageType = $this->getPageType();
         if (empty($pageType)) {
-            exit('no pagetype');
-            // todo: exception please
+            throw new \ErrorException('No pageType registered.');
         }
 
         if (!isset($this->metaPool[$pageType])) {
-            exit('no meta object for pagetype');
-            // todo: exception please
+            throw new \ErrorException('No meta object for pageType [' . $pageType . ']');
         }
 
         return $this->metaPool[$pageType];

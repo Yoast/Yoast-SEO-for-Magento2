@@ -45,6 +45,18 @@ class AnalysisTemplates extends Value
      */
     protected $templatesHelper;
 
+    /**
+     * AnalysisTemplates constructor.
+     * @param Context $context
+     * @param Registry $registry
+     * @param ScopeConfigInterface $config
+     * @param TypeListInterface $cacheTypeList
+     * @param AbstractResource|null $resource
+     * @param AbstractDb|null $resourceCollection
+     * @param Random $mathRandom
+     * @param TemplatesHelper $templatesHelper
+     * @param array $data
+     */
     public function __construct(
         Context $context,
         Registry $registry,

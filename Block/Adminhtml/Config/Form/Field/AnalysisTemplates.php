@@ -31,8 +31,6 @@ use MaxServ\YoastSeo\Helper\Analysis\TemplatesHelper;
 /**
  * Class AnalysisTemplates
  * @package MaxServ\YoastSeo\Block\Adminhtml\Config\Form\Field
- *
- * @todo: template as textarea
  */
 class AnalysisTemplates extends AbstractFieldArray
 {
@@ -52,6 +50,13 @@ class AnalysisTemplates extends AbstractFieldArray
      */
     protected $templatesHelper;
 
+    /**
+     * AnalysisTemplates constructor.
+     * @param Context $context
+     * @param TemplatesHelper $templatesHelper
+     * @param Random $mathRandom
+     * @param array $data
+     */
     public function __construct(
         Context $context,
         TemplatesHelper $templatesHelper,
@@ -62,6 +67,9 @@ class AnalysisTemplates extends AbstractFieldArray
         $this->templatesHelper = $templatesHelper;
     }
 
+    /**
+     * @return EntityType
+     */
     public function getEntityTypeRenderer()
     {
         if (empty($this->entityTypeRenderer)) {
@@ -92,6 +100,10 @@ class AnalysisTemplates extends AbstractFieldArray
         return $this->textAreaRenderer;
     }
 
+    /**
+     * @param AbstractElement $element
+     * @return string
+     */
     protected function _getElementHtml(AbstractElement $element)
     {
         if (!$element->getValue()) {

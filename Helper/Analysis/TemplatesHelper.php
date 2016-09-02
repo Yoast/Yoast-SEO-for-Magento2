@@ -49,6 +49,13 @@ class TemplatesHelper extends AbstractHelper
      */
     protected $mathRandom;
 
+    /**
+     * TemplatesHelper constructor.
+     * @param Context $context
+     * @param Random $mathRandom
+     * @param array $defaultTemplates
+     * @param array $imagesHelpers
+     */
     public function __construct(
         Context $context,
         Random $mathRandom,

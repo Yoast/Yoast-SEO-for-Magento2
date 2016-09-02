@@ -87,7 +87,6 @@ abstract class Meta extends AbstractHelper
      */
     public function getTitleTemplate()
     {
-        // todo: make setting?
         return '%s | ' . $this->getStoreName();
     }
 

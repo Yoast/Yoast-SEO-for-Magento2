@@ -32,6 +32,10 @@ class ImageHelper
      */
     protected $storeManager;
 
+    /**
+     * ImageHelper constructor.
+     * @param StoreManagerInterface $storeManager
+     */
     public function __construct(
         StoreManagerInterface $storeManager
     ) {

@@ -75,7 +75,7 @@ class Image extends AbstractBackend
             try {
                 $this->imageUploader->moveFileFromTmp($image);
             } catch (\Exception $e) {
-                //todo: $this->_logger->critical($e);
+                // silent
             }
         }
     }
