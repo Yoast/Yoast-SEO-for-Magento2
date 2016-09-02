@@ -32,4 +32,7 @@
             </argument>
         </arguments>
     </type>
+    <type name="Magento\Framework\View\Page\Config">
+        <plugin name="maxserv_yoastseo_framework_view_page_config_plugin" type="MaxServ\YoastSeo\Plugin\Framework\View\Page\ConfigPlugin" sortOrder="1" disabled="false" />
+    </type>
 </config>
