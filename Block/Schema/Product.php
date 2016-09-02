@@ -95,7 +95,8 @@ class Product extends AbstractProduct
             '@type' => 'Product',
             'name' => $this->getProduct()->getName(),
             'description' => $this->getProductDescription(),
-            'image' => $this->getImage($this->getProduct(), 'product_base_image')->getImageUrl()
+            'image' => $this->getImage($this->getProduct(), 'product_base_image')->getImageUrl(),
+            'url' => $this->getProduct()->getProductUrl()
         ];
 
         $additional = [
