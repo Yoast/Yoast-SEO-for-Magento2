@@ -21,6 +21,13 @@
 
 <form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
     <fieldset name="general">
+        <field name="is_active">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="additionalClasses" xsi:type="string">yoastBox-activeToggle</item>
+                </item>
+            </argument>
+        </field>
         <field name="title">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">

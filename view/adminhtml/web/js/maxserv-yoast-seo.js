@@ -28,8 +28,10 @@ define([
     $.widget('maxServ.yoastSeo', {
         _create: function() {
             this.element = $('#yoast-seo-wrapper');
+            this.is_visible = true;
             this.config = window.yoastBoxConfig;
             this.snippetPreviewElement = $('#yoast-seo-snippet-preview')[0];
+            this.getToggleElement();
             this.getInputElements();
             $('#yoast-seo-wrapper').tabs({
                 active: 0
@@ -49,6 +51,45 @@ define([
             this.setupApp();
             this.updateFieldsets();
             this.setupEventListeners();
+        },
+        getToggleElement: function() {
+            var widget = this,
+                toggleElement, visibilityElement;
+
+            if (widget.config.entityType === 'catalog_product') {
+                toggleElement = $('.yoastBox-productEnabledToggle').find('input[type="checkbox"]');
+                visibilityElement = $('.yoastBox-productVisibilityToggle').find('select');
+                var changeFunction = function() {
+                    var active = toggleElement.prop('checked'),
+                        visible = visibilityElement.val() >= 2;
+                    if ((active && visible) && !widget.is_visible) {
+                        widget.is_visible = true;
+                        widget.element.slideDown();
+                    } else if ((!active || !visible) && widget.is_visible) {
+                        widget.is_visible = false;
+                        widget.element.slideUp();
+                    }
+                };
+                $([toggleElement, visibilityElement]).each(function() {
+                    $(this).on('change', changeFunction);
+                });
+                changeFunction();
+            } else {
+                toggleElement = $('.yoastBox-activeToggle').find('input[type="checkbox"]');
+                if (toggleElement.length) {
+                    widget.togglElement = toggleElement;
+                    widget.toggleElement.on('change', function() {
+                        if (this.checked && !widget.is_visible) {
+                            widget.is_visible = true;
+                            widget.element.slideDown();
+                        } else if (!this.checked && widget.is_visible) {
+                            widget.is_visible = false;
+                            widget.element.slideUp();
+                        }
+                    }).change();
+                }
+            }
+
         },
         getInputElements: function() {
             this.titleInputElement = $('.yoastBox-title .admin__control-text');
@@ -136,11 +177,12 @@ define([
             this.snippetPreview.setMetaDescription(this.getDescriptionValue());
         },
         setupEventListeners: function() {
-            var widget = this;
-            $(this.inputElements).each(function() {
-                $(this).on('change', function () {
+            var widget = this,
+                changeFunction = function() {
                     widget.update();
-                });
+                };
+            $(this.inputElements).each(function() {
+                $(this).on('change', changeFunction);
             });
         },
         saveSnippetData: function(data) {
