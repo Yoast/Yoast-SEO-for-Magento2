@@ -42,5 +42,13 @@
                 </field>
             </group>
         </section>
+        <section id="general">
+            <group id="store_information">
+                <field id="schema_sameas" translate="label comment" type="textarea" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Other URLs</label>
+                    <comment>Enter alternate URLs which identify your store. E.g. your store's Facebook page. One URL per line.</comment>
+                </field>
+            </group>
+        </section>
     </system>
 </config>
