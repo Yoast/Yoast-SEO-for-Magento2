@@ -53,8 +53,8 @@
             <argument name="defaultTemplates" xsi:type="array">
                 <item name="catalog_product" xsi:type="string">
                     <![CDATA[<h1>{{input[type="text"][name="product[name]"]}}</h1>
-                    <p>{{textarea[name="description"]}}</p>
-                    <p>{{images}}</p>]]>
+<p>{{textarea[name="description"]}}</p>
+<p>{{images}}</p>]]>
                 </item>
                 <item name="catalog_category" xsi:type="string">
                     <![CDATA[<h1>{{input[type="text"][name="name"]}}</h1>

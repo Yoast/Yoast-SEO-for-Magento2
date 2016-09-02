@@ -49,7 +49,6 @@
                 <item name="catalog_product" xsi:type="string" translate="true">Product</item>
                 <item name="catalog_category" xsi:type="string" translate="true">Category</item>
                 <item name="cms_page" xsi:type="string" translate="true">CMS Page</item>
-                <item name="my_entity" xsi:type="string" translate="true">My Entity</item>
             </argument>
         </arguments>
     </type>

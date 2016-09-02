@@ -72,26 +72,7 @@ class AnalysisTemplates extends Value
             $value = unserialize($value);
         }
 
-        $result = [];
-        $entityTypes = [];
-        foreach ($value as $entityType => $template) {
-            $resultId = $this->mathRandom->getUniqueHash('_');
-            $result[$resultId] = [
-                'entity_type' => $entityType,
-                'template' => $template
-            ];
-            $entityTypes[] = $entityType;
-        }
-
-        $requiredEntityTypes = ['catalog_product', 'catalog_category', 'cms_page'];
-        foreach (array_diff($requiredEntityTypes, $entityTypes) as $entityType) {
-            $resultId = $this->mathRandom->getUniqueHash('_');
-            $result[$resultId] = [
-                'entity_type' => $entityType,
-                'template' => $this->templatesHelper->getDefaultTemplate($entityType)
-            ];
-        }
-
+        $result = $this->templatesHelper->getEditorArray($value);
         $this->setValue($result);
     }
 

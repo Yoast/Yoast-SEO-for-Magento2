@@ -23,6 +23,7 @@ namespace MaxServ\YoastSeo\Helper\Analysis;
 
 use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Framework\App\Helper\Context;
+use Magento\Framework\Math\Random;
 use Magento\Store\Model\ScopeInterface;
 
 class TemplatesHelper extends AbstractHelper
@@ -43,14 +44,21 @@ class TemplatesHelper extends AbstractHelper
      */
     protected $templates = [];
 
+    /**
+     * @var Random
+     */
+    protected $mathRandom;
+
     public function __construct(
         Context $context,
+        Random $mathRandom,
         array $defaultTemplates = [],
         array $imagesHelpers = []
     ) {
         parent::__construct($context);
         $this->defaultTemplates = $defaultTemplates;
         $this->imagesHelpers = $imagesHelpers;
+        $this->mathRandom = $mathRandom;
         $this->loadConfigTemplates();
     }
 
@@ -103,5 +111,41 @@ class TemplatesHelper extends AbstractHelper
         }
 
         return $images;
+    }
+
+    public function getEditorArray($templates)
+    {
+        if (!is_array($templates)) {
+            $templates = [];
+        }
+        $result = [];
+        $entityTypes = [];
+        foreach ($templates as $entityType => $template) {
+            $resultId = $this->mathRandom->getUniqueHash('_');
+            $result[$resultId] = [
+                'entity_type' => $entityType,
+                'template' => $template
+            ];
+            $entityTypes[] = $entityType;
+        }
+
+        $requiredEntityTypes = ['catalog_product', 'catalog_category', 'cms_page'];
+        foreach (array_diff($requiredEntityTypes, $entityTypes) as $entityType) {
+            $resultId = $this->mathRandom->getUniqueHash('_');
+            $result[$resultId] = [
+                'entity_type' => $entityType,
+                'template' => $this->getDefaultTemplate($entityType)
+            ];
+        }
+
+        return $result;
+    }
+
+    /**
+     * @return array
+     */
+    public function getDefaultTemplates()
+    {
+        return $this->defaultTemplates;
     }
 }
