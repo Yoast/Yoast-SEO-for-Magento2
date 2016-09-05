@@ -43,6 +43,11 @@ class YoastSeo extends Template
     protected $entityConfigurationPool;
 
     /**
+     * @var MetaProviderInterface
+     */
+    protected $metaProvider;
+
+    /**
      * @param Context $context
      * @param EntityConfigurationPool $entityConfigurationPool
      * @param array $data
@@ -62,15 +67,21 @@ class YoastSeo extends Template
      */
     public function getMeta()
     {
-        $pageType = $this->getPageType();
-        if (empty($pageType)) {
-            throw new \ErrorException('No pageType registered.');
+        if (empty($this->metaProvider)) {
+            $pageType = $this->getPageType();
+            if (empty($pageType)) {
+                throw new \ErrorException('No pageType registered.');
+            }
+
+            /** @var EntityConfiguration $entityConfiguration */
+            $entityConfiguration = $this->entityConfigurationPool->getEntityConfiguration($pageType);
+            $metaProvider = $entityConfiguration->getMetaProvider();
+            $metaProvider->setLayout($this->getLayout());
+
+            $this->metaProvider = $metaProvider;
         }
 
-        /** @var EntityConfiguration $entityConfiguration */
-        $entityConfiguration = $this->entityConfigurationPool->getEntityConfiguration($pageType);
-
-        return $entityConfiguration->getMetaProvider();
+        return $this->metaProvider;
     }
 
     /**

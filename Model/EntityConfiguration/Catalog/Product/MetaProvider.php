@@ -139,9 +139,20 @@ class MetaProvider extends AbstractMetaProvider
         return $this->image;
     }
 
-    public function getPrice()
+    /**
+     * @return null
+     */
+    public function getPrevLink()
     {
+        return null;
+    }
 
+    /**
+     * @return null
+     */
+    public function getNextLink()
+    {
+        return null;
     }
 
     /**

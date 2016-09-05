@@ -25,6 +25,7 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\Registry;
 use Magento\Framework\UrlInterface;
+use Magento\Framework\View\Layout;
 use MaxServ\YoastSeo\Helper\ImageHelper;
 
 abstract class AbstractMetaProvider implements MetaProviderInterface
@@ -54,6 +55,11 @@ abstract class AbstractMetaProvider implements MetaProviderInterface
      * @var ImageHelper
      */
     protected $imageHelper;
+
+    /**
+     * @var Layout
+     */
+    protected $layout;
 
     /**
      * @var string
@@ -100,6 +106,10 @@ abstract class AbstractMetaProvider implements MetaProviderInterface
         return '%s | ' . $this->getStoreName();
     }
 
+    /**
+     * @param string $imageUrl
+     * @return array
+     */
     public function getImageMeta($imageUrl)
     {
         $baseUrl = $this->urlBuilder->getBaseUrl();
@@ -136,5 +146,24 @@ abstract class AbstractMetaProvider implements MetaProviderInterface
         }
 
         return $result;
+    }
+
+    /**
+     * @param Layout $layout
+     * @return $this
+     */
+    public function setLayout($layout)
+    {
+        $this->layout = $layout;
+
+        return $this;
+    }
+
+    /**
+     * @return Layout
+     */
+    public function getLayout()
+    {
+        return $this->layout;
     }
 }

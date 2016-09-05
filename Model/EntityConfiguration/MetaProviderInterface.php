@@ -21,6 +21,8 @@
 
 namespace MaxServ\YoastSeo\Model\EntityConfiguration;
 
+use Magento\Framework\View\Layout;
+
 interface MetaProviderInterface
 {
 
@@ -58,6 +60,16 @@ interface MetaProviderInterface
     /**
      * @return string
      */
+    public function getPrevLink();
+
+    /**
+     * @return string
+     */
+    public function getNextLink();
+
+    /**
+     * @return string
+     */
     public function getOpenGraphTitle();
 
     /**
@@ -84,4 +96,15 @@ interface MetaProviderInterface
      * @return string
      */
     public function getTwitterImage();
+
+    /**
+     * @param Layout $layout
+     * @return $this
+     */
+    public function setLayout($layout);
+
+    /**
+     * @return Layout
+     */
+    public function getLayout();
 }

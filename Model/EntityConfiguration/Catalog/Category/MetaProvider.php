@@ -21,6 +21,7 @@
 
 namespace MaxServ\YoastSeo\Model\EntityConfiguration\Catalog\Category;
 
+use Magento\Catalog\Block\Product\ListProduct;
 use MaxServ\YoastSeo\Model\EntityConfiguration\AbstractMetaProvider;
 
 class MetaProvider extends AbstractMetaProvider
@@ -30,6 +31,8 @@ class MetaProvider extends AbstractMetaProvider
      * @var \Magento\Catalog\Model\Category
      */
     protected $category;
+
+    protected $toolbarBlock;
 
     /**
      * @return \Magento\Catalog\Model\Category
@@ -99,6 +102,71 @@ class MetaProvider extends AbstractMetaProvider
         }
 
         return $this->image;
+    }
+
+    /**
+     * @return bool
+     */
+    protected function getIsPageOnly()
+    {
+        $displayMode = $this->getCategory()->getDisplayMode();
+
+        return $displayMode === 'PAGE';
+    }
+
+    /**
+     * @return \Magento\Catalog\Block\Product\ProductList\Toolbar
+     */
+    protected function getToolbarBlock()
+    {
+        if (empty($this->toolbarBlock)) {
+            /** @var ListProduct $listBlock */
+            $listBlock = $this->getLayout()->getBlock('category.products.list');
+
+            // kick the product collection load cycle
+            $productCollection = $listBlock->getLoadedProductCollection();
+
+            $toolbarBlock = $listBlock->getToolbarBlock();
+            $toolbarBlock->setCollection($productCollection);
+
+            $this->toolbarBlock = $toolbarBlock;
+        }
+
+        return $this->toolbarBlock;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPrevLink()
+    {
+        if ($this->getIsPageOnly()) {
+            return null;
+        }
+
+        $toolbarBlock = $this->getToolbarBlock();
+        if ($toolbarBlock->isFirstPage()) {
+            return null;
+        }
+
+        return $toolbarBlock->getPagerUrl(['p' => $toolbarBlock->getCurrentPage() - 1]);
+    }
+
+    /**
+     * @return string
+     */
+    public function getNextLink()
+    {
+        if ($this->getIsPageOnly()) {
+            return null;
+        }
+
+        $toolbarBlock = $this->getToolbarBlock();
+        if ($toolbarBlock->getCurrentPage() == $toolbarBlock->getLastPageNum()) {
+            return null;
+        }
+
+        return $toolbarBlock->getPagerUrl(['p' => $toolbarBlock->getCurrentPage() + 1]);
     }
 
     /**
