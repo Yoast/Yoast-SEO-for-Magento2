@@ -35,6 +35,11 @@ class ConfigPlugin
         $this->request = $request;
     }
 
+    /**
+     * @param Config $subject
+     * @param string $robots
+     * @return string
+     */
     public function afterGetRobots(Config $subject, $robots)
     {
         if (($robots == 'INDEX,FOLLOW' && $this->isPaged()) || $this->isSearch()) {
@@ -44,11 +49,19 @@ class ConfigPlugin
         return $robots;
     }
 
+    /**
+     * @return bool
+     */
     protected function isPaged()
     {
-        return $this->request->getParam('p', false) !== false;
+        $page = $this->request->getParam('p', 1);
+
+        return $page > 1;
     }
 
+    /**
+     * @return bool
+     */
     protected function isSearch()
     {
         return $this->request->getModuleName() === 'catalogsearch';
