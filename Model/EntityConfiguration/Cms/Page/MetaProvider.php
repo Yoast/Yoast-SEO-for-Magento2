@@ -144,7 +144,7 @@ class MetaProvider extends AbstractMetaProvider
     {
         return $this->getFirstAvailableValue(
             $this->getPage()->getYoastTwitterTitle(),
-            $this->getTitle()
+            $this->getOpenGraphTitle()
         );
     }
 
@@ -155,7 +155,7 @@ class MetaProvider extends AbstractMetaProvider
     {
         return $this->getFirstAvailableValue(
             $this->getPage()->getYoastTwitterDescription(),
-            $this->getDescription()
+            $this->getOpenGraphDescription()
         );
     }
 
@@ -168,6 +168,8 @@ class MetaProvider extends AbstractMetaProvider
 
         if ($twitterImage) {
             $twitterImage = $this->imageHelper->getYoastImage($twitterImage);
+        } else {
+            $twitterImage = $this->getOpenGraphImage();
         }
 
         return $twitterImage;
