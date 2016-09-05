@@ -23,6 +23,7 @@ namespace MaxServ\YoastSeo\Model\EntityConfiguration\Catalog\Product;
 
 use Magento\Catalog\Block\Product\ImageBuilder;
 use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\Registry;
 use Magento\Framework\UrlInterface;
 use MaxServ\YoastSeo\Helper\ImageHelper;
@@ -46,6 +47,7 @@ class MetaProvider extends AbstractMetaProvider
      * @param ScopeConfigInterface $scopeConfig
      * @param Registry $registry
      * @param UrlInterface $urlBuilder
+     * @param DirectoryList $directoryList
      * @param ImageHelper $imageHelper
      * @param ImageBuilder $imageBuilder
      */
@@ -53,10 +55,11 @@ class MetaProvider extends AbstractMetaProvider
         ScopeConfigInterface $scopeConfig,
         Registry $registry,
         UrlInterface $urlBuilder,
+        DirectoryList $directoryList,
         ImageHelper $imageHelper,
         ImageBuilder $imageBuilder
     ) {
-        parent::__construct($scopeConfig, $registry, $urlBuilder, $imageHelper);
+        parent::__construct($scopeConfig, $registry, $urlBuilder, $directoryList, $imageHelper);
         $this->imageBuilder = $imageBuilder;
     }
 

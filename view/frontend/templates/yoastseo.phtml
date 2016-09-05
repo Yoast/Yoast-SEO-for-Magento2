@@ -49,6 +49,12 @@ if ($block->getPageType() == 'product') {
 <meta property="og:description" content="<?php echo $meta->getOpenGraphDescription(); ?>"/>
 <?php if ($openGraphImage): ?>
     <meta property="og:image" content="<?php echo $openGraphImage; ?>"/>
+    <?php $imageMeta = $meta->getImageMeta($openGraphImage); ?>
+    <?php if ($imageMeta && isset($imageMeta['width'], $imageMeta['height'], $imageMeta['mime'])): ?>
+        <meta property="og:image:width" content="<?php echo $imageMeta['width']; ?>" />
+        <meta property="og:image:height" content="<?php echo $imageMeta['height']; ?>" />
+        <meta property="og:image:type" content="<?php echo $imageMeta['mime']; ?>" />
+    <?php endif; ?>
 <?php endif; ?>
 <meta property="og:url" content="<?php echo $meta->getUrl(); ?>"/>
 <meta property="fb:admins" content="<?php echo $block->getFacebookAdmins(); ?>"

@@ -22,6 +22,7 @@
 namespace MaxServ\YoastSeo\Model\EntityConfiguration;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\Registry;
 use Magento\Framework\UrlInterface;
 use MaxServ\YoastSeo\Helper\ImageHelper;
@@ -43,6 +44,11 @@ abstract class AbstractMetaProvider implements MetaProviderInterface
      * @var UrlInterface
      */
     protected $urlBuilder;
+
+    /**
+     * @var DirectoryList
+     */
+    protected $directoryList;
 
     /**
      * @var ImageHelper
@@ -68,11 +74,13 @@ abstract class AbstractMetaProvider implements MetaProviderInterface
         ScopeConfigInterface $scopeConfig,
         Registry $registry,
         UrlInterface $urlBuilder,
+        DirectoryList $directoryList,
         ImageHelper $imageHelper
     ) {
         $this->scopeConfig = $scopeConfig;
         $this->registry = $registry;
         $this->urlBuilder = $urlBuilder;
+        $this->directoryList = $directoryList;
         $this->imageHelper = $imageHelper;
     }
 
@@ -90,6 +98,27 @@ abstract class AbstractMetaProvider implements MetaProviderInterface
     public function getTitleTemplate()
     {
         return '%s | ' . $this->getStoreName();
+    }
+
+    public function getImageMeta($imageUrl)
+    {
+        $baseUrl = $this->urlBuilder->getBaseUrl();
+        $root = $this->directoryList->getRoot() . '/';
+        $image = str_replace($baseUrl, $root, $imageUrl);
+
+        $meta = [];
+
+        if (file_exists($image)) {
+            $size = getimagesize($image);
+
+            $meta = [
+                'width' => $size[0],
+                'height' => $size[1],
+                'mime' => $size['mime']
+            ];
+        }
+
+        return $meta;
     }
 
     /**

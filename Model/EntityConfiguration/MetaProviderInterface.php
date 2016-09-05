@@ -50,6 +50,12 @@ interface MetaProviderInterface
     public function getImage();
 
     /**
+     * @param string $imageUrl
+     * @return array
+     */
+    public function getImageMeta($imageUrl);
+
+    /**
      * @return string
      */
     public function getOpenGraphTitle();
