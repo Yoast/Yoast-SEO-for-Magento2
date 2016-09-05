@@ -28,6 +28,7 @@ $meta = $block->getMeta();
 
 // get image for opengraph
 $openGraphImage = $meta->getOpenGraphImage();
+$openGraphVideo = $meta->getOpenGraphVideo();
 
 // get image for twitter card. If no image was found, use card type 'summary'
 $twitterImage = $meta->getTwitterImage();
@@ -61,6 +62,9 @@ if ($block->getPageType() == 'product') {
         <meta property="og:image:height" content="<?php echo $imageMeta['height']; ?>" />
         <meta property="og:image:type" content="<?php echo $imageMeta['mime']; ?>" />
     <?php endif; ?>
+<?php endif; ?>
+<?php if ($openGraphVideo): ?>
+    <meta property="og:video" content="<?php echo $openGraphVideo; ?>" />
 <?php endif; ?>
 <meta property="og:url" content="<?php echo $meta->getUrl(); ?>"/>
 <meta property="fb:admins" content="<?php echo $block->getFacebookAdmins(); ?>"

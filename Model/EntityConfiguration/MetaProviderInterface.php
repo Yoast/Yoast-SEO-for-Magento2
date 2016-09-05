@@ -83,6 +83,11 @@ interface MetaProviderInterface
     public function getOpenGraphImage();
 
     /**
+     * @return array
+     */
+    public function getOpenGraphVideo();
+
+    /**
      * @return string
      */
     public function getTwitterTitle();

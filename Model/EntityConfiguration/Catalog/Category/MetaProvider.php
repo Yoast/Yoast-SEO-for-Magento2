@@ -208,6 +208,14 @@ class MetaProvider extends AbstractMetaProvider
     }
 
     /**
+     * @return array
+     */
+    public function getOpenGraphVideo()
+    {
+        return null;
+    }
+
+    /**
      * @return string
      */
     public function getTwitterTitle()

@@ -24,6 +24,7 @@ namespace MaxServ\YoastSeo\Model\EntityConfiguration\Catalog\Product;
 use Magento\Catalog\Block\Product\ImageBuilder;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\Filesystem\DirectoryList;
+use Magento\Framework\DataObject;
 use Magento\Framework\Registry;
 use Magento\Framework\UrlInterface;
 use MaxServ\YoastSeo\Helper\ImageHelper;
@@ -191,6 +192,24 @@ class MetaProvider extends AbstractMetaProvider
         }
 
         return $openGraphImage;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOpenGraphVideo()
+    {
+        $gallery = $this->getProduct()->getMediaGalleryImages();
+        $video = null;
+
+        foreach ($gallery as $item) {
+            if ($item->getMediaType() === 'external-video') {
+                $video = $item->getVideoUrl();
+                break;
+            }
+        }
+
+        return $video;
     }
 
     /**
