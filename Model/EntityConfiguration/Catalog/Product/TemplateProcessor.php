@@ -31,8 +31,15 @@ class TemplateProcessor extends AbstractTemplateProcessor
         $fields = $this->getFields($template);
 
         foreach ($fields as $field) {
-            if ($field !== "images") {
-                $this->replaceField($template, $field, "[name=\"product[" . $field . "]\"]");
+            switch($field) {
+                case "description":
+                    $this->replaceField($template, $field, "textarea[name=\"description\"]");
+                    break;
+                case "images":
+                    break;
+                default:
+                    $this->replaceField($template, $field, "[name=\"product[" . $field . "]\"]");
+                    break;
             }
         }
 
