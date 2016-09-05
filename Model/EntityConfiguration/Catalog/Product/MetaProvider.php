@@ -195,21 +195,14 @@ class MetaProvider extends AbstractMetaProvider
     }
 
     /**
+     * @todo: hook into magento video loading (Magento_ProductVideo::get-video-information.js) to also save width & height attributes
+     * Without width & height attributes the og:video tag will not be considered by Facebook.
+     *
      * @return string
      */
     public function getOpenGraphVideo()
     {
-        $gallery = $this->getProduct()->getMediaGalleryImages();
-        $video = null;
-
-        foreach ($gallery as $item) {
-            if ($item->getMediaType() === 'external-video') {
-                $video = $item->getVideoUrl();
-                break;
-            }
-        }
-
-        return $video;
+        return null;
     }
 
     /**
