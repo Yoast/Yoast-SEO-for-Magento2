@@ -28,15 +28,29 @@ use MaxServ\YoastSeo\Model\EntityConfigurationPool;
 class EntityType extends Select
 {
 
+    /**
+     * @var EntityConfigurationPool
+     */
     protected $entityConfigurationPool;
 
     public function __construct(
         Context $context,
         EntityConfigurationPool $entityConfigurationPool,
-        array $data
+        array $data = []
     ) {
         parent::__construct($context, $data);
         $this->entityConfigurationPool = $entityConfigurationPool;
+    }
+
+    /**
+     * @param string $name
+     * @return $this
+     */
+    public function setInputName($name)
+    {
+        $this->setName($name);
+
+        return $this;
     }
 
     /**
