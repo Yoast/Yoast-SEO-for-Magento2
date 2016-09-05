@@ -50,6 +50,7 @@ if ($block->getPageType() == 'product') {
 
 <meta property="og:locale" content="<?php echo $block->getLocale(); ?>" />
 <meta property="og:type" content="<?php echo $meta->getType(); ?>"/>
+<meta property="og:site_name" content="<?php echo $block->getStoreName(); ?>" />
 <meta property="og:title" content="<?php echo $meta->getOpenGraphTitle(); ?>"/>
 <meta property="og:description" content="<?php echo $meta->getOpenGraphDescription(); ?>"/>
 <?php if ($openGraphImage): ?>
@@ -64,6 +65,7 @@ if ($block->getPageType() == 'product') {
 <meta property="og:url" content="<?php echo $meta->getUrl(); ?>"/>
 <meta property="fb:admins" content="<?php echo $block->getFacebookAdmins(); ?>"
 <meta property="fb:app_id" content="<?php echo $block->getFacebookAppId(); ?>"/>
+<meta property="fb:pages" content="<?php echo $block->getFacebookPages(); ?>" />
 <?php if ($finalPrice): ?>
     <meta property="product:price:amount" content="<?php echo $finalPrice; ?>"/>
     <?php echo $block->getChildHtml('meta.currency'); ?>

@@ -61,9 +61,20 @@ class YoastSeo extends Template
         $this->entityConfigurationPool = $entityConfigurationPool;
     }
 
+    /**
+     * @return string
+     */
     public function getLocale()
     {
         return $this->_scopeConfig->getValue('general/locale/code', ScopeInterface::SCOPE_STORE);
+    }
+
+    /**
+     * @return string
+     */
+    public function getStoreName()
+    {
+        return $this->_scopeConfig->getValue('general/store_information/name', ScopeInterface::SCOPE_STORE);
     }
 
     /**
@@ -103,6 +114,14 @@ class YoastSeo extends Template
     public function getFacebookAdmins()
     {
         return $this->_scopeConfig->getValue('web/seo/facebook_admins', ScopeInterface::SCOPE_STORE);
+    }
+
+    /**
+     * @return string
+     */
+    public function getFacebookPages()
+    {
+        return $this->_scopeConfig->getValue('web/seo/facebook_pages', ScopeInterface::SCOPE_STORE);
     }
 
     /**

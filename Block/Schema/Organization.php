@@ -53,7 +53,7 @@ class Organization extends Template
             '@context' => 'http://schema.org',
             '@type' => 'Organization',
             'url' => $this->getBaseUrl(),
-            'name' => $this->getStoreInformation('general/store_information/name'),
+            'name' => $this->getStoreInformation('general/store_information/company_name'),
             'logo' => $this->getStoreLogo()
         ];
 

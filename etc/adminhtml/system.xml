@@ -35,6 +35,9 @@
                 <field id="facebook_admins" translate="label" type="text" sortOrder="45" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Facebook Admin Ids</label>
                 </field>
+                <field id="facebook_pages" translate="label" type="text" sortOrder="46" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Facebook Pages</label>
+                </field>
                 <field id="analysis_templates" translate="label" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Analysis templates</label>
                     <frontend_model>MaxServ\YoastSeo\Block\Adminhtml\Config\Form\Field\AnalysisTemplates</frontend_model>
@@ -48,6 +51,10 @@
         </section>
         <section id="general">
             <group id="store_information">
+                <field id="company_name" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Company Name</label>
+                </field>
+
                 <field id="schema_sameas" translate="label comment" type="textarea" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Other URLs</label>
                     <comment>Enter alternate URLs which identify your store. E.g. your store's Facebook page. One URL per line.</comment>
