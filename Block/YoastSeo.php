@@ -61,6 +61,11 @@ class YoastSeo extends Template
         $this->entityConfigurationPool = $entityConfigurationPool;
     }
 
+    public function getLocale()
+    {
+        return $this->_scopeConfig->getValue('general/locale/code', ScopeInterface::SCOPE_STORE);
+    }
+
     /**
      * @return MetaProviderInterface
      * @throws \ErrorException

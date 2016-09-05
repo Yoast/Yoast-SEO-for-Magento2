@@ -48,6 +48,7 @@ if ($block->getPageType() == 'product') {
 };
 ?>
 
+<meta property="og:locale" content="<?php echo $block->getLocale(); ?>" />
 <meta property="og:type" content="<?php echo $meta->getType(); ?>"/>
 <meta property="og:title" content="<?php echo $meta->getOpenGraphTitle(); ?>"/>
 <meta property="og:description" content="<?php echo $meta->getOpenGraphDescription(); ?>"/>
