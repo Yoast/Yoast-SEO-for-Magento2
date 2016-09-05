@@ -19,11 +19,11 @@
  *
  */
 
-namespace MaxServ\YoastSeo\Helper\Meta\Cms;
+namespace MaxServ\YoastSeo\Model\EntityConfiguration\Cms\Page;
 
-use MaxServ\YoastSeo\Helper\Meta;
+use MaxServ\YoastSeo\Model\EntityConfiguration\AbstractMetaProvider;
 
-class Page extends Meta
+class MetaProvider extends AbstractMetaProvider
 {
 
     /**
@@ -48,7 +48,7 @@ class Page extends Meta
      */
     public function getType()
     {
-        if ($this->_urlBuilder->getCurrentUrl() === $this->_urlBuilder->getBaseUrl()) {
+        if ($this->urlBuilder->getCurrentUrl() === $this->urlBuilder->getBaseUrl()) {
             return 'website';
         }
         return 'article';
@@ -59,7 +59,7 @@ class Page extends Meta
      */
     public function getUrl()
     {
-        return $this->_urlBuilder->getUrl(null, ['_direct' => $this->getPage()->getIdentifier()]);
+        return $this->urlBuilder->getUrl(null, ['_direct' => $this->getPage()->getIdentifier()]);
     }
 
     /**
@@ -86,7 +86,7 @@ class Page extends Meta
         if (empty($this->description)) {
             $this->description = $this->getFirstAvailableValue(
                 $this->getPage()->getMetaDescription()
-                // fallback to page content ?
+            // fallback to page content ?
             );
         }
 

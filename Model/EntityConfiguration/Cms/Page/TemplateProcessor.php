@@ -19,35 +19,23 @@
  *
  */
 
-namespace MaxServ\YoastSeo\Helper\Analysis\Images;
+namespace MaxServ\YoastSeo\Model\EntityConfiguration\Cms\Page;
 
-use Magento\Framework\Registry;
+use MaxServ\YoastSeo\Model\EntityConfiguration\AbstractTemplateProcessor;
 
-class Category
+class TemplateProcessor extends AbstractTemplateProcessor
 {
 
-    /**
-     * @var Registry
-     */
-    protected $registry;
-
-    public function __construct(
-        Registry $registry
-    ) {
-        $this->registry = $registry;
-    }
-
-    public function getImages()
+    public function processTemplate($template)
     {
-        $images = [];
+        $fields = $this->getFields($template);
 
-        /** @var \Magento\Catalog\Model\Category $category */
-        $category = $this->registry->registry('current_category');
-        $imageUrl = $category->getImageUrl();
-        if ($imageUrl) {
-            $images[] = sprintf("<img src='%s' alt='%s' />", $imageUrl, $category->getName());
+        foreach ($fields as $field) {
+            if ($field !== "images") {
+                $this->replaceField($template, $field, "[name=\"" . $field . "\"]");
+            }
         }
 
-        return $images;
+        return $template;
     }
 }

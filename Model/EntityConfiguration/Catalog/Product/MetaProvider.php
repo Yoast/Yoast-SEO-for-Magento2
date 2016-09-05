@@ -19,28 +19,57 @@
  *
  */
 
-namespace MaxServ\YoastSeo\Helper\Meta\Catalog;
+namespace MaxServ\YoastSeo\Model\EntityConfiguration\Catalog\Product;
 
-use MaxServ\YoastSeo\Helper\Meta;
+use Magento\Catalog\Block\Product\ImageBuilder;
+use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\Registry;
+use Magento\Framework\UrlInterface;
+use MaxServ\YoastSeo\Helper\ImageHelper;
+use MaxServ\YoastSeo\Model\EntityConfiguration\AbstractMetaProvider;
 
-class Category extends Meta
+class MetaProvider extends AbstractMetaProvider
 {
 
     /**
-     * @var \Magento\Catalog\Model\Category
+     * @var \Magento\Catalog\Model\Product
      */
-    protected $category;
+    protected $product;
 
     /**
-     * @return \Magento\Catalog\Model\Category
+     * @var ImageBuilder
      */
-    public function getCategory()
+    protected $imageBuilder;
+
+    /**
+     * MetaProvider constructor.
+     * @param ScopeConfigInterface $scopeConfig
+     * @param Registry $registry
+     * @param UrlInterface $urlBuilder
+     * @param ImageHelper $imageHelper
+     * @param ImageBuilder $imageBuilder
+     */
+    public function __construct(
+        ScopeConfigInterface $scopeConfig,
+        Registry $registry,
+        UrlInterface $urlBuilder,
+        ImageHelper $imageHelper,
+        ImageBuilder $imageBuilder
+    ) {
+        parent::__construct($scopeConfig, $registry, $urlBuilder, $imageHelper);
+        $this->imageBuilder = $imageBuilder;
+    }
+
+    /**
+     * @return \Magento\Catalog\Model\Product
+     */
+    public function getProduct()
     {
-        if (empty($this->category)) {
-            $this->category = $this->registry->registry('current_category');
+        if (empty($this->product)) {
+            $this->product = $this->registry->registry('current_product');
         }
 
-        return $this->category;
+        return $this->product;
     }
 
     /**
@@ -48,7 +77,7 @@ class Category extends Meta
      */
     public function getType()
     {
-        return 'product.group';
+        return 'product';
     }
 
     /**
@@ -56,7 +85,7 @@ class Category extends Meta
      */
     public function getUrl()
     {
-        return $this->getCategory()->getUrl();
+        return $this->getProduct()->getProductUrl();
     }
 
     /**
@@ -66,11 +95,10 @@ class Category extends Meta
     {
         if (empty($this->title)) {
             $this->title = $this->getFirstAvailableValue(
-                $this->getCategory()->getMetaTitle(),
-                $this->getCategory()->getName()
+                $this->getProduct()->getMetaTitle(),
+                $this->getProduct()->getName()
             );
         }
-
         return $this->title;
     }
 
@@ -80,9 +108,11 @@ class Category extends Meta
     public function getDescription()
     {
         if (empty($this->description)) {
+
             $this->description = $this->getFirstAvailableValue(
-                $this->getCategory()->getMetaDescription(),
-                $this->getCategory()->getDescription()
+                $this->getProduct()->getMetaDescription(),
+                $this->getProduct()->getShortDescription(),
+                $this->getProduct()->getDescription()
             );
         }
 
@@ -95,10 +125,20 @@ class Category extends Meta
     public function getImage()
     {
         if (empty($this->image)) {
-            $this->image = $this->getCategory()->getImageUrl();
+            $image =  $this->imageBuilder->setProduct($this->getProduct())
+                ->setImageId('product_base_image')
+                ->setAttributes([])
+                ->create();
+
+            $this->image = $image->getImageUrl();
         }
 
         return $this->image;
+    }
+
+    public function getPrice()
+    {
+
     }
 
     /**
@@ -107,7 +147,7 @@ class Category extends Meta
     public function getOpenGraphTitle()
     {
         return $this->getFirstAvailableValue(
-            $this->getCategory()->getYoastFacebookTitle(),
+            $this->getProduct()->getYoastFacebookTitle(),
             $this->getTitle()
         );
     }
@@ -118,7 +158,7 @@ class Category extends Meta
     public function getOpenGraphDescription()
     {
         return $this->getFirstAvailableValue(
-            $this->getCategory()->getYoastFacebookDescription(),
+            $this->getProduct()->getYoastFacebookDescription(),
             $this->getDescription()
         );
     }
@@ -128,7 +168,7 @@ class Category extends Meta
      */
     public function getOpenGraphImage()
     {
-        $openGraphImage = $this->getCategory()->getYoastFacebookImage();
+        $openGraphImage = $this->getProduct()->getYoastFacebookImage();
 
         if ($openGraphImage) {
             $openGraphImage = $this->imageHelper->getYoastImage($openGraphImage);
@@ -145,7 +185,7 @@ class Category extends Meta
     public function getTwitterTitle()
     {
         return $this->getFirstAvailableValue(
-            $this->getCategory()->getYoastTwitterTitle(),
+            $this->getProduct()->getYoastTwitterTitle(),
             $this->getTitle()
         );
     }
@@ -156,7 +196,7 @@ class Category extends Meta
     public function getTwitterDescription()
     {
         return $this->getFirstAvailableValue(
-            $this->getCategory()->getYoastTwitterDescription(),
+            $this->getProduct()->getYoastTwitterDescription(),
             $this->getDescription()
         );
     }
@@ -166,7 +206,7 @@ class Category extends Meta
      */
     public function getTwitterImage()
     {
-        $twitterImage = $this->getCategory()->getYoastTwitterImage();
+        $twitterImage = $this->getProduct()->getYoastTwitterImage();
 
         if ($twitterImage) {
             $twitterImage = $this->imageHelper->getYoastImage($twitterImage);

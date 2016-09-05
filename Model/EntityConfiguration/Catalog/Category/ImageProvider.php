@@ -19,11 +19,12 @@
  *
  */
 
-namespace MaxServ\YoastSeo\Helper\Analysis\Images;
+namespace MaxServ\YoastSeo\Model\EntityConfiguration\Catalog\Category;
 
 use Magento\Framework\Registry;
+use MaxServ\YoastSeo\Model\EntityConfiguration\ImageProviderInterface;
 
-class Product
+class ImageProvider implements ImageProviderInterface
 {
 
     /**
@@ -39,18 +40,15 @@ class Product
 
     public function getImages()
     {
-        /** @var \Magento\Catalog\Model\Product $product */
-        $product = $this->registry->registry('current_product');
         $images = [];
 
-        $gallery = $product->getMediaGalleryImages();
-        if (is_array($gallery)) {
-            foreach ($gallery as $item) {
-                $images[] = sprintf("<img src='%s' alt='%s' />", $item->getUrl(), $product->getName());
-            }
+        /** @var \Magento\Catalog\Model\Category $category */
+        $category = $this->registry->registry('current_category');
+        $imageUrl = $category->getImageUrl();
+        if ($imageUrl) {
+            $images[] = sprintf("<img src='%s' alt='%s' />", $imageUrl, $category->getName());
         }
 
         return $images;
     }
-
 }

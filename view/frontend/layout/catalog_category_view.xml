@@ -24,7 +24,7 @@
     <body>
         <referenceBlock name="maxserv.yoastseo">
             <arguments>
-                <argument name="page_type" xsi:type="string">category</argument>
+                <argument name="page_type" xsi:type="string">catalog_category</argument>
             </arguments>
         </referenceBlock>
     </body>

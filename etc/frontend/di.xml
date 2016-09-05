@@ -21,17 +21,6 @@
 
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-
-    <!-- meta renderer pool for YoastSeo block -->
-    <type name="MaxServ\YoastSeo\Block\YoastSeo">
-        <arguments>
-            <argument name="metaPool" xsi:type="array">
-                <item name="product" xsi:type="object">MaxServ\YoastSeo\Helper\Meta\Catalog\Product</item>
-                <item name="category" xsi:type="object">MaxServ\YoastSeo\Helper\Meta\Catalog\Category</item>
-                <item name="cms_page" xsi:type="object">MaxServ\YoastSeo\Helper\Meta\Cms\Page</item>
-            </argument>
-        </arguments>
-    </type>
     <type name="Magento\Framework\View\Page\Config">
         <plugin name="maxserv_yoastseo_framework_view_page_config_plugin" type="MaxServ\YoastSeo\Plugin\Framework\View\Page\ConfigPlugin" sortOrder="1" disabled="false" />
     </type>

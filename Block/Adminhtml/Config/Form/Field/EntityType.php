@@ -23,28 +23,20 @@ namespace MaxServ\YoastSeo\Block\Adminhtml\Config\Form\Field;
 
 use Magento\Framework\View\Element\Html\Select;
 use Magento\Framework\View\Element\Context;
+use MaxServ\YoastSeo\Model\EntityConfigurationPool;
 
 class EntityType extends Select
 {
 
-    protected $entityTypes;
+    protected $entityConfigurationPool;
 
     public function __construct(
         Context $context,
-        array $entityTypes = [],
+        EntityConfigurationPool $entityConfigurationPool,
         array $data
     ) {
         parent::__construct($context, $data);
-        $this->entityTypes = $entityTypes;
-    }
-
-    /**
-     * @param string $value
-     * @return $this
-     */
-    public function setInputName($value)
-    {
-        return $this->setName($value);
+        $this->entityConfigurationPool = $entityConfigurationPool;
     }
 
     /**
@@ -55,7 +47,7 @@ class EntityType extends Select
     public function _toHtml()
     {
         if (!$this->getOptions()) {
-            $this->setOptions($this->entityTypes);
+            $this->setOptions($this->entityConfigurationPool->getEntityTypesMap());
         }
         return parent::_toHtml();
     }

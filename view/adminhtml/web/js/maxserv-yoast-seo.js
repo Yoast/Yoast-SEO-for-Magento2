@@ -77,7 +77,7 @@ define([
             } else {
                 toggleElement = $('.yoastBox-activeToggle').find('input[type="checkbox"]');
                 if (toggleElement.length) {
-                    widget.togglElement = toggleElement;
+                    widget.toggleElement = toggleElement;
                     widget.toggleElement.on('change', function() {
                         if (this.checked && !widget.is_visible) {
                             widget.is_visible = true;
@@ -238,14 +238,14 @@ define([
         },
         getContentValue: function() {
             var widget = this,
-                template = widget.config.contentTemplate,
+                content = widget.config.contentTemplate,
                 selector;
             for (selector in widget.templateElements) {
-                template = template.split(selector).join(widget.getElementValue(widget.templateElements[selector]));
+                content = content.split(selector).join(widget.getElementValue(widget.templateElements[selector]));
             }
-            template = template.replace('{{images}}', widget.config.images.join('<br />'));
+            content = content.replace('{{images}}', widget.config.images.join('<br />'));
 
-            return template;
+            return content;
         },
         getElementValue: function(inputElement) {
             var tag = inputElement.prop('tagName').toLowerCase(),

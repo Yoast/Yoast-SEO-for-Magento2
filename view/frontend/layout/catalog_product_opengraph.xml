@@ -25,7 +25,7 @@
         <referenceBlock name="opengraph.general" remove="true" />
         <referenceBlock name="maxserv.yoastseo">
             <arguments>
-                <argument name="page_type" xsi:type="string">product</argument>
+                <argument name="page_type" xsi:type="string">catalog_product</argument>
             </arguments>
         </referenceBlock>
     </body>

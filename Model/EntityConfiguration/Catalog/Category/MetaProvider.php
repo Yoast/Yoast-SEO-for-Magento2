@@ -19,47 +19,28 @@
  *
  */
 
-namespace MaxServ\YoastSeo\Helper\Meta\Catalog;
+namespace MaxServ\YoastSeo\Model\EntityConfiguration\Catalog\Category;
 
-use Magento\Catalog\Block\Product\ImageBuilder;
-use Magento\Framework\App\Helper\Context;
-use Magento\Framework\Registry;
-use MaxServ\YoastSeo\Helper\ImageHelper;
-use MaxServ\YoastSeo\Helper\Meta;
+use MaxServ\YoastSeo\Model\EntityConfiguration\AbstractMetaProvider;
 
-class Product extends Meta
+class MetaProvider extends AbstractMetaProvider
 {
 
     /**
-     * @var \Magento\Catalog\Model\Product
+     * @var \Magento\Catalog\Model\Category
      */
-    protected $product;
+    protected $category;
 
     /**
-     * @var ImageBuilder
+     * @return \Magento\Catalog\Model\Category
      */
-    protected $imageBuilder;
-
-    public function __construct(
-        Context $context,
-        Registry $registry,
-        ImageHelper $imageHelper,
-        ImageBuilder $imageBuilder
-    ) {
-        parent::__construct($context, $registry, $imageHelper);
-        $this->imageBuilder = $imageBuilder;
-    }
-
-    /**
-     * @return \Magento\Catalog\Model\Product
-     */
-    public function getProduct()
+    public function getCategory()
     {
-        if (empty($this->product)) {
-            $this->product = $this->registry->registry('current_product');
+        if (empty($this->category)) {
+            $this->category = $this->registry->registry('current_category');
         }
 
-        return $this->product;
+        return $this->category;
     }
 
     /**
@@ -67,7 +48,7 @@ class Product extends Meta
      */
     public function getType()
     {
-        return 'product';
+        return 'product.group';
     }
 
     /**
@@ -75,7 +56,7 @@ class Product extends Meta
      */
     public function getUrl()
     {
-        return $this->getProduct()->getProductUrl();
+        return $this->getCategory()->getUrl();
     }
 
     /**
@@ -85,10 +66,11 @@ class Product extends Meta
     {
         if (empty($this->title)) {
             $this->title = $this->getFirstAvailableValue(
-                $this->getProduct()->getMetaTitle(),
-                $this->getProduct()->getName()
+                $this->getCategory()->getMetaTitle(),
+                $this->getCategory()->getName()
             );
         }
+
         return $this->title;
     }
 
@@ -98,11 +80,9 @@ class Product extends Meta
     public function getDescription()
     {
         if (empty($this->description)) {
-
             $this->description = $this->getFirstAvailableValue(
-                $this->getProduct()->getMetaDescription(),
-                $this->getProduct()->getShortDescription(),
-                $this->getProduct()->getDescription()
+                $this->getCategory()->getMetaDescription(),
+                $this->getCategory()->getDescription()
             );
         }
 
@@ -115,20 +95,10 @@ class Product extends Meta
     public function getImage()
     {
         if (empty($this->image)) {
-            $image =  $this->imageBuilder->setProduct($this->getProduct())
-                ->setImageId('product_base_image')
-                ->setAttributes([])
-                ->create();
-
-            $this->image = $image->getImageUrl();
+            $this->image = $this->getCategory()->getImageUrl();
         }
 
         return $this->image;
-    }
-
-    public function getPrice()
-    {
-
     }
 
     /**
@@ -137,7 +107,7 @@ class Product extends Meta
     public function getOpenGraphTitle()
     {
         return $this->getFirstAvailableValue(
-            $this->getProduct()->getYoastFacebookTitle(),
+            $this->getCategory()->getYoastFacebookTitle(),
             $this->getTitle()
         );
     }
@@ -148,7 +118,7 @@ class Product extends Meta
     public function getOpenGraphDescription()
     {
         return $this->getFirstAvailableValue(
-            $this->getProduct()->getYoastFacebookDescription(),
+            $this->getCategory()->getYoastFacebookDescription(),
             $this->getDescription()
         );
     }
@@ -158,7 +128,7 @@ class Product extends Meta
      */
     public function getOpenGraphImage()
     {
-        $openGraphImage = $this->getProduct()->getYoastFacebookImage();
+        $openGraphImage = $this->getCategory()->getYoastFacebookImage();
 
         if ($openGraphImage) {
             $openGraphImage = $this->imageHelper->getYoastImage($openGraphImage);
@@ -175,7 +145,7 @@ class Product extends Meta
     public function getTwitterTitle()
     {
         return $this->getFirstAvailableValue(
-            $this->getProduct()->getYoastTwitterTitle(),
+            $this->getCategory()->getYoastTwitterTitle(),
             $this->getTitle()
         );
     }
@@ -186,7 +156,7 @@ class Product extends Meta
     public function getTwitterDescription()
     {
         return $this->getFirstAvailableValue(
-            $this->getProduct()->getYoastTwitterDescription(),
+            $this->getCategory()->getYoastTwitterDescription(),
             $this->getDescription()
         );
     }
@@ -196,7 +166,7 @@ class Product extends Meta
      */
     public function getTwitterImage()
     {
-        $twitterImage = $this->getProduct()->getYoastTwitterImage();
+        $twitterImage = $this->getCategory()->getYoastTwitterImage();
 
         if ($twitterImage) {
             $twitterImage = $this->imageHelper->getYoastImage($twitterImage);
@@ -206,5 +176,4 @@ class Product extends Meta
 
         return $twitterImage;
     }
-
 }

@@ -20,10 +20,10 @@
  */
 
 use MaxServ\YoastSeo\Block\YoastSeo;
-use MaxServ\YoastSeo\Helper\Meta;
+use MaxServ\YoastSeo\Model\EntityConfiguration\MetaProviderInterface;
 
 /** @var YoastSeo $block */
-/** @var Meta $meta */
+/** @var MetaProviderInterface $meta */
 $meta = $block->getMeta();
 
 // get image for opengraph

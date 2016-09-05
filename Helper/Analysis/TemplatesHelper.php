@@ -25,24 +25,13 @@ use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Framework\App\Helper\Context;
 use Magento\Framework\Math\Random;
 use Magento\Store\Model\ScopeInterface;
+use MaxServ\YoastSeo\Model\EntityConfiguration;
+use MaxServ\YoastSeo\Model\EntityConfigurationPool;
 
 class TemplatesHelper extends AbstractHelper
 {
 
-    /**
-     * @var array
-     */
-    protected $defaultTemplates;
-
-    /**
-     * @var array
-     */
-    protected $imagesHelpers;
-
-    /**
-     * @var array
-     */
-    protected $templates = [];
+    protected $entityConfigurationPool;
 
     /**
      * @var Random
@@ -50,21 +39,23 @@ class TemplatesHelper extends AbstractHelper
     protected $mathRandom;
 
     /**
+     * @var array
+     */
+    protected $templates = [];
+
+    /**
      * TemplatesHelper constructor.
      * @param Context $context
      * @param Random $mathRandom
-     * @param array $defaultTemplates
-     * @param array $imagesHelpers
+     * @param EntityConfigurationPool $entityConfigurationPool
      */
     public function __construct(
         Context $context,
         Random $mathRandom,
-        array $defaultTemplates = [],
-        array $imagesHelpers = []
+        EntityConfigurationPool $entityConfigurationPool
     ) {
         parent::__construct($context);
-        $this->defaultTemplates = $defaultTemplates;
-        $this->imagesHelpers = $imagesHelpers;
+        $this->entityConfigurationPool = $entityConfigurationPool;
         $this->mathRandom = $mathRandom;
         $this->loadConfigTemplates();
     }
@@ -89,11 +80,9 @@ class TemplatesHelper extends AbstractHelper
      */
     public function getDefaultTemplate($entityType)
     {
-        if (!isset($this->defaultTemplates[$entityType])) {
-            return '';
-        }
-
-        return $this->defaultTemplates[$entityType];
+        /** @var EntityConfiguration $entityConfiguration */
+        $entityConfiguration = $this->entityConfigurationPool->getEntityConfiguration($entityType);
+        return $entityConfiguration->getDefaultTemplate();
     }
 
     /**
@@ -102,42 +91,41 @@ class TemplatesHelper extends AbstractHelper
      */
     public function getTemplate($entityType)
     {
-        if (!isset($this->templates[$entityType])) {
-            return '';
-        }
+        $entityConfiguration = $this->entityConfigurationPool->getEntityConfiguration($entityType);
+        $templateProcessor = $entityConfiguration->getTemplateProcessor();
 
-        return $this->templates[$entityType];
+        if (isset($this->templates[$entityType])) {
+            $template = $this->templates[$entityType];
+        } else {
+            /** @var EntityConfiguration $entityConfiguration */
+            $template = $entityConfiguration->getDefaultTemplate();
+        }
+        $processedTemplate = $templateProcessor->processTemplate($template);
+
+        return $processedTemplate;
     }
 
+    /**
+     * @param string $entityType
+     * @return array
+     */
     public function getImages($entityType)
     {
-        if (isset($this->imagesHelpers[$entityType])) {
-            $images = $this->imagesHelpers[$entityType]->getImages();
-        } else {
-            $images = [];
-        }
+        /** @var EntityConfiguration $entityConfiguration */
+        $entityConfiguration = $this->entityConfigurationPool->getEntityConfiguration($entityType);
+        $images = $entityConfiguration->getImageProvider()->getImages();
 
         return $images;
     }
 
-    public function getEditorArray($templates)
+    /**
+     * @return array
+     */
+    public function getEditorArray()
     {
-        if (!is_array($templates)) {
-            $templates = [];
-        }
         $result = [];
-        $entityTypes = [];
-        foreach ($templates as $entityType => $template) {
-            $resultId = $this->mathRandom->getUniqueHash('_');
-            $result[$resultId] = [
-                'entity_type' => $entityType,
-                'template' => $template
-            ];
-            $entityTypes[] = $entityType;
-        }
-
-        $requiredEntityTypes = ['catalog_product', 'catalog_category', 'cms_page'];
-        foreach (array_diff($requiredEntityTypes, $entityTypes) as $entityType) {
+        $requiredEntityTypes = $this->entityConfigurationPool->getRequiredEntities();
+        foreach ($requiredEntityTypes as $entityType) {
             $resultId = $this->mathRandom->getUniqueHash('_');
             $result[$resultId] = [
                 'entity_type' => $entityType,
@@ -146,13 +134,5 @@ class TemplatesHelper extends AbstractHelper
         }
 
         return $result;
-    }
-
-    /**
-     * @return array
-     */
-    public function getDefaultTemplates()
-    {
-        return $this->defaultTemplates;
     }
 }

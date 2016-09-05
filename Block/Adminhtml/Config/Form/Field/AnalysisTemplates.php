@@ -107,8 +107,7 @@ class AnalysisTemplates extends AbstractFieldArray
     protected function _getElementHtml(AbstractElement $element)
     {
         if (!$element->getValue()) {
-            $templates = $this->templatesHelper->getDefaultTemplates();
-            $value = $this->templatesHelper->getEditorArray($templates);
+            $value = $this->templatesHelper->getEditorArray();
             $element->setValue($value);
         }
         return parent::_getElementHtml($element);

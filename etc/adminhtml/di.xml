@@ -45,11 +45,7 @@
     </virtualType>
     <type name="MaxServ\YoastSeo\Block\Adminhtml\Config\Form\Field\EntityType">
         <arguments>
-            <argument name="entityTypes" xsi:type="array">
-                <item name="catalog_product" xsi:type="string" translate="true">Product</item>
-                <item name="catalog_category" xsi:type="string" translate="true">Category</item>
-                <item name="cms_page" xsi:type="string" translate="true">CMS Page</item>
-            </argument>
+            <argument name="entityConfigurationPool" xsi:type="object">MaxServ\YoastSeo\Model\EntityConfigurationPool</argument>
         </arguments>
     </type>
 </config>

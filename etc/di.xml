@@ -48,28 +48,62 @@
             <argument name="imageUploader" xsi:type="object">MaxServ\YoastSeo\Model\ImageUploader</argument>
         </arguments>
     </type>
+    <virtualType name="MaxServ\YoastSeo\Model\EntityConfiguration\Catalog\ProductConfiguration" type="MaxServ\YoastSeo\Model\EntityConfiguration">
+        <arguments>
+            <argument name="entityName" xsi:type="string">catalog_product</argument>
+            <argument name="entityLabel" xsi:type="string">Product</argument>
+            <argument name="defaultTemplate" xsi:type="string">
+                <![CDATA[<h1>{{name}}</h1>
+<p>{{description}}</p>
+<p>{{images}}</p>]]>
+            </argument>
+            <argument name="templateProcessor" xsi:type="string">MaxServ\YoastSeo\Model\EntityConfiguration\Catalog\Product\TemplateProcessor</argument>
+            <argument name="imageProvider" xsi:type="string">MaxServ\YoastSeo\Model\EntityConfiguration\Catalog\Product\ImageProvider</argument>
+            <argument name="metaProvider" xsi:type="string">MaxServ\YoastSeo\Model\EntityConfiguration\Catalog\Product\MetaProvider</argument>
+            <argument name="isRequired" xsi:type="boolean">true</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="MaxServ\YoastSeo\Model\EntityConfiguration\Catalog\CategoryConfiguration" type="MaxServ\YoastSeo\Model\EntityConfiguration">
+        <arguments>
+            <argument name="entityName" xsi:type="string">catalog_category</argument>
+            <argument name="entityLabel" xsi:type="string">Category</argument>
+            <argument name="defaultTemplate" xsi:type="string">
+                <![CDATA[<h1>{{name}}</h1>
+<p>{{description}}</p>
+<p>{{images}}</p>]]>
+            </argument>
+            <argument name="templateProcessor" xsi:type="string">MaxServ\YoastSeo\Model\EntityConfiguration\Catalog\Category\TemplateProcessor</argument>
+            <argument name="imageProvider" xsi:type="string">MaxServ\YoastSeo\Model\EntityConfiguration\Catalog\Category\ImageProvider</argument>
+            <argument name="metaProvider" xsi:type="string">MaxServ\YoastSeo\Model\EntityConfiguration\Catalog\Category\MetaProvider</argument>
+            <argument name="isRequired" xsi:type="boolean">true</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="MaxServ\YoastSeo\Model\EntityConfiguration\Cms\PageConfiguration" type="MaxServ\YoastSeo\Model\EntityConfiguration">
+        <arguments>
+            <argument name="entityName" xsi:type="string">cms_page</argument>
+            <argument name="entityLabel" xsi:type="string">CMS Page</argument>
+            <argument name="defaultTemplate" xsi:type="string">
+                <![CDATA[<h1>{{title}}</h1>
+<p>{{content}}</p>]]>
+            </argument>
+            <argument name="templateProcessor" xsi:type="string">MaxServ\YoastSeo\Model\EntityConfiguration\Cms\Page\TemplateProcessor</argument>
+            <argument name="imageProvider" xsi:type="string">MaxServ\YoastSeo\Model\EntityConfiguration\Cms\Page\ImageProvider</argument>
+            <argument name="metaProvider" xsi:type="string">MaxServ\YoastSeo\Model\EntityConfiguration\Cms\Page\MetaProvider</argument>
+            <argument name="isRequired" xsi:type="boolean">true</argument>
+        </arguments>
+    </virtualType>
+    <type name="MaxServ\YoastSeo\Model\EntityConfigurationPool">
+        <arguments>
+            <argument name="entityConfigurations" xsi:type="array">
+                <item name="catalog_product" xsi:type="object">MaxServ\YoastSeo\Model\EntityConfiguration\Catalog\ProductConfiguration</item>
+                <item name="catalog_category" xsi:type="object">MaxServ\YoastSeo\Model\EntityConfiguration\Catalog\CategoryConfiguration</item>
+                <item name="cms_page" xsi:type="object">MaxServ\YoastSeo\Model\EntityConfiguration\Cms\PageConfiguration</item>
+            </argument>
+        </arguments>
+    </type>
     <type name="MaxServ\YoastSeo\Helper\Analysis\TemplatesHelper">
         <arguments>
-            <argument name="defaultTemplates" xsi:type="array">
-                <item name="catalog_product" xsi:type="string">
-                    <![CDATA[<h1>{{input[type="text"][name="product[name]"]}}</h1>
-<p>{{textarea[name="description"]}}</p>
-<p>{{images}}</p>]]>
-                </item>
-                <item name="catalog_category" xsi:type="string">
-                    <![CDATA[<h1>{{input[type="text"][name="name"]}}</h1>
-<p>{{textarea[name="description"]}}</p>
-<p>{{images}}</p>]]>
-                </item>
-                <item name="cms_page" xsi:type="string">
-                    <![CDATA[<h1>{{input[type="text"][name="title"]}}</h1>
-<p>{{textarea[name="content"]}}</p>]]>
-                </item>
-            </argument>
-            <argument name="imagesHelpers" xsi:type="array">
-                <item name="catalog_product" xsi:type="object">MaxServ\YoastSeo\Helper\Analysis\Images\Product</item>
-                <item name="catalog_category" xsi:type="object">MaxServ\YoastSeo\Helper\Analysis\Images\Category</item>
-            </argument>
+            <argument name="entityConfigurationPool" xsi:type="object">MaxServ\YoastSeo\Model\EntityConfigurationPool</argument>
         </arguments>
     </type>
 </config>

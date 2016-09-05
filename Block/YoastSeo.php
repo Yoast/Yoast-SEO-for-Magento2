@@ -24,7 +24,9 @@ namespace MaxServ\YoastSeo\Block;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\Element\Template\Context;
 use Magento\Store\Model\ScopeInterface;
-use MaxServ\YoastSeo\Helper\Meta;
+use MaxServ\YoastSeo\Model\EntityConfiguration;
+use MaxServ\YoastSeo\Model\EntityConfiguration\MetaProviderInterface;
+use MaxServ\YoastSeo\Model\EntityConfigurationPool;
 
 /**
  * Class YoastSeo
@@ -36,26 +38,26 @@ class YoastSeo extends Template
 {
 
     /**
-     * @var Meta[]
+     * @var EntityConfiguration[]
      */
-    protected $metaPool;
+    protected $entityConfigurationPool;
 
     /**
      * @param Context $context
-     * @param array $metaPool
+     * @param EntityConfigurationPool $entityConfigurationPool
      * @param array $data
      */
     public function __construct(
         Context $context,
-        array $metaPool,
+        EntityConfigurationPool $entityConfigurationPool,
         array $data
     ) {
         parent::__construct($context, $data);
-        $this->metaPool = $metaPool;
+        $this->entityConfigurationPool = $entityConfigurationPool;
     }
 
     /**
-     * @return Meta
+     * @return MetaProviderInterface
      * @throws \ErrorException
      */
     public function getMeta()
@@ -65,11 +67,10 @@ class YoastSeo extends Template
             throw new \ErrorException('No pageType registered.');
         }
 
-        if (!isset($this->metaPool[$pageType])) {
-            throw new \ErrorException('No meta object for pageType [' . $pageType . ']');
-        }
+        /** @var EntityConfiguration $entityConfiguration */
+        $entityConfiguration = $this->entityConfigurationPool->getEntityConfiguration($pageType);
 
-        return $this->metaPool[$pageType];
+        return $entityConfiguration->getMetaProvider();
     }
 
     /**
