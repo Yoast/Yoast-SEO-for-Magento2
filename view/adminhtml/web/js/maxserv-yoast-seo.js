@@ -27,6 +27,16 @@ define([
 
     $.widget('maxServ.yoastSeo', {
         _create: function() {
+            this.setup();
+        },
+        setup: function() {
+            var widget = this;
+            if (!this.checkInputElements()) {
+                setTimeout(function() {
+                    widget.setup();
+                }, 300);
+                return;
+            }
             this.element = $('#yoast-seo-wrapper');
             this.is_visible = true;
             this.config = window.yoastBoxConfig;
@@ -90,6 +100,14 @@ define([
                 }
             }
 
+        },
+        checkInputElements: function() {
+            return $('.yoastBox-title .admin__control-text').length &&
+            $('.yoastBox-urlKey .admin__control-text').length &&
+            $('.yoastBox-contentHeading .admin__control-text').length &&
+            $('.yoastBox-metaTitle .admin__control-text').length &&
+            $('.yoastBox-focusKeyword .admin__control-text').length &&
+            $('.yoastBox-metaDescription .admin__control-textarea').length;
         },
         getInputElements: function() {
             this.titleInputElement = $('.yoastBox-title .admin__control-text');
