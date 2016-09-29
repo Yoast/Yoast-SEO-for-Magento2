@@ -106,8 +106,9 @@ class YoastSeo extends AbstractModifier
         $meta['content']['children']['container_description']['children']['description']['arguments']['data']['config']['additionalClasses'] = 'yoastBox-content';
         $meta['search-engine-optimization']['arguments']['data']['config']['label'] = __('Search Engine Optimization by Yoast');
         $meta['search-engine-optimization']['children']['container_url_key']['children']['url_key']['arguments']['data']['config']['additionalClasses'] = 'yoastBox-urlKey';
-        $meta['search-engine-optimization']['children']['container_meta_title']['children']['meta_title']['arguments']['data']['config']['additionalClasses'] = 'yoastBox-metaTitle';
-        $meta['search-engine-optimization']['children']['container_meta_description']['children']['meta_description']['arguments']['data']['config']['additionalClasses'] = 'yoastBox-metaDescription';
+        $meta['search-engine-optimization']['children']['container_meta_title']['children']['meta_title']['arguments']['data']['config']['additionalClasses'] = 'yoastBox-metaTitle hidden';
+        $meta['search-engine-optimization']['children']['container_meta_description']['children']['meta_description']['arguments']['data']['config']['additionalClasses'] = 'yoastBox-metaDescription hidden';
+        $meta['search-engine-optimization']['children']['container_meta_keyword']['children']['meta_keyword']['arguments']['data']['config']['additionalClasses'] = 'yoastBox-metaKeywords';
         $meta['search-engine-optimization']['children']['container_focus_keyword']['children']['focus_keyword']['arguments']['data']['config']['additionalClasses'] = 'yoastBox-focusKeyword';
 
         // facebook fieldset
