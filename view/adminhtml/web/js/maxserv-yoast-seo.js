@@ -50,7 +50,6 @@ define([
             this.inputElements = [
                 this.titleInputElement,
                 this.urlKeyInputElement,
-                this.contentHeadingInputElement,
                 this.metaTitleInputElement,
                 this.focusKeywordInputElement,
                 this.metaDescriptionInputElement
@@ -104,15 +103,13 @@ define([
         checkInputElements: function() {
             return $('.yoastBox-title .admin__control-text').length &&
             $('.yoastBox-urlKey .admin__control-text').length &&
-            $('.yoastBox-contentHeading .admin__control-text').length &&
             $('.yoastBox-metaTitle .admin__control-text').length &&
-            $('.yoastBox-focusKeyword .admin__control-text').length &&
+            $('.yoastBox-metaTitle .admin__control-text').length &&
             $('.yoastBox-metaDescription .admin__control-textarea').length;
         },
         getInputElements: function() {
             this.titleInputElement = $('.yoastBox-title .admin__control-text');
             this.urlKeyInputElement = $('.yoastBox-urlKey .admin__control-text');
-            this.contentHeadingInputElement = $('.yoastBox-contentHeading .admin__control-text');
             this.metaTitleInputElement = $('.yoastBox-metaTitle .admin__control-text');
             this.focusKeywordInputElement = $('.yoastBox-focusKeyword .admin__control-text');
             this.metaDescriptionInputElement = $('.yoastBox-metaDescription .admin__control-textarea');
@@ -189,7 +186,10 @@ define([
             );
             $('#yoast-seo-keywords-fieldset').append(
                 $('.yoastBox-metaKeywords')
-            )
+            );
+            $('#yoast-seo-focus-input-fieldset').append(
+                $('.yoastBox-focusKeyword')
+            );
         },
         update: function() {
             this.app.refresh();
@@ -201,8 +201,11 @@ define([
             var widget = this,
                 changeFunction = function() {
                     widget.update();
-                };
-            $(this.inputElements).each(function() {
+                },
+                inputElements = this.inputElements.concat(
+                    $('.yoastBox-content textarea')
+                );
+            $(inputElements).each(function() {
                 $(this).on('change', changeFunction);
             });
         },
@@ -218,43 +221,32 @@ define([
             }
             return url;
         },
-        getCategoryInputElements: function() {
-            this.titleInputElement = $('input[type=text][name="name"]');
-            this.urlKeyInputElement = $('input[type=text][name="url_key"]');
-            this.contentHeadingInputElement = false;
-            this.metaTitleInputElement = $('input[type=text][name="meta_title"]');
-            this.focusKeywordInputElement = $('input[type=text][name="focus_keyword"]');
-            this.metaDescriptionInputElement = $('textarea[name="meta_description"]');
-        },
         getTitleValue: function() {
             var metaTitle = this.metaTitleInputElement.val(),
-                pageTitle = this.titleInputElement.val(),
-                contentHeading = this.contentHeadingInputElement.val();
+                pageTitle = this.titleInputElement.val();
             if (metaTitle) {
                 return metaTitle;
             } else if (pageTitle) {
                 return pageTitle;
-            } else if (contentHeading) {
-                return contentHeading;
             }
             return '';
         },
         setTitleValue: function(value) {
-            this.metaTitleInputElement.val(value);
+            this.metaTitleInputElement.val(value).change();
             return this;
         },
         getIdentifierValue: function() {
             return this.urlKeyInputElement.val();
         },
         setIdentifierValue: function(value) {
-            this.urlKeyInputElement.val(value);
+            this.urlKeyInputElement.val(value).change();
             return this;
         },
         getKeywordValue: function() {
             return this.focusKeywordInputElement.val();
         },
         setKeywordValue: function(value) {
-            this.focusKeywordInputElement.val(value);
+            this.focusKeywordInputElement.val(value).change();
             return this;
         },
         getContentValue: function() {
@@ -285,15 +277,11 @@ define([
 
             return value;
         },
-        setContentValue: function(value) {
-            this.metaDescriptionInputElement.val(value);
-            return this;
-        },
         getDescriptionValue: function() {
             return this.metaDescriptionInputElement.val();
         },
         setDescriptionValue: function(value) {
-            this.metaDescriptionInputElement.val(value);
+            this.metaDescriptionInputElement.val(value).change();
             return this;
         }
     });

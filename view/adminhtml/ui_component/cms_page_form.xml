@@ -89,7 +89,7 @@
         <field name="focus_keyword">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="additionalClasses" xsi:type="string">yoastBox-focusKeyword hidden</item>
+                    <item name="additionalClasses" xsi:type="string">yoastBox-focusKeyword</item>
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="label" xsi:type="string" translate="true">Focus Keyword</item>
                     <item name="formElement" xsi:type="string">input</item>
