@@ -27,7 +27,15 @@ define([
 
     $.widget('maxServ.yoastSeo', {
         _create: function() {
-            this.setup();
+            this.config = window.yoastBoxConfig;
+            if (this.config.hide_yoastbox === true) {
+                this.hide();
+            } else {
+                this.setup();
+            }
+        },
+        hide: function() {
+            $('[data-index="search_engine_optimization"]').hide();
         },
         setup: function() {
             var widget = this;
@@ -38,7 +46,7 @@ define([
                 return;
             }
             this.element = $('#yoast-seo-wrapper');
-            this.config = window.yoastBoxConfig;
+
             this.snippetPreviewElement = $('#yoast-seo-snippet-preview')[0];
             this.getInputElements();
             $('#yoast-seo-wrapper').tabs({

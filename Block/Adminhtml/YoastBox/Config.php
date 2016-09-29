@@ -30,6 +30,8 @@ use MaxServ\YoastSeo\Helper\Analysis\TemplatesHelper;
  * @package MaxServ\YoastSeo\Block\Adminhtml\YoastBox
  * @method string getEntityType()
  * @method $this setEntityType(string $entityType)
+ * @method array getConfig()
+ * @method $this setConfig(array $config)
  */
 class Config extends Template
 {
@@ -67,6 +69,10 @@ class Config extends Template
             'contentTemplate' => $this->getContentTemplate(),
             'images' => $this->getImages()
         ];
+
+        if ($this->getConfig() && is_array($this->getConfig())) {
+            $config = array_merge($config, $this->getConfig());
+        }
 
         return json_encode($config);
     }

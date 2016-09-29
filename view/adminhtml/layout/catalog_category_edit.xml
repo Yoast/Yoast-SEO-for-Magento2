@@ -26,6 +26,9 @@
             <block class="MaxServ\YoastSeo\Block\Adminhtml\YoastBox\Config" name="maxserv_yoastseo_yoastbox_config">
                 <arguments>
                     <argument name="entity_type" xsi:type="string">catalog_category</argument>
+                    <argument name="config" xsi:type="array">
+                        <item name="hide_yoastbox" xsi:type="helper" helper="MaxServ\YoastSeo\Helper\CatalogHelper::isRootCategory" />
+                    </argument>
                 </arguments>
             </block>
         </referenceContainer>
