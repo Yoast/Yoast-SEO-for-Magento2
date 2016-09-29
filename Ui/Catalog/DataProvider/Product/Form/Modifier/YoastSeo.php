@@ -99,9 +99,6 @@ class YoastSeo extends AbstractModifier
      */
     protected function setYoastFieldClasses(&$meta)
     {
-        // general settings
-        $meta['product-details']['children']['container_status']['children']['status']['arguments']['data']['config']['additionalClasses'] = 'yoastBox-productEnabledToggle';
-        $meta['product-details']['children']['container_visibility']['children']['visibility']['arguments']['data']['config']['additionalClasses'] = 'yoastBox-productVisibilityToggle';
         $meta['product-details']['children']['container_name']['children']['name']['arguments']['data']['config']['additionalClasses'] = 'yoastBox-title';
         $meta['content']['children']['container_description']['children']['description']['arguments']['data']['config']['additionalClasses'] = 'yoastBox-content';
         $meta['search-engine-optimization']['arguments']['data']['config']['label'] = __('Search Engine Optimization by Yoast');
