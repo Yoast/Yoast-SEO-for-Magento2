@@ -61,28 +61,35 @@
         <field name="identifier">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="additionalClasses" xsi:type="string">yoastBox-urlKey</item>
+                    <item name="additionalClasses" xsi:type="string">yoastBox-urlKey hidden</item>
                 </item>
             </argument>
         </field>
         <field name="meta_title">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="additionalClasses" xsi:type="string">yoastBox-metaTitle</item>
+                    <item name="additionalClasses" xsi:type="string">yoastBox-metaTitle hidden</item>
                 </item>
             </argument>
         </field>
         <field name="meta_description">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="additionalClasses" xsi:type="string">yoastBox-metaDescription</item>
+                    <item name="additionalClasses" xsi:type="string">yoastBox-metaDescription hidden</item>
+                </item>
+            </argument>
+        </field>
+        <field name="meta_keywords">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="additionalClasses" xsi:type="string">yoastBox-metaKeywords</item>
                 </item>
             </argument>
         </field>
         <field name="focus_keyword">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="additionalClasses" xsi:type="string">yoastBox-focusKeyword</item>
+                    <item name="additionalClasses" xsi:type="string">yoastBox-focusKeyword hidden</item>
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="label" xsi:type="string" translate="true">Focus Keyword</item>
                     <item name="formElement" xsi:type="string">input</item>

@@ -169,6 +169,9 @@ define([
             $('#yoast-seo-twitter').append(
                 $('.yoastBox-twitter-fieldset')
             );
+            $('#yoast-seo-keywords-fieldset').append(
+                $('.yoastBox-metaKeywords')
+            )
         },
         update: function() {
             this.app.refresh();
