@@ -87,12 +87,12 @@ class TemplatesHelper extends AbstractHelper
 
     /**
      * @param string $entityType
+     * @param bool $processTemplate
      * @return string
      */
-    public function getTemplate($entityType)
+    public function getTemplate($entityType, $processTemplate = true)
     {
         $entityConfiguration = $this->entityConfigurationPool->getEntityConfiguration($entityType);
-        $templateProcessor = $entityConfiguration->getTemplateProcessor();
 
         if (isset($this->templates[$entityType])) {
             $template = $this->templates[$entityType];
@@ -100,9 +100,12 @@ class TemplatesHelper extends AbstractHelper
             /** @var EntityConfiguration $entityConfiguration */
             $template = $entityConfiguration->getDefaultTemplate();
         }
-        $processedTemplate = $templateProcessor->processTemplate($template);
+        if ($processTemplate) {
+            $templateProcessor = $entityConfiguration->getTemplateProcessor();
+            $template = $templateProcessor->processTemplate($template);
+        }
 
-        return $processedTemplate;
+        return $template;
     }
 
     /**
@@ -129,7 +132,7 @@ class TemplatesHelper extends AbstractHelper
             $resultId = $this->mathRandom->getUniqueHash('_');
             $result[$resultId] = [
                 'entity_type' => $entityType,
-                'template' => $this->getDefaultTemplate($entityType)
+                'template' => $this->getTemplate($entityType, false)
             ];
         }
 

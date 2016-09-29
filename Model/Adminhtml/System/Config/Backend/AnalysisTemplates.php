@@ -21,7 +21,6 @@
 
 namespace MaxServ\YoastSeo\Model\Adminhtml\System\Config\Backend;
 
-
 use Magento\Framework\App\Cache\TypeListInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\Config\Value;
