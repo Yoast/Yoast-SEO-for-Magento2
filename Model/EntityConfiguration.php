@@ -143,11 +143,16 @@ class EntityConfiguration
 
     /**
      * @return TemplateProcessorInterface
+     * @throws \Exception
      */
     public function getTemplateProcessor()
     {
         if (empty($this->templateProcessorInstance)) {
-            $this->templateProcessorInstance = $this->objectManager->get($this->templateProcessor);
+            $templateProcessorInstance = $this->objectManager->get($this->templateProcessor);
+            if (!$templateProcessorInstance instanceof TemplateProcessorInterface) {
+                throw new \Exception('Template processor must implement \MaxServ\YoastSeo\Model\TemplateProcessorInterface');
+            }
+            $this->templateProcessorInstance = $templateProcessorInstance;
         }
 
         return $this->templateProcessorInstance;
@@ -155,11 +160,16 @@ class EntityConfiguration
 
     /**
      * @return ImageProviderInterface
+     * @throws \Exception
      */
     public function getImageProvider()
     {
         if (empty($this->imageProviderInstance)) {
-            $this->imageProviderInstance = $this->objectManager->get($this->imageProvider);
+            $imageProviderInstance = $this->objectManager->get($this->imageProvider);
+            if (!$imageProviderInstance instanceof ImageProviderInterface) {
+                throw new \Exception('Template processor must implement \MaxServ\YoastSeo\Model\ImageProviderInterface');
+            }
+            $this->imageProviderInstance = $imageProviderInstance;
         }
 
         return $this->imageProviderInstance;
@@ -167,11 +177,16 @@ class EntityConfiguration
 
     /**
      * @return MetaProviderInterface
+     * @throws \Exception
      */
     public function getMetaProvider()
     {
         if (empty($this->metaProviderInstance)) {
-            $this->metaProviderInstance = $this->objectManager->get($this->metaProvider);
+            $metaProviderInstance = $this->objectManager->get($this->metaProvider);
+            if (!$metaProviderInstance instanceof MetaProviderInterface) {
+                throw new \Exception('Template processor must implement \MaxServ\YoastSeo\Model\MetaProviderInterface');
+            }
+            $this->metaProviderInstance = $metaProviderInstance;
         }
 
         return $this->metaProviderInstance;

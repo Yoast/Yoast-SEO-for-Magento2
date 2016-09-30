@@ -26,6 +26,9 @@ use MaxServ\YoastSeo\Model\EntityConfiguration\AbstractTemplateProcessor;
 class TemplateProcessor extends AbstractTemplateProcessor
 {
 
+    /**
+     * @inheritdoc
+     */
     public function processTemplate($template)
     {
         $fields = $this->getFields($template);

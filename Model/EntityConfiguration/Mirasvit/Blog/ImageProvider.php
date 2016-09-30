@@ -19,26 +19,15 @@
  *
  */
 
-namespace MaxServ\YoastSeo\Setup;
+namespace MaxServ\YoastSeo\Model\EntityConfiguration\Mirasvit\Blog;
 
-use Magento\Framework\Setup\InstallDataInterface;
-use Magento\Framework\Setup\ModuleContextInterface;
-use Magento\Framework\Setup\ModuleDataSetupInterface;
+use MaxServ\YoastSeo\Model\EntityConfiguration\ImageProviderInterface;
 
-class InstallSchemaData extends AbstractInstallData implements InstallDataInterface
+class ImageProvider implements ImageProviderInterface
 {
 
-    /**
-     * @param ModuleDataSetupInterface $setup
-     * @param ModuleContextInterface $context
-     */
-    public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
+    public function getImages()
     {
-        $this->setup = $setup;
-        $this->context = $context;
-
-        $this->updateProductAttributes();
-        $this->updateCategoryAttributes();
-        $this->updateMirasvitBlogAttributes();
+        return [];
     }
 }

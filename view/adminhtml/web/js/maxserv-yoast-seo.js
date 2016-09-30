@@ -55,9 +55,12 @@ define([
 
             this.inputElements = [
                 this.titleInputElement,
+                this.focusKeywordInputElement
+            ];
+
+            this.hideInputElements = [
                 this.urlKeyInputElement,
                 this.metaTitleInputElement,
-                this.focusKeywordInputElement,
                 this.metaDescriptionInputElement
             ];
 
@@ -67,19 +70,39 @@ define([
             this.updateFieldsets();
             this.setupEventListeners();
         },
+        getFocusKeywordFieldIdentifier: function() {
+            return this.config.focusKeywordFieldIdentifier || '.yoastBox-focusKeyword';
+        },
+        getFocusKeywordIdentifier: function() {
+            return this.config.focusKeywordIdentifier || '.yoastBox-focusKeyword .admin__control-text';
+        },
+        getTitleIdentifier: function() {
+            return this.config.titleIdentifier || '.yoastBox-title .admin__control-text';
+        },
+        getUrlKeyIdentifier: function() {
+            return this.config.urlKeyIdentifier || '.yoastBox-urlKey .admin__control-text';
+        },
+        getMetaTitleIdentifier: function() {
+            return this.config.metaTitleIdentifier || '.yoastBox-metaTitle .admin__control-text';
+        },
+        getMetaDescriptionIdentifier: function() {
+            return this.config.metaDescriptionIdentifier || '.yoastBox-metaDescription .admin__control-textarea';
+        },
+        getMetaKeywordsIdentifier: function() {
+            return this.config.metaKeywordsIdentifier || '.yoastBox-metaKeywords';
+        },
         checkInputElements: function() {
-            return $('.yoastBox-title .admin__control-text').length &&
-            $('.yoastBox-urlKey .admin__control-text').length &&
-            $('.yoastBox-metaTitle .admin__control-text').length &&
-            $('.yoastBox-metaTitle .admin__control-text').length &&
-            $('.yoastBox-metaDescription .admin__control-textarea').length;
+            return $(this.getTitleIdentifier()).length &&
+            $(this.getUrlKeyIdentifier()).length &&
+            $(this.getMetaTitleIdentifier()).length &&
+            $(this.getMetaDescriptionIdentifier()).length;
         },
         getInputElements: function() {
-            this.titleInputElement = $('.yoastBox-title .admin__control-text');
-            this.urlKeyInputElement = $('.yoastBox-urlKey .admin__control-text');
-            this.metaTitleInputElement = $('.yoastBox-metaTitle .admin__control-text');
-            this.focusKeywordInputElement = $('.yoastBox-focusKeyword .admin__control-text');
-            this.metaDescriptionInputElement = $('.yoastBox-metaDescription .admin__control-textarea');
+            this.titleInputElement = $(this.getTitleIdentifier());
+            this.urlKeyInputElement = $(this.getUrlKeyIdentifier());
+            this.metaTitleInputElement = $(this.getMetaTitleIdentifier());
+            this.focusKeywordInputElement = $(this.getFocusKeywordIdentifier());
+            this.metaDescriptionInputElement = $(this.getMetaDescriptionIdentifier());
         },
         getTemplateElements: function() {
             // template input elements
@@ -152,11 +175,15 @@ define([
                 $('.yoastBox-twitter-fieldset')
             );
             $('#yoast-seo-keywords-fieldset').append(
-                $('.yoastBox-metaKeywords')
+                $(this.getMetaKeywordsIdentifier())
             );
             $('#yoast-seo-focus-input-fieldset').append(
-                $('.yoastBox-focusKeyword')
+                $(this.getFocusKeywordFieldIdentifier())
             );
+
+            $(this.hideInputElements).each(function() {
+                $(this).parents('.admin__field').hide();
+            });
         },
         update: function() {
             this.app.refresh();

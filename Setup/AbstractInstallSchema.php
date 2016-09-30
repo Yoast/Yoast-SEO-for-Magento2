@@ -59,24 +59,30 @@ class AbstractInstallSchema
 
     protected function updateCmsPageColumns()
     {
-        $this->addCmsPageColumn('focus_keyword', ['comment' => 'Focus Keyword']);
-        $this->addCmsPageColumn('yoast_facebook_title', ['comment' => 'Yoast Facebook Title']);
-        $this->addCmsPageColumn('yoast_facebook_description', ['comment' => 'Yoast Facebook Description', 'length' => 0]);
-        $this->addCmsPageColumn('yoast_facebook_image', ['comment' => 'Yoast Facebook Image']);
-        $this->addCmsPageColumn('yoast_twitter_title', ['comment' => 'Yoast Twitter Title']);
-        $this->addCmsPageColumn('yoast_twitter_description', ['comment' => 'Yoast Twitter Description', 'length' => 0]);
-        $this->addCmsPageColumn('yoast_twitter_image', ['comment' => 'Yoast Twitter Image']);
+        $columns = [
+            'focus_keyword' => ['comment' => 'Focus Keyword'],
+            'yoast_facebook_title' => ['comment' => 'Yoast Facebook Title'],
+            'yoast_facebook_description' => ['comment' => 'Yoast Facebook Description', 'length' => 0],
+            'yoast_facebook_image' => ['comment' => 'Yoast Facebook Image'],
+            'yoast_twitter_title' => ['comment' => 'Yoast Twitter Title'],
+            'yoast_twitter_description' => ['comment' => 'Yoast Twitter Description', 'length' => 0],
+            'yoast_twitter_image' => ['comment' => 'Yoast Twitter Image']
+        ];
+        $cmsTableName = $this->getSetupConnection()->getTableName('cms_page');
+        foreach ($columns as $columnName => $columnDefinition) {
+            $this->addColumn($cmsTableName, $columnName, $columnDefinition);
+        }
     }
 
     /**
-     * Add a column to the cms_page table if it does not exist yet.
+     * Add a column to the specified table if it does not exist yet.
      *
+     * @param string $tableName
      * @param string $columnName
      * @param array $columnDefinition
      */
-    protected function addCmsPageColumn($columnName, $columnDefinition = [])
+    protected function addColumn($tableName, $columnName, $columnDefinition = [])
     {
-        $tableName = $this->getSetupConnection()->getTableName('cms_page');
         if (!$this->getSetupConnection()->tableColumnExists($tableName, $columnName)) {
             $columnDefinition = array_merge(
                 [

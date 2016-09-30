@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!--
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the General Public License (GPL 3.0).
+  ~ This license is available through the world-wide-web at this URL:
+  ~ http://opensource.org/licenses/gpl-3.0.en.php
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this module to newer
+  ~ versions in the future.
+  ~
+  ~ @category    Maxserv: MaxServ_YoastSeo
+  ~ @package     Maxserv: MaxServ_YoastSeo
+  ~ @author      Vincent Hornikx <vincent.hornikx@maxser.com>
+  ~ @copyright   Copyright (c) 2016 MaxServ (http://www.maxserv.com)
+  ~ @license     http://opensource.org/licenses/gpl-3.0.en.php General Public License (GPL 3.0)
+  ~
+  -->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="yoast" />
+    <body>
+        <block name="maxserv_yoast_block" class="MaxServ\YoastSeo\Block\Adminhtml\YoastBox" />
+        <referenceContainer name="before.body.end">
+            <block class="MaxServ\YoastSeo\Block\Adminhtml\YoastBox\Config" name="maxserv_yoastseo_yoastbox_config">
+                <arguments>
+                    <argument name="entity_type" xsi:type="string">mirasvit_blog</argument>
+                    <argument name="config" xsi:type="array">
+                        <item name="focusKeywordFieldIdentifier" xsi:type="string"><![CDATA[.admin__field.field.field-focus_keyword]]></item>
+                        <item name="focusKeywordIdentifier" xsi:type="string"><![CDATA[#focus_keyword]]></item>
+                        <item name="titleIdentifier" xsi:type="string"><![CDATA[#name]]></item>
+                        <item name="metaTitleIdentifier" xsi:type="string"><![CDATA[#meta_title]]></item>
+                        <item name="metaDescriptionIdentifier" xsi:type="string"><![CDATA[#meta_description]]></item>
+                        <item name="metaKeywordsIdentifier" xsi:type="string"><![CDATA[.admin__field.field.field-meta_keywords]]></item>
+                        <item name="urlKeyIdentifier" xsi:type="string"><![CDATA[#url_key]]></item>
+                    </argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

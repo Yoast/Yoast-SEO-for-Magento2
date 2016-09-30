@@ -29,7 +29,10 @@ class YoastBox extends Template
     protected function _construct()
     {
         $this->setTemplate('MaxServ_YoastSeo::yoastbox.phtml');
-        $this->setNameInLayout('maxserv_yoast_block');
+
+        if (!$this->getNameInLayout()) {
+            $this->setNameInLayout('maxserv_yoast_block');
+        }
 
         parent::_construct();
     }

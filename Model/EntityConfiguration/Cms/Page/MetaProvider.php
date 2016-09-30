@@ -44,7 +44,7 @@ class MetaProvider extends AbstractMetaProvider
     }
 
     /**
-     * @return string
+     * @inheritdoc
      */
     public function getType()
     {
@@ -55,7 +55,7 @@ class MetaProvider extends AbstractMetaProvider
     }
 
     /**
-     * @return string
+     * @inheritdoc
      */
     public function getUrl()
     {
@@ -63,7 +63,7 @@ class MetaProvider extends AbstractMetaProvider
     }
 
     /**
-     * @return null|string
+     * @inheritdoc
      */
     public function getTitle()
     {
@@ -79,7 +79,7 @@ class MetaProvider extends AbstractMetaProvider
     }
 
     /**
-     * @return string
+     * @inheritdoc
      */
     public function getDescription()
     {
@@ -94,7 +94,7 @@ class MetaProvider extends AbstractMetaProvider
     }
 
     /**
-     * @return string
+     * @inheritdoc
      */
     public function getImage()
     {
@@ -102,7 +102,7 @@ class MetaProvider extends AbstractMetaProvider
     }
 
     /**
-     * @return null
+     * @inheritdoc
      */
     public function getPrevLink()
     {
@@ -110,7 +110,7 @@ class MetaProvider extends AbstractMetaProvider
     }
 
     /**
-     * @return null
+     * @inheritdoc
      */
     public function getNextLink()
     {
@@ -118,7 +118,7 @@ class MetaProvider extends AbstractMetaProvider
     }
 
     /**
-     * @return null|string
+     * @inheritdoc
      */
     public function getOpenGraphTitle()
     {
@@ -129,7 +129,7 @@ class MetaProvider extends AbstractMetaProvider
     }
 
     /**
-     * @return string
+     * @inheritdoc
      */
     public function getOpenGraphDescription()
     {
@@ -140,7 +140,7 @@ class MetaProvider extends AbstractMetaProvider
     }
 
     /**
-     * @return string
+     * @inheritdoc
      */
     public function getOpenGraphImage()
     {
@@ -154,7 +154,7 @@ class MetaProvider extends AbstractMetaProvider
     }
 
     /**
-     * @return array
+     * @inheritdoc
      */
     public function getOpenGraphVideo()
     {
@@ -162,7 +162,7 @@ class MetaProvider extends AbstractMetaProvider
     }
 
     /**
-     * @return null|string
+     * @inheritdoc
      */
     public function getTwitterTitle()
     {
@@ -173,7 +173,7 @@ class MetaProvider extends AbstractMetaProvider
     }
 
     /**
-     * @return string
+     * @inheritdoc
      */
     public function getTwitterDescription()
     {
@@ -184,7 +184,7 @@ class MetaProvider extends AbstractMetaProvider
     }
 
     /**
-     * @return string
+     * @inheritdoc
      */
     public function getTwitterImage()
     {

@@ -19,26 +19,27 @@
  *
  */
 
-namespace MaxServ\YoastSeo\Setup;
+namespace MaxServ\YoastSeo\Model\EntityConfiguration\Mirasvit\Blog;
 
-use Magento\Framework\Setup\InstallDataInterface;
-use Magento\Framework\Setup\ModuleContextInterface;
-use Magento\Framework\Setup\ModuleDataSetupInterface;
+use MaxServ\YoastSeo\Model\EntityConfiguration\AbstractTemplateProcessor;
+use MaxServ\YoastSeo\Model\EntityConfiguration\TemplateProcessorInterface;
 
-class InstallSchemaData extends AbstractInstallData implements InstallDataInterface
+class TemplateProcessor extends AbstractTemplateProcessor implements TemplateProcessorInterface
 {
 
     /**
-     * @param ModuleDataSetupInterface $setup
-     * @param ModuleContextInterface $context
+     * @inheritdoc
      */
-    public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
+    public function processTemplate($template)
     {
-        $this->setup = $setup;
-        $this->context = $context;
+        $fields = $this->getFields($template);
 
-        $this->updateProductAttributes();
-        $this->updateCategoryAttributes();
-        $this->updateMirasvitBlogAttributes();
+        foreach ($fields as $field) {
+            if ($field !== 'images') {
+                $this->replaceField($template, $field, sprintf('[name="post[%s]"]', $field));
+            }
+        }
+
+        return $template;
     }
 }
