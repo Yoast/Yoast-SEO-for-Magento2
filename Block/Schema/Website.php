@@ -38,7 +38,7 @@ class Website extends Template
         if ($this->isSitelinkSearchboxAvailable()) {
             $schema['potentialAction'] = [
                 '@type' => 'SearchAction',
-                'target' => $this->getUrl('catalogsearch/result', ['_query' => ['q' => '{search_term_string}']]),
+                'target' => $this->getUrl('catalogsearch/result') . '?q={search_term_string}',
                 'query-input' => 'required name=search_term_string'
             ];
         }

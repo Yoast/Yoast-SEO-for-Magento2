@@ -92,27 +92,12 @@
             <argument name="isRequired" xsi:type="boolean">true</argument>
         </arguments>
     </virtualType>
-    <virtualType name="MaxServ\YoastSeo\Model\EntityConfiguration\Mirasvit\BlogConfiguration" type="MaxServ\YoastSeo\Model\EntityConfiguration">
-        <arguments>
-            <argument name="entityName" xsi:type="string">mirasvit_blog</argument>
-            <argument name="entityLabel" xsi:type="string">Blog</argument>
-            <argument name="defaultTemplate" xsi:type="string">
-                <![CDATA[<h1>{{name}}</h1>
-<p>{{content}}</p>]]>
-            </argument>
-            <argument name="templateProcessor" xsi:type="string">MaxServ\YoastSeo\Model\EntityConfiguration\Mirasvit\Blog\TemplateProcessor</argument>
-            <argument name="imageProvider" xsi:type="string">MaxServ\YoastSeo\Model\EntityConfiguration\Mirasvit\Blog\ImageProvider</argument>
-            <argument name="metaProvider" xsi:type="string">MaxServ\YoastSeo\Model\EntityConfiguration\Mirasvit\Blog\MetaProvider</argument>
-            <argument name="isRequired" xsi:type="boolean">true</argument>
-        </arguments>
-    </virtualType>
     <type name="MaxServ\YoastSeo\Model\EntityConfigurationPool">
         <arguments>
             <argument name="entityConfigurations" xsi:type="array">
                 <item name="catalog_product" xsi:type="object">MaxServ\YoastSeo\Model\EntityConfiguration\Catalog\ProductConfiguration</item>
                 <item name="catalog_category" xsi:type="object">MaxServ\YoastSeo\Model\EntityConfiguration\Catalog\CategoryConfiguration</item>
                 <item name="cms_page" xsi:type="object">MaxServ\YoastSeo\Model\EntityConfiguration\Cms\PageConfiguration</item>
-                <item name="mirasvit_blog" xsi:type="object">MaxServ\YoastSeo\Model\EntityConfiguration\Mirasvit\BlogConfiguration</item>
             </argument>
         </arguments>
     </type>
