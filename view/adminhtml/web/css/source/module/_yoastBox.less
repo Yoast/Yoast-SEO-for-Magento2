@@ -1,0 +1,65 @@
+.yoastBox {
+
+    .yoastBox-tabs {
+
+        position: relative;
+        z-index: 2;
+        list-style:none;
+        margin-bottom:0;
+
+        &:after {
+            content: "";
+            display:table;
+            clear:both;
+        }
+
+        li {
+            float: left;
+            padding: 5px 10px;
+            border: 1px solid transparent;
+
+            &:not(:first-child) {
+                margin-left: 2px;
+            }
+        }
+
+        a {
+            display:block;
+            color: @adminTextColor;
+            transition: color 0.3s linear;
+        }
+        li.ui-state-active {
+            border-top-color: @adminBorderColor;
+            border-right-color: @adminBorderColor;
+            border-bottom-color: #ffffff;
+            border-left-color: @adminBorderColor;
+
+            a {
+                color: @adminTextActiveColor;
+            }
+        }
+    }
+
+    .yoastBox-tab {
+
+        position: relative;
+        z-index: 1;
+        border: 1px solid @adminBorderColor;
+
+        .fieldset-wrapper {
+            padding-bottom: 0;
+        }
+
+        .admin__field-label {
+            width: calc(~'(100% * 0.15) - 30px');
+        }
+
+        .admin__control-checkbox + .admin__field-label {
+            width: auto;
+        }
+
+        .admin__field-control {
+            width: calc(~'(100% * 0.8) - 30px');
+        }
+    }
+}

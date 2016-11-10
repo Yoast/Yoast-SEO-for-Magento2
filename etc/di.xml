@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<!--
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the General Public License (GPL 3.0).
+  ~ This license is available through the world-wide-web at this URL:
+  ~ http://opensource.org/licenses/gpl-3.0.en.php
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this module to newer
+  ~ versions in the future.
+  ~
+  ~ @category    Maxserv: MaxServ_YoastSeo
+  ~ @package     Maxserv: MaxServ_YoastSeo
+  ~ @author      Vincent Hornikx <vincent.hornikx@maxser.com>
+  ~ @copyright   Copyright (c) 2016 MaxServ (http://www.maxserv.com)
+  ~ @license     http://opensource.org/licenses/gpl-3.0.en.php General Public License (GPL 3.0)
+  ~
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="MaxServ\YoastSeo\Model\ImageUploader" type="Magento\Catalog\Model\ImageUploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="string">yoast/tmp</argument>
+            <argument name="basePath" xsi:type="string">yoast/img</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="gif" xsi:type="string">gif</item>
+                <item name="png" xsi:type="string">png</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="MaxServ\YoastSeo\Controller\Adminhtml\Image\Upload">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">MaxServ\YoastSeo\Model\ImageUploader</argument>
+        </arguments>
+    </type>
+    <type name="MaxServ\YoastSeo\Plugin\Cms\PagePlugin">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">MaxServ\YoastSeo\Model\ImageUploader</argument>
+        </arguments>
+    </type>
+    <type name="MaxServ\YoastSeo\Model\Attribute\Backend\Image">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">MaxServ\YoastSeo\Model\ImageUploader</argument>
+        </arguments>
+    </type>
+    <virtualType name="MaxServ\YoastSeo\Model\EntityConfiguration\Catalog\ProductConfiguration" type="MaxServ\YoastSeo\Model\EntityConfiguration">
+        <arguments>
+            <argument name="entityName" xsi:type="string">catalog_product</argument>
+            <argument name="entityLabel" xsi:type="string">Product</argument>
+            <argument name="defaultTemplate" xsi:type="string">
+                <![CDATA[<h1>{{name}}</h1>
+<p>{{description}}</p>
+<p>{{images}}</p>]]>
+            </argument>
+            <argument name="templateProcessor" xsi:type="string">MaxServ\YoastSeo\Model\EntityConfiguration\Catalog\Product\TemplateProcessor</argument>
+            <argument name="imageProvider" xsi:type="string">MaxServ\YoastSeo\Model\EntityConfiguration\Catalog\Product\ImageProvider</argument>
+            <argument name="metaProvider" xsi:type="string">MaxServ\YoastSeo\Model\EntityConfiguration\Catalog\Product\MetaProvider</argument>
+            <argument name="isRequired" xsi:type="boolean">true</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="MaxServ\YoastSeo\Model\EntityConfiguration\Catalog\CategoryConfiguration" type="MaxServ\YoastSeo\Model\EntityConfiguration">
+        <arguments>
+            <argument name="entityName" xsi:type="string">catalog_category</argument>
+            <argument name="entityLabel" xsi:type="string">Category</argument>
+            <argument name="defaultTemplate" xsi:type="string">
+                <![CDATA[<h1>{{name}}</h1>
+<p>{{description}}</p>
+<p>{{images}}</p>]]>
+            </argument>
+            <argument name="templateProcessor" xsi:type="string">MaxServ\YoastSeo\Model\EntityConfiguration\Catalog\Category\TemplateProcessor</argument>
+            <argument name="imageProvider" xsi:type="string">MaxServ\YoastSeo\Model\EntityConfiguration\Catalog\Category\ImageProvider</argument>
+            <argument name="metaProvider" xsi:type="string">MaxServ\YoastSeo\Model\EntityConfiguration\Catalog\Category\MetaProvider</argument>
+            <argument name="isRequired" xsi:type="boolean">true</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="MaxServ\YoastSeo\Model\EntityConfiguration\Cms\PageConfiguration" type="MaxServ\YoastSeo\Model\EntityConfiguration">
+        <arguments>
+            <argument name="entityName" xsi:type="string">cms_page</argument>
+            <argument name="entityLabel" xsi:type="string">CMS Page</argument>
+            <argument name="defaultTemplate" xsi:type="string">
+                <![CDATA[<h1>{{title}}</h1>
+<p>{{content}}</p>]]>
+            </argument>
+            <argument name="templateProcessor" xsi:type="string">MaxServ\YoastSeo\Model\EntityConfiguration\Cms\Page\TemplateProcessor</argument>
+            <argument name="imageProvider" xsi:type="string">MaxServ\YoastSeo\Model\EntityConfiguration\Cms\Page\ImageProvider</argument>
+            <argument name="metaProvider" xsi:type="string">MaxServ\YoastSeo\Model\EntityConfiguration\Cms\Page\MetaProvider</argument>
+            <argument name="isRequired" xsi:type="boolean">true</argument>
+        </arguments>
+    </virtualType>
+    <type name="MaxServ\YoastSeo\Model\EntityConfigurationPool">
+        <arguments>
+            <argument name="entityConfigurations" xsi:type="array">
+                <item name="catalog_product" xsi:type="object">MaxServ\YoastSeo\Model\EntityConfiguration\Catalog\ProductConfiguration</item>
+                <item name="catalog_category" xsi:type="object">MaxServ\YoastSeo\Model\EntityConfiguration\Catalog\CategoryConfiguration</item>
+                <item name="cms_page" xsi:type="object">MaxServ\YoastSeo\Model\EntityConfiguration\Cms\PageConfiguration</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="MaxServ\YoastSeo\Helper\Analysis\TemplatesHelper">
+        <arguments>
+            <argument name="entityConfigurationPool" xsi:type="object">MaxServ\YoastSeo\Model\EntityConfigurationPool</argument>
+        </arguments>
+    </type>
+
+    <!-- Mirasvit Blog section -->
+    <preference for="Mirasvit\Blog\Block\Adminhtml\Post\Edit\Tab\Meta"
+                type="MaxServ\YoastSeo\Block\Adminhtml\Mirasvit\Blog\Post\Edit\Tab\Meta" />
+</config>
