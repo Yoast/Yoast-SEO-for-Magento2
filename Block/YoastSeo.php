@@ -105,7 +105,7 @@ class YoastSeo extends Template
      */
     public function getFacebookAppId()
     {
-        return $this->_scopeConfig->getValue('web/seo/facebook_app_id', ScopeInterface::SCOPE_STORE);
+        return $this->_scopeConfig->getValue('yoastseo/facebook/facebook_app_id', ScopeInterface::SCOPE_STORE);
     }
 
     /**
@@ -113,7 +113,7 @@ class YoastSeo extends Template
      */
     public function getFacebookAdmins()
     {
-        return $this->_scopeConfig->getValue('web/seo/facebook_admins', ScopeInterface::SCOPE_STORE);
+        return $this->_scopeConfig->getValue('yoastseo/facebook/facebook_admins', ScopeInterface::SCOPE_STORE);
     }
 
     /**
@@ -121,7 +121,7 @@ class YoastSeo extends Template
      */
     public function getFacebookPages()
     {
-        return $this->_scopeConfig->getValue('web/seo/facebook_pages', ScopeInterface::SCOPE_STORE);
+        return $this->_scopeConfig->getValue('yoastseo/facebook/facebook_pages', ScopeInterface::SCOPE_STORE);
     }
 
     /**
@@ -129,9 +129,13 @@ class YoastSeo extends Template
      */
     public function getTwitterSite()
     {
-        $twitterSite = $this->_scopeConfig->getValue('web/seo/twitter_company', ScopeInterface::SCOPE_STORE);
+        $twitterSite = $this->_scopeConfig->getValue('yoastseo/twitter/twitter_company', ScopeInterface::SCOPE_STORE);
         if (substr($twitterSite, 0, 1) !== '@') {
             $twitterSite = '@' . $twitterSite;
+        }
+
+        if ($twitterSite === '@') {
+            $twitterSite = '';
         }
 
         return $twitterSite;
@@ -142,9 +146,13 @@ class YoastSeo extends Template
      */
     public function getTwitterCreator()
     {
-        $twitterUser = $this->_scopeConfig->getValue('web/seo/twitter_user', ScopeInterface::SCOPE_STORE);
+        $twitterUser = $this->_scopeConfig->getValue('yoastseo/twitter/twitter_user', ScopeInterface::SCOPE_STORE);
         if (substr($twitterUser, 0, 1) !== '@') {
             $twitterUser = '@' . $twitterUser;
+        }
+
+        if ($twitterUser === '@') {
+            $twitterUser = '';
         }
 
         return $twitterUser;
