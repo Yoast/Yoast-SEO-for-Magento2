@@ -69,6 +69,10 @@ define([
             this.setupApp();
             this.updateFieldsets();
             this.setupEventListeners();
+
+            this.updateInterval = window.setInterval(function () {
+                this.update();
+            }.bind(this), 1000);
         },
         getFocusKeywordFieldIdentifier: function() {
             return this.config.focusKeywordFieldIdentifier || '.yoastBox-focusKeyword';
@@ -199,7 +203,9 @@ define([
                     widget.update();
                 },
                 inputElements = this.inputElements.concat(
-                    $('.yoastBox-content textarea')
+                    [
+                        $('.yoastBox-content textarea')
+                    ]
                 );
             $(inputElements).each(function() {
                 $(this).on('change', changeFunction);
@@ -252,9 +258,34 @@ define([
             for (selector in widget.templateElements) {
                 content = content.split(selector).join(widget.getElementValue(widget.templateElements[selector]));
             }
-            content = content.replace('{{images}}', widget.config.images.join('<br />'));
+            content = content.replace('{{images}}', widget.getEntityImages());
 
             return content;
+        },
+        getEntityImages: function () {
+            var images = "";
+            switch (this.config.entityType) {
+                case 'catalog_product':
+                    images = this.getProductImages();
+                    break;
+                default:
+                    images = this.config.images.join('<br />');
+                    break;
+            }
+            return images;
+        },
+        getProductImages: function () {
+            var images = [];
+            $("[data-role=\"image\"]").each(function (ignore, element) {
+                var $el = $(element),
+                    src = $el.find("[name*=\"file\"]").val(),
+                    alt = $el.find("[name*=\"label\"]").val(),
+                    disabled = $el.find("[name*=\"disabled\"]").val();
+                if (disabled == '0') {
+                    images.push("<img src=\"" + src + "\" alt=\"" + alt + "\" />");
+                }
+            });
+            return images.join("<br /> ");
         },
         getElementValue: function(inputElement) {
             var tag = inputElement.prop('tagName').toLowerCase(),
