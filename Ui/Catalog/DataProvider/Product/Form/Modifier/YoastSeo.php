@@ -23,11 +23,17 @@ namespace MaxServ\YoastSeo\Ui\Catalog\DataProvider\Product\Form\Modifier;
 
 use Magento\Catalog\Ui\DataProvider\Product\Form\Modifier\AbstractModifier;
 
+use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Stdlib\ArrayManager;
 use MaxServ\YoastSeo\Helper\ImageHelper;
 
 class YoastSeo extends AbstractModifier
 {
+
+    /**
+     * @var ScopeConfigInterface
+     */
+    protected $scopeConfig;
 
     /**
      * @var ArrayManager
@@ -39,12 +45,21 @@ class YoastSeo extends AbstractModifier
      */
     protected $imageHelper;
 
+    /**
+     * @var bool
+     */
+    protected $moduleIsDisabled = false;
+
     public function __construct(
+        ScopeConfigInterface $scopeConfig,
         ArrayManager $arrayManager,
         ImageHelper $imageHelper
     ) {
+        $this->scopeConfig = $scopeConfig;
         $this->arrayManager = $arrayManager;
         $this->imageHelper = $imageHelper;
+
+        $this->moduleIsDisabled = (bool)$this->scopeConfig->getValue('advanced/modules_disable_output/MaxServ_YoastSeo');
     }
 
     /**
@@ -53,6 +68,10 @@ class YoastSeo extends AbstractModifier
      */
     public function modifyData(array $data)
     {
+        if ($this->moduleIsDisabled) {
+            return $data;
+        }
+
         foreach ($data as &$item) {
             $this->updateImageData($item['product'], 'facebook');
             $this->updateImageData($item['product'], 'twitter');
@@ -89,6 +108,10 @@ class YoastSeo extends AbstractModifier
      */
     public function modifyMeta(array $meta)
     {
+        if ($this->moduleIsDisabled) {
+            return $meta;
+        }
+
         $this->setYoastFieldClasses($meta);
 
         return $meta;
