@@ -145,8 +145,10 @@ define([
             var widget = this;
             this.app = new YoastSEO.App({
                 snippetPreview: widget.snippetPreview,
+                contentAnalysisActive: true,
                 targets: {
-                    output: 'yoast-seo-output'
+                    output: 'yoast-seo-output',
+                    contentOutput: 'yoast-seo-content-output'
                 },
                 callbacks: {
                     updateSnippetValues: function() {
