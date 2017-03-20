@@ -21,43 +21,56 @@
 
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
-        <section id="web">
-            <group id="seo">
+        <tab id="maxserv_yoastseo" sortOrder="120" translate="false">
+            <label>YoastSEO</label>
+        </tab>
+        <section id="yoastseo" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>SEO Settings</label>
+            <tab>maxserv_yoastseo</tab>
+            <resource>MaxServ_YoastSeo::admin</resource>
+            <group id="general" translate="true" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Settings</label>
+                <field id="company_name" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Company Name</label>
+                </field>
+                <field id="sitelink_searchbox" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Sitelink Searchbox?</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="schema_sameas" translate="label comment" type="textarea" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Other URLs</label>
+                    <comment>Enter alternate URLs which identify your store. E.g. your store's Facebook page. One URL per line.</comment>
+                </field>
+            </group>
+            <group id="facebook" translate="true" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Facebook Settings</label>
+                <field id="facebook_app_id" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Facebook App Id</label>
+                </field>
+                <field id="facebook_admins" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Facebook Admin Ids</label>
+                </field>
+                <field id="facebook_pages" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Facebook Pages</label>
+                </field>
+            </group>
+            <group id="twitter" translate="true" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Twitter Settings</label>
                 <field id="twitter_company" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Company Twitter Account</label>
+                    <comment>Full account name, e.g. @company</comment>
                 </field>
                 <field id="twitter_user" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Content Manager Twitter Account</label>
+                    <comment>Full account name, e.g. @content_manager</comment>
                 </field>
-                <field id="facebook_app_id" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Facebook App Id</label>
-                </field>
-                <field id="facebook_admins" translate="label" type="text" sortOrder="45" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Facebook Admin Ids</label>
-                </field>
-                <field id="facebook_pages" translate="label" type="text" sortOrder="46" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Facebook Pages</label>
-                </field>
+            </group>
+            <group id="templates" translate="true" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Analysis Template Settings</label>
                 <field id="analysis_templates" translate="label" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Analysis templates</label>
                     <frontend_model>MaxServ\YoastSeo\Block\Adminhtml\Config\Form\Field\AnalysisTemplates</frontend_model>
                     <backend_model>MaxServ\YoastSeo\Model\Adminhtml\System\Config\Backend\AnalysisTemplates</backend_model>
-                </field>
-                <field id="sitelink_searchbox" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Enable Sitelink Searchbox?</label>
-                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                </field>
-            </group>
-        </section>
-        <section id="general">
-            <group id="store_information">
-                <field id="company_name" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Company Name</label>
-                </field>
-
-                <field id="schema_sameas" translate="label comment" type="textarea" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Other URLs</label>
-                    <comment>Enter alternate URLs which identify your store. E.g. your store's Facebook page. One URL per line.</comment>
                 </field>
             </group>
         </section>
