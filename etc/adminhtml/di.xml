@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!--
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the General Public License (GPL 3.0).
+  ~ This license is available through the world-wide-web at this URL:
+  ~ http://opensource.org/licenses/gpl-3.0.en.php
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this module to newer
+  ~ versions in the future.
+  ~
+  ~ @category    Maxserv: MaxServ_YoastSeo
+  ~ @package     Maxserv: MaxServ_YoastSeo
+  ~ @author      Vincent Hornikx <vincent.hornikx@maxser.com>
+  ~ @copyright   Copyright (c) 2016 MaxServ (http://www.maxserv.com)
+  ~ @license     http://opensource.org/licenses/gpl-3.0.en.php General Public License (GPL 3.0)
+  ~
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Catalog\Model\Category">
+        <plugin name="maxserv_yoastseo_catalog_categoryplugin"
+                type="MaxServ\YoastSeo\Plugin\Catalog\CategoryPlugin" sortOrder="1" disabled="false" />
+    </type>
+    <type name="Magento\Catalog\Model\Category\DataProvider">
+        <plugin name="maxserv_yoastseo_catalog_category_dataproviderplugin"
+                type="MaxServ\YoastSeo\Plugin\Catalog\Category\DataProviderPlugin" sortOrder="1" disabled="false" />
+    </type>
+    <type name="Magento\Catalog\Model\Product">
+        <plugin name="maxserv_yoastseo_catalog_productplugin"
+                type="MaxServ\YoastSeo\Plugin\Catalog\ProductPlugin" sortOrder="1" disabled="false" />
+    </type>
+    <type name="Magento\Cms\Model\Page">
+        <plugin name="maxserv_yoastseo_cms_pageplugin" type="MaxServ\YoastSeo\Plugin\Cms\PagePlugin" sortOrder="1"
+                disabled="false"/>
+    </type>
+    <type name="Magento\Cms\Model\Page\DataProvider">
+        <plugin name="maxserv_yoastseo_cms_page_dataproviderplugin"
+                type="MaxServ\YoastSeo\Plugin\Cms\Page\DataProviderPlugin" sortOrder="1" disabled="false"/>
+    </type>
+    <virtualType name="Magento\Catalog\Ui\DataProvider\Product\Form\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="yoastseo" xsi:type="array">
+                    <item name="class" xsi:type="string">MaxServ\YoastSeo\Ui\Catalog\DataProvider\Product\Form\Modifier\YoastSeo</item>
+                    <item name="sortOrder" xsi:type="number">130</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="MaxServ\YoastSeo\Block\Adminhtml\Config\Form\Field\EntityType">
+        <arguments>
+            <argument name="entityConfigurationPool" xsi:type="object">MaxServ\YoastSeo\Model\EntityConfigurationPool</argument>
+        </arguments>
+    </type>
+</config>
