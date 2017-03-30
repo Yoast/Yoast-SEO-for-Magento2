@@ -85,7 +85,7 @@ class Upload extends Action
     }
 
     /**
-     * @return getFieldKey
+     * @return string
      */
     protected function getFieldKey()
     {

@@ -62,13 +62,15 @@ class TemplatesHelper extends AbstractHelper
 
     protected function loadConfigTemplates()
     {
-        $templates = $this->scopeConfig->getValue('web/seo/analysis_templates', ScopeInterface::SCOPE_STORE);
+        $templates = $this->scopeConfig->getValue('yoastseo/templates/analysis_templates', ScopeInterface::SCOPE_STORE);
 
         if (!empty($templates) && is_string($templates)) {
             $unserialized = unserialize($templates);
             if ($unserialized) {
                 $templates = $unserialized;
             }
+        } else {
+            $templates = [];
         }
 
         $this->templates = $templates;

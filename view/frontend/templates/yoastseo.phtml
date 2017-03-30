@@ -68,16 +68,26 @@ if ($block->getPageType() == 'product') {
     <meta property="og:video" content="<?php echo $openGraphVideo; ?>" />
 <?php endif; ?>
 <meta property="og:url" content="<?php echo $meta->getUrl(); ?>"/>
+<?php if ($block->getFacebookAdmins()): ?>
 <meta property="fb:admins" content="<?php echo $block->getFacebookAdmins(); ?>"
+<?php endif; ?>
+<?php if ($block->getFacebookAppId()): ?>
 <meta property="fb:app_id" content="<?php echo $block->getFacebookAppId(); ?>"/>
+<?php endif; ?>
+<?php if ($block->getFacebookPages()): ?>
 <meta property="fb:pages" content="<?php echo $block->getFacebookPages(); ?>" />
+<?php endif; ?>
 <?php if ($finalPrice): ?>
-    <meta property="product:price:amount" content="<?php echo $finalPrice; ?>"/>
-    <?php echo $block->getChildHtml('meta.currency'); ?>
+<meta property="product:price:amount" content="<?php echo $finalPrice; ?>"/>
+<?php echo $block->getChildHtml('meta.currency'); ?>
 <?php endif; ?>
 <meta name="twitter:card" content="<?php echo $twitterCardType; ?>">
+<?php if ($block->getTwitterSite()): ?>
 <meta name="twitter:site" content="<?php echo $block->getTwitterSite(); ?>"/>
+<?php endif; ?>
+<?php if ($block->getTwitterCreator()): ?>
 <meta name="twitter:creator" content="<?php echo $block->getTwitterCreator(); ?>"/>
+<?php endif; ?>
 <meta name="twitter:title" content="<?php echo $meta->getTwitterTitle(); ?>"/>
 <meta name="twitter:description" content="<?php echo $meta->getTwitterDescription(); ?>"/>
 <?php if ($twitterImage): ?>
