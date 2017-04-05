@@ -23,6 +23,7 @@ namespace MaxServ\YoastSeo\Model\Attribute\Backend;
 
 use Magento\Catalog\Model\ImageUploader;
 use Magento\Eav\Model\Entity\Attribute\Backend\AbstractBackend;
+use Magento\Framework\App\RequestInterface;
 use Magento\Framework\DataObject;
 
 class Image extends AbstractBackend
@@ -34,12 +35,20 @@ class Image extends AbstractBackend
     private $imageUploader;
 
     /**
+     * @var RequestInterface
+     */
+    protected $request;
+
+    /**
      * @param ImageUploader $imageUploader
+     * @param RequestInterface $request
      */
     public function __construct(
-        ImageUploader $imageUploader
+        ImageUploader $imageUploader,
+        RequestInterface $request
     ) {
         $this->imageUploader = $imageUploader;
+        $this->request = $request;
     }
 
     /**
@@ -48,8 +57,24 @@ class Image extends AbstractBackend
      */
     public function beforeSave($object)
     {
-        $this->updateImage($object, 'facebook');
-        $this->updateImage($object, 'twitter');
+        $postData = $this->request->getPostValue('product');
+        if (!$postData) {
+            $postData = $this->request->getPost();
+        }
+
+        if ($postData) {
+            if (!isset($postData['yoast_facebook_image'])) {
+                $object->setYoastFacebookImage(null);
+            } else {
+                $this->updateImage($object, 'facebook');
+            }
+
+            if (!isset($postData['yoast_twitter_image'])) {
+                $object->setYoastTwitterImage(null);
+            } else {
+                $this->updateImage($object, 'twitter');
+            }
+        }
 
         return $this;
     }

@@ -23,6 +23,7 @@ namespace MaxServ\YoastSeo\Plugin\Cms;
 
 use Magento\Catalog\Model\ImageUploader;
 use Magento\Cms\Model\Page;
+use Magento\Framework\App\RequestInterface;
 
 class PagePlugin
 {
@@ -35,12 +36,20 @@ class PagePlugin
     protected $imageUploader;
 
     /**
+     * @var RequestInterface
+     */
+    protected $request;
+
+    /**
      * @param ImageUploader $imageUploader
+     * @param RequestInterface $request
      */
     public function __construct(
-        ImageUploader $imageUploader
+        ImageUploader $imageUploader,
+        RequestInterface $request
     ) {
         $this->imageUploader = $imageUploader;
+        $this->request = $request;
     }
 
     /**
