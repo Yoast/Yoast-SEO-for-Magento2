@@ -52,11 +52,16 @@ class CatalogHelper extends AbstractHelper
             return true;
         }
 
-        $storeId = $this->_request->getParam('store', 0);
-        $store = $this->storeManager->getStore($storeId);
-        $rootCategoryId = $store->getRootCategoryId();
+        $isRootCategory = false;
+        $stores = $this->storeManager->getStores();
+        foreach ($stores as $store) {
+            if ((int)$store->getRootCategoryId() === (int)$categoryId) {
+                $isRootCategory = true;
+                break;
+            }
+        }
 
-        return (int)$categoryId === (int)$rootCategoryId;
+        return $isRootCategory;
     }
 
 }

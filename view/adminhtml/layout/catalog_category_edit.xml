@@ -27,7 +27,7 @@
                 <arguments>
                     <argument name="entity_type" xsi:type="string">catalog_category</argument>
                     <argument name="config" xsi:type="array">
-                        <item name="hide_yoastbox" xsi:type="helper" helper="MaxServ\YoastSeo\Helper\CatalogHelper::isRootCategory" />
+                        <item name="provider" xsi:type="string">category_form.category_form_data_source</item>
                     </argument>
                 </arguments>
             </block>

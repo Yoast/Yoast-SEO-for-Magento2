@@ -22,6 +22,7 @@
 namespace MaxServ\YoastSeo\Plugin\Catalog\Category;
 
 use Magento\Catalog\Model\Category\DataProvider;
+use MaxServ\YoastSeo\Helper\CatalogHelper;
 use MaxServ\YoastSeo\Helper\ImageHelper;
 
 class DataProviderPlugin
@@ -31,13 +32,27 @@ class DataProviderPlugin
      */
     protected $imageHelper;
 
+    protected $catalogHelper;
+
     /**
      * @param ImageHelper $imageHelper
+     * @param CatalogHelper $catalogHelper
      */
     public function __construct(
-        ImageHelper $imageHelper
+        ImageHelper $imageHelper,
+        CatalogHelper $catalogHelper
     ) {
         $this->imageHelper = $imageHelper;
+        $this->catalogHelper = $catalogHelper;
+    }
+
+    public function afterPrepareMeta(DataProvider $dataProvider, $result)
+    {
+        if ($this->catalogHelper->isRootCategory()) {
+            $result['search_engine_optimization']['arguments']['data']['config']['componentDisabled'] = true;
+        }
+
+        return $result;
     }
 
     /**

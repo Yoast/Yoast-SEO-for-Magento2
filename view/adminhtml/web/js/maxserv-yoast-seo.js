@@ -21,30 +21,29 @@
 
 define([
     'jquery',
+    'uiRegistry',
     'domReady!'
-], function($) {
+], function($, registry) {
     "use strict";
 
     $.widget('maxServ.yoastSeo', {
+        options: {
+            provider: false
+        },
         _create: function() {
             this.config = window.yoastBoxConfig;
-            if (this.config.hide_yoastbox === true) {
-                this.hide();
+
+            this.source = registry.get(this.config.provider);
+            console.log(this.source);
+            if (this.config.providerElement) {
+                this.sourceData = this.source.data[this.config.providerElement];
             } else {
-                this.setup();
+                this.sourceData = this.source.data;
             }
-        },
-        hide: function() {
-            $('[data-index="search_engine_optimization"]').hide();
+
+            this.setup();
         },
         setup: function() {
-            var widget = this;
-            if (!this.checkInputElements()) {
-                setTimeout(function() {
-                    widget.setup();
-                }, 300);
-                return;
-            }
             this.element = $('#yoast-seo-wrapper');
 
             this.snippetPreviewElement = $('#yoast-seo-snippet-preview')[0];
@@ -70,9 +69,9 @@ define([
             this.updateFieldsets();
             this.setupEventListeners();
 
-            this.updateInterval = window.setInterval(function () {
+            /*this.updateInterval = window.setInterval(function () {
                 this.update();
-            }.bind(this), 1000);
+            }.bind(this), 1000);*/
         },
         getFocusKeywordFieldIdentifier: function() {
             return this.config.focusKeywordFieldIdentifier || '.yoastBox-focusKeyword';
@@ -95,37 +94,44 @@ define([
         getMetaKeywordsIdentifier: function() {
             return this.config.metaKeywordsIdentifier || '.yoastBox-metaKeywords';
         },
-        checkInputElements: function() {
-            return $(this.getTitleIdentifier()).length &&
-            $(this.getUrlKeyIdentifier()).length &&
-            $(this.getMetaTitleIdentifier()).length &&
-            $(this.getMetaDescriptionIdentifier()).length;
-        },
         getInputElements: function() {
-            this.titleInputElement = $(this.getTitleIdentifier());
+            this.titleInputElement = $(this.getTitleIdentifier()).addClass('yoastBox-inputElement');
             this.urlKeyInputElement = $(this.getUrlKeyIdentifier());
             this.metaTitleInputElement = $(this.getMetaTitleIdentifier());
-            this.focusKeywordInputElement = $(this.getFocusKeywordIdentifier());
+            this.focusKeywordInputElement = $(this.getFocusKeywordIdentifier()).addClass('yoastBox-inputElement');
             this.metaDescriptionInputElement = $(this.getMetaDescriptionIdentifier());
         },
         getTemplateElements: function() {
             // template input elements
-            var widget = this,
-                template = this.config.contentTemplate,
+            var template = this.config.contentTemplate,
                 matches = template.match(/\{\{([\sa-zA-Z0-9\-_\[\]"=]+)}}/g),
-                selector, inputElement;
+                selector, selectorMatch, inputElement;
 
-            widget.templateElements = {};
-            $(matches).each(function() {
-                if (this !== '{{images}}') {
-                    selector = this.replace(/(\{\{|}})/g, '');
+            this.templateElements = {};
+            $(matches).each(function (ignore, match) {
+                if (match !== '{{images}}') {
+                    selector = match.replace(/(\{\{|}})/g, '');
                     inputElement = $(selector);
                     if (inputElement.length) {
-                        widget.templateElements[this] = inputElement;
-                        widget.inputElements.push(inputElement);
+                        this.templateElements[match] = {
+                            type: "inputElement",
+                            element: inputElement
+                        };
+                        if (!inputElement.hasClass('yoastBox-inputElement')) {
+                            inputElement.addClass('yoastBox-inputElement');
+                        }
+                        this.inputElements.push(inputElement);
+                    } else {
+                        selectorMatch = selector.match("\"([^\"]+)\"");
+                        if (selectorMatch[1] && this.sourceData[selectorMatch[1]]) {
+                            this.templateElements[match] = {
+                                type: "source",
+                                element: selectorMatch[1]
+                            }
+                        }
                     }
                 }
-            });
+            }.bind(this));
         },
         setupSnippetPreview: function() {
             var widget = this;
@@ -192,24 +198,16 @@ define([
             });
         },
         update: function() {
+            console.log("update");
             this.app.refresh();
             this.snippetPreview.setTitle(this.getTitleValue());
             this.snippetPreview.setUrlPath(this.getIdentifierValue());
             this.snippetPreview.setMetaDescription(this.getDescriptionValue());
         },
         setupEventListeners: function() {
-            var widget = this,
-                changeFunction = function() {
-                    widget.update();
-                },
-                inputElements = this.inputElements.concat(
-                    [
-                        $('.yoastBox-content textarea')
-                    ]
-                );
-            $(inputElements).each(function() {
-                $(this).on('change', changeFunction);
-            });
+            $(document)
+                .on("click", ".fieldset-wrapper-title", this.getTemplateElements.bind(this))
+                .on("change", ".yoastBox-inputElement", this.update.bind(this));
         },
         saveSnippetData: function(data) {
             this.setTitleValue(data.title);
@@ -254,9 +252,19 @@ define([
         getContentValue: function() {
             var widget = this,
                 content = widget.config.contentTemplate,
-                selector;
+                selector, el, value;
             for (selector in widget.templateElements) {
-                content = content.split(selector).join(widget.getElementValue(widget.templateElements[selector]));
+                el = widget.templateElements[selector];
+                value = "";
+                switch (el.type) {
+                    case "inputElement":
+                        value = widget.getElementValue(el.element);
+                        break;
+                    case "source":
+                        value = this.sourceData[el.element];
+                        break;
+                }
+                content = content.split(selector).join(value);
             }
             content = content.replace('{{images}}', widget.getEntityImages());
 

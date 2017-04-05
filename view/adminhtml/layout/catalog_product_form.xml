@@ -26,6 +26,10 @@
             <block class="MaxServ\YoastSeo\Block\Adminhtml\YoastBox\Config" name="maxserv_yoastseo_yoastbox_config">
                 <arguments>
                     <argument name="entity_type" xsi:type="string">catalog_product</argument>
+                    <argument name="config" xsi:type="array">
+                        <item name="provider" xsi:type="string">product_form.product_form_data_source</item>
+                        <item name="providerElement" xsi:type="string">product</item>
+                    </argument>
                 </arguments>
             </block>
         </referenceContainer>

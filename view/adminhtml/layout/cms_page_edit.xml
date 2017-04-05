@@ -26,6 +26,9 @@
             <block class="MaxServ\YoastSeo\Block\Adminhtml\YoastBox\Config" name="maxserv_yoastseo_config">
                 <arguments>
                     <argument name="entity_type" xsi:type="string">cms_page</argument>
+                    <argument name="config" xsi:type="array">
+                        <item name="provider" xsi:type="string">cms_page_form.page_form_data_source</item>
+                    </argument>
                 </arguments>
             </block>
         </referenceContainer>
