@@ -34,7 +34,6 @@ define([
             this.config = window.yoastBoxConfig;
 
             this.source = registry.get(this.config.provider);
-            console.log(this.source);
             if (this.config.providerElement) {
                 this.sourceData = this.source.data[this.config.providerElement];
             } else {
@@ -198,7 +197,6 @@ define([
             });
         },
         update: function() {
-            console.log("update");
             this.app.refresh();
             this.snippetPreview.setTitle(this.getTitleValue());
             this.snippetPreview.setUrlPath(this.getIdentifierValue());

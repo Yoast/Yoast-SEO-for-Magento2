@@ -48,7 +48,7 @@
     <fieldset name="search_engine_optimisation">
         <argument name="data" xsi:type="array">
             <item name="config" xsi:type="array">
-                <item name="label" xsi:type="string" translate="true">Search Engine Optimization by Yoast</item>
+                <item name="label" xsi:type="string" translate="true">Yoast SEO</item>
             </item>
         </argument>
         <field name="identifier">
