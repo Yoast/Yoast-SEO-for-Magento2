@@ -62,4 +62,68 @@
             width: calc(~'(100% * 0.8) - 30px');
         }
     }
+
+    .analysisBox {
+        border: 1px solid #ddd;
+        margin-bottom: 15px;
+
+        > h3 {
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 0;
+            cursor: pointer;
+
+            .overallScore {
+                float: left;
+                width: 12px;
+                height: 12px;
+                margin: 3px 10px 0 0;
+                border-radius: 50%;
+                background: #888;
+
+                &.na {
+                    background-color: #999;
+                }
+
+                &.bad {
+                    background-color: #dc3232;
+                }
+
+                &.ok {
+                    background-color: #ee7c1b;
+                }
+
+                &.good {
+                    background-color: #7ad03a;
+                }
+            }
+        }
+
+        > * {
+            padding: 10px 15px;
+        }
+
+        .admin__fieldset {
+            padding: 1rem 0;
+        }
+
+        .seo-focusKeyword {
+            font-weight: bold;
+        }
+    }
+
+    .yoastBox-focusKeyword {
+        margin-left: 0;
+
+        .admin__field-label,
+        .admin__field-control {
+            float: none;
+            width: 100%;
+            text-align: left;
+            margin-left: 0;
+        }
+    }
+
+    .snippet-editor__preview {
+        padding-left: 0;
+    }
 }

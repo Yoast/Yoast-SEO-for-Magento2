@@ -22,8 +22,9 @@
 define([
     'jquery',
     'uiRegistry',
+    'mage/apply/main',
     'domReady!'
-], function($, registry) {
+], function($, registry, mage) {
     "use strict";
 
     $.widget('maxServ.yoastSeo', {
@@ -31,6 +32,7 @@ define([
             provider: false
         },
         _create: function() {
+            mage.apply();
             this.config = window.yoastBoxConfig;
 
             this.source = registry.get(this.config.provider);
@@ -163,6 +165,7 @@ define([
                     updateSnippetValues: function() {
 
                     },
+                    saveContentScore: widget.updateContentScore.bind(widget),
                     getData: function() {
                         return {
                             baseUrl: widget.getBaseUrl(),
@@ -176,6 +179,8 @@ define([
                     }
                 }
             });
+            widget.app.seoAssessorPresenter.overall = 'seo-overallScore';
+            widget.app.contentAssessorPresenter.overall = 'readability-overallScore';
             widget.app.refresh();
         },
         updateFieldsets: function() {
@@ -197,6 +202,7 @@ define([
             });
         },
         update: function() {
+            $(".seo-focusKeyword").html(this.getKeywordValue());
             this.app.refresh();
             this.snippetPreview.setTitle(this.getTitleValue());
             this.snippetPreview.setUrlPath(this.getIdentifierValue());
@@ -316,6 +322,9 @@ define([
         setDescriptionValue: function(value) {
             this.metaDescriptionInputElement.val(value).change();
             return this;
+        },
+        updateContentScore: function (ignore, presenter) {
+            presenter.renderOverallRating();
         }
     });
 
