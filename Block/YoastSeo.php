@@ -21,6 +21,7 @@
 
 namespace MaxServ\YoastSeo\Block;
 
+use Magento\Framework\App\RequestInterface;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\Element\Template\Context;
 use Magento\Store\Model\ScopeInterface;
@@ -48,17 +49,46 @@ class YoastSeo extends Template
     protected $metaProvider;
 
     /**
+     * @var RequestInterface
+     */
+    protected $request;
+
+    /**
      * @param Context $context
      * @param EntityConfigurationPool $entityConfigurationPool
+     * @param RequestInterface $request
      * @param array $data
      */
     public function __construct(
         Context $context,
         EntityConfigurationPool $entityConfigurationPool,
+        RequestInterface $request,
         array $data
     ) {
         parent::__construct($context, $data);
         $this->entityConfigurationPool = $entityConfigurationPool;
+        $this->request = $request;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCanonicalUrl()
+    {
+        $action = $this->request->getFullActionName();
+        $canonical = null;
+        switch ($action) {
+            case "cms_index_index":
+            case "cms_page_view":
+                $canonical = $this->getUrl('', ['_current' => true, '_use_rewrite' => true]);
+                break;
+        }
+
+        if ($canonical && substr($canonical, -5) !== '.html' && substr($canonical, -1) !== '/') {
+            $canonical .= '/';
+        }
+
+        return $canonical;
     }
 
     /**
