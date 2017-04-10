@@ -203,8 +203,6 @@ define([
                     this.metaKeywordsInputElement
                 );
             }
-
-            console.log(this.hideInputElements);
             $(this.hideInputElements).each(function() {
                 var $this = $(this);
                 if ($this.hasClass('admin__field')) {
