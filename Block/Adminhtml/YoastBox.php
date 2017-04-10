@@ -22,6 +22,7 @@
 namespace MaxServ\YoastSeo\Block\Adminhtml;
 
 use Magento\Backend\Block\Template;
+use Magento\Store\Model\ScopeInterface;
 
 class YoastBox extends Template
 {
@@ -35,5 +36,13 @@ class YoastBox extends Template
         }
 
         parent::_construct();
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsKeywordsEnabled()
+    {
+        return (bool) $this->_scopeConfig->getValue('yoastseo/fields/enable_keywords', ScopeInterface::SCOPE_STORE);
     }
 }

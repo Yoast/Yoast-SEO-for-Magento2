@@ -64,6 +64,10 @@ define([
                 this.metaDescriptionInputElement
             ];
 
+            if (!this.config.isKeywordsEnabled) {
+                this.hideInputElements.push(this.metaKeywordsInputElement);
+            }
+
             this.getTemplateElements();
             this.setupSnippetPreview();
             this.setupApp();
@@ -101,6 +105,7 @@ define([
             this.metaTitleInputElement = $(this.getMetaTitleIdentifier());
             this.focusKeywordInputElement = $(this.getFocusKeywordIdentifier()).addClass('yoastBox-inputElement');
             this.metaDescriptionInputElement = $(this.getMetaDescriptionIdentifier());
+            this.metaKeywordsInputElement = $(this.getMetaKeywordsIdentifier());
         },
         getTemplateElements: function() {
             // template input elements
@@ -190,15 +195,23 @@ define([
             $('#yoast-seo-twitter').append(
                 $('.yoastBox-twitter-fieldset')
             );
-            $('#yoast-seo-keywords-fieldset').append(
-                $(this.getMetaKeywordsIdentifier())
-            );
             $('#yoast-seo-focus-input-fieldset').append(
                 $(this.getFocusKeywordFieldIdentifier())
             );
+            if (this.config.isKeywordsEnabled) {
+                $('#yoast-seo-keywords-fieldset').append(
+                    this.metaKeywordsInputElement
+                );
+            }
 
+            console.log(this.hideInputElements);
             $(this.hideInputElements).each(function() {
-                $(this).parents('.admin__field').hide();
+                var $this = $(this);
+                if ($this.hasClass('admin__field')) {
+                    $this.hide();
+                } else {
+                    $(this).parents('.admin__field').hide();
+                }
             });
         },
         update: function() {

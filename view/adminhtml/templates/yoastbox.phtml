@@ -12,9 +12,11 @@
         <li class="yoastBox-tabs-tab">
             <a href="#yoast-seo-twitter" title="<?php echo __('Twitter'); ?>"><?php echo __('Twitter'); ?></a>
         </li>
+        <?php if ($block->getIsKeywordsEnabled()): ?>
         <li class="yoastBox-tabs-tab">
             <a href="#yoast-seo-keywords" title="<?php echo __('Keywords'); ?>"><?php echo __('Keywords'); ?></a>
         </li>
+        <?php endif; ?>
     </ul>
     <div id="yoast-seo-overview" class="yoastBox-tab">
         <div class="analysisBox analysisBox--readability" data-mage-init='{"collapsible":{"active":true}}'>
@@ -53,9 +55,11 @@
         <h3><?php echo __('Twitter settings'); ?></h3>
         <p><?php echo __('These settings will override the default settings for'); ?> Twitter</p>
     </div>
+    <?php if ($block->getIsKeywordsEnabled()): ?>
     <div id="yoast-seo-keywords" class="yoastBox-tab">
         <fieldset id="yoast-seo-keywords-fieldset" class="admin__fieldset"></fieldset>
     </div>
+    <?php endif; ?>
 </div>
 <script>
     require(['yoastSeo'], function(yoastSeo) {

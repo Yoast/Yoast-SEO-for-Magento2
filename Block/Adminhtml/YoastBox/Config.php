@@ -23,6 +23,7 @@ namespace MaxServ\YoastSeo\Block\Adminhtml\YoastBox;
 
 use Magento\Backend\Block\Template;
 use Magento\Backend\Block\Template\Context;
+use Magento\Store\Model\ScopeInterface;
 use MaxServ\YoastSeo\Helper\Analysis\TemplatesHelper;
 
 /**
@@ -67,7 +68,8 @@ class Config extends Template
         $config = [
             'entityType' => $this->getEntityType(),
             'contentTemplate' => $this->getContentTemplate(),
-            'images' => $this->getImages()
+            'images' => $this->getImages(),
+            'isKeywordsEnabled' => $this->getIsKeywordsEnabled()
         ];
 
         if ($this->getConfig() && is_array($this->getConfig())) {
@@ -91,5 +93,13 @@ class Config extends Template
     public function getImages()
     {
         return $this->templatesHelper->getImages($this->getEntityType());
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsKeywordsEnabled()
+    {
+        return (bool) $this->_scopeConfig->getValue('yoastseo/fields/enable_keywords', ScopeInterface::SCOPE_STORE);
     }
 }

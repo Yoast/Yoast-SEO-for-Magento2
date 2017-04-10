@@ -42,6 +42,13 @@
                     <comment>Enter alternate URLs which identify your store. E.g. your store's Facebook page. One URL per line.</comment>
                 </field>
             </group>
+            <group id="fields" translate="true" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Fields</label>
+                <field id="enable_keywords" type="select" translate="true" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Keywords</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
             <group id="facebook" translate="true" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Facebook Settings</label>
                 <field id="facebook_app_id" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
