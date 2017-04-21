@@ -48,9 +48,11 @@ class DataProviderPlugin
      */
     public function afterGetData(DataProvider $subject, $result)
     {
-        foreach ($result as &$item) {
-            $this->imageHelper->updateImageDataForDataProvider($item, 'facebook');
-            $this->imageHelper->updateImageDataForDataProvider($item, 'twitter');
+        if (is_array($result) && count($result)) {
+            foreach ($result as &$item) {
+                $this->imageHelper->updateImageDataForDataProvider($item, 'facebook');
+                $this->imageHelper->updateImageDataForDataProvider($item, 'twitter');
+            }
         }
 
         return $result;
