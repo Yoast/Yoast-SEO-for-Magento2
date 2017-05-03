@@ -39,6 +39,5 @@ class UpgradeData extends AbstractInstallData implements UpgradeDataInterface
 
         $this->updateProductAttributes();
         $this->updateCategoryAttributes();
-        $this->updateMirasvitBlogAttributes();
     }
 }
