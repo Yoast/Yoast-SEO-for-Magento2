@@ -180,8 +180,6 @@ class AbstractInstallData
             'group' => 'Yoast Twitter',
             'sort_order' => 20
         ]);
-
-        $this->getEavSetup()->removeAttribute(Category::ENTITY, 'robots_override');
     }
 
     /**
