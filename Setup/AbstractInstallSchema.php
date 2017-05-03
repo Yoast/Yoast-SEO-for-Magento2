@@ -67,9 +67,7 @@ class AbstractInstallSchema
             'yoast_twitter_title' => ['comment' => 'Yoast Twitter Title'],
             'yoast_twitter_description' => ['comment' => 'Yoast Twitter Description', 'length' => 0],
             'yoast_twitter_image' => ['comment' => 'Yoast Twitter Image'],
-            'yoast_robots_instructions' => [
-                'comment' => 'Yoast Robot instructions',
-            ],
+            'yoast_robots_instructions' => ['comment' => 'Yoast Robot instructions'],
         ];
         $cmsTableName = $this->getSetupConnection()->getTableName('cms_page');
         foreach ($columns as $columnName => $columnDefinition) {
