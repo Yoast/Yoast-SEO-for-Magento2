@@ -13,8 +13,8 @@
  *
  * @category    Maxserv: MaxServ_YoastSeo
  * @package     Maxserv: MaxServ_YoastSeo
- * @author      Vincent Hornikx <vincent.hornikx@maxser.com>
- * @copyright   Copyright (c) 2016 MaxServ (http://www.maxserv.com)
+ * @author      Vincent Hornikx <vincent.hornikx@maxserv.com>
+ * @copyright   Copyright (c) 2017 MaxServ (http://www.maxserv.com)
  * @license     http://opensource.org/licenses/gpl-3.0.en.php General Public License (GPL 3.0)
  *
  */
@@ -52,6 +52,10 @@ class AbstractInstallData
      */
     protected $eavSetup;
 
+    /**
+     * AbstractInstallData constructor.
+     * @param EavSetupFactory $eavSetupFactory
+     */
     public function __construct(
         EavSetupFactory $eavSetupFactory
     ) {
@@ -75,6 +79,13 @@ class AbstractInstallData
             'label' => 'Focus Keyword',
             'group' => 'Search Engine Optimization',
             'sort_order' => 100
+        ]);
+        $this->addProductAttribute('yoast_robots_instructions', [
+            'label' => 'Robot instructions',
+            'group' => 'Search Engine Optimization',
+            'input' => 'select',
+            'source' => 'MaxServ\YoastSeo\Model\Entity\Attribute\Source\Robots',
+            'sort_order' => 110
         ]);
         $this->addProductAttribute('yoast_facebook_title', [
             'label' => 'Facebook title',
@@ -124,6 +135,13 @@ class AbstractInstallData
             'group' => 'Search Engine Optimization',
             'sort_order' => 100
         ]);
+        $this->addCategoryAttribute('yoast_robots_instructions', [
+            'label' => 'Robot instructions',
+            'group' => 'Search Engine Optimization',
+            'input' => 'select',
+            'source' => 'MaxServ\YoastSeo\Model\Entity\Attribute\Source\Robots',
+            'sort_order' => 110
+        ]);
         $this->addCategoryAttribute('yoast_facebook_title', [
             'label' => 'Facebook title',
             'group' => 'Yoast Facebook',
@@ -162,6 +180,8 @@ class AbstractInstallData
             'group' => 'Yoast Twitter',
             'sort_order' => 20
         ]);
+
+        $this->getEavSetup()->removeAttribute(Category::ENTITY, 'robots_override');
     }
 
     /**
@@ -257,6 +277,12 @@ class AbstractInstallData
             'label' => 'Focus Keyword',
             'sort_order' => 100
         ]);
+        $this->addBlogAttribute('yoast_robots_instructions', [
+            'label' => 'Robot instructions',
+            'input' => 'select',
+            'source' => 'MaxServ\YoastSeo\Model\Entity\Attribute\Source\Robots',
+            'sort_order' => 110
+        ]);
         $this->addBlogAttribute('yoast_facebook_title', [
             'label' => 'Facebook title',
             'sort_order' => 10
@@ -291,6 +317,10 @@ class AbstractInstallData
         ]);
     }
 
+    /**
+     * @param $attributeCode
+     * @param $attributeConfiguration
+     */
     protected function addBlogAttribute($attributeCode, $attributeConfiguration)
     {
         $defaultAttributeConfig = [

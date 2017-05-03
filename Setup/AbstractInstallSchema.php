@@ -13,8 +13,8 @@
  *
  * @category    Maxserv: MaxServ_YoastSeo
  * @package     Maxserv: MaxServ_YoastSeo
- * @author      Vincent Hornikx <vincent.hornikx@maxser.com>
- * @copyright   Copyright (c) 2016 MaxServ (http://www.maxserv.com)
+ * @author      Vincent Hornikx <vincent.hornikx@maxserv.com>
+ * @copyright   Copyright (c) 2017 MaxServ (http://www.maxserv.com)
  * @license     http://opensource.org/licenses/gpl-3.0.en.php General Public License (GPL 3.0)
  *
  */
@@ -66,7 +66,10 @@ class AbstractInstallSchema
             'yoast_facebook_image' => ['comment' => 'Yoast Facebook Image'],
             'yoast_twitter_title' => ['comment' => 'Yoast Twitter Title'],
             'yoast_twitter_description' => ['comment' => 'Yoast Twitter Description', 'length' => 0],
-            'yoast_twitter_image' => ['comment' => 'Yoast Twitter Image']
+            'yoast_twitter_image' => ['comment' => 'Yoast Twitter Image'],
+            'yoast_robots_instructions' => [
+                'comment' => 'Yoast Robot instructions',
+            ],
         ];
         $cmsTableName = $this->getSetupConnection()->getTableName('cms_page');
         foreach ($columns as $columnName => $columnDefinition) {
