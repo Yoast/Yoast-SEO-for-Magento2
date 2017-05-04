@@ -130,6 +130,7 @@ class YoastSeo extends AbstractModifier
         $meta['search-engine-optimization']['children']['container_meta_description']['children']['meta_description']['arguments']['data']['config']['additionalClasses'] = 'yoastBox-metaDescription hidden';
         $meta['search-engine-optimization']['children']['container_meta_keyword']['children']['meta_keyword']['arguments']['data']['config']['additionalClasses'] = 'yoastBox-metaKeywords';
         $meta['search-engine-optimization']['children']['container_focus_keyword']['children']['focus_keyword']['arguments']['data']['config']['additionalClasses'] = 'yoastBox-focusKeyword';
+        $meta['search-engine-optimization']['children']['container_yoast_robots_instructions']['children']['yoast_robots_instructions']['arguments']['data']['config']['additionalClasses'] = 'yoastBox-robotsInstructions';
 
         // facebook fieldset
         $meta['yoast-facebook']['arguments']['data']['config']['label'] = '';

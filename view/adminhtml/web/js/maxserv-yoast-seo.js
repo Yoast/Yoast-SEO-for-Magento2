@@ -201,12 +201,13 @@ define([
             $('#yoast-seo-focus-input-fieldset').append(
                 $(this.getFocusKeywordFieldIdentifier())
             );
-
-            $('#yoast-seo-focus-input-fieldset').append(
+            console.log(this.getRobotsInstructionsIdentifier());
+            console.log($(this.getRobotsInstructionsIdentifier()));
+            $('#yoast-seo-settings-fieldset').append(
                 $(this.getRobotsInstructionsIdentifier())
             );
             if (this.config.isKeywordsEnabled) {
-                $('#yoast-seo-keywords-fieldset').append(
+                $('#yoast-seo-settings-fieldset').append(
                     this.metaKeywordsInputElement
                 );
             }

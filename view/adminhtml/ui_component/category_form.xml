@@ -86,6 +86,19 @@
                 </item>
             </argument>
         </field>
+        <field name="yoast_robots_instructions">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">MaxServ\YoastSeo\Model\Config\Source\Design\Robots</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="label" xsi:type="string" translate="true">Robot Instructions</item>
+                    <item name="additionalClasses" xsi:type="string">yoastBox-robotsInstructions</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="dataScope" xsi:type="string">yoast_robots_instructions</item>
+                    <item name="sortOrder" xsi:type="string">210</item>
+                </item>
+            </argument>
+        </field>
         <container name="maxserv_yoast_seo_container">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
