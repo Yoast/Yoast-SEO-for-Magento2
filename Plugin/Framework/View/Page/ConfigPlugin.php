@@ -58,10 +58,10 @@ class ConfigPlugin
         $page = $this->registry->registry('current_page');
 
         /** @var Product $product */
-        $product = $this->registry->registry('product');
+        $product = $this->registry->registry('current_product');
 
         /** @var Category $category */
-        $category = $this->registry->registry('category');
+        $category = $this->registry->registry('current_category');
 
         if ($page && $page->getId() && $page->getYoastRobotsInstructions()) {
             $robots = $page->getYoastRobotsInstructions();
