@@ -81,6 +81,9 @@ define([
         getFocusKeywordFieldIdentifier: function() {
             return this.config.focusKeywordFieldIdentifier || '.yoastBox-focusKeyword';
         },
+        getRobotsInstructionsIdentifier: function() {
+            return this.config.robotsInstructionsIdentifier || '.yoastBox-robotsInstructions';
+        },
         getFocusKeywordIdentifier: function() {
             return this.config.focusKeywordIdentifier || '.yoastBox-focusKeyword .admin__control-text';
         },
@@ -197,6 +200,10 @@ define([
             );
             $('#yoast-seo-focus-input-fieldset').append(
                 $(this.getFocusKeywordFieldIdentifier())
+            );
+
+            $('#yoast-seo-focus-input-fieldset').append(
+                $(this.getRobotsInstructionsIdentifier())
             );
             if (this.config.isKeywordsEnabled) {
                 $('#yoast-seo-keywords-fieldset').append(
