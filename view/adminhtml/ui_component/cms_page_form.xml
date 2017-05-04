@@ -13,8 +13,8 @@
   ~
   ~ @category    Maxserv: MaxServ_YoastSeo
   ~ @package     Maxserv: MaxServ_YoastSeo
-  ~ @author      Vincent Hornikx <vincent.hornikx@maxser.com>
-  ~ @copyright   Copyright (c) 2016 MaxServ (http://www.maxserv.com)
+  ~ @author      Vincent Hornikx <vincent.hornikx@maxserv.com>
+  ~ @copyright   Copyright (c) 2017 MaxServ (http://www.maxserv.com)
   ~ @license     http://opensource.org/licenses/gpl-3.0.en.php General Public License (GPL 3.0)
   ~
   -->
@@ -88,6 +88,19 @@
                     <item name="formElement" xsi:type="string">input</item>
                     <item name="source" xsi:type="string">page</item>
                     <item name="dataScope" xsi:type="string">focus_keyword</item>
+                </item>
+            </argument>
+        </field>
+        <field name="yoast_robots_instructions">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">MaxServ\YoastSeo\Model\Config\Source\Design\Robots</item>
+                <item name="config" xsi:type="array">
+                    <item name="additionalClasses" xsi:type="string">yoastBox-robotsInstructions</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Robot instructions</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">page</item>
+                    <item name="dataScope" xsi:type="string">yoast_robots_instructions</item>
                 </item>
             </argument>
         </field>

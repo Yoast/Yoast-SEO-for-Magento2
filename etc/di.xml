@@ -13,8 +13,8 @@
   ~
   ~ @category    Maxserv: MaxServ_YoastSeo
   ~ @package     Maxserv: MaxServ_YoastSeo
-  ~ @author      Vincent Hornikx <vincent.hornikx@maxser.com>
-  ~ @copyright   Copyright (c) 2016 MaxServ (http://www.maxserv.com)
+  ~ @author      Vincent Hornikx <vincent.hornikx@maxserv.com>
+  ~ @copyright   Copyright (c) 2017 MaxServ (http://www.maxserv.com)
   ~ @license     http://opensource.org/licenses/gpl-3.0.en.php General Public License (GPL 3.0)
   ~
   -->
@@ -106,8 +106,4 @@
             <argument name="entityConfigurationPool" xsi:type="object">MaxServ\YoastSeo\Model\EntityConfigurationPool</argument>
         </arguments>
     </type>
-
-    <!-- Mirasvit Blog section -->
-    <preference for="Mirasvit\Blog\Block\Adminhtml\Post\Edit\Tab\Meta"
-                type="MaxServ\YoastSeo\Block\Adminhtml\Mirasvit\Blog\Post\Edit\Tab\Meta" />
 </config>

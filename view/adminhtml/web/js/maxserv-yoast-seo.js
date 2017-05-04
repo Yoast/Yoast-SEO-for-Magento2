@@ -12,8 +12,8 @@
  *
  * @category    Maxserv: MaxServ_YoastSeo
  * @package     Maxserv: MaxServ_YoastSeo
- * @author      Vincent Hornikx <vincent.hornikx@maxser.com>
- * @copyright   Copyright (c) 2016 MaxServ (http://www.maxserv.com)
+ * @author      Vincent Hornikx <vincent.hornikx@maxserv.com>
+ * @copyright   Copyright (c) 2017 MaxServ (http://www.maxserv.com)
  * @license     http://opensource.org/licenses/gpl-3.0.en.php General Public License (GPL 3.0)
  *
  */
@@ -80,6 +80,9 @@ define([
         },
         getFocusKeywordFieldIdentifier: function() {
             return this.config.focusKeywordFieldIdentifier || '.yoastBox-focusKeyword';
+        },
+        getRobotsInstructionsIdentifier: function() {
+            return this.config.robotsInstructionsIdentifier || '.yoastBox-robotsInstructions';
         },
         getFocusKeywordIdentifier: function() {
             return this.config.focusKeywordIdentifier || '.yoastBox-focusKeyword .admin__control-text';
@@ -198,8 +201,13 @@ define([
             $('#yoast-seo-focus-input-fieldset').append(
                 $(this.getFocusKeywordFieldIdentifier())
             );
+            console.log(this.getRobotsInstructionsIdentifier());
+            console.log($(this.getRobotsInstructionsIdentifier()));
+            $('#yoast-seo-settings-fieldset').append(
+                $(this.getRobotsInstructionsIdentifier())
+            );
             if (this.config.isKeywordsEnabled) {
-                $('#yoast-seo-keywords-fieldset').append(
+                $('#yoast-seo-settings-fieldset').append(
                     this.metaKeywordsInputElement
                 );
             }

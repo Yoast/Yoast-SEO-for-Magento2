@@ -13,10 +13,9 @@
  *
  * @category    Maxserv: MaxServ_YoastSeo
  * @package     Maxserv: MaxServ_YoastSeo
- * @author      Vincent Hornikx <vincent.hornikx@maxser.com>
- * @copyright   Copyright (c) 2016 MaxServ (http://www.maxserv.com)
+ * @author      Vincent Hornikx <vincent.hornikx@maxserv.com>
+ * @copyright   Copyright (c) 2017 MaxServ (http://www.maxserv.com)
  * @license     http://opensource.org/licenses/gpl-3.0.en.php General Public License (GPL 3.0)
- *
  */
 
 namespace MaxServ\YoastSeo\Setup;
@@ -52,6 +51,10 @@ class AbstractInstallData
      */
     protected $eavSetup;
 
+    /**
+     * AbstractInstallData constructor.
+     * @param EavSetupFactory $eavSetupFactory
+     */
     public function __construct(
         EavSetupFactory $eavSetupFactory
     ) {
@@ -75,6 +78,13 @@ class AbstractInstallData
             'label' => 'Focus Keyword',
             'group' => 'Search Engine Optimization',
             'sort_order' => 100
+        ]);
+        $this->addProductAttribute('yoast_robots_instructions', [
+            'label' => 'Robot instructions',
+            'group' => 'Search Engine Optimization',
+            'input' => 'select',
+            'source' => 'MaxServ\YoastSeo\Model\Entity\Attribute\Source\Robots',
+            'sort_order' => 110
         ]);
         $this->addProductAttribute('yoast_facebook_title', [
             'label' => 'Facebook title',
@@ -123,6 +133,13 @@ class AbstractInstallData
             'label' => 'Focus Keyword',
             'group' => 'Search Engine Optimization',
             'sort_order' => 100
+        ]);
+        $this->addCategoryAttribute('yoast_robots_instructions', [
+            'label' => 'Robot instructions',
+            'group' => 'Search Engine Optimization',
+            'input' => 'select',
+            'source' => 'MaxServ\YoastSeo\Model\Entity\Attribute\Source\Robots',
+            'sort_order' => 110
         ]);
         $this->addCategoryAttribute('yoast_facebook_title', [
             'label' => 'Facebook title',
@@ -239,79 +256,6 @@ class AbstractInstallData
                 Category::ENTITY,
                 $attributeCode,
                 $attributeConfig
-            );
-        }
-    }
-
-    protected function updateMirasvitBlogAttributes()
-    {
-        $eavSetup = $this->getEavSetup();
-        if ($eavSetup) {
-            $blogEntityType = $eavSetup->getEntityType('blog_post');
-            if (!$blogEntityType) {
-                // Mirasvit Blog entity setup not done
-                return;
-            }
-        }
-        $this->addBlogAttribute('focus_keyword', [
-            'label' => 'Focus Keyword',
-            'sort_order' => 100
-        ]);
-        $this->addBlogAttribute('yoast_facebook_title', [
-            'label' => 'Facebook title',
-            'sort_order' => 10
-        ]);
-        $this->addBlogAttribute('yoast_facebook_description', [
-            'label' => 'Facebook description',
-            'type' => 'text',
-            'input' => 'textarea',
-            'sort_order' => 20
-        ]);
-        $this->addBlogAttribute('yoast_facebook_image', [
-            'input' => 'fileUploader',
-            'backend' => 'MaxServ\YoastSeo\Model\Attribute\Backend\Image',
-            'label' => 'Facebook image',
-            'sort_order' => 20
-        ]);
-        $this->addBlogAttribute('yoast_twitter_title', [
-            'label' => 'Twitter title',
-            'sort_order' => 10
-        ]);
-        $this->addBlogAttribute('yoast_twitter_description', [
-            'label' => 'Twitter description',
-            'type' => 'text',
-            'input' => 'textarea',
-            'sort_order' => 20
-        ]);
-        $this->addBlogAttribute('yoast_twitter_image', [
-            'input' => 'fileUploader',
-            'backend' => 'MaxServ\YoastSeo\Model\Attribute\Backend\Image',
-            'label' => 'Twitter image',
-            'sort_order' => 20
-        ]);
-    }
-
-    protected function addBlogAttribute($attributeCode, $attributeConfiguration)
-    {
-        $defaultAttributeConfig = [
-            'type' => 'varchar',
-            'required' => false,
-            'sort_order' => 100,
-            'input' => 'text',
-            'user_defined' => true
-        ];
-        $requiredAttributeConfigKeys = ['type', 'label', 'input'];
-        $attributeConfiguration = array_merge($defaultAttributeConfig, $attributeConfiguration);
-        if (count(array_diff($requiredAttributeConfigKeys, array_keys($attributeConfiguration)))) {
-            // error, missing required key
-            return;
-        }
-        $eavSetup = $this->getEavSetup();
-        if ($eavSetup) {
-            $eavSetup->addAttribute(
-                'blog_post',
-                $attributeCode,
-                $attributeConfiguration
             );
         }
     }

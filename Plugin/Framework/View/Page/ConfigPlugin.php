@@ -13,8 +13,8 @@
  *
  * @category    Maxserv: MaxServ_YoastSeo
  * @package     Maxserv: MaxServ_YoastSeo
- * @author      Vincent Hornikx <vincent.hornikx@maxser.com>
- * @copyright   Copyright (c) 2016 MaxServ (http://www.maxserv.com)
+ * @author      Vincent Hornikx <vincent.hornikx@maxserv.com>
+ * @copyright   Copyright (c) 2017 MaxServ (http://www.maxserv.com)
  * @license     http://opensource.org/licenses/gpl-3.0.en.php General Public License (GPL 3.0)
  *
  */
@@ -23,16 +23,28 @@ namespace MaxServ\YoastSeo\Plugin\Framework\View\Page;
 
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\View\Page\Config;
+use Magento\Framework\Registry;
+use Magento\Catalog\Model\Category;
+use Magento\Catalog\Model\Product;
+use Magento\Cms\Model\Page;
 
 class ConfigPlugin
 {
-
+    /** @var RequestInterface */
     protected $request;
 
+    /** @var Registry */
+    protected $registry;
+
+    /** @var Page */
+    protected $page;
+
     public function __construct(
-        RequestInterface $request
+        RequestInterface $request,
+        Registry $registry
     ) {
         $this->request = $request;
+        $this->registry = $registry;
     }
 
     /**
@@ -42,6 +54,23 @@ class ConfigPlugin
      */
     public function afterGetRobots(Config $subject, $robots)
     {
+        /** @var Page $page */
+        $page = $this->registry->registry('current_page');
+
+        /** @var Product $product */
+        $product = $this->registry->registry('current_product');
+
+        /** @var Category $category */
+        $category = $this->registry->registry('current_category');
+
+        if ($page && $page->getId() && $page->getYoastRobotsInstructions()) {
+            $robots = $page->getYoastRobotsInstructions();
+        } elseif ($product && $product->getId() && $product->getYoastRobotsInstructions()) {
+            $robots = $product->getYoastRobotsInstructions();
+        } elseif ($category && $category->getId() && $category->getYoastRobotsInstructions()) {
+            $robots = $category->getYoastRobotsInstructions();
+        }
+
         if (($robots == 'INDEX,FOLLOW' && $this->isPaged()) || $this->isSearch()) {
             return 'NOINDEX,FOLLOW';
         }
