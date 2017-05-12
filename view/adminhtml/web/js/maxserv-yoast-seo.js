@@ -162,7 +162,7 @@ define([
         },
         setupApp: function() {
             var widget = this;
-            this.app = new YoastSEO.App({
+            this.app = new YoastSEO.Application({
                 snippetPreview: widget.snippetPreview,
                 contentAnalysisActive: true,
                 targets: {
