@@ -1,7 +1,7 @@
 # MaxServ_YoastSeo
 
 ## Introduction
-We have developed this advanced SEO module in close corporation with YOAST. It incorporates the YOAST library into Magento2.  
+We have developed this advanced SEO module in close cooperation with YOAST. It incorporates the YOAST library into Magento2.  
 
 ## Requirements
 Magento 2.1.*
