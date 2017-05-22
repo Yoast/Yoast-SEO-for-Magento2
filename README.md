@@ -1,14 +1,13 @@
 # MaxServ_YoastSeo
 
 ## Introduction
-This module incorporates Yoast SEO into Magento. 
+We have developed this advanced SEO module in close corporation with YOAST. It incorporates the YOAST library into Magento2.  
 
 ## Requirements
 Magento 2.1.*
 
 ## Latest version
-The current version is 1.0.0. 
-We are still in active development working towards a release candidate.
+The current stable version is 1.0.0. 
 
 ## Installation
 Register the repository:
