@@ -25,7 +25,6 @@ use Magento\Backend\Block\Template\Context;
 use Magento\Config\Block\System\Config\Form\Field\FieldArray\AbstractFieldArray;
 use Magento\Framework\Data\Form\Element\AbstractElement;
 use Magento\Framework\DataObject;
-use Magento\Framework\Math\Random;
 use MaxServ\YoastSeo\Helper\Analysis\TemplatesHelper;
 
 /**
@@ -54,13 +53,11 @@ class AnalysisTemplates extends AbstractFieldArray
      * AnalysisTemplates constructor.
      * @param Context $context
      * @param TemplatesHelper $templatesHelper
-     * @param Random $mathRandom
      * @param array $data
      */
     public function __construct(
         Context $context,
         TemplatesHelper $templatesHelper,
-        Random $mathRandom,
         array $data = []
     ) {
         parent::__construct($context, $data);
