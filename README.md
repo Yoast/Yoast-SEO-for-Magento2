@@ -6,9 +6,6 @@ We have developed this advanced SEO module in close cooperation with YOAST. It i
 ## Requirements
 Magento 2.1.*
 
-## Latest version
-The current stable version is 1.0.0. 
-
 ## Installation
 Register the repository:
 
