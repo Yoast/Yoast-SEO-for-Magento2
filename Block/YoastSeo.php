@@ -49,25 +49,17 @@ class YoastSeo extends Template
     protected $metaProvider;
 
     /**
-     * @var RequestInterface
-     */
-    protected $request;
-
-    /**
      * @param Context $context
      * @param EntityConfigurationPool $entityConfigurationPool
-     * @param RequestInterface $request
      * @param array $data
      */
     public function __construct(
         Context $context,
         EntityConfigurationPool $entityConfigurationPool,
-        RequestInterface $request,
         array $data
     ) {
         parent::__construct($context, $data);
         $this->entityConfigurationPool = $entityConfigurationPool;
-        $this->request = $request;
     }
 
     /**
@@ -75,7 +67,7 @@ class YoastSeo extends Template
      */
     public function getCanonicalUrl()
     {
-        $action = $this->request->getFullActionName();
+        $action = $this->_request->getFullActionName();
         $canonical = null;
         switch ($action) {
             case "cms_index_index":
