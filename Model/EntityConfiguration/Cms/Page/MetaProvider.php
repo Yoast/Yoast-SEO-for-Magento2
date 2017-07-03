@@ -59,7 +59,7 @@ class MetaProvider extends AbstractMetaProvider
      */
     public function getUrl()
     {
-        return $this->urlBuilder->getUrl(null, ['_direct' => $this->getPage()->getIdentifier()]);
+        return $this->urlBuilder->getUrl(null, ['_current' => true, '_use_rewrite' => true]);
     }
 
     /**
