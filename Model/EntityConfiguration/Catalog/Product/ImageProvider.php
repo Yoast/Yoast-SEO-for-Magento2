@@ -53,7 +53,7 @@ class ImageProvider implements ImageProviderInterface
         $gallery = $product->getMediaGalleryImages();
         $images = [];
 
-        if ($gallery->count()) {
+        if ($gallery && $gallery->count()) {
             foreach ($gallery as $image) {
                 $images[] = sprintf("<img src='%s' alt='%s' />", $image->getUrl(), $product->getName());
             }
