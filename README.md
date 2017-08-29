@@ -11,7 +11,7 @@ Register the repository:
 
 ```
 #command line
-$ composer repositories.magento-module-yoastseo '{"type": "vcs", "url": "git@github.com:Yoast/magento-seo.git"}'
+$ composer config repositories.magento-module-yoastseo '{"type": "vcs", "url": "git@github.com:Yoast/magento-seo.git"}'
 
 # OR
 
