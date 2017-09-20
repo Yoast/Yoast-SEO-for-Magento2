@@ -112,8 +112,6 @@ define([
 
             this.metaTitleChangedCheckbox = this.metaTitleInputElement.siblings('.admin__field-service').find('input[type=checkbox]');
             this.metaDescriptionChangedCheckbox = this.metaDescriptionInputElement.siblings('.admin__field-service').find('input[type=checkbox]');
-
-            console.log(this.metaTitleChangedCheckbox, this.metaDescriptionChangedCheckbox);
         },
         getTemplateElements: function() {
             // template input elements
