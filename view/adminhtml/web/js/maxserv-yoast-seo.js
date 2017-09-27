@@ -109,6 +109,9 @@ define([
             this.focusKeywordInputElement = $(this.getFocusKeywordIdentifier()).addClass('yoastBox-inputElement');
             this.metaDescriptionInputElement = $(this.getMetaDescriptionIdentifier());
             this.metaKeywordsInputElement = $(this.getMetaKeywordsIdentifier());
+
+            this.metaTitleChangedCheckbox = this.metaTitleInputElement.siblings('.admin__field-service').find('input[type=checkbox]');
+            this.metaDescriptionChangedCheckbox = this.metaDescriptionInputElement.siblings('.admin__field-service').find('input[type=checkbox]');
         },
         getTemplateElements: function() {
             // template input elements
@@ -201,8 +204,6 @@ define([
             $('#yoast-seo-focus-input-fieldset').append(
                 $(this.getFocusKeywordFieldIdentifier())
             );
-            console.log(this.getRobotsInstructionsIdentifier());
-            console.log($(this.getRobotsInstructionsIdentifier()));
             $('#yoast-seo-settings-fieldset').append(
                 $(this.getRobotsInstructionsIdentifier())
             );
@@ -231,6 +232,20 @@ define([
             $(document)
                 .on("click", ".fieldset-wrapper-title", this.getTemplateElements.bind(this))
                 .on("change", ".yoastBox-inputElement", this.update.bind(this));
+
+            if (this.metaTitleChangedCheckbox.length) {
+                this.metaTitleInputElement.on('change', function () {
+                    this.metaTitleInputElement.attr('disabled', false);
+                    this.metaTitleChangedCheckbox.get(0).checked = false;
+                }.bind(this));
+            }
+
+            if (this.metaDescriptionChangedCheckbox.length) {
+                this.metaDescriptionInputElement.on('change', function () {
+                    this.metaDescriptionInputElement.attr('disabled', false);
+                    this.metaDescriptionChangedCheckbox.get(0).checked = false;
+                }.bind(this))
+            }
         },
         saveSnippetData: function(data) {
             this.setTitleValue(data.title);
@@ -255,7 +270,9 @@ define([
             return '';
         },
         setTitleValue: function(value) {
-            this.metaTitleInputElement.val(value).change();
+            if (value !== this.metaTitleInputElement.val()) {
+                this.metaTitleInputElement.attr('disabled',false).val(value).change();
+            }
             return this;
         },
         getIdentifierValue: function() {
@@ -339,7 +356,9 @@ define([
             return this.metaDescriptionInputElement.val();
         },
         setDescriptionValue: function(value) {
-            this.metaDescriptionInputElement.val(value).change();
+            if (value !== this.metaDescriptionInputElement.val()) {
+                this.metaDescriptionInputElement.attr('disabled',false).val(value).change();
+            }
             return this;
         },
         updateContentScore: function (ignore, presenter) {
