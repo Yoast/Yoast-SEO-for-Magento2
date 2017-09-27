@@ -122,8 +122,26 @@ class YoastSeo extends AbstractModifier
      */
     protected function setYoastFieldClasses(&$meta)
     {
-        $meta['product-details']['children']['container_name']['children']['name']['arguments']['data']['config']['additionalClasses'] = 'yoastBox-title';
-        $meta['content']['children']['container_description']['children']['description']['arguments']['data']['config']['additionalClasses'] = 'yoastBox-content';
+        foreach ($meta as $groupKey => $group) {
+            if (!isset($group['children'])) {
+                continue;
+            }
+            foreach ($group['children'] as $containerKey => $container) {
+                if (!isset($container['children'])) {
+                    continue;
+                }
+                foreach ($container['children'] as $fieldKey => $field) {
+                    switch ($fieldKey) {
+                        case 'name':
+                            $meta[$groupKey]['children'][$containerKey]['children'][$fieldKey]['arguments']['data']['config']['additionalClasses'] = 'yoastBox-title';
+                            break;
+                        case 'description':
+                            $meta[$groupKey]['children'][$containerKey]['children'][$fieldKey]['arguments']['data']['config']['additionalClasses'] = 'yoastBox-content';
+                    }
+                }
+            }
+        }
+
         $meta['search-engine-optimization']['arguments']['data']['config']['label'] = __('Yoast SEO');
         $meta['search-engine-optimization']['children']['container_url_key']['children']['url_key']['arguments']['data']['config']['additionalClasses'] = 'yoastBox-urlKey';
         $meta['search-engine-optimization']['children']['container_meta_title']['children']['meta_title']['arguments']['data']['config']['additionalClasses'] = 'yoastBox-metaTitle hidden';
