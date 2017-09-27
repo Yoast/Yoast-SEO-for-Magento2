@@ -97,7 +97,7 @@ define([
             return this.config.metaTitleIdentifier || '.yoastBox-metaTitle .admin__control-text';
         },
         getMetaDescriptionIdentifier: function() {
-            return this.config.metaDescriptionIdentifier || '.yoastBox-metaDescription .admin__control-textarea';
+            return this.config.metaDescriptionIdentifier || '.yoastBox-metaDescription .admin__control-textarea, .yoastBox-metaDescription .admin__control-text';
         },
         getMetaKeywordsIdentifier: function() {
             return this.config.metaKeywordsIdentifier || '.yoastBox-metaKeywords';
@@ -112,6 +112,7 @@ define([
 
             this.metaTitleChangedCheckbox = this.metaTitleInputElement.siblings('.admin__field-service').find('input[type=checkbox]');
             this.metaDescriptionChangedCheckbox = this.metaDescriptionInputElement.siblings('.admin__field-service').find('input[type=checkbox]');
+            this.createRedirectCheckbox = $('.yoastBox-urlKey [name="product[url_key_create_redirect]"]');
         },
         getTemplateElements: function() {
             // template input elements
@@ -215,9 +216,9 @@ define([
             $(this.hideInputElements).each(function() {
                 var $this = $(this);
                 if ($this.hasClass('admin__field')) {
-                    $this.hide();
+                    $this.addClass('hidden');
                 } else {
-                    $(this).parents('.admin__field').hide();
+                    $(this).parents('.admin__field').slice(0,1).addClass('hidden');
                 }
             });
         },
@@ -279,7 +280,12 @@ define([
             return this.urlKeyInputElement.val();
         },
         setIdentifierValue: function(value) {
-            this.urlKeyInputElement.val(value).change();
+            if (value !== this.urlKeyInputElement.val()) {
+                if (this.urlKeyInputElement.val() && this.createRedirectCheckbox.length) {
+                    this.createRedirectCheckbox.attr('disabled', false).prop('checked', true);
+                }
+                this.urlKeyInputElement.attr('disabled', false).val(value).change();
+            }
             return this;
         },
         getKeywordValue: function() {
