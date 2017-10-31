@@ -99,7 +99,7 @@ class AbstractInstallData
             'sort_order' => 20
         ]);
         $this->addProductAttribute('yoast_facebook_image', [
-            'input' => 'fileUploader',
+            'input' => 'image',
             'backend' => 'MaxServ\YoastSeo\Model\Attribute\Backend\Image',
             'label' => 'Facebook image',
             'group' => 'Yoast Facebook',
@@ -118,7 +118,7 @@ class AbstractInstallData
             'sort_order' => 20
         ]);
         $this->addProductAttribute('yoast_twitter_image', [
-            'input' => 'fileUploader',
+            'input' => 'image',
             'backend' => 'MaxServ\YoastSeo\Model\Attribute\Backend\Image',
             'label' => 'Twitter image',
             'group' => 'Yoast Twitter',
@@ -154,7 +154,7 @@ class AbstractInstallData
             'sort_order' => 20
         ]);
         $this->addCategoryAttribute('yoast_facebook_image', [
-            'input' => 'fileUploader',
+            'input' => 'image',
             'backend' => 'MaxServ\YoastSeo\Model\Attribute\Backend\Image',
             'label' => 'Facebook image',
             'group' => 'Yoast Facebook',
@@ -173,7 +173,7 @@ class AbstractInstallData
             'sort_order' => 20
         ]);
         $this->addCategoryAttribute('yoast_twitter_image', [
-            'input' => 'fileUploader',
+            'input' => 'image',
             'backend' => 'MaxServ\YoastSeo\Model\Attribute\Backend\Image',
             'label' => 'Twitter image',
             'group' => 'Yoast Twitter',
