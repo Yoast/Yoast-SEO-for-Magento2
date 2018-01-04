@@ -70,7 +70,7 @@ class YoastSeo extends AbstractModifier
         $this->imageHelper = $imageHelper;
 
         $this->moduleIsDisabled = (bool)$this->scopeConfig->getValue('advanced/modules_disable_output/MaxServ_YoastSeo');
-        $this->seoAttributeGroupCode = (string)$this->scopeConfig->getValue('yoastseo/advanced/seo_attribute_group_code');
+        $this->seoAttributeGroupCode = (string)$this->scopeConfig->getValue('yoastseo/advanced/product_seo_attribute_group_code');
     }
 
     /**

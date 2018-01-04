@@ -2,7 +2,7 @@
     <default>
         <yoastseo>
             <advanced>
-                <seo_attribute_group_code>search-engine-optimization</seo_attribute_group_code>
+                <product_seo_attribute_group_code>search-engine-optimization</product_seo_attribute_group_code>
             </advanced>
         </yoastseo>
     </default>

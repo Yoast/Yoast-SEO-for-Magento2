@@ -82,7 +82,7 @@
             </group>
             <group id="advanced" translate="true" sortOrder="50" showInDefault="1" showInWebsite="0" showInStore="0">
                 <label>Advanced Configuration</label>
-                <field id="seo_attribute_group_code" type="text" translate="label" showInDefault="1" showInWebsite="0" showInStore="0">
+                <field id="product_seo_attribute_group_code" type="text" translate="label" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>SEO attribute group code</label>
                 </field>
             </group>
