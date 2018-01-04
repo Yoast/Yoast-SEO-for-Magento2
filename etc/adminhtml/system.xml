@@ -80,6 +80,12 @@
                     <backend_model>MaxServ\YoastSeo\Model\Adminhtml\System\Config\Backend\AnalysisTemplates</backend_model>
                 </field>
             </group>
+            <group id="advanced" translate="true" sortOrder="50" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Advanced Configuration</label>
+                <field id="seo_attribute_group_code" type="text" translate="label" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>SEO attribute group code</label>
+                </field>
+            </group>
         </section>
     </system>
 </config>
