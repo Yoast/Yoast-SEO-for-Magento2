@@ -25,6 +25,8 @@ use Magento\Catalog\Ui\DataProvider\Product\Form\Modifier\AbstractModifier;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Stdlib\ArrayManager;
+use Magento\Framework\View\LayoutInterface;
+use Magento\Ui\Component\Container;
 use MaxServ\YoastSeo\Helper\ImageHelper;
 
 class YoastSeo extends AbstractModifier
@@ -46,20 +48,39 @@ class YoastSeo extends AbstractModifier
     protected $imageHelper;
 
     /**
+     * @var LayoutInterface
+     */
+    protected $layout;
+
+    /**
      * @var bool
      */
     protected $moduleIsDisabled = false;
 
+    /**
+     * @var string
+     */
+    protected $seoAttributeGroupCode;
+
+    /**
+     * @param ScopeConfigInterface $scopeConfig
+     * @param ArrayManager $arrayManager
+     * @param ImageHelper $imageHelper
+     * @param LayoutInterface $layout
+     */
     public function __construct(
         ScopeConfigInterface $scopeConfig,
         ArrayManager $arrayManager,
-        ImageHelper $imageHelper
+        ImageHelper $imageHelper,
+        LayoutInterface $layout
     ) {
         $this->scopeConfig = $scopeConfig;
         $this->arrayManager = $arrayManager;
         $this->imageHelper = $imageHelper;
+        $this->layout = $layout;
 
         $this->moduleIsDisabled = (bool)$this->scopeConfig->getValue('advanced/modules_disable_output/MaxServ_YoastSeo');
+        $this->seoAttributeGroupCode = (string)$this->scopeConfig->getValue('yoastseo/advanced/product_seo_attribute_group_code');
     }
 
     /**
@@ -142,13 +163,46 @@ class YoastSeo extends AbstractModifier
             }
         }
 
-        $meta['search-engine-optimization']['arguments']['data']['config']['label'] = __('Yoast SEO');
-        $meta['search-engine-optimization']['children']['container_url_key']['children']['url_key']['arguments']['data']['config']['additionalClasses'] = 'yoastBox-urlKey';
-        $meta['search-engine-optimization']['children']['container_meta_title']['children']['meta_title']['arguments']['data']['config']['additionalClasses'] = 'yoastBox-metaTitle hidden';
-        $meta['search-engine-optimization']['children']['container_meta_description']['children']['meta_description']['arguments']['data']['config']['additionalClasses'] = 'yoastBox-metaDescription hidden';
-        $meta['search-engine-optimization']['children']['container_meta_keyword']['children']['meta_keyword']['arguments']['data']['config']['additionalClasses'] = 'yoastBox-metaKeywords';
-        $meta['search-engine-optimization']['children']['container_focus_keyword']['children']['focus_keyword']['arguments']['data']['config']['additionalClasses'] = 'yoastBox-focusKeyword';
-        $meta['search-engine-optimization']['children']['container_yoast_robots_instructions']['children']['yoast_robots_instructions']['arguments']['data']['config']['additionalClasses'] = 'yoastBox-robotsInstructions';
+        $groupCode = $this->seoAttributeGroupCode;
+
+        $meta[$groupCode]['arguments']['data']['config']['label'] = __('Yoast SEO');
+        $meta[$groupCode]['children']['container_url_key']['children']['url_key']['arguments']['data']['config']['additionalClasses'] = 'yoastBox-urlKey';
+        $meta[$groupCode]['children']['container_meta_title']['children']['meta_title']['arguments']['data']['config']['additionalClasses'] = 'yoastBox-metaTitle hidden';
+        $meta[$groupCode]['children']['container_meta_description']['children']['meta_description']['arguments']['data']['config']['additionalClasses'] = 'yoastBox-metaDescription hidden';
+        $meta[$groupCode]['children']['container_meta_keyword']['children']['meta_keyword']['arguments']['data']['config']['additionalClasses'] = 'yoastBox-metaKeywords';
+        $meta[$groupCode]['children']['container_focus_keyword']['children']['focus_keyword']['arguments']['data']['config']['additionalClasses'] = 'yoastBox-focusKeyword';
+        $meta[$groupCode]['children']['container_yoast_robots_instructions']['children']['yoast_robots_instructions']['arguments']['data']['config']['additionalClasses'] = 'yoastBox-robotsInstructions';
+
+        $meta[$groupCode]['children']['container_yoastBox_block'] = [
+            'arguments' => [
+                'data' => [
+                    'config' => [
+                        'formElement' => Container::NAME,
+                        'componentType' => Container::NAME,
+                        'breakLine' => false,
+                        'label' => 'Yoast',
+                        'required' => true,
+                        'sortOrder' => 100
+                    ]
+                ]
+            ],
+            'children' => [
+                'yoastBox_block' => [
+                    'arguments' => [
+                        'data' => [
+                            'config' => [
+                                'label' => null,
+                                'formElement' => Container::NAME,
+                                'componentType' => Container::NAME,
+                                'template' => 'ui/form/components/complex',
+                                'content' => $this->layout->createBlock('MaxServ\YoastSeo\Block\Adminhtml\YoastBox')->toHtml(),
+                                'sortOrder' => 10
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ];
 
         // facebook fieldset
         $meta['yoast-facebook']['arguments']['data']['config']['label'] = '';
