@@ -46,7 +46,7 @@
             <argument name="modifiers" xsi:type="array">
                 <item name="yoastseo" xsi:type="array">
                     <item name="class" xsi:type="string">MaxServ\YoastSeo\Ui\Catalog\DataProvider\Product\Form\Modifier\YoastSeo</item>
-                    <item name="sortOrder" xsi:type="number">130</item>
+                    <item name="sortOrder" xsi:type="number">100000</item>
                 </item>
             </argument>
         </arguments>

@@ -31,10 +31,6 @@ class YoastBox extends Template
     {
         $this->setTemplate('MaxServ_YoastSeo::yoastbox.phtml');
 
-        if (!$this->getNameInLayout()) {
-            $this->setNameInLayout('maxserv_yoast_block');
-        }
-
         parent::_construct();
     }
 
