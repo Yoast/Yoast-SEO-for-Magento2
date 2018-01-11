@@ -60,16 +60,6 @@ interface MetaProviderInterface
     /**
      * @return string
      */
-    public function getPrevLink();
-
-    /**
-     * @return string
-     */
-    public function getNextLink();
-
-    /**
-     * @return string
-     */
     public function getOpenGraphTitle();
 
     /**

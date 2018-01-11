@@ -141,22 +141,6 @@ class MetaProvider extends AbstractMetaProvider
     }
 
     /**
-     * @return null
-     */
-    public function getPrevLink()
-    {
-        return null;
-    }
-
-    /**
-     * @return null
-     */
-    public function getNextLink()
-    {
-        return null;
-    }
-
-    /**
      * @return string
      */
     public function getOpenGraphTitle()

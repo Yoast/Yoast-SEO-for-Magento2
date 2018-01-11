@@ -104,22 +104,6 @@ class MetaProvider extends AbstractMetaProvider
     /**
      * @inheritdoc
      */
-    public function getPrevLink()
-    {
-        return null;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getNextLink()
-    {
-        return null;
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function getOpenGraphTitle()
     {
         return $this->getFirstAvailableValue(
