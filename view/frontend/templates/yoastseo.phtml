@@ -38,10 +38,6 @@ if ($twitterImage) {
     $twitterCardType = 'summary';
 }
 
-// get page links for paginated content
-$prevLink = $meta->getPrevLink();
-$nextLink = $meta->getNextLink();
-
 // If the current page is a product page and the product has a price then show price information
 $finalPrice = 0;
 if ($block->getPageType() == 'product') {
@@ -96,9 +92,3 @@ if ($block->getPageType() == 'product') {
 <?php if ($twitterImage): ?>
     <meta name="twitter:image" content="<?php echo $twitterImage; ?>"/>
 <?php endif; ?>
-<?php if ($prevLink): ?>
-    <link rel="prev" href="<?php echo $prevLink; ?>" />
-<?php endif; ?>
-<?php if ($nextLink): ?>
-    <link rel="next" href="<?php echo $nextLink; ?>" />
-<?php endif;

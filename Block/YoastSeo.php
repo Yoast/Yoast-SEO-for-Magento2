@@ -102,6 +102,8 @@ class YoastSeo extends Template
     /**
      * @return MetaProviderInterface
      * @throws \ErrorException
+     * @throws \Exception
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function getMeta()
     {
