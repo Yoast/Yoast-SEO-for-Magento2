@@ -53,7 +53,7 @@ if ($block->getPageType() == 'product') {
 <meta property="og:type" content="<?php echo $meta->getType(); ?>"/>
 <meta property="og:site_name" content="<?php echo $block->getStoreName(); ?>" />
 <meta property="og:title" content="<?php echo $meta->getOpenGraphTitle(); ?>"/>
-<meta property="og:description" content="<?php echo $meta->getOpenGraphDescription(); ?>"/>
+<meta property="og:description" content="<?php echo strip_tags($meta->getOpenGraphDescription()); ?>"/>
 <?php if ($openGraphImage): ?>
     <meta property="og:image" content="<?php echo $openGraphImage; ?>"/>
     <?php $imageMeta = $meta->getImageMeta($openGraphImage); ?>
