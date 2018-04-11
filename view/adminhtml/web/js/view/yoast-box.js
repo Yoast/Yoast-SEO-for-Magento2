@@ -38,7 +38,6 @@ define([
             configurationService.load(this.provider);
         },
         onConfigurationUpdate: function () {
-            fieldManager.setFieldsetTitle(configurationService.configuration().fieldSetIndex);
             this.initFields();
         },
         onTemplateReady: function () {

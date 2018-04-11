@@ -21,17 +21,6 @@ define([
     });
 
     return {
-        setFieldsetTitle: function (fieldIndex) {
-            uiRegistry
-                .promise({index: fieldIndex})
-                .done(function (fieldset) {
-                    if (ko.isObservable(fieldset.label)) {
-                        fieldset.label('YoastSEO');
-                    } else {
-                        fieldset.label = ko.observable('YoastSEO');
-                    }
-                });
-        },
         bindFieldToYoastData: function (key, index, hide) {
             if (!fields.hasOwnProperty(key)) {
                 uiRegistry
