@@ -41,9 +41,10 @@ class SeoScore extends Column
             $score = array_sum($score) / count($score);
         }
 
-        $html = '<span class="yoastScore-score yoastScore-score--'
+        $html = '<div class="yoastScore-cell">'
+            . '<span class="yoastScore-score yoastScore-score--'
             . $this->getScoreClass($score)
-            . '"></span>';
+            . '"></span></div>';
 
         return $html;
     }
