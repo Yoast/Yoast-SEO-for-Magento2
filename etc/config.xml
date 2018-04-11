@@ -1,0 +1,12 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <yoastseo>
+            <products>
+                <attribute_group_code>search-engine-optimization</attribute_group_code>
+            </products>
+            <categories>
+                <attribute_group_code>search-engine-optimization</attribute_group_code>
+            </categories>
+        </yoastseo>
+    </default>
+</config>

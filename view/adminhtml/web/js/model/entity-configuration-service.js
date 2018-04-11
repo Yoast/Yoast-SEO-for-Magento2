@@ -6,13 +6,8 @@ define([
 
     return {
         configuration: ko.observable(null),
-        load: function (dataSource) {
-            var url = yoastBoxConfig.configUrl + "?dataSource=";
-
-            if (dataSource.indexOf(".") > -1) {
-                dataSource = dataSource.substring(0, dataSource.indexOf("."));
-            }
-            url += dataSource;
+        load: function (namespace) {
+            var url = yoastBoxConfig.configUrl + "?namespace=" + namespace;
 
             $.get(url)
                 .done(this.onConfigurationLoad.bind(this))

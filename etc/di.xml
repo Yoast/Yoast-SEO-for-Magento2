@@ -73,16 +73,6 @@
             </argument>
         </arguments>
     </type>
-    <type name="MaxServ\YoastSeo\Model\Config\Source\EntityType">
-        <arguments>
-            <argument name="entityTypes" xsi:type="array">
-                <item name="catalog_product" xsi:type="string">Magento\Catalog\Model\Product</item>
-                <item name="catalog_category" xsi:type="string">Magento\Catalog\Model\Category</item>
-                <item name="cms_page" xsi:type="string">Magento\Cms\Model\Page</item>
-                <item name="foo_bar" xsi:type="string">yay foo bar</item>
-            </argument>
-        </arguments>
-    </type>
     <virtualType name="MaxServ\YoastSeo\Model\ImageUploader" type="Magento\Catalog\Model\ImageUploader">
         <arguments>
             <argument name="baseTmpPath" xsi:type="string">yoast/tmp</argument>
@@ -100,21 +90,11 @@
             <argument name="imageUploader" xsi:type="object">MaxServ\YoastSeo\Model\ImageUploader</argument>
         </arguments>
     </type>
-    <type name="MaxServ\YoastSeo\Model\EntityConfigurationManagement">
+    <type name="MaxServ\YoastSeo\Model\EntityConfigurationPool">
         <arguments>
             <argument name="entityConfigurations" xsi:type="array">
-                <item name="cms_page" xsi:type="array">
-                    <item name="titleField" xsi:type="string">title</item>
-                    <item name="urlKeyField" xsi:type="string">identifier</item>
-                    <item name="fieldSetIndex" xsi:type="string">search_engine_optimisation</item>
-                    <item name="fieldWrapper" xsi:type="string"></item>
-                </item>
-                <item name="catalog_product" xsi:type="array">
-                    <item name="titleField" xsi:type="string">name</item>
-                    <item name="urlKeyField" xsi:type="string">url_key</item>
-                    <item name="fieldSetIndex" xsi:type="string">search_engine_optimisation</item>
-                    <item name="fieldWrapper" xsi:type="string">product</item>
-                </item>
+                <item name="cms_page" xsi:type="object">MaxServ\YoastSeo\Model\Entity\Configuration\Cms\PageConfiguration</item>
+                <item name="catalog_product" xsi:type="object">MaxServ\YoastSeo\Model\Entity\Configuration\Catalog\ProductConfiguration</item>
             </argument>
         </arguments>
     </type>

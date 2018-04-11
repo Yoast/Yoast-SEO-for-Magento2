@@ -4,28 +4,27 @@ namespace MaxServ\YoastSeo\Controller\Adminhtml\Editor;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
-use Magento\Framework\App\ResponseInterface;
-use MaxServ\YoastSeo\Model\EntityConfigurationManagement;
+use MaxServ\YoastSeo\Model\EntityConfigurationPool;
 
 class Config extends Action
 {
     const ADMIN_RESOURCE = 'MaxServ_YoastSeo::admin';
 
     /**
-     * @var EntityConfigurationManagement
+     * @var EntityConfigurationPool
      */
-    protected $entityConfigurationManagement;
+    protected $entityConfigurationPool;
 
     /**
      * @param Context $context
-     * @param EntityConfigurationManagement $entityConfigurationManagement
+     * @param EntityConfigurationPool $entityConfigurationPool
      */
     public function __construct(
         Context $context,
-        EntityConfigurationManagement $entityConfigurationManagement
+        EntityConfigurationPool $entityConfigurationPool
     ) {
         parent::__construct($context);
-        $this->entityConfigurationManagement = $entityConfigurationManagement;
+        $this->entityConfigurationPool = $entityConfigurationPool;
     }
 
     /**
@@ -33,10 +32,17 @@ class Config extends Action
      */
     public function execute()
     {
-        $dataSource = $this->getRequest()->getParam('dataSource');
-        $configuration = $this->entityConfigurationManagement
-            ->getByDataSource($dataSource);
+        $namespace = $this->getRequest()->getParam('namespace');
+        $configuration = $this->entityConfigurationPool
+            ->getEntityConfiguration($namespace);
 
-        $this->getResponse()->representJson(json_encode($configuration));
+        if ($configuration) {
+            $result = $configuration->toArray();
+        } else {
+            $result = [
+                'error' => 'no configuration found for: ' . $namespace
+            ];
+        }
+        $this->getResponse()->representJson(json_encode($result));
     }
 }

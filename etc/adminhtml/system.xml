@@ -21,7 +21,19 @@
                     <comment>Enter other URL's which also represent your company. E.g. Facebook page, Twitter page, etc. Enter one URL per line.</comment>
                 </field>
             </group>
-            <group id="facebook" translate="label" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+            <group id="products" translate="label" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Products</label>
+                <field id="attribute_group_code" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>SEO Attribute Group Code</label>
+                </field>
+            </group>
+            <group id="categories" translate="label" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Categories</label>
+                <field id="attribute_group_code" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>SEO Attribute Group Code</label>
+                </field>
+            </group>
+            <group id="facebook" translate="label" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Facebook Settings</label>
                 <field id="app_id" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Facebook App Id</label>
@@ -30,7 +42,7 @@
                     <label>Admin Ids</label>
                 </field>
             </group>
-            <group id="twitter" translate="label" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+            <group id="twitter" translate="label" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Twitter Settings</label>
                 <field id="company_account" translate="label comment" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Company Twitter Account</label>

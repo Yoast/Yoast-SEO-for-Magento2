@@ -35,7 +35,7 @@ define([
             yoastData.initFormData(this.formData);
 
             configurationService.configuration.subscribe(this.onConfigurationUpdate.bind(this));
-            configurationService.load(this.provider);
+            configurationService.load(this.ns);
         },
         onConfigurationUpdate: function () {
             this.initFields();

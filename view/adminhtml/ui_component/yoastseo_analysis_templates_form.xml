@@ -55,11 +55,10 @@
         </field>
         <field name="entity_type">
             <argument name="data" xsi:type="array">
-                <item name="options" xsi:type="object">MaxServ\YoastSeo\Model\Config\Source\EntityType</item>
                 <item name="config" xsi:type="array">
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="label" xsi:type="string" translate="true">Entity Type</item>
-                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="formElement" xsi:type="string">input</item>
                     <item name="source" xsi:type="string">template</item>
                     <item name="sortOrder" xsi:type="number">10</item>
                     <item name="dataScope" xsi:type="string">entity_type</item>
