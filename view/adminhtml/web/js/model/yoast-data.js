@@ -8,8 +8,8 @@ define([
         entity_data = null;
 
     return {
-        content_score: ko.observable(''),
-        keyword_score: ko.observable(''),
+        content_score: ko.observable(-1),
+        keyword_score: ko.observable(-1),
         focus_keyword: ko.observable(''),
         title: ko.observable(''),
         content: ko.observable(''),

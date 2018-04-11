@@ -48,6 +48,7 @@ define([
             this.initFields();
         },
         onTemplateReady: function () {
+            this.initFieldsets();
             this.initPreview();
             this.initApp();
         },
@@ -86,6 +87,8 @@ define([
             fieldManager.hideField('yoast_twitter_image');
 
             templateProcessor.init(this.formData, configurationService.configuration().template);
+        },
+        initFieldsets: function () {
         },
         initPreview: function () {
             this.previewElement = $("#yoastBox-snippetPreview")[0];
@@ -129,9 +132,6 @@ define([
                     contentOutput: 'yoastBox-readabilityOutput'
                 },
                 callbacks: {
-                    updateSnippetValues: function (data) {
-                        console.log('update snippet values', data);
-                    },
                     saveScores: function (score, presenter) {
                         yoastData.keyword_score(score);
                         presenter.renderOverallRating();

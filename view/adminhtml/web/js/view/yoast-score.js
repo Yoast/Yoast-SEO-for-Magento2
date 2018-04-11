@@ -26,6 +26,8 @@ define([
     function getScoreLabel (score) {
         if (!score) {
             return $.mage.__("N/A");
+        } else if (score < 0) {
+            return $.mage.__("loading");
         } else if (score <= 40) {
             return $.mage.__("Bad");
         } else if (score <= 70) {

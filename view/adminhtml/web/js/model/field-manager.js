@@ -6,8 +6,7 @@ define([
 ], function ($, ko, uiRegistry, yoastData) {
     "use strict";
 
-    var fields = {},
-        urlKeyCreateRedirectField;
+    var fields = {};
 
     $.each(yoastData, function (key, observable) {
         if (!ko.isObservable(observable)) {
@@ -22,15 +21,15 @@ define([
     });
 
     return {
-        urlKeyCreateRedirectField: urlKeyCreateRedirectField,
+        urlKeyCreateRedirectField: null,
         initUrlKeyCreateRedirectField: function () {
             uiRegistry
                 .promise({index: 'url_key_create_redirect'})
                 .done(function (field) {
                     if (field) {
-                        urlKeyCreateRedirectField = field;
+                        this.urlKeyCreateRedirectField = field;
                     }
-                });
+                }.bind(this));
         },
         hideField: function (index) {
             uiRegistry
@@ -46,7 +45,6 @@ define([
                 uiRegistry
                     .promise({index: index})
                     .done(function (key, hide, field) {
-                        console.log(key, hide, field);
                         if (field && field.value) {
                             fields[key] = field;
                             if (yoastData.hasOwnProperty(key)) {

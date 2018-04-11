@@ -59,7 +59,6 @@ class YoastSeo extends AbstractModifier
 
         $meta = $this->arrayManager->merge($path, $meta, $attributeGroup);
 
-
         return $meta;
     }
 }
