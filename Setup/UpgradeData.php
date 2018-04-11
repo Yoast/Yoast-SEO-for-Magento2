@@ -9,15 +9,15 @@ use Magento\Eav\Setup\EavSetupFactory;
 use Magento\Eav\Model\Config as EavConfig;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
-use Magento\Framework\Setup\InstallDataInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
+use Magento\Framework\Setup\UpgradeDataInterface;
 use MaxServ\YoastSeo\Api\AnalysisTemplateRepositoryInterface;
 use MaxServ\YoastSeo\Api\Data\AnalysisTemplateInterface;
 use MaxServ\YoastSeo\Api\Data\AnalysisTemplateInterfaceFactory;
 use Psr\Log\LoggerInterface;
 
-class InstallData implements InstallDataInterface
+class UpgradeData implements UpgradeDataInterface
 {
     /**
      * @var LoggerInterface
@@ -86,7 +86,7 @@ class InstallData implements InstallDataInterface
     /**
      * @inheritDoc
      */
-    public function install(
+    public function upgrade(
         ModuleDataSetupInterface $setup,
         ModuleContextInterface $context
     ) {
@@ -139,7 +139,7 @@ class InstallData implements InstallDataInterface
 
         $this->eavSetup->addAttribute($entityTypeId, 'yoast_keyword_score', [
             'type' => 'int',
-            'label' => 'Yoast Content Score',
+            'label' => 'Yoast Keyword Score',
             'input' => 'text',
             'global' => 'store',
             'required' => false
@@ -210,7 +210,7 @@ class InstallData implements InstallDataInterface
 
         $this->eavSetup->addAttribute($entityTypeId, 'yoast_keyword_score', [
             'type' => 'int',
-            'label' => 'Yoast Content Score',
+            'label' => 'Yoast Keyword Score',
             'input' => 'text',
             'global' => 'store',
             'required' => false
@@ -244,7 +244,8 @@ class InstallData implements InstallDataInterface
             'type' => 'text',
             'label' => 'Yoast Facebook Description',
             'input' => 'textarea',
-            'global' => 'store'
+            'global' => 'store',
+            'required' => false
         ]);
 
         $this->eavSetup->addAttribute($entityTypeId, 'yoast_twitter_image', [

@@ -21,7 +21,7 @@ define([
     });
 
     return {
-        urlKeyCreateRedirectField: null,
+        urlKeyCreateRedirectField: false,
         initUrlKeyCreateRedirectField: function () {
             uiRegistry
                 .promise({index: 'url_key_create_redirect'})

@@ -55,6 +55,9 @@ define([
 
             if (entity_data && entity_data.hasOwnProperty('url_path')) {
                 urlPath = entity_data.url_path.split('/').slice(0, -1).join('/') + '/'
+                if (urlPath == '/') {
+                    urlPath = '';
+                }
             }
 
             return baseUrl + urlPath;

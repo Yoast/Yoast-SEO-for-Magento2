@@ -42,7 +42,7 @@
             </argument>
         </arguments>
     </type>
-    <type name="MaxServ\YoastSeo\Setup\InstallData">
+    <type name="MaxServ\YoastSeo\Setup\UpgradeData">
         <arguments>
             <argument name="templates" xsi:type="array">
                 <item name="catalog_product" xsi:type="array">
@@ -95,6 +95,7 @@
             <argument name="entityConfigurations" xsi:type="array">
                 <item name="cms_page_form" xsi:type="object">MaxServ\YoastSeo\Model\Entity\Configuration\Cms\PageConfiguration</item>
                 <item name="product_form" xsi:type="object">MaxServ\YoastSeo\Model\Entity\Configuration\Catalog\ProductConfiguration</item>
+                <item name="category_form" xsi:type="object">MaxServ\YoastSeo\Model\Entity\Configuration\Catalog\CategoryConfiguration</item>
             </argument>
         </arguments>
     </type>

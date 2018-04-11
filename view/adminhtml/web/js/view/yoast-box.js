@@ -44,6 +44,8 @@ define([
             }
             this.entityData = entityData;
 
+            console.log(fieldWrapper, entityData);
+
             yoastData.initEntityData(this.entityData);
             this.initFields();
         },
@@ -114,7 +116,7 @@ define([
         },
         updateCreateRedirect: function () {
             var urlKeyField = configurationService.configuration().urlKeyField;
-            if (fieldManager.urlKeyCreateRedirectField) {
+            if (fieldManager.urlKeyCreateRedirectField && fieldManager.urlKeyCreateRedirectField.enabled) {
                 fieldManager.urlKeyCreateRedirectField.enabled(
                     yoastData.url_key() !== this.entityData[urlKeyField]
                 );

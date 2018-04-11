@@ -1,0 +1,58 @@
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <fieldset name="general">
+        <field name="yoast_keyword_score" formElement="hidden">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">page</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">YoastSEO Score</label>
+                <dataScope>yoast_keyword_score</dataScope>
+            </settings>
+        </field>
+        <field name="yoast_content_score" formElement="hidden">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">page</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">YoastSEO Score</label>
+                <dataScope>yoast_content_score</dataScope>
+            </settings>
+        </field>
+    </fieldset>
+    <fieldset name="search_engine_optimization">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">YoastSEO</item>
+            </item>
+        </argument>
+        <field name="focus_keyword" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">page</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Focus Keyword</label>
+                <dataScope>yoast_focus_keyword</dataScope>
+            </settings>
+        </field>
+        <field name="yoastbox" formElement="text">
+            <argument name="data" xsi:type="array">
+                <item name="js_config" xsi:type="array">
+                    <item name="component" xsi:type="string">MaxServ_YoastSeo/js/view/yoast-box</item>
+                </item>
+            </argument>
+            <settings>
+                <dataScope>yoastbox</dataScope>
+            </settings>
+        </field>
+    </fieldset>
+</form>
+
