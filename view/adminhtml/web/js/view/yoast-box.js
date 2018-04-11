@@ -30,14 +30,21 @@ define([
         },
         initialize: function () {
             this._super();
-
             this.formName(this.ns);
-            yoastData.initFormData(this.formData);
 
             configurationService.configuration.subscribe(this.onConfigurationUpdate.bind(this));
             configurationService.load(this.ns);
         },
         onConfigurationUpdate: function () {
+            var fieldWrapper = configurationService.configuration().fieldWrapper,
+                entityData = this.formData;
+
+            if (fieldWrapper && entityData.hasOwnProperty(fieldWrapper)) {
+                entityData = entityData[fieldWrapper];
+            }
+            this.entityData = entityData;
+
+            yoastData.initEntityData(this.entityData);
             this.initFields();
         },
         onTemplateReady: function () {
@@ -55,7 +62,10 @@ define([
         initFields: function () {
             var configuration = configurationService.configuration(),
                 urlKeyField = configuration.urlKeyField,
-                titleField = configuration.titleField;
+                titleField = configuration.titleField,
+                metaKeywordField = configuration.metaKeywordField;
+
+            fieldManager.initUrlKeyCreateRedirectField();
 
             fieldManager.bindFieldToYoastData('url_key', urlKeyField, false);
             fieldManager.bindFieldToYoastData('title', titleField, false);
@@ -64,7 +74,16 @@ define([
             fieldManager.bindFieldToYoastData('focus_keyword', 'focus_keyword', true);
             fieldManager.bindFieldToYoastData('meta_title', 'meta_title', true);
             fieldManager.bindFieldToYoastData('meta_description', 'meta_description', true);
-            fieldManager.bindFieldToYoastData('meta_keywords', 'meta_keywords', true);
+            fieldManager.bindFieldToYoastData('meta_keywords', metaKeywordField, true);
+
+            fieldManager.hideField('yoast_keyword_score');
+            fieldManager.hideField('yoast_content_score');
+            fieldManager.hideField('yoast_facebook_title');
+            fieldManager.hideField('yoast_facebook_description');
+            fieldManager.hideField('yoast_facebook_image');
+            fieldManager.hideField('yoast_twitter_title');
+            fieldManager.hideField('yoast_twitter_description');
+            fieldManager.hideField('yoast_twitter_image');
 
             templateProcessor.init(this.formData, configurationService.configuration().template);
         },
@@ -82,11 +101,21 @@ define([
                         yoastData.url_key(data.urlPath);
                         yoastData.meta_title(data.title);
                         yoastData.meta_description(data.metaDesc);
-                    }
+
+                        this.updateCreateRedirect();
+                    }.bind(this)
                 },
                 baseUrl: yoastData.base_url,
                 targetElement: this.previewElement
             });
+        },
+        updateCreateRedirect: function () {
+            var urlKeyField = configurationService.configuration().urlKeyField;
+            if (fieldManager.urlKeyCreateRedirectField) {
+                fieldManager.urlKeyCreateRedirectField.enabled(
+                    yoastData.url_key() !== this.entityData[urlKeyField]
+                );
+            }
         },
         initApp: function () {
             var locale = yoastBoxConfig.locale;

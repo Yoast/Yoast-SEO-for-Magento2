@@ -45,4 +45,12 @@ class PageConfiguration extends AbstractEntityConfiguration
     {
         return '';
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function getMetaKeywordField()
+    {
+        return 'meta_keywords';
+    }
 }

@@ -46,4 +46,12 @@ class ProductConfiguration extends AbstractEntityConfiguration implements Entity
     {
         return 'product';
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function getMetaKeywordField()
+    {
+        return 'meta_keyword';
+    }
 }

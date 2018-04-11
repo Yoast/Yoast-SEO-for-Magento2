@@ -5,7 +5,7 @@ define([
     "use strict";
 
     var url_key = ko.observable(''),
-        form_data = null;
+        entity_data = null;
 
     return {
         content_score: ko.observable(''),
@@ -24,8 +24,8 @@ define([
         yoast_twitter_description: ko.observable(''),
         yoast_twitter_image: ko.observable(''),
 
-        initFormData: function (formData) {
-            form_data = formData;
+        initEntityData: function (entityData, fieldWrapper) {
+            entity_data = entityData;
             var keys = [
                 'yoast_facebook_title',
                 'yoast_facebook_description',
@@ -33,8 +33,8 @@ define([
                 'yoast_twitter_description'
             ];
             $.each(keys, function (ignore, key) {
-                if (formData.hasOwnProperty(key)) {
-                    this[key](formData[key]);
+                if (entityData.hasOwnProperty(key)) {
+                    this[key](entityData[key]);
                 }
             }.bind(this));
         },
@@ -53,8 +53,8 @@ define([
             var baseUrl = yoastBoxConfig.baseUrl,
                 urlPath = '';
 
-            if (form_data && form_data.hasOwnProperty('url_path')) {
-                urlPath = form_data.url_path.split('/').slice(0, -1).join('/') + '/'
+            if (entity_data && entity_data.hasOwnProperty('url_path')) {
+                urlPath = entity_data.url_path.split('/').slice(0, -1).join('/') + '/'
             }
 
             return baseUrl + urlPath;

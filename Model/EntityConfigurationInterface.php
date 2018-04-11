@@ -38,4 +38,9 @@ interface EntityConfigurationInterface
      * @return string
      */
     public function getTemplate();
+
+    /**
+     * @return string
+     */
+    public function getMetaKeywordField();
 }

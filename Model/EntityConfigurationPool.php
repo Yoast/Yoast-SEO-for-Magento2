@@ -24,7 +24,6 @@ class EntityConfigurationPool
      */
     public function getEntityConfiguration($entity)
     {
-        $entity = str_replace('_form', '', $entity);
         if (!isset($this->entityConfigurations[$entity])) {
             return false;
         }

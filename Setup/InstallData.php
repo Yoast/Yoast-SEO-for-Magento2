@@ -137,46 +137,68 @@ class InstallData implements InstallDataInterface
         $entityType = $this->eavConfig->getEntityType(Product::ENTITY);
         $entityTypeId = $entityType->getId();
 
+        $this->eavSetup->addAttribute($entityTypeId, 'yoast_keyword_score', [
+            'type' => 'int',
+            'label' => 'Yoast Content Score',
+            'input' => 'text',
+            'global' => 'store',
+            'required' => false
+        ]);
+
+        $this->eavSetup->addAttribute($entityTypeId, 'yoast_content_score', [
+            'type' => 'int',
+            'label' => 'Yoast Content Score',
+            'input' => 'text',
+            'global' => 'store',
+            'required' => false
+        ]);
+
         $this->eavSetup->addAttribute($entityTypeId, 'yoast_facebook_image', [
             'type' => 'varchar',
             'label' => 'Yoast Facebook Image',
             'input' => 'image',
-            'global' => 'store'
+            'global' => 'store',
+            'required' => false
         ]);
 
         $this->eavSetup->addAttribute($entityTypeId, 'yoast_facebook_title', [
             'type' => 'varchar',
             'label' => 'Yoast Facebook Title',
             'input' => 'text',
-            'global' => 'store'
+            'global' => 'store',
+            'required' => false
         ]);
 
         $this->eavSetup->addAttribute($entityTypeId, 'yoast_facebook_description', [
             'type' => 'text',
             'label' => 'Yoast Facebook Description',
             'input' => 'textarea',
-            'global' => 'store'
+            'global' => 'store',
+            'required' => false
         ]);
 
         $this->eavSetup->addAttribute($entityTypeId, 'yoast_twitter_image', [
             'type' => 'varchar',
             'label' => 'Yoast Twitter Image',
             'input' => 'image',
-            'global' => 'store'
+            'global' => 'store',
+            'required' => false
         ]);
 
         $this->eavSetup->addAttribute($entityTypeId, 'yoast_twitter_title', [
             'type' => 'varchar',
             'label' => 'Yoast Twitter Title',
             'input' => 'text',
-            'global' => 'store'
+            'global' => 'store',
+            'required' => false
         ]);
 
         $this->eavSetup->addAttribute($entityTypeId, 'yoast_twitter_description', [
             'type' => 'text',
             'label' => 'Yoast Twitter Description',
             'input' => 'textarea',
-            'global' => 'store'
+            'global' => 'store',
+            'required' => false
         ]);
     }
 
@@ -186,18 +208,36 @@ class InstallData implements InstallDataInterface
         $entityType = $this->eavConfig->getEntityType(Category::ENTITY);
         $entityTypeId = $entityType->getId();
 
+        $this->eavSetup->addAttribute($entityTypeId, 'yoast_keyword_score', [
+            'type' => 'int',
+            'label' => 'Yoast Content Score',
+            'input' => 'text',
+            'global' => 'store',
+            'required' => false
+        ]);
+
+        $this->eavSetup->addAttribute($entityTypeId, 'yoast_content_score', [
+            'type' => 'int',
+            'label' => 'Yoast Content Score',
+            'input' => 'text',
+            'global' => 'store',
+            'required' => false
+        ]);
+
         $this->eavSetup->addAttribute($entityTypeId, 'yoast_facebook_image', [
             'type' => 'varchar',
             'label' => 'Yoast Facebook Image',
             'input' => 'image',
-            'global' => 'store'
+            'global' => 'store',
+            'required' => false
         ]);
 
         $this->eavSetup->addAttribute($entityTypeId, 'yoast_facebook_title', [
             'type' => 'varchar',
             'label' => 'Yoast Facebook Title',
             'input' => 'text',
-            'global' => 'store'
+            'global' => 'store',
+            'required' => false
         ]);
 
         $this->eavSetup->addAttribute($entityTypeId, 'yoast_facebook_description', [
@@ -211,21 +251,24 @@ class InstallData implements InstallDataInterface
             'type' => 'varchar',
             'label' => 'Yoast Twitter Image',
             'input' => 'image',
-            'global' => 'store'
+            'global' => 'store',
+            'required' => false
         ]);
 
         $this->eavSetup->addAttribute($entityTypeId, 'yoast_twitter_title', [
             'type' => 'varchar',
             'label' => 'Yoast Twitter Title',
             'input' => 'text',
-            'global' => 'store'
+            'global' => 'store',
+            'required' => false
         ]);
 
         $this->eavSetup->addAttribute($entityTypeId, 'yoast_twitter_description', [
             'type' => 'text',
             'label' => 'Yoast Twitter Description',
             'input' => 'textarea',
-            'global' => 'store'
+            'global' => 'store',
+            'required' => false
         ]);
     }
 }

@@ -41,7 +41,8 @@ abstract class AbstractEntityConfiguration implements EntityConfigurationInterfa
             'urlKeyField' => $this->getUrlKeyField(),
             'seoAttributeGroupCode' => $this->getSeoAttributeGroupCode(),
             'fieldWrapper' => $this->getFieldWrapper(),
-            'template' => $this->getTemplate()
+            'template' => $this->getTemplate(),
+            'metaKeywordField' => $this->getMetaKeywordField()
         ];
     }
 
