@@ -1,0 +1,32 @@
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/yoastseo/analysis/template" method="GET">
+        <service class="MaxServ\YoastSeo\Api\AnalysisTemplateRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="MaxServ_YoastSeo::admin" />
+        </resources>
+    </route>
+    <route url="/V1/yoastseo/analysis/template/:templateId" method="GET">
+        <service class="MaxServ\YoastSeo\Api\AnalysisTemplateRepositoryInterface" method="get"/>
+        <resources>
+            <resource ref="MaxServ_YoastSeo::admin" />
+        </resources>
+    </route>
+    <route url="/V1/yoastseo/analysis/template/" method="POST">
+        <service class="MaxServ\YoastSeo\Api\AnalysisTemplateRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="MaxServ_YoastSeo::admin" />
+        </resources>
+    </route>
+    <route url="/V1/yoastseo/analysis/template/:templateId" method="PUT">
+        <service class="MaxServ\YoastSeo\Api\AnalysisTemplateRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="MaxServ_YoastSeo::admin" />
+        </resources>
+    </route>
+    <route url="/V1/yoastseo/analysis/template/:templateId" method="DELETE">
+        <service class="MaxServ\YoastSeo\Api\AnalysisTemplateRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="MaxServ_YoastSeo::admin" />
+        </resources>
+    </route>
+</routes>

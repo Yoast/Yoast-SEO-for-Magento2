@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Api/etc/extension_attributes.xsd">
+    <extension_attributes for="Magento\Cms\Model\Page">
+        <attribute code="yoast_score" type="string" />
+        <attribute code="focus_keyword" type="string" />
+        <attribute code="facebook_title" type="string" />
+        <attribute code="facebook_description" type="string" />
+        <attribute code="twitter_title" type="string" />
+        <attribute code="twitter_description" type="string" />
+    </extension_attributes>
+</config>

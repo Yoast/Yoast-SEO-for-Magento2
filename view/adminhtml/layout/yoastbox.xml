@@ -1,0 +1,10 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="MaxServ_YoastSeo::css/vendor/yoast-seo.min.css" />
+    </head>
+    <body>
+        <referenceContainer name="before.body.end">
+            <block class="MaxServ\YoastSeo\Block\Adminhtml\Init" name="yoastbox.init" template="MaxServ_YoastSeo::yoastbox-init.phtml" />
+        </referenceContainer>
+    </body>
+</page>

@@ -1,0 +1,25 @@
+<div class="yoastScore-wrapper" data-bind="scope: 'yoastScore'">
+    <div class="yoastScore admin__field">
+        <span class="admin__field-label" data-bind="i18n: 'Keyword'"></span>
+        <span data-bind="attr: {'class': keyword_class}"></span>
+        <span data-bind="text: keyword_label"></span>
+    </div>
+    <div class="yoastScore admin__field">
+        <span class="admin__field-label" data-bind="i18n: 'Readability'"></span>
+        <span data-bind="attr: {'class': content_class}"></span>
+        <span data-bind="text: content_label"></span>
+    </div>
+</div>
+<script type="text/x-magento-init">
+    {
+        ".yoastScore": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "yoastScore": {
+                        "component": "MaxServ_YoastSeo/js/view/yoast-score"
+                    }
+                }
+            }
+        }
+    }
+</script>

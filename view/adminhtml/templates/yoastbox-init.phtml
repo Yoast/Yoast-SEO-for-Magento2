@@ -1,0 +1,10 @@
+<?php
+/** @var \MaxServ\YoastSeo\Block\Adminhtml\Init $block */
+?>
+<script>
+    window.yoastBoxConfig = {
+        locale: '<?php echo $block->getLocale(); ?>',
+        baseUrl: '<?php echo $block->getBaseUrl(); ?>',
+        configUrl: '<?php echo $block->getUrl('yoastseo/editor/config'); ?>'
+    };
+</script>

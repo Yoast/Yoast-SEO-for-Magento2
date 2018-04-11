@@ -1,7 +1,19 @@
-# exclude IDE files
-nbproject
-.~lock.*
-.buildpath
-.idea
-.project
-.settings
+#default ignore everything
+/*
+
+# standard files
+!/.gitignore
+!/composer.json
+!/license.txt
+!/README.md
+
+# magento files
+!/Api
+!/Block
+!/Controller
+!/etc
+!/Model
+!/registration.php
+!/Setup
+!/view
+!/Ui

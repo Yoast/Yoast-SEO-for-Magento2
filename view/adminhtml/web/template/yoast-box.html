@@ -1,0 +1,134 @@
+<div class="admin__field">
+    <label class="admin__field-label" for="yoastbox-focus-keyword">
+        <span data-bind="i18n: 'Focus Keyword'"></span>
+    </label>
+    <div class="admin__field-control">
+        <input type="text" class="admin__control-text" id="yoastbox-focus-keyword"
+               data-bind="value: yoastData.focus_keyword, valueUpdate: 'keyup'"/>
+    </div>
+</div>
+<div class="yoastBox" afterRender="onTemplateReady">
+    <ul class="yoastBox-navigation">
+       <li data-bind="css: {'current': currentTab() == 'analysis' }">
+           <a href="#yoastbox-analysis" data-bind="click:  function () { setCurrentTab('analysis'); }">
+               <span data-bind="i18n: 'Analysis'"></span>
+           </a>
+       </li>
+       <li data-bind="css: {'current': currentTab() == 'facebook' }">
+           <a href="#yoastbox-facebook" data-bind="click: function () { setCurrentTab('facebook'); }">
+               <span data-bind="i18n: 'Facebook'"></span>
+           </a>
+       </li>
+       <li data-bind="css: {'current': currentTab() == 'twitter' }">
+           <a href="#yoastbox-twitter" data-bind="click: function () { setCurrentTab('twitter'); }">
+               <span data-bind="i18n: 'Twitter'"></span>
+           </a>
+       </li>
+       <li data-bind="css: {'current': currentTab() == 'other' }, if: hasOtherSettings">
+           <a href="#yoastbox-other" data-bind="click: function () { setCurrentTab('other'); }">
+               <span data-bind="i18n: 'Other settings'"></span>
+           </a>
+       </li>
+    </ul>
+    <div class="yoastBox-tab" id="yoastbox-analysis" data-bind="visible: currentTab() == 'analysis'">
+        <div class="analysisBox analysisBox--readability">
+            <h4 class="analysisBox-title">
+                <span id="yoastBox-readabilityScore" class="overallScore"></span>
+                <span data-bind="i18n: 'Readability'"></span>
+            </h4>
+            <div class="analysisBox-content">
+                <div id="yoastBox-readabilityOutput"></div>
+            </div>
+        </div>
+        <div class="analysisBox analysisBox-keyword">
+            <h4 class="analysisBox-title">
+                <span id="yoastBox-overallScore" class="overallScore"></span>
+                <span data-bind="i18n: 'Focus Keyword'"></span>
+                <span if="yoastData.focus_keyword">:</span>
+                <span data-bind="text: yoastData.focus_keyword"></span>
+            </h4>
+            <div class="analysisBox-content">
+                <div id="yoastBox-snippetPreview"></div>
+                <div id="yoastBox-focusKeywordOutput"></div>
+            </div>
+        </div>
+    </div>
+    <div class="yoastBox-tab" id="yoastbox-facebook" data-bind="visible: currentTab() == 'facebook'">
+        <h4>
+            <span data-bind="i18n: 'Facebook Settings'"></span>
+        </h4>
+        <fieldset class="admin__fieldset">
+            <div class="admin__field">
+                <label class="admin__field-label" for="yoastbox-facebook-title">
+                    <span data-bind="i18n: 'Title'"></span>
+                </label>
+                <div class="admin__field-control">
+                    <input type="text" class="admin__control-text" id="yoastbox-facebook-title"
+                    data-bind="value: yoastData.yoast_facebook_title, valueUpdate: 'keyup', attr: {
+                        'name': fieldName('yoast_facebook_title'),
+                        'data-form-part': formName
+                    }"/>
+                </div>
+            </div>
+            <div class="admin__field">
+                <label class="admin__field-label" for="yoastbox-facebook-description">
+                    <span data-bind="i18n: 'Description'"></span>
+                </label>
+                <div class="admin__field-control">
+                    <input type="textarea" class="admin__control-textarea" id="yoastbox-facebook-description"
+                           data-bind="value: yoastData.yoast_facebook_description, valueUpdate: 'keyup', attr: {
+                        'name': fieldName('yoast_facebook_description'),
+                        'data-form-part': formName
+                    }" />
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <div class="yoastBox-tab" id="yoastbox-twitter" data-bind="visible: currentTab() == 'twitter'">
+        <h4>
+            <span data-bind="i18n: 'Twitter Settings'"></span>
+        </h4>
+        <fieldset class="admin__fieldset">
+            <div class="admin__field">
+                <label class="admin__field-label" for="yoastbox-twitter-title">
+                    <span data-bind="i18n: 'Title'"></span>
+                </label>
+                <div class="admin__field-control">
+                    <input type="text" class="admin__control-text" id="yoastbox-twitter-title"
+                           data-bind="value: yoastData.yoast_twitter_title, valueUpdate: 'keyup', attr: {
+                        'name': fieldName('yoast_twitter_title'),
+                        'data-form-part': formName
+                    }"/>
+                </div>
+            </div>
+            <div class="admin__field">
+                <label class="admin__field-label" for="yoastbox-twitter-description">
+                    <span data-bind="i18n: 'Description'"></span>
+                </label>
+                <div class="admin__field-control">
+                    <input type="textarea" class="admin__control-textarea" id="yoastbox-twitter-description"
+                           data-bind="value: yoastData.yoast_twitter_description, valueUpdate: 'keyup', attr: {
+                        'name': fieldName('yoast_twitter_description'),
+                        'data-form-part': formName
+                    }" />
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <div class="yoastBox-tab" id="yoastbox-other" data-bind="visible: currentTab() == 'other', if: hasOtherSettings">
+        <h4>
+            <span data-bind="i18n: 'Other Settings'"></span>
+        </h4>
+        <fieldset class="admin__fieldset">
+            <div class="admin__field" data-bind="if: enableMetaKeywords">
+                <label class="admin__field-label" for="yoastbox-meta-keywords">
+                    <span data-bind="i18n: 'Meta Keywords'"></span>
+                </label>
+                <div class="admin__field-control">
+                    <input type="textarea" class="admin__control-input" id="yoastbox-meta-keywords"
+                           data-bind="value: yoastData.meta_keywords, value_update: 'keyup'" />
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</div>
