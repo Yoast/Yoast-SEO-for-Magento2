@@ -25,7 +25,6 @@ define([
         yoast_twitter_image: ko.observable(''),
 
         initFormData: function (formData) {
-            formData.url_path = 'foo/bar/company';
             form_data = formData;
             var keys = [
                 'yoast_facebook_title',
