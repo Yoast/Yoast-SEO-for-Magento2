@@ -1,8 +1,3 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <update handle="yoastbox" />
-    <body>
-        <referenceContainer name="content">
-            <block class="MaxServ\YoastSeo\Block\Adminhtml\Score" name="yoastseo.score" template="MaxServ_YoastSeo::score.phtml" before="-" />
-        </referenceContainer>
-    </body>
 </page>

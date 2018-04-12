@@ -1,0 +1,117 @@
+<div class="fieldset-wrapper"
+     css="$data.additionalClasses"
+     attr="'data-level': $data.level, 'data-index': index"
+     data-bind="visible: $data.visible === undefined ? true: $data.visible"
+    afterRender="onElementRender">
+    <div class="fieldset-wrapper-title"
+         attr="tabindex: !collapsible ? -1 : 0,
+               'data-state-collapsible': collapsible ? opened() ? 'open' : 'closed' : null"
+         click="toggleOpened"
+         keyboard="13: toggleOpened"
+         if="label">
+
+        <strong css="'admin__collapsible-title': collapsible,
+                      title: !collapsible,
+                      '_changed': changed,
+                      '_loading': loading,
+                      '_error': error">
+            <span translate="label"/>
+            <span class="admin__page-nav-item-messages" if="collapsible">
+                <span class="admin__page-nav-item-message _changed">
+                    <span class="admin__page-nav-item-message-icon"></span>
+                    <span class="admin__page-nav-item-message-tooltip"
+                          data-bind="i18n: 'Changes have been made to this section that have not been saved.'">
+                    </span>
+                </span>
+                <span class="admin__page-nav-item-message _error">
+                    <span class="admin__page-nav-item-message-icon"></span>
+                    <span class="admin__page-nav-item-message-tooltip"
+                          data-bind="i18n: 'This tab contains invalid data. Please resolve this before saving.'">
+                    </span>
+                </span>
+                <span class="admin__page-nav-item-message-loader">
+                    <span class="spinner">
+                       <span repeat="8"/>
+                    </span>
+               </span>
+            </span>
+        </strong>
+    </div>
+
+    <div class="admin__fieldset-wrapper-content"
+         css="'admin__collapsible-content': collapsible, '_show': opened, '_hide': !opened()">
+        <fieldset
+                if="opened() || _wasOpened || initializeFieldsetDataByDefault"
+                class="admin__fieldset">
+            <!-- ko foreach: {data: elems, as: 'element'} -->
+                <!-- ko if: $parent.isRegularElement(element.name) -->
+                    <!-- ko template: getTemplate() --><!-- /ko -->
+                <!-- /ko -->
+            <!-- /ko -->
+        </fieldset>
+        <div class="yoastBox">
+            <ul class="yoastBox-navigation" data-bind="foreach: { data: tabs, as: 'tab' }">
+                <li data-bind="css: {'current': $parent.currentTab() == tab }">
+                    <a href="#yoastbox-analysis" data-bind="click: $parent.setCurrentTab.bind($parent, tab) ">
+                        <span data-bind="i18n: $parent.ucfirst(tab)"></span>
+                    </a>
+                </li>
+            </ul>
+            <div class="yoastBox-tab" id="yoastbox-analysis" data-bind="visible: currentTab() == 'analysis'">
+                <div class="analysisBox analysisBox--readability">
+                    <h4 class="analysisBox-title">
+                        <span id="yoastBox-readabilityScore" class="overallScore"></span>
+                        <span data-bind="i18n: 'Readability'"></span>
+                    </h4>
+                    <div class="analysisBox-content">
+                        <div id="yoastBox-readabilityOutput"></div>
+                    </div>
+                </div>
+                <div class="analysisBox analysisBox-keyword">
+                    <h4 class="analysisBox-title">
+                        <span id="yoastBox-overallScore" class="overallScore"></span>
+                        <span data-bind="i18n: 'Focus Keyword'"></span>
+                        <span if="focus_keyword">:</span>
+                        <span data-bind="text: focus_keyword"></span>
+                    </h4>
+                    <div class="analysisBox-content">
+                        <div class="admin__fieldset">
+                            <!-- ko foreach: {data: elems, as: 'element'} -->
+                                <!-- ko if: $parent.isElementName(element.name, 'yoast_focus_keyword') -->
+                                    <!-- ko template: getTemplate() --><!-- /ko -->
+                                <!-- /ko -->
+                            <!-- /ko -->
+                        </div>
+                        <div id="yoastBox-snippetPreview"></div>
+                        <div id="yoastBox-focusKeywordOutput"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="yoastBox-tab" id="yoastbox-facebook" data-bind="visible: currentTab() == 'facebook'">
+                <h4>
+                    <span data-bind="i18n: 'Facebook Settings'"></span>
+                </h4>
+                <!-- ko foreach: {data: elems, as: 'element'} -->
+                    <!-- ko if: $parent.isElementName(element.name, 'yoast_facebook') -->
+                        <!-- ko template: getTemplate() --><!-- /ko -->
+                    <!-- /ko -->
+                <!-- /ko -->
+            </div>
+            <div class="yoastBox-tab" id="yoastbox-twitter" data-bind="visible: currentTab() == 'twitter'">
+                <h4>
+                    <span data-bind="i18n: 'Twitter Settings'"></span>
+                </h4>
+                <!-- ko foreach: {data: elems, as: 'element'} -->
+                    <!-- ko if: $parent.isElementName(element.name, 'yoast_twitter') -->
+                        <!-- ko template: getTemplate() --><!-- /ko -->
+                    <!-- /ko -->
+                <!-- /ko -->
+            </div>
+            <div class="yoastBox-tab" id="yoastbox-other" data-bind="visible: currentTab() == 'other'">
+                <h4>
+                    <span data-bind="i18n: 'Other Settings'"></span>
+                </h4>
+            </div>
+        </div>
+    </div>
+</div>

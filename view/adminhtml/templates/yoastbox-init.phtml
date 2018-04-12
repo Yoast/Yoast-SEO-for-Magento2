@@ -3,8 +3,10 @@
 ?>
 <script>
     window.yoastBoxConfig = {
-        locale: '<?php echo $block->getLocale(); ?>',
-        baseUrl: '<?php echo $block->getBaseUrl(); ?>',
-        configUrl: '<?php echo $block->getUrl('yoastseo/editor/config'); ?>'
+        locale: "<?php echo $block->getLocale(); ?>",
+        baseUrl: "<?php echo $block->getBaseUrl(); ?>",
+        configUrl: "<?php echo $block->getUrl("yoastseo/editor/config"); ?>",
+        uploadUrl: "<?php echo $block->getUrl("yoastseo/image/upload"); ?>",
+        entity: <?php echo json_encode($block->getEntityConfiguration()); ?>
     };
 </script>

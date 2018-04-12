@@ -137,6 +137,14 @@ class UpgradeData implements UpgradeDataInterface
         $entityType = $this->eavConfig->getEntityType(Product::ENTITY);
         $entityTypeId = $entityType->getId();
 
+        $this->eavSetup->addAttribute($entityTypeId, 'yoast_focus_keyword', [
+            'type' => 'varchar',
+            'label' => 'Yoast Focus Keyword',
+            'input' => 'text',
+            'global' => 'store',
+            'required' => false
+        ]);
+
         $this->eavSetup->addAttribute($entityTypeId, 'yoast_keyword_score', [
             'type' => 'int',
             'label' => 'Yoast Keyword Score',
@@ -156,6 +164,7 @@ class UpgradeData implements UpgradeDataInterface
         $this->eavSetup->addAttribute($entityTypeId, 'yoast_facebook_image', [
             'type' => 'varchar',
             'label' => 'Yoast Facebook Image',
+            'backend' => 'MaxServ\YoastSeo\Model\Entity\Attribute\Backend\Image',
             'input' => 'image',
             'global' => 'store',
             'required' => false
@@ -180,6 +189,7 @@ class UpgradeData implements UpgradeDataInterface
         $this->eavSetup->addAttribute($entityTypeId, 'yoast_twitter_image', [
             'type' => 'varchar',
             'label' => 'Yoast Twitter Image',
+            'backend' => 'MaxServ\YoastSeo\Model\Entity\Attribute\Backend\Image',
             'input' => 'image',
             'global' => 'store',
             'required' => false
@@ -208,6 +218,14 @@ class UpgradeData implements UpgradeDataInterface
         $entityType = $this->eavConfig->getEntityType(Category::ENTITY);
         $entityTypeId = $entityType->getId();
 
+        $this->eavSetup->addAttribute($entityTypeId, 'yoast_focus_keyword', [
+            'type' => 'varchar',
+            'label' => 'Yoast Focus Keyword',
+            'input' => 'text',
+            'global' => 'store',
+            'required' => false
+        ]);
+
         $this->eavSetup->addAttribute($entityTypeId, 'yoast_keyword_score', [
             'type' => 'int',
             'label' => 'Yoast Keyword Score',
@@ -227,6 +245,7 @@ class UpgradeData implements UpgradeDataInterface
         $this->eavSetup->addAttribute($entityTypeId, 'yoast_facebook_image', [
             'type' => 'varchar',
             'label' => 'Yoast Facebook Image',
+            'backend' => 'MaxServ\YoastSeo\Model\Entity\Attribute\Backend\Image',
             'input' => 'image',
             'global' => 'store',
             'required' => false
@@ -251,6 +270,7 @@ class UpgradeData implements UpgradeDataInterface
         $this->eavSetup->addAttribute($entityTypeId, 'yoast_twitter_image', [
             'type' => 'varchar',
             'label' => 'Yoast Twitter Image',
+            'backend' => 'MaxServ\YoastSeo\Model\Entity\Attribute\Backend\Image',
             'input' => 'image',
             'global' => 'store',
             'required' => false
