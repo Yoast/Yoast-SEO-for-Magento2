@@ -75,7 +75,8 @@ class YoastSeo extends AbstractModifier
      */
     public function modifyMeta(array $meta)
     {
-        $path = $this->config->getProductsAttributeGroupCode();
+        $path = $this->arrayManager->findPath('container_url_key', $meta);
+        $path = substr($path, 0, strpos($path, '/children/container_url_key'));
 
         $attributeGroup['arguments']['data']['config'] = [
             'label' => 'YoastSeo',
