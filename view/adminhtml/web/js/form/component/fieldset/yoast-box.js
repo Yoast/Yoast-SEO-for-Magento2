@@ -10,6 +10,7 @@ define([
 
     return FieldSet.extend({
         defaults: {
+            enableMetaKeywords: ko.observable(yoastBoxConfig.enableMetaKeywords),
             template: "MaxServ_YoastSeo/form/fieldset/yoast-box",
             tabs: ko.observableArray(['analysis', 'facebook', 'twitter', 'other']),
             currentTab: ko.observable('analysis'),

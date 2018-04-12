@@ -145,5 +145,24 @@
                 </settings>
             </field>
         </fieldset>
+        <field name="yoast_robots_instructions" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">page</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Robots</label>
+                <dataScope>yoast_robots_instructions</dataScope>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="MaxServ\YoastSeo\Model\Entity\Attribute\Source\Robots" />
+                    </settings>
+                </select>
+            </formElements>
+        </field>
     </fieldset>
 </form>

@@ -83,15 +83,6 @@ class UpgradeSchema implements UpgradeSchemaInterface
         $connection = $this->setup->getConnection();
         $table = $this->setup->getTable('cms_page');
 
-        if (!$connection->tableColumnExists($table, 'yoast_facebook_image')) {
-            $connection->addColumn($table, 'yoast_facebook_image', [
-                'type' => Table::TYPE_TEXT,
-                'length' => 255,
-                'nullable' => true,
-                'comment' => 'Yoast SEO Facebook Image'
-            ]);
-        }
-
         if (!$connection->tableColumnExists($table, 'yoast_focus_keyword')) {
             $connection->addColumn($table, 'yoast_focus_keyword', [
                 'type' => Table::TYPE_TEXT,
@@ -119,6 +110,15 @@ class UpgradeSchema implements UpgradeSchemaInterface
             ]);
         }
 
+        if (!$connection->tableColumnExists($table, 'yoast_robots_instructions')) {
+            $connection->addColumn($table, 'yoast_robots_instructions', [
+                'type' => Table::TYPE_TEXT,
+                'length' => 255,
+                'nullable' => true,
+                'comment' => 'YoastSEO Content Score'
+            ]);
+        }
+
         if (!$connection->tableColumnExists($table, 'yoast_facebook_title')) {
             $connection->addColumn($table, 'yoast_facebook_title', [
                 'type' => Table::TYPE_TEXT,
@@ -136,12 +136,12 @@ class UpgradeSchema implements UpgradeSchemaInterface
             ]);
         }
 
-        if (!$connection->tableColumnExists($table, 'yoast_twitter_image')) {
-            $connection->addColumn($table, 'yoast_twitter_image', [
+        if (!$connection->tableColumnExists($table, 'yoast_facebook_image')) {
+            $connection->addColumn($table, 'yoast_facebook_image', [
                 'type' => Table::TYPE_TEXT,
                 'length' => 255,
                 'nullable' => true,
-                'comment' => 'Yoast SEO Twitter Image'
+                'comment' => 'Yoast SEO Facebook Image'
             ]);
         }
 
@@ -160,6 +160,15 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 'length' => 255,
                 'nullable' => true,
                 'comment' => 'Yoast SEO Twitter Description'
+            ]);
+        }
+
+        if (!$connection->tableColumnExists($table, 'yoast_twitter_image')) {
+            $connection->addColumn($table, 'yoast_twitter_image', [
+                'type' => Table::TYPE_TEXT,
+                'length' => 255,
+                'nullable' => true,
+                'comment' => 'Yoast SEO Twitter Image'
             ]);
         }
     }

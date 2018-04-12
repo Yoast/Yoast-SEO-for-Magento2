@@ -111,6 +111,20 @@
                 <h4>
                     <span data-bind="i18n: 'Other Settings'"></span>
                 </h4>
+                <div class="admin__fieldset">
+                    <!-- ko if: enableMetaKeywords -->
+                        <!-- ko foreach: {data: elems, as: 'element'} -->
+                            <!-- ko if: $parent.isElementName(element.name, 'meta_keywords') -->
+                                <!-- ko template: getTemplate() --><!-- /ko -->
+                            <!-- /ko -->
+                        <!-- /ko -->
+                    <!-- /ko -->
+                    <!-- ko foreach: {data: elems, as: 'element'} -->
+                        <!-- ko if: $parent.isElementName(element.name, 'yoast_robots_instructions') -->
+                            <!-- ko template: getTemplate() --><!-- /ko -->
+                        <!-- /ko -->
+                    <!-- /ko -->
+                </div>
             </div>
         </div>
     </div>
