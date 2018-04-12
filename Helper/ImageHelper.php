@@ -35,6 +35,7 @@ class ImageHelper
         if (isset($item[$field]) && $item[$field] && is_string($item[$field])) {
             $img = $item[$field];
             $image[] = [
+                'type' => 'image',
                 'name' => $img,
                 'url' => $this->getYoastImage($img)
             ];

@@ -6,7 +6,7 @@ use Magento\Catalog\Model\ImageUploader;
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 
-class PrepagePageSaveObserver implements ObserverInterface
+class PreparePageSaveObserver implements ObserverInterface
 {
     /**
      * @var ImageUploader

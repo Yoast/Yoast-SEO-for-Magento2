@@ -1,5 +1,5 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
     <event name="cms_page_prepare_save">
-        <observer name="yoastseo_cms_page_prepare_save_listener" instance="MaxServ\YoastSeo\Observer\PrepagePageSaveObserver" />
+        <observer name="yoastseo_cms_page_prepare_save_listener" instance="MaxServ\YoastSeo\Observer\PreparePageSaveObserver" />
     </event>
 </config>

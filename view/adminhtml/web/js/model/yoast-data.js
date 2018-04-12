@@ -8,14 +8,19 @@ define([
     var focusKeywordElement;
 
     return {
-        keyword_score: ko.observable(null),
-        content_score: ko.observable(null),
-        focus_keyword: ko.observable(null),
-        title: ko.observable(null),
-        url_key: ko.observable(null),
-        meta_title: ko.observable(null),
-        meta_description: ko.observable(null),
-        content: ko.observable(null),
+        fieldsToLoad: 0,
+        fieldsLoaded: 0,
+        get fieldsReady() {
+           return this.fieldLoaded > 0 && this.fieldsLoaded === this.fieldsToLoad;
+        },
+        keyword_score: ko.observable(''),
+        content_score: ko.observable(''),
+        focus_keyword: ko.observable(''),
+        title: ko.observable(''),
+        url_key: ko.observable(''),
+        meta_title: ko.observable(''),
+        meta_description: ko.observable(''),
+        content: ko.observable(''),
         getTitle: function () {
             if (this.meta_title()) {
                 return this.meta_title();
@@ -63,9 +68,11 @@ define([
                 meta_title: 'meta_title',
                 meta_description: 'meta_description'
             }, function (key, fieldIndex) {
+                this.fieldsToLoad++;
                 uiRegistry
                     .promise({index: fieldIndex})
                     .done(function (key, field) {
+                        this.fieldsLoaded++;
                         this.fields[key] = field;
                         this[key](field.value());
 
@@ -74,6 +81,7 @@ define([
                         }.bind(this, key, field));
 
                         this[key].subscribe(function (key, field) {
+                            console.log('set field value', key, this[key]());
                             field.value(this[key]());
                         }.bind(this, key, field));
 

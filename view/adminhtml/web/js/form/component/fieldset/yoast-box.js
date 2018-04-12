@@ -15,7 +15,16 @@ define([
             tabs: ko.observableArray(['analysis', 'facebook', 'twitter', 'other']),
             currentTab: ko.observable('analysis'),
             focus_keyword: yoastData.focus_keyword,
-            metaElements: ['meta_title', 'meta_description', 'meta_keywords'],
+            metaElements: [
+                'container_meta_title',
+                'meta_title',
+                'container_meta_description',
+                'meta_description',
+                'container_meta_keywords',
+                'meta_keywords',
+                'container_meta_keyword',
+                'meta_keyword'
+            ],
             imports: {
                 formData: "${ $.provider }:data"
             }
@@ -41,6 +50,9 @@ define([
                 },
                 callbacks: {
                     saveSnippetData: function (data) {
+                        if (!yoastData.fieldsReady) {
+                            return;
+                        }
                         yoastData.meta_title(data.title);
                         yoastData.meta_description(data.metaDesc);
                         yoastData.url_key(data.urlPath);
@@ -97,6 +109,7 @@ define([
 
             $.each([
                 yoastData.title,
+                yoastData.url_key,
                 yoastData.focus_keyword,
                 yoastData.content
             ], function (ignore, field) {
@@ -134,7 +147,7 @@ define([
         isElementName: function (elementName, requiredName) {
             elementName = elementName.split(".").pop();
 
-            return elementName === requiredName;
+            return elementName === requiredName || elementName === 'container_' + requiredName;
         },
         setCurrentTab: function (tab) {
             this.currentTab(tab);

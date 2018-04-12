@@ -161,11 +161,11 @@ class UpgradeData implements UpgradeDataInterface
             'required' => false
         ]);
 
-        $this->eavSetup->addAttribute($entityTypeId, 'yoast_facebook_image', [
+        $this->eavSetup->addAttribute($entityTypeId, 'yoast_robots_instructions', [
             'type' => 'varchar',
-            'label' => 'Yoast Facebook Image',
-            'backend' => 'MaxServ\YoastSeo\Model\Entity\Attribute\Backend\Image',
-            'input' => 'image',
+            'label' => 'Yoast Robots Instructions',
+            'input' => 'select',
+            'source' => 'MaxServ\YoastSeo\Model\Entity\Attribute\Source\Robots',
             'global' => 'store',
             'required' => false
         ]);
@@ -186,11 +186,11 @@ class UpgradeData implements UpgradeDataInterface
             'required' => false
         ]);
 
-        $this->eavSetup->addAttribute($entityTypeId, 'yoast_twitter_image', [
+        $this->eavSetup->addAttribute($entityTypeId, 'yoast_facebook_image', [
             'type' => 'varchar',
-            'label' => 'Yoast Twitter Image',
-            'backend' => 'MaxServ\YoastSeo\Model\Entity\Attribute\Backend\Image',
-            'input' => 'image',
+            'label' => 'Yoast Facebook Image',
+            'frontend' => 'Magento\Catalog\Model\Product\Attribute\Frontend\Image',
+            'input' => 'media_image',
             'global' => 'store',
             'required' => false
         ]);
@@ -207,6 +207,15 @@ class UpgradeData implements UpgradeDataInterface
             'type' => 'text',
             'label' => 'Yoast Twitter Description',
             'input' => 'textarea',
+            'global' => 'store',
+            'required' => false
+        ]);
+
+        $this->eavSetup->addAttribute($entityTypeId, 'yoast_twitter_image', [
+            'type' => 'varchar',
+            'label' => 'Yoast Twitter Image',
+            'frontend' => 'Magento\Catalog\Model\Product\Attribute\Frontend\Image',
+            'input' => 'media_image',
             'global' => 'store',
             'required' => false
         ]);
@@ -242,11 +251,11 @@ class UpgradeData implements UpgradeDataInterface
             'required' => false
         ]);
 
-        $this->eavSetup->addAttribute($entityTypeId, 'yoast_facebook_image', [
+        $this->eavSetup->addAttribute($entityTypeId, 'yoast_robots_instructions', [
             'type' => 'varchar',
-            'label' => 'Yoast Facebook Image',
-            'backend' => 'MaxServ\YoastSeo\Model\Entity\Attribute\Backend\Image',
-            'input' => 'image',
+            'label' => 'Yoast Robots Instructions',
+            'input' => 'select',
+            'source' => 'MaxServ\YoastSeo\Model\Entity\Attribute\Source\Robots',
             'global' => 'store',
             'required' => false
         ]);
@@ -267,11 +276,11 @@ class UpgradeData implements UpgradeDataInterface
             'required' => false
         ]);
 
-        $this->eavSetup->addAttribute($entityTypeId, 'yoast_twitter_image', [
+        $this->eavSetup->addAttribute($entityTypeId, 'yoast_facebook_image', [
             'type' => 'varchar',
-            'label' => 'Yoast Twitter Image',
-            'backend' => 'MaxServ\YoastSeo\Model\Entity\Attribute\Backend\Image',
-            'input' => 'image',
+            'label' => 'Yoast Facebook Image',
+            'frontend' => 'Magento\Catalog\Model\Product\Attribute\Frontend\Image',
+            'input' => 'media_image',
             'global' => 'store',
             'required' => false
         ]);
@@ -288,6 +297,15 @@ class UpgradeData implements UpgradeDataInterface
             'type' => 'text',
             'label' => 'Yoast Twitter Description',
             'input' => 'textarea',
+            'global' => 'store',
+            'required' => false
+        ]);
+
+        $this->eavSetup->addAttribute($entityTypeId, 'yoast_twitter_image', [
+            'type' => 'varchar',
+            'label' => 'Yoast Twitter Image',
+            'frontend' => 'Magento\Catalog\Model\Product\Attribute\Frontend\Image',
+            'input' => 'media_image',
             'global' => 'store',
             'required' => false
         ]);
