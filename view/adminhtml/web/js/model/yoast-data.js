@@ -11,7 +11,7 @@ define([
         fieldsToLoad: 0,
         fieldsLoaded: 0,
         get fieldsReady() {
-           return this.fieldLoaded > 0 && this.fieldsLoaded === this.fieldsToLoad;
+           return this.fieldsLoaded > 0 && this.fieldsLoaded === this.fieldsToLoad;
         },
         keyword_score: ko.observable(''),
         content_score: ko.observable(''),
@@ -81,7 +81,6 @@ define([
                         }.bind(this, key, field));
 
                         this[key].subscribe(function (key, field) {
-                            console.log('set field value', key, this[key]());
                             field.value(this[key]());
                         }.bind(this, key, field));
 
@@ -94,7 +93,7 @@ define([
 
             if (this.entityData && this.entityData.hasOwnProperty('url_path')) {
                 path = this.entityData.url_path;
-                path = path.explode('/').slice(0, -1).join('/');
+                path = path.split('/').slice(0, -1).join('/');
                 if (path) {
                     url += path + "/";
                 }

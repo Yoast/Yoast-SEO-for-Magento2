@@ -85,11 +85,6 @@
             </argument>
         </arguments>
     </virtualType>
-    <type name="MaxServ\YoastSeo\Model\Entity\Attribute\Backend\Image">
-        <arguments>
-            <argument name="imageUploader" xsi:type="object">MaxServ\YoastSeo\Model\ImageUploader</argument>
-        </arguments>
-    </type>
     <type name="MaxServ\YoastSeo\Model\EntityConfigurationPool">
         <arguments>
             <argument name="entityConfigurations" xsi:type="array">

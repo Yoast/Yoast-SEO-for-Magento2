@@ -2,4 +2,7 @@
     <event name="cms_page_prepare_save">
         <observer name="yoastseo_cms_page_prepare_save_listener" instance="MaxServ\YoastSeo\Observer\PreparePageSaveObserver" />
     </event>
+    <event name="catalog_category_prepare_save">
+        <observer name="yoastseo_catalog_category_prepare_save_listener" instance="MaxServ\YoastSeo\Observer\PrepareCategorySaveObserver"/>
+    </event>
 </config>
