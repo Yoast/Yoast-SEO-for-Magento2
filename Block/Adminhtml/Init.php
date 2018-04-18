@@ -46,6 +46,7 @@ class Init extends Template
 
         return $entityConfiguration->toArray();
     }
+
     /**
      * @return string
      */
@@ -55,13 +56,27 @@ class Init extends Template
         if (!$storeId) {
             $storeId = $this->_storeManager->getStore()->getId();
         }
-        
+
         $locale = $this->_scopeConfig->getValue(
             'general/locale/code',
             ScopeInterface::SCOPE_STORES,
             $storeId
         );
-        
+
         return $locale;
+    }
+
+    /**
+     * @return string
+     */
+    public function getWysiwygUrl()
+    {
+        $storeId = $this->getRequest()->getParam(
+            'store',
+            $this->_storeManager->getDefaultStoreView()->getId()
+        );
+        $store = $this->_storeManager->getStore($storeId);
+
+        return $store->getUrl('', ['_direct' => 'yoastseo/wysiwyg/render']);
     }
 }

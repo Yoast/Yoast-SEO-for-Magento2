@@ -8,6 +8,7 @@
         baseUrl: "<?php echo $block->getBaseUrl(); ?>",
         configUrl: "<?php echo $block->getUrl("yoastseo/editor/config"); ?>",
         uploadUrl: "<?php echo $block->getUrl("yoastseo/image/upload"); ?>",
+        wysiwygUrl: "<?php echo $block->getWysiwygUrl(); ?>",
         entity: <?php echo json_encode($block->getEntityConfiguration()); ?>
     };
 </script>

@@ -49,7 +49,7 @@
                     <item name="entity_type" xsi:type="string">catalog_product</item>
                     <item name="content" xsi:type="string">
                         <![CDATA[{{name reader='text'}}
-{{description reader='wysiwig'}}
+{{description reader='wysiwyg'}}
 {{images reader='productImages'}}
 ]]>
                     </item>
@@ -58,7 +58,7 @@
                     <item name="entity_type" xsi:type="string">catalog_category</item>
                     <item name="content" xsi:type="string">
                         <![CDATA[{{name reader='text'}}
-{{description reader='wysiwig'}}
+{{description reader='wysiwyg'}}
 ]]>
                     </item>
                 </item>
@@ -66,7 +66,7 @@
                     <item name="entity_type" xsi:type="string">cms_page</item>
                     <item name="content" xsi:type="string">
                         <![CDATA[{{title reader='text'}}
-{{content reader='wysiwig'}}
+{{content reader='wysiwyg'}}
 ]]>
                     </item>
                 </item>

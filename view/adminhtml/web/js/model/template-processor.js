@@ -1,14 +1,23 @@
 define([
     "jquery",
     "uiRegistry",
-    "MaxServ_YoastSeo/js/model/yoast-data"
-], function ($, uiRegistry, yoastData) {
+    "MaxServ_YoastSeo/js/model/yoast-data",
+    "MaxServ_YoastSeo/js/form/field/reader/text",
+    "MaxServ_YoastSeo/js/form/field/reader/wysiwyg"
+], function ($, uiRegistry, yoastData, textReader, wysiwygReader) {
     "use strict";
 
     return {
+        readers: {
+            text: textReader,
+            wysiwyg: wysiwygReader
+        },
         elements: {},
         template: '',
         formData: {},
+        registerReader: function (type, reader) {
+            this.readers[type] = reader;
+        },
         init: function (formData, template) {
             var regex = new RegExp("{{([a-z_]+)\\s?((?:\\s?[a-z]+='[^']+')?)}}"),
                 inputs = template.match(/{{[a-z_]+\s?(?:\s?[a-z]+='[^']+')?}}/gm);
@@ -44,29 +53,42 @@ define([
             this.update();
         },
         update: function () {
-            var content = this.template;
+            var content = this.template,
+                inputs = [],
+                promises = [];
 
             $.each(this.elements, function (ignore, element) {
-                var value = '';
-                if (!element.field) {
-                    var field = this.findField(element.index);
-                    if (field) {
-                        element.field = field;
-                    }
-                }
+                inputs.push(element.input);
 
-                if (element.field && element.field.value) {
-                    value = element.field.value();
+                if (element.reader && this.readers.hasOwnProperty(element.reader)) {
+                    promises.push(this.readers[element.reader].promise(element.field));
+                } else if (element.field && element.field.value) {
+                    promises.push(element.field.value());
                 } else if (this.formData.hasOwnProperty(element.index)) {
-                    value = this.formData[element.index];
+                    promises.push(this.formData[element.index]);
                 } else if (element.hasOwnProperty('default')) {
-                    value = element.default;
+                    promises.push(element.default);
+                } else {
+                    promises.push('');
                 }
 
-                content = content.replace(element.input, value);
             }.bind(this));
 
-            yoastData.content(content);
+            Promise
+                .all(promises)
+                .then(function (values) {
+                    for (var i = 0, len = inputs.length; i < len; i++) {
+                        var input = inputs[i],
+                            value = values[i];
+                        content = content.replace(input, value);
+                    }
+
+                    yoastData.content(content);
+                }, function(error) {
+                    console.log('error', error);
+                });
+
+            //yoastData.content(content);
         },
         findField: function (index) {
             var field;

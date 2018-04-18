@@ -90,6 +90,7 @@ define([
                         presenter.renderOverallRating();
                     },
                     getData: function () {
+                        console.log('content:', yoastData.content());
                         return {
                             baseUrl: yoastData.base_url,
                             title: yoastData.title(),
