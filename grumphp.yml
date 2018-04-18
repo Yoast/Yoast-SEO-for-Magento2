@@ -1,0 +1,21 @@
+parameters:
+    git_dir: .
+    bin_dir: vendor/bin
+    tasks:
+      phpcs:
+        standard: PSR2
+      xmllint:
+        triggered_by:
+          - xml
+      jsonlint: ~
+      git_blacklist:
+        keywords:
+          - "var_dump("
+          - "exit;"
+          - "f:debug"
+          - "DebuggerUtility"
+          - "console.log("
+        triggered_by:
+          - php
+          - html
+          - js
