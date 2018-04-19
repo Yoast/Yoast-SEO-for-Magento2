@@ -4,6 +4,7 @@ namespace MaxServ\YoastSeo\Block\Adminhtml;
 
 use Magento\Backend\Block\Template;
 use Magento\Backend\Block\Template\Context;
+use Magento\Store\Api\Data\StoreInterface;
 use Magento\Store\Model\ScopeInterface;
 use MaxServ\YoastSeo\Model\EntityConfigurationPool;
 
@@ -67,16 +68,30 @@ class Init extends Template
     }
 
     /**
+     * @param string $route
      * @return string
      */
-    public function getWysiwygUrl()
+    public function getStoreUrl($route)
     {
-        $storeId = $this->getRequest()->getParam(
-            'store',
-            $this->_storeManager->getDefaultStoreView()->getId()
-        );
-        $store = $this->_storeManager->getStore($storeId);
+        $store = $this->getStore();
 
-        return $store->getUrl('', ['_direct' => 'yoastseo/wysiwyg/render']);
+        return $store->getUrl('', ['_direct' => $route, '_nosid' => true]);
+    }
+
+    /**
+     * @return StoreInterface
+     */
+    public function getStore()
+    {
+        if (!$this->hasData('store')) {
+            $storeId = $this->getRequest()->getParam(
+                'store',
+                $this->_storeManager->getDefaultStoreView()->getId()
+            );
+            $store = $this->_storeManager->getStore($storeId);
+            $this->setData('store', $store);
+        }
+
+        return $this->getData('store');
     }
 }

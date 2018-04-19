@@ -14,8 +14,6 @@ parameters:
           - "exit;"
           - "f:debug"
           - "DebuggerUtility"
-          - "console.log("
         triggered_by:
           - php
           - html
-          - js

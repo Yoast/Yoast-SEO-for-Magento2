@@ -1,6 +1,6 @@
 <?php
 
-namespace MaxServ\YoastSeo\Controller\Wysiwyg;
+namespace MaxServ\YoastSeo\Controller\Render;
 
 use Magento\Cms\Model\Template\FilterProvider;
 use Magento\Framework\App\Action\Action;
@@ -9,7 +9,7 @@ use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Store\Model\StoreManagerInterface;
 
-class Render extends Action
+class Wysiwyg extends Action
 {
 
     /**

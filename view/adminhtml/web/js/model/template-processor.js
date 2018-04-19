@@ -3,14 +3,26 @@ define([
     "uiRegistry",
     "MaxServ_YoastSeo/js/model/yoast-data",
     "MaxServ_YoastSeo/js/form/field/reader/text",
-    "MaxServ_YoastSeo/js/form/field/reader/wysiwyg"
-], function ($, uiRegistry, yoastData, textReader, wysiwygReader) {
+    "MaxServ_YoastSeo/js/form/field/reader/wysiwyg",
+    "MaxServ_YoastSeo/js/form/field/reader/cms_block",
+    "MaxServ_YoastSeo/js/form/field/reader/category_landing_page",
+], function (
+    $,
+    uiRegistry,
+    yoastData,
+    textReader,
+    wysiwygReader,
+    cmsBlockReader,
+    categoryLandingPageReader
+) {
     "use strict";
 
     return {
         readers: {
             text: textReader,
-            wysiwyg: wysiwygReader
+            wysiwyg: wysiwygReader,
+            cms_block: cmsBlockReader,
+            category_landing_page: categoryLandingPageReader
         },
         elements: {},
         template: '',
@@ -45,12 +57,21 @@ define([
                 }
 
                 if (element.field && element.field.value) {
-                    element.field.value.subscribe(this.update.bind(this));
+                    element.field.value.subscribe(this.scheduleUpdate.bind(this));
                 }
 
                 this.elements[index] = element;
             }.bind(this));
+            
+            $(document).on('yoastseo:reload', this.scheduleUpdate.bind(this));
+            
             this.update();
+        },
+        scheduleUpdate: function () {
+            if (this.updateTimer) {
+                clearTimeout(this.updateTimer);
+            }
+            this.updateTimer = setTimeout(this.update.bind(this), 300);
         },
         update: function () {
             var content = this.template,
@@ -82,7 +103,6 @@ define([
                             value = values[i];
                         content = content.replace(input, value);
                     }
-
                     yoastData.content(content);
                 }, function(error) {
                     console.log('error', error);

@@ -4,27 +4,24 @@ define([
 ], function ($, ko) {
     "use strict";
 
-    var renderUrl = yoastBoxConfig.wysiwygUrl;
+    var cmsBlockUrl = yoastBoxConfig.cmsBlockUrl;
 
     return {
         promise: function (field) {
-            if (!field || !field.hasOwnProperty("value") || !ko.isObservable(field.value)) {
+            if (!field || !field.hasOwnProperty("value") || !ko.isObservable(field.value) || !field.value()) {
                 return '';
             }
 
             return new Promise(function (resolve, reject) {
                 $
                     .ajax({
-                        url: renderUrl,
-                        data: {
-                            content: field.value()
-                        },
-                        type: "POST",
+                        url: cmsBlockUrl + "?cms_block_id=" + field.value(),
+                        type: "GET",
                         dataType: "json"
                     })
                     .done(function (result) {
                         if (result && result.html || result.html === "") {
-                            resolve(result.html)
+                            resolve(result.html);
                         } else {
                             reject();
                         }

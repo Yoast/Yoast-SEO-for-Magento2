@@ -90,7 +90,6 @@ define([
                         presenter.renderOverallRating();
                     },
                     getData: function () {
-                        console.log('content:', yoastData.content());
                         return {
                             baseUrl: yoastData.base_url,
                             title: yoastData.title(),
@@ -114,8 +113,14 @@ define([
                 yoastData.focus_keyword,
                 yoastData.content
             ], function (ignore, field) {
-                field.subscribe(this.refreshApp.bind(this));
+                field.subscribe(this.scheduleRefresh.bind(this));
             }.bind(this));
+        },
+        scheduleRefresh: function () {
+            if (this.refreshTimer) {
+                clearTimeout(this.refreshTimer);
+            }
+            this.refreshTimer = setTimeout(this.refreshApp.bind(this), 300);
         },
         refreshApp: function () {
             this.app.refresh();
