@@ -4,6 +4,7 @@ namespace MaxServ\YoastSeo\Block\Adminhtml;
 
 use Magento\Backend\Block\Template;
 use Magento\Backend\Block\Template\Context;
+use Magento\Framework\UrlInterface;
 use Magento\Store\Api\Data\StoreInterface;
 use Magento\Store\Model\ScopeInterface;
 use MaxServ\YoastSeo\Model\EntityConfigurationPool;
@@ -65,6 +66,13 @@ class Init extends Template
         );
 
         return $locale;
+    }
+
+    public function getProductImageBaseUrl()
+    {
+        $store = $this->_storeManager->getStore();
+        $path = 'catalog/product';
+        return $store->getBaseUrl(UrlInterface::URL_TYPE_MEDIA) . $path;
     }
 
     /**

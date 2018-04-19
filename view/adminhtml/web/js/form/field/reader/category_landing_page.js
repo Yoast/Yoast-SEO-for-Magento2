@@ -14,6 +14,10 @@ define([
                 return '';
             }
 
+            if (field.oldValue && field.htmlValue && field.oldValue === field.value()) {
+                return field.htmlValue;
+            }
+
             return new Promise(function (resolve, reject) {
                 function doActualPromise() {
                     var displayMode = displayModeField.value();
@@ -28,6 +32,8 @@ define([
                             })
                             .done(function (result) {
                                 if (result && result.html) {
+                                    field.oldValue = field.value();
+                                    field.htmlValue = result.html;
                                     resolve(result.html);
                                 } else {
                                     reject();
@@ -38,15 +44,12 @@ define([
                 }
 
                 if (!displayModeField) {
-                    console.log('search display mode field');
                     uiRegistry
                         .promise({index: 'display_mode'})
                         .done(function (uiField) {
-                            console.log('display mode field found');
                             displayModeField = uiField;
                             displayModeField.value.subscribe(function () {
-                                console.log('display mode changed');
-                                $(document).trigger("yoastseo:reload");
+                                $(document).trigger("yoastseo:template:update");
                             });
                             doActualPromise();
                         });

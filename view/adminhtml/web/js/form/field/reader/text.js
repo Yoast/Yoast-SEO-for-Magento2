@@ -9,7 +9,7 @@ define([
                 if (field && field.hasOwnProperty("value") && ko.isObservable(field.value)) {
                     resolve(field.value());
                 } else {
-                    reject();
+                    resolve('');
                 }
             });
         }

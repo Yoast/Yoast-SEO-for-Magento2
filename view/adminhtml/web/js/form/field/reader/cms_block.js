@@ -12,6 +12,10 @@ define([
                 return '';
             }
 
+            if (field.oldValue && field.htmlValue && field.oldValue === field.value()) {
+                return field.htmlValue;
+            }
+
             return new Promise(function (resolve, reject) {
                 $
                     .ajax({
@@ -21,9 +25,11 @@ define([
                     })
                     .done(function (result) {
                         if (result && result.html || result.html === "") {
+                            field.oldValue = field.value();
+                            field.htmlValue = result.html;
                             resolve(result.html);
                         } else {
-                            reject();
+                            reject('invalid result html for cms_block');
                         }
                     })
                     .fail(reject);

@@ -6,6 +6,7 @@ define([
     "MaxServ_YoastSeo/js/form/field/reader/wysiwyg",
     "MaxServ_YoastSeo/js/form/field/reader/cms_block",
     "MaxServ_YoastSeo/js/form/field/reader/category_landing_page",
+    "MaxServ_YoastSeo/js/form/provider/product_images"
 ], function (
     $,
     uiRegistry,
@@ -13,7 +14,8 @@ define([
     textReader,
     wysiwygReader,
     cmsBlockReader,
-    categoryLandingPageReader
+    categoryLandingPageReader,
+    productImagesProvider
 ) {
     "use strict";
 
@@ -24,11 +26,17 @@ define([
             cms_block: cmsBlockReader,
             category_landing_page: categoryLandingPageReader
         },
+        providers: {
+            product_images: productImagesProvider
+        },
         elements: {},
         template: '',
         formData: {},
         registerReader: function (type, reader) {
             this.readers[type] = reader;
+        },
+        registerProvider: function (type, provider) {
+            this.providers[type] = provider;
         },
         init: function (formData, template) {
             var regex = new RegExp("{{([a-z_]+)\\s?((?:\\s?[a-z]+='[^']+')?)}}"),
@@ -43,9 +51,10 @@ define([
                     attributes = config.length >= 3 ? config[2] : false,
                     element = {
                         input: input,
-                        index: index,
-                        field: this.findField(index)
+                        index: index
                     };
+
+                this.findField(element, index);
 
                 if (attributes) {
                     $.each(attributes.split(' '), function (ignore, attribute) {
@@ -56,14 +65,10 @@ define([
                     });
                 }
 
-                if (element.field && element.field.value) {
-                    element.field.value.subscribe(this.scheduleUpdate.bind(this));
-                }
-
                 this.elements[index] = element;
             }.bind(this));
             
-            $(document).on('yoastseo:reload', this.scheduleUpdate.bind(this));
+            $(document).on('yoastseo:template:update', this.scheduleUpdate.bind(this));
             
             this.update();
         },
@@ -71,7 +76,7 @@ define([
             if (this.updateTimer) {
                 clearTimeout(this.updateTimer);
             }
-            this.updateTimer = setTimeout(this.update.bind(this), 300);
+            this.updateTimer = setTimeout(this.update.bind(this), 500);
         },
         update: function () {
             var content = this.template,
@@ -81,18 +86,26 @@ define([
             $.each(this.elements, function (ignore, element) {
                 inputs.push(element.input);
 
-                if (element.reader && this.readers.hasOwnProperty(element.reader)) {
-                    promises.push(this.readers[element.reader].promise(element.field));
-                } else if (element.field && element.field.value) {
-                    promises.push(element.field.value());
-                } else if (this.formData.hasOwnProperty(element.index)) {
-                    promises.push(this.formData[element.index]);
-                } else if (element.hasOwnProperty('default')) {
-                    promises.push(element.default);
-                } else {
-                    promises.push('');
+                switch (true) {
+                    case (element.field && element.reader && this.readers.hasOwnProperty(element.reader)):
+                        promises.push(this.readers[element.reader].promise(element.field));
+                        break;
+                    case (element.field && element.field.value):
+                        promises.push(element.field.value());
+                        break;
+                    case (this.formData.hasOwnProperty(element.index)):
+                        promises.push(this.formData[element.index]);
+                        break;
+                    case (element.hasOwnProperty('default')):
+                        promises.push(element.default);
+                        break;
+                    case (element.hasOwnProperty('provider') && this.providers.hasOwnProperty(element.provider)):
+                        promises.push(this.providers[element.provider].promise());
+                        break;
+                    default:
+                        promises.push('');
+                        break;
                 }
-
             }.bind(this));
 
             Promise
@@ -103,27 +116,22 @@ define([
                             value = values[i];
                         content = content.replace(input, value);
                     }
+
                     yoastData.content(content);
                 }, function(error) {
                     console.log('error', error);
                 });
 
-            //yoastData.content(content);
+            yoastData.content(content);
         },
-        findField: function (index) {
-            var field;
-
-            field = uiRegistry.get({dataScope: "data." + index});
-
-            if (!field) {
-                field = uiRegistry.get({index: index});
-            }
-
-            if (!field) {
-                field = uiRegistry.get({name: index});
-            }
-
-            return field;
+        findField: function (element, index) {
+            uiRegistry
+                .promise({index: index})
+                .done(function (field) {
+                    element.field = field;
+                    field.value.subscribe(this.scheduleUpdate.bind(this));
+                    this.scheduleUpdate();
+                }.bind(this));
         }
     };
 });
