@@ -59,26 +59,24 @@
                 <item name="catalog_product" xsi:type="array">
                     <item name="entity_type" xsi:type="string">catalog_product</item>
                     <item name="content" xsi:type="string">
-                        <![CDATA[{{name reader='text'}}
-{{description reader='wysiwyg'}}
-{{images reader='productImages'}}
-]]>
+                        <![CDATA[<h1>{{name reader='text'}}</h1>
+<div>{{description reader='wysiwyg'}}</div>
+<div class="gallery">{{product_images provider='product_images'}}</div>]]>
                     </item>
                 </item>
                 <item name="catalog_category" xsi:type="array">
                     <item name="entity_type" xsi:type="string">catalog_category</item>
                     <item name="content" xsi:type="string">
-                        <![CDATA[{{name reader='text'}}
-{{description reader='wysiwyg'}}
-]]>
+                        <![CDATA[<h1>{{name reader='text'}}</h1>
+<div>{{description reader='wysiwyg'}}</div>
+<div>{{landing_page reader='category_landing_page'}}</div>]]>
                     </item>
                 </item>
                 <item name="cms_page" xsi:type="array">
                     <item name="entity_type" xsi:type="string">cms_page</item>
                     <item name="content" xsi:type="string">
-                        <![CDATA[{{title reader='text'}}
-{{content reader='wysiwyg'}}
-]]>
+                        <![CDATA[<h1>{{title reader='text'}}</h1>
+<div>{{content reader='wysiwyg'}}</div>]]>
                     </item>
                 </item>
             </argument>
