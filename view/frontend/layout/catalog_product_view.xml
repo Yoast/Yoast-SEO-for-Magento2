@@ -2,12 +2,4 @@
     <head>
         <attribute name="prefix" value="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# product: http://ogp.me/ns/product#" />
     </head>
-    <body>
-        <referenceBlock name="opengraph.general" remove="true" />
-        <referenceBlock name="yoastseo">
-            <arguments>
-                <argument name="page_type" xsi:type="string">catalog_product</argument>
-            </arguments>
-        </referenceBlock>
-    </body>
 </page>

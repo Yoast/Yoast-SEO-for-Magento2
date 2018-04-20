@@ -1,6 +1,7 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <update handle="yoastseo" />
     <body>
+        <referenceBlock name="opengraph.general" remove="true" />
         <referenceBlock name="yoastseo">
             <arguments>
                 <argument name="entity_type" xsi:type="string">catalog_product</argument>
