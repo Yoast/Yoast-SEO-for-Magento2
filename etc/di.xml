@@ -35,6 +35,17 @@
             </argument>
         </arguments>
     </type>
+    <type name="Magento\Framework\EntityManager\Operation\ExtensionPool">
+        <arguments>
+            <argument name="extensionActions" xsi:type="array">
+                <item name="Magento\Catalog\Api\Data\ProductInterface" xsi:type="array">
+                    <item name="delete" xsi:type="array">
+                        <item name="onDeleteCreateRedirect" xsi:type="string">MaxServ\YoastSeo\EntityManager\Operation\Extension\Catalog\Product\Delete\RewriteHandler</item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
     <type name="Magento\Framework\EntityManager\HydratorPool">
         <arguments>
             <argument name="hydrators" xsi:type="array">

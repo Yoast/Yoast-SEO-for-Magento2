@@ -3,6 +3,7 @@
         <yoastseo>
             <products>
                 <attribute_group_code>search-engine-optimization</attribute_group_code>
+                <redirect_delete>to_parent_category</redirect_delete>
             </products>
             <categories>
                 <attribute_group_code>search-engine-optimization</attribute_group_code>

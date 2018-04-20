@@ -12,6 +12,7 @@
 !/Api
 !/Block
 !/Controller
+!/EntityManager
 !/etc
 !/Helper
 !/Model

@@ -1,6 +1,6 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
-        <tab id="YoastSEO" translate="label" sortOrder="100">
+        <tab id="YoastSEO" translate="label" sortOrder="110">
             <label>YoastSEO</label>
         </tab>
         <section id="yoastseo" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -26,6 +26,30 @@
                 <field id="attribute_group_code" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>SEO Attribute Group Code</label>
                 </field>
+                <group id="redirect_deleted" translate="label" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Create Redirect On Delete</label>
+                    <field id="redirect_delete" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Redirect to</label>
+                        <source_model>MaxServ\YoastSeo\Model\Config\Source\Product\RedirectDeletedOptions</source_model>
+                        <config_path>yoastseo/products/redirect_delete</config_path>
+                    </field>
+                    <field id="category" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Category</label>
+                        <source_model>MaxServ\YoastSeo\Model\Config\Source\Category</source_model>
+                        <config_path>yoastseo/products/redirect_delete_category</config_path>
+                        <depends>
+                            <field id="redirect_delete">to_category</field>
+                        </depends>
+                    </field>
+                    <field id="cms_page" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>CMS Page</label>
+                        <source_model>MaxServ\YoastSeo\Model\Config\Source\Cms\Page</source_model>
+                        <config_path>yoastseo/products/redirect_delete_cms_page</config_path>
+                        <depends>
+                            <field id="redirect_delete">to_cms_page</field>
+                        </depends>
+                    </field>
+                </group>
             </group>
             <group id="categories" translate="label" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Categories</label>
