@@ -1,5 +1,6 @@
 define([
     "jquery",
+    "ko",
     "uiRegistry",
     "MaxServ_YoastSeo/js/model/yoast-data",
     "MaxServ_YoastSeo/js/form/field/reader/text",
@@ -9,6 +10,7 @@ define([
     "MaxServ_YoastSeo/js/form/provider/product_images"
 ], function (
     $,
+    ko,
     uiRegistry,
     yoastData,
     textReader,
@@ -128,9 +130,12 @@ define([
             uiRegistry
                 .promise({index: index})
                 .done(function (field) {
-                    element.field = field;
-                    field.value.subscribe(this.scheduleUpdate.bind(this));
-                    this.scheduleUpdate();
+                    console.log(field, element);
+                    if (field && field.value && ko.isObservable(field.value)) {
+                        element.field = field;
+                        field.value.subscribe(this.scheduleUpdate.bind(this));
+                        this.scheduleUpdate();
+                    }
                 }.bind(this));
         }
     };

@@ -2,6 +2,8 @@
 
 namespace MaxServ\YoastSeo\Model;
 
+use MaxServ\YoastSeo\Model\Entity\MetaProviderInterface;
+
 interface EntityConfigurationInterface
 {
     /**
@@ -43,4 +45,9 @@ interface EntityConfigurationInterface
      * @return string
      */
     public function getMetaKeywordField();
+
+    /**
+     * @return MetaProviderInterface
+     */
+    public function getMetaProvider();
 }

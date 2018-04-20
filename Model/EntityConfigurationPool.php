@@ -30,4 +30,21 @@ class EntityConfigurationPool
 
         return $this->entityConfigurations[$entity];
     }
+
+    /**
+     * @param string $entityType
+     * @return EntityConfigurationInterface|null
+     */
+    public function getConfigurationByEntityType($entityType)
+    {
+        $configuration = null;
+        foreach ($this->entityConfigurations as $entityConfiguration) {
+            if ($entityConfiguration->getEntityType() === $entityType) {
+                $configuration = $entityConfiguration;
+                break;
+            }
+        }
+
+        return $configuration;
+    }
 }

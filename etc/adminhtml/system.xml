@@ -65,6 +65,9 @@
                 <field id="admin_ids" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Admin Ids</label>
                 </field>
+                <field id="facebook_pages" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Facebook Pages</label>
+                </field>
             </group>
             <group id="twitter" translate="label" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Twitter Settings</label>

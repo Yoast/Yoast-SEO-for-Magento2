@@ -1,0 +1,5 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="cms_page_render">
+        <observer name="maxserv_yoast_seo_cms_page_render_observer" instance="MaxServ\YoastSeo\Observer\Cms\Page\RenderObserver" />
+    </event>
+</config>

@@ -94,6 +94,21 @@
             </argument>
         </arguments>
     </virtualType>
+    <type name="MaxServ\YoastSeo\Model\Entity\Configuration\Cms\PageConfiguration">
+        <arguments>
+            <argument name="metaProvider" xsi:type="object">MaxServ\YoastSeo\Model\Entity\Configuration\Cms\PageMetaProvider</argument>
+        </arguments>
+    </type>
+    <type name="MaxServ\YoastSeo\Model\Entity\Configuration\Catalog\ProductConfiguration">
+        <arguments>
+            <argument name="metaProvider" xsi:type="object">MaxServ\YoastSeo\Model\Entity\Configuration\Catalog\ProductMetaProvider</argument>
+        </arguments>
+    </type>
+    <type name="MaxServ\YoastSeo\Model\Entity\Configuration\Catalog\CategoryConfiguration">
+        <arguments>
+            <argument name="metaProvider" xsi:type="object">MaxServ\YoastSeo\Model\Entity\Configuration\Catalog\CategoryMetaProvider</argument>
+        </arguments>
+    </type>
     <type name="MaxServ\YoastSeo\Model\EntityConfigurationPool">
         <arguments>
             <argument name="entityConfigurations" xsi:type="array">

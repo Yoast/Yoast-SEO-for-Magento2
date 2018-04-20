@@ -1,0 +1,8 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="after.body.start">
+            <block class="MaxServ\YoastSeo\Block\Schema\Website" name="yoastseo.schema.website" template="MaxServ_YoastSeo::schema.phtml" />
+            <block class="MaxServ\YoastSeo\Block\Schema\Organization" name="yoastseo.schema.organization" template="MaxServ_YoastSeo::schema.phtml" />
+        </referenceContainer>
+    </body>
+</page>

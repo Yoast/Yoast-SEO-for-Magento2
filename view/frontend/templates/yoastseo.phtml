@@ -1,0 +1,78 @@
+<?php
+use MaxServ\YoastSeo\Block\YoastSeo;
+use MaxServ\YoastSeo\Model\Entity\MetaProviderInterface;
+
+/** @var YoastSeo $block */
+/** @var MetaProviderInterface $meta */
+$meta = $block->getMetaProvider();
+$finalPrice = $block->getFinalPrice();
+
+if ($meta) {
+    $openGraphImage = $meta->getOpenGraphImage();
+    $openGraphVideo = $meta->getOpenGraphVideo();
+
+    $twitterImage = $meta->getTwitterImage();
+    if ($twitterImage) {
+        $twitterCard = 'summary_large_image';
+    } else {
+        $twitterCard = 'summary';
+    }
+}
+
+?>
+
+<!-- This site is optimized with the Yoast SEO for Magento plugin 2.0.0 - https://yoast.com/magento/plugins/seo/ -->
+<?php if ($block->getCanonicalUrl()): ?>
+    <link rel="canonical" href="<?php echo $block->getCanonicalUrl(); ?>" />
+<?php endif; ?>
+
+<?php if ($meta): ?>
+    <!-- YoastSEO OpenGraph -->
+    <meta property="og:url" content="<?php echo $block->getCanonicalUrl(); ?>"/>
+    <meta property="og:locale" content="<?php echo $block->getLocale(); ?>" />
+    <meta property="og:type" content="<?php echo $meta->getType(); ?>"/>
+    <meta property="og:site_name" content="<?php echo $block->getStoreName(); ?>" />
+    <meta property="og:title" content="<?php echo $meta->getOpenGraphTitle(); ?>"/>
+    <meta property="og:description" content="<?php echo strip_tags($meta->getOpenGraphDescription()); ?>"/>
+    <?php if ($openGraphImage): ?>
+        <meta property="og:image" content="<?php echo $openGraphImage; ?>"/>
+        <?php $imageMeta = $meta->getImageMeta($openGraphImage); ?>
+        <?php if ($imageMeta && isset($imageMeta['width'], $imageMeta['height'], $imageMeta['mime'])): ?>
+            <meta property="og:image:width" content="<?php echo $imageMeta['width']; ?>" />
+            <meta property="og:image:height" content="<?php echo $imageMeta['height']; ?>" />
+            <meta property="og:image:type" content="<?php echo $imageMeta['mime']; ?>" />
+        <?php endif; ?>
+    <?php endif; ?>
+    <?php if ($openGraphVideo): ?>
+        <meta property="og:video" content="<?php echo $openGraphVideo; ?>" />
+    <?php endif; ?>
+
+    <!-- YoastSEO Twitter Card -->
+    <meta name="twitter:card" content="<?php echo $twitterCard; ?>">
+    <?php if ($block->getTwitterSite()): ?>
+        <meta name="twitter:site" content="<?php echo $block->getTwitterSite(); ?>"/>
+    <?php endif; ?>
+    <?php if ($block->getTwitterCreator()): ?>
+        <meta name="twitter:creator" content="<?php echo $block->getTwitterCreator(); ?>"/>
+    <?php endif; ?>
+    <meta name="twitter:title" content="<?php echo $meta->getTwitterTitle(); ?>"/>
+    <meta name="twitter:description" content="<?php echo $meta->getTwitterDescription(); ?>"/>
+    <?php if ($twitterImage): ?>
+        <meta name="twitter:image" content="<?php echo $twitterImage; ?>"/>
+    <?php endif; ?>
+<?php endif; ?>
+
+<?php if ($block->getFacebookAdmins()): ?>
+    <meta property="fb:admins" content="<?php echo $block->getFacebookAdmins(); ?>"
+<?php endif; ?>
+<?php if ($block->getFacebookAppId()): ?>
+    <meta property="fb:app_id" content="<?php echo $block->getFacebookAppId(); ?>"/>
+<?php endif; ?>
+<?php if ($block->getFacebookPages()): ?>
+    <meta property="fb:pages" content="<?php echo $block->getFacebookPages(); ?>" />
+<?php endif; ?>
+
+<?php if ($finalPrice): ?>
+    <meta property="product:price:amount" content="<?php echo $finalPrice; ?>"/>
+    <?php echo $block->getChildHtml('meta.currency'); ?>
+<?php endif; ?>

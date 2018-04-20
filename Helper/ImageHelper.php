@@ -53,6 +53,12 @@ class ImageHelper
      */
     public function getYoastImage($image)
     {
-        return $this->storeManager->getStore()->getBaseUrl(UrlInterface::URL_TYPE_MEDIA) . 'yoast/img/' . $image;
+        $baseUrl = $this->storeManager->getStore()->getBaseUrl(
+            UrlInterface::URL_TYPE_MEDIA
+        );
+
+        $image = ltrim($image, '/');
+
+        return $baseUrl . 'yoast/img/' . $image;
     }
 }
