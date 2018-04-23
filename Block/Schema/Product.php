@@ -14,14 +14,9 @@ use Magento\Review\Model\Review;
 use Magento\Review\Model\ReviewFactory;
 use Magento\Review\Model\ResourceModel\Review\Collection as ReviewCollection;
 use Magento\Review\Model\ResourceModel\Review\CollectionFactory as ReviewCollectionFactory;
-use MaxServ\YoastSeo\Helper\HtmlHelper;
 
 class Product extends AbstractProduct
 {
-    /**
-     * @var HtmlHelper
-     */
-    protected $htmlHelper;
 
     /**
      * @var ReviewFactory
@@ -50,7 +45,6 @@ class Product extends AbstractProduct
 
     public function __construct(
         Context $context,
-        HtmlHelper $htmlHelper,
         ReviewFactory $reviewFactory,
         ReviewCollectionFactory $reviewCollectionFactory,
         VoteCollectionFactory $voteCollectionFactory,
@@ -58,7 +52,6 @@ class Product extends AbstractProduct
         array $data = []
     ) {
         parent::__construct($context, $data);
-        $this->htmlHelper = $htmlHelper;
         $this->reviewFactory = $reviewFactory;
         $this->reviewCollectionFactory = $reviewCollectionFactory;
         $this->voteCollectionFactory = $voteCollectionFactory;
@@ -120,7 +113,6 @@ class Product extends AbstractProduct
         $description = $product->getShortDescription();
         if (!$description) {
             $description = $product->getDescription();
-            $description = $this->htmlHelper->getFirstParagraph($description);
         }
 
         return $description;
