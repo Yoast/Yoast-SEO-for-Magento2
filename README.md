@@ -4,7 +4,7 @@
 We have developed this advanced SEO module in close cooperation with YOAST. It incorporates the YOAST library into Magento2.  
 
 ## Requirements
-Magento 2.1.*
+Magento 2.1.* OpenSource. This version of the module has not yet been tested on Magento 2 Commerce. 
 
 ## Installation
 Register the repository:
