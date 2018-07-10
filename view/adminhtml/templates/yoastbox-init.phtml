@@ -1,0 +1,16 @@
+<?php
+/** @var \MaxServ\YoastSeo\Block\Adminhtml\Init $block */
+?>
+<script>
+    window.yoastBoxConfig = {
+        enableMetaKeywords: false,
+        locale: "<?php echo $block->getLocale(); ?>",
+        baseUrl: "<?php echo $block->getStoreBaseUrl(); ?>",
+        configUrl: "<?php echo $block->getUrl("yoastseo/editor/config"); ?>",
+        uploadUrl: "<?php echo $block->getUrl("yoastseo/image/upload"); ?>",
+        wysiwygUrl: "<?php echo $block->getStoreUrl('yoastseo/render/wysiwyg'); ?>",
+        cmsBlockUrl: "<?php echo $block->getStoreUrl('yoastseo/render/cms_block'); ?>",
+        entity: <?php echo json_encode($block->getEntityConfiguration()); ?>,
+        productImageBaseUrl: "<?php echo $block->getProductImageBaseUrl(); ?>"
+    };
+</script>

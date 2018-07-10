@@ -1,23 +1,4 @@
 <?php
-/**
- * NOTICE OF LICENSE
- *
- * This source file is subject to the General Public License (GPL 3.0).
- * This license is available through the world-wide-web at this URL:
- * http://opensource.org/licenses/gpl-3.0.en.php
- *
- * DISCLAIMER
- *
- * Do not edit or add to this file if you wish to upgrade this module to newer
- * versions in the future.
- *
- * @category    Maxserv: MaxServ_YoastSeo
- * @package     Maxserv: MaxServ_YoastSeo
- * @author      Vincent Hornikx <vincent.hornikx@maxserv.com>
- * @copyright   Copyright (c) 2017 MaxServ (http://www.maxserv.com)
- * @license     http://opensource.org/licenses/gpl-3.0.en.php General Public License (GPL 3.0)
- *
- */
 
 namespace MaxServ\YoastSeo\Block\Schema;
 
@@ -33,15 +14,9 @@ use Magento\Review\Model\Review;
 use Magento\Review\Model\ReviewFactory;
 use Magento\Review\Model\ResourceModel\Review\Collection as ReviewCollection;
 use Magento\Review\Model\ResourceModel\Review\CollectionFactory as ReviewCollectionFactory;
-use MaxServ\YoastSeo\Helper\HtmlHelper;
 
 class Product extends AbstractProduct
 {
-
-    /**
-     * @var HtmlHelper
-     */
-    protected $htmlHelper;
 
     /**
      * @var ReviewFactory
@@ -70,7 +45,6 @@ class Product extends AbstractProduct
 
     public function __construct(
         Context $context,
-        HtmlHelper $htmlHelper,
         ReviewFactory $reviewFactory,
         ReviewCollectionFactory $reviewCollectionFactory,
         VoteCollectionFactory $voteCollectionFactory,
@@ -78,7 +52,6 @@ class Product extends AbstractProduct
         array $data = []
     ) {
         parent::__construct($context, $data);
-        $this->htmlHelper = $htmlHelper;
         $this->reviewFactory = $reviewFactory;
         $this->reviewCollectionFactory = $reviewCollectionFactory;
         $this->voteCollectionFactory = $voteCollectionFactory;
@@ -95,16 +68,17 @@ class Product extends AbstractProduct
             '@type' => 'Product',
             'name' => $this->getProduct()->getName(),
             'description' => $this->getProductDescription(),
-            'image' => $this->getImage($this->getProduct(), 'product_base_image')->getImageUrl(),
+            'image' => $this->getImage(
+                $this->getProduct(),
+                'product_base_image'
+            )->getImageUrl(),
             'url' => $this->getProduct()->getProductUrl()
         ];
-
         $additional = [
             'aggregateRating' => $this->getAggregateRating(),
             'offers' => $this->getOffer(),
             'review' => $this->getReviews()
         ];
-
         $schema = array_merge($schema, array_filter($additional));
 
         return json_encode($schema);
@@ -121,9 +95,10 @@ class Product extends AbstractProduct
         } catch (\Exception $e) {
             $attributeValue = false;
         }
-
         if (!$attributeValue) {
-            $attributeValue = $this->getProduct()->getDataUsingMethod($attributeCode);
+            $attributeValue = $this->getProduct()->getDataUsingMethod(
+                $attributeCode
+            );
         }
 
         return $attributeValue;
@@ -138,7 +113,6 @@ class Product extends AbstractProduct
         $description = $product->getShortDescription();
         if (!$description) {
             $description = $product->getDescription();
-            $description = $this->htmlHelper->getFirstParagraph($description);
         }
 
         return $description;
@@ -150,16 +124,13 @@ class Product extends AbstractProduct
     protected function loadReviewSummary()
     {
         if (empty($this->ratingSummary)) {
-
             $ratingSummary = $this->getProduct()->getRatingSummary();
-
             if (!$ratingSummary) {
                 /** @var Review $review */
                 $review = $this->reviewFactory->create();
                 $review->getEntitySummary($this->getProduct());
                 $ratingSummary = $this->getProduct()->getRatingSummary();
             }
-
             $this->ratingSummary = $ratingSummary;
         }
     }
@@ -170,15 +141,15 @@ class Product extends AbstractProduct
     protected function getAggregateRating()
     {
         $this->loadReviewSummary();
-
         // if product has not ratings return empty array so that rating is excluded from schema
         if ($this->ratingSummary->getReviewsCount() == 0) {
             return [];
         }
-
         $aggregateRating = [
             '@type' => 'AggregateRating',
-            'ratingValue' => round($this->ratingSummary->getRatingSummary() / 20),
+            'ratingValue' => round(
+                $this->ratingSummary->getRatingSummary() / 20
+            ),
             'reviewCount' => $this->ratingSummary->getReviewsCount()
         ];
 
@@ -192,20 +163,22 @@ class Product extends AbstractProduct
     {
         /** @var Currency $currencyBlock */
         $currencyBlock = $this->getLayout()->getBlock('opengraph.currency');
-
         /** @var StockItem $stockItem */
-        $stockItem = $this->stockRegistry->getStockItem($this->getProduct()->getId());
-
+        $stockItem = $this->stockRegistry->getStockItem(
+            $this->getProduct()->getId()
+        );
         if ($stockItem->getIsInStock()) {
             $availability = 'http://schema.org/InStock';
         } else {
             $availability = 'http://schema.org/OutOfStock';
         }
-
         $offer = [
             '@type' => 'Offer',
             'availability' => $availability,
-            'price' => (string)number_format((float)$this->getProduct()->getFinalPrice(), 2),
+            'price' => (string)number_format(
+                (float)$this->getProduct()->getFinalPrice(),
+                2
+            ),
             'priceCurrency' => $currencyBlock->getCurrentCurrencyCode()
         ];
 
@@ -223,12 +196,9 @@ class Product extends AbstractProduct
             ->addStoreFilter($this->_storeManager->getStore()->getId())
             ->addEntityFilter('product', $this->getProduct()->getId())
             ->addStatusFilter(Review::STATUS_APPROVED);
-
         $reviews = [];
-
         foreach ($reviewCollection as $review) {
             /** @var Review $review */
-
             /** @var VoteCollection $voteCollection */
             $voteCollection = $this->getVotesCollection($review);
             $lowest = PHP_INT_MAX;
@@ -241,11 +211,13 @@ class Product extends AbstractProduct
                 $total += $value;
             }
             $average = $total / $voteCollection->getSize();
-
             $reviews[] = [
                 '@type' => 'Review',
                 'author' => $review->getNickname(),
-                'datePublished' => date("Y-m-d", strtotime($review->getCreatedAt())),
+                'datePublished' => date(
+                    "Y-m-d",
+                    strtotime($review->getCreatedAt())
+                ),
                 'description' => $review->getDetail(),
                 'name' => $review->getTitle(),
                 'reviewRating' => [

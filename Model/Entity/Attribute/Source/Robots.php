@@ -1,23 +1,5 @@
 <?php
-/**
- * NOTICE OF LICENSE
- *
- * This source file is subject to the General Public License (GPL 3.0).
- * This license is available through the world-wide-web at this URL:
- * http://opensource.org/licenses/gpl-3.0.en.php
- *
- * DISCLAIMER
- *
- * Do not edit or add to this file if you wish to upgrade this module to newer
- * versions in the future.
- *
- * @category    Maxserv: MaxServ_YoastSeo
- * @package     Maxserv: MaxServ_YoastSeo
- * @author      Luk van den Borne <luk.van.den.borne@maxserv.com>
- * @copyright   Copyright (c) 2017 MaxServ (http://www.maxserv.com)
- * @license     http://opensource.org/licenses/gpl-3.0.en.php General Public License (GPL 3.0)
- *
- */
+
 namespace MaxServ\YoastSeo\Model\Entity\Attribute\Source;
 
 use Magento\Eav\Model\Entity\Attribute\Source\AbstractSource;
@@ -38,6 +20,7 @@ class Robots extends AbstractSource
                 ['value' => 'NOINDEX,NOFOLLOW', 'label' => 'NOINDEX, NOFOLLOW'],
             ];
         }
+
         return $this->_options;
     }
 
@@ -52,6 +35,7 @@ class Robots extends AbstractSource
                 return $option['label'];
             }
         }
+
         return false;
     }
 }

@@ -1,0 +1,88 @@
+.yoastBox {
+    .yoastBox-navigation {
+        z-index: 2;
+        display: flex;
+        flex-direction: row;
+        flex-flow: row;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        li {
+            flex-grow: 0;
+            flex-shrink: 0;
+            padding: @indent__xs @indent__s;
+            border: 1px solid transparent;
+
+            &:not(:first-child) {
+                margin-left: -1px;
+            }
+
+            a {
+                color: @text__color;
+            }
+
+            &.current {
+                border-color: @yoast__border-color;
+                border-bottom-color: @color-white;
+
+                a {
+                    color: @color-phoenix;
+                }
+            }
+        }
+    }
+
+    .yoastBox-tab {
+        padding: @indent__s;
+        border: 1px solid @yoast__border-color;
+        margin-top: -1px;
+        z-index: 1;
+    }
+
+    .analysisBox {
+        border: 1px solid @yoast__border-color;
+
+        &:not(:last-child) {
+            margin-bottom: @indent__l;
+        }
+
+        .overallScore {
+            float: left;
+            width: 12px;
+            height: 12px;
+            margin: 3px 10px 0 0;
+            border-radius: 50%;
+            background: #888;
+
+            &.na {
+                background-color: #999;
+            }
+
+            &.bad {
+                background-color: #dc3232;
+            }
+
+            &.ok {
+                background-color: #ee7c1b;
+            }
+
+            &.good {
+                background-color: #7ad03a;
+            }
+        }
+
+        .analysisBox-title {
+            padding: @indent__s;
+            border-bottom: 1px solid @yoast__border-color;
+        }
+
+        .analysisBox-content {
+            padding: @indent__s;
+        }
+    }
+}
+
+.assessment-results__mark-container {
+    display: none !important;
+}

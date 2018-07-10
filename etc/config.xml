@@ -1,9 +1,13 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
     <default>
         <yoastseo>
-            <advanced>
-                <product_seo_attribute_group_code>search-engine-optimization</product_seo_attribute_group_code>
-            </advanced>
+            <products>
+                <attribute_group_code>search-engine-optimization</attribute_group_code>
+                <redirect_delete>to_parent_category</redirect_delete>
+            </products>
+            <categories>
+                <attribute_group_code>search-engine-optimization</attribute_group_code>
+            </categories>
         </yoastseo>
     </default>
 </config>

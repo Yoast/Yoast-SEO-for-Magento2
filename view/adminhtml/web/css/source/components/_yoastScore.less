@@ -1,0 +1,53 @@
+.yoastScore-wrapper {
+    border: 1px solid @yoast__border-color;
+    border-radius: 5px;
+
+    .yoastScore-header {
+        padding: @indent__s/2 @indent__s;
+        border-bottom: 1px solid @yoast__border-color;
+    }
+
+    .yoastScore {
+        margin-top: 0;
+
+        .admin__field-label {
+            display: inline-block;
+            width: 100px;
+            cursor: default;
+        }
+    }
+
+    .yoastScore-score {
+        margin-top: -3px;
+        margin-left: @indent__s;
+    }
+}
+
+.yoastScore-cell {
+    text-align: center;
+}
+
+.yoastScore-score {
+    display: inline-block;
+    padding: 0;
+    vertical-align: middle;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+
+    &.yoastScore-score--na {
+        background-color: #999;
+    }
+
+    &.yoastScore-score--bad {
+        background-color: #dc3232;
+    }
+
+    &.yoastScore-score--ok {
+        background-color: #ee7c1b;
+    }
+
+    &.yoastScore-score--good {
+        background-color: #7ad03a;
+    }
+}

@@ -1,221 +1,168 @@
-<?xml version="1.0"?>
-<!--
-  ~ NOTICE OF LICENSE
-  ~
-  ~ This source file is subject to the General Public License (GPL 3.0).
-  ~ This license is available through the world-wide-web at this URL:
-  ~ http://opensource.org/licenses/gpl-3.0.en.php
-  ~
-  ~ DISCLAIMER
-  ~
-  ~ Do not edit or add to this file if you wish to upgrade this module to newer
-  ~ versions in the future.
-  ~
-  ~ @category    Maxserv: MaxServ_YoastSeo
-  ~ @package     Maxserv: MaxServ_YoastSeo
-  ~ @author      Vincent Hornikx <vincent.hornikx@maxserv.com>
-  ~ @copyright   Copyright (c) 2017 MaxServ (http://www.maxserv.com)
-  ~ @license     http://opensource.org/licenses/gpl-3.0.en.php General Public License (GPL 3.0)
-  ~
-  -->
-
 <form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
-    <fieldset name="general">
-        <field name="title">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="additionalClasses" xsi:type="string">yoastBox-title</item>
-                </item>
-            </argument>
-        </field>
-    </fieldset>
-    <fieldset name="content">
-        <field name="content_heading">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="additionalClasses" xsi:type="string">yoastBox-contentHeading</item>
-                </item>
-            </argument>
-        </field>
-        <field name="content">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="additionalClasses" xsi:type="string">admin__field-wide yoastBox-content</item>
-                </item>
-            </argument>
-        </field>
-    </fieldset>
     <fieldset name="search_engine_optimisation">
         <argument name="data" xsi:type="array">
             <item name="config" xsi:type="array">
-                <item name="label" xsi:type="string" translate="true">Yoast SEO</item>
+                <item name="label" xsi:type="string">YoastSEO</item>
+                <item name="component" xsi:type="string">MaxServ_YoastSeo/js/form/component/fieldset/yoast-box</item>
             </item>
         </argument>
-        <field name="identifier">
+        <field name="yoast_keyword_score" formElement="input">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="additionalClasses" xsi:type="string">yoastBox-urlKey hidden</item>
-                </item>
-            </argument>
-        </field>
-        <field name="meta_title">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="additionalClasses" xsi:type="string">yoastBox-metaTitle hidden</item>
-                </item>
-            </argument>
-        </field>
-        <field name="meta_description">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="additionalClasses" xsi:type="string">yoastBox-metaDescription hidden</item>
-                </item>
-            </argument>
-        </field>
-        <field name="meta_keywords">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="additionalClasses" xsi:type="string">yoastBox-metaKeywords</item>
-                </item>
-            </argument>
-        </field>
-        <field name="focus_keyword">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="additionalClasses" xsi:type="string">yoastBox-focusKeyword</item>
-                    <item name="dataType" xsi:type="string">text</item>
-                    <item name="label" xsi:type="string" translate="true">Focus Keyword</item>
-                    <item name="formElement" xsi:type="string">input</item>
                     <item name="source" xsi:type="string">page</item>
-                    <item name="dataScope" xsi:type="string">focus_keyword</item>
                 </item>
             </argument>
+            <settings>
+                <visible>false</visible>
+                <dataType>text</dataType>
+                <label translate="true">Title</label>
+                <dataScope>yoast_keyword_score</dataScope>
+            </settings>
         </field>
-        <field name="yoast_robots_instructions">
+        <field name="yoast_content_score" formElement="input">
             <argument name="data" xsi:type="array">
-                <item name="options" xsi:type="object">MaxServ\YoastSeo\Model\Config\Source\Design\Robots</item>
                 <item name="config" xsi:type="array">
-                    <item name="additionalClasses" xsi:type="string">yoastBox-robotsInstructions</item>
-                    <item name="dataType" xsi:type="string">text</item>
-                    <item name="label" xsi:type="string" translate="true">Robot instructions</item>
-                    <item name="formElement" xsi:type="string">select</item>
                     <item name="source" xsi:type="string">page</item>
-                    <item name="dataScope" xsi:type="string">yoast_robots_instructions</item>
                 </item>
             </argument>
+            <settings>
+                <visible>false</visible>
+                <dataType>text</dataType>
+                <label translate="true">Title</label>
+                <dataScope>yoast_content_score</dataScope>
+            </settings>
         </field>
-        <container name="yoastBox">
-            <htmlContent name="yoastBox-block">
-                <argument name="block" xsi:type="object">MaxServ\YoastSeo\Block\Adminhtml\YoastBox</argument>
-            </htmlContent>
-            <fieldset name="yoastBox-facebook">
+        <field name="yoast_focus_keyword" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">page</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Focus Keyword</label>
+                <dataScope>yoast_focus_keyword</dataScope>
+            </settings>
+        </field>
+        <fieldset name="yoast_facebook">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string"></item>
+                    <item name="collapsible" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+            <field name="yoast_facebook_title" formElement="input">
                 <argument name="data" xsi:type="array">
                     <item name="config" xsi:type="array">
-                        <item name="additionalClasses" xsi:type="string">yoastBox-facebook-fieldset</item>
-                        <item name="label" xsi:type="string" />
+                        <item name="source" xsi:type="string">page</item>
                     </item>
                 </argument>
-                <field name="yoast_facebook_title">
-                    <argument name="data" xsi:type="array">
-                        <item name="config" xsi:type="array">
-                            <item name="additionalClasses" xsi:type="string">yoastBox-facebook-title</item>
-                            <item name="label" xsi:type="string" translate="true">Facebook Title</item>
-                            <item name="dataType" xsi:type="string">text</item>
-                            <item name="formElement" xsi:type="string">input</item>
-                            <item name="source" xsi:type="string">page</item>
-                            <item name="dataScope" xsi:type="string">yoast_facebook_title</item>
-                        </item>
-                    </argument>
-                </field>
-                <field name="yoast_facebook_description">
-                    <argument name="data" xsi:type="array">
-                        <item name="config" xsi:type="array">
-                            <item name="additionalClasses" xsi:type="string">yoastBox-facebook-description</item>
-                            <item name="label" xsi:type="string" translate="true">Facebook Description</item>
-                            <item name="dataType" xsi:type="string">text</item>
-                            <item name="formElement" xsi:type="string">textarea</item>
-                            <item name="source" xsi:type="string">page</item>
-                            <item name="dataScope" xsi:type="string">yoast_facebook_description</item>
-                        </item>
-                    </argument>
-                </field>
-                <field name="yoast_facebook_image">
-                    <argument name="data" xsi:type="array">
-                        <item name="config" xsi:type="array">
-                            <item name="additionalClasses" xsi:type="string">yoastBox-facebook-image</item>
-                            <item name="dataType" xsi:type="string">string</item>
-                            <item name="source" xsi:type="string">page</item>
-                            <item name="label" xsi:type="string" translate="true">Facebook Image</item>
-                            <item name="visible" xsi:type="boolean">true</item>
-                            <item name="formElement" xsi:type="string">fileUploader</item>
-                            <item name="elementTmpl" xsi:type="string">ui/form/element/uploader/uploader</item>
-                            <item name="previewTmpl" xsi:type="string">Magento_Catalog/image-preview</item>
-                            <item name="required" xsi:type="boolean">false</item>
-                            <item name="sortOrder" xsi:type="number">40</item>
-                            <item name="uploaderConfig" xsi:type="array">
-                                <item name="url" xsi:type="url" path="yoast/image/upload"/>
-                                <item name="formData" xsi:type="array">
-                                    <item name="yoast_image_key" xsi:type="string">yoast_facebook_image</item>
-                                </item>
-                            </item>
-                        </item>
-                    </argument>
-                </field>
-            </fieldset>
-            <fieldset name="yoastBox-twitter">
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Title</label>
+                    <dataScope>yoast_facebook_title</dataScope>
+                </settings>
+            </field>
+            <field name="yoast_facebook_description" formElement="textarea">
                 <argument name="data" xsi:type="array">
                     <item name="config" xsi:type="array">
-                        <item name="additionalClasses" xsi:type="string">yoastBox-twitter-fieldset</item>
-                        <item name="label" xsi:type="string" />
+                        <item name="source" xsi:type="string">page</item>
                     </item>
                 </argument>
-                <field name="yoast_twitter_title">
-                    <argument name="data" xsi:type="array">
-                        <item name="config" xsi:type="array">
-                            <item name="additionalClasses" xsi:type="string">yoastBox-twitter-title</item>
-                            <item name="label" xsi:type="string" translate="true">Twitter Title</item>
-                            <item name="dataType" xsi:type="string">text</item>
-                            <item name="formElement" xsi:type="string">input</item>
-                            <item name="source" xsi:type="string">page</item>
-                            <item name="dataScope" xsi:type="string">yoast_twitter_title</item>
-                        </item>
-                    </argument>
-                </field>
-                <field name="yoast_twitter_description">
-                    <argument name="data" xsi:type="array">
-                        <item name="config" xsi:type="array">
-                            <item name="additionalClasses" xsi:type="string">yoastBox-twitter-description</item>
-                            <item name="label" xsi:type="string" translate="true">Twitter Description</item>
-                            <item name="dataType" xsi:type="string">text</item>
-                            <item name="formElement" xsi:type="string">textarea</item>
-                            <item name="source" xsi:type="string">page</item>
-                            <item name="dataScope" xsi:type="string">yoast_twitter_description</item>
-                        </item>
-                    </argument>
-                </field>
-                <field name="yoast_twitter_image">
-                    <argument name="data" xsi:type="array">
-                        <item name="config" xsi:type="array">
-                            <item name="additionalClasses" xsi:type="string">yoastBox-twitter-image</item>
-                            <item name="dataType" xsi:type="string">string</item>
-                            <item name="source" xsi:type="string">page</item>
-                            <item name="label" xsi:type="string" translate="true">Twitter Image</item>
-                            <item name="visible" xsi:type="boolean">true</item>
-                            <item name="formElement" xsi:type="string">fileUploader</item>
-                            <item name="elementTmpl" xsi:type="string">ui/form/element/uploader/uploader</item>
-                            <item name="previewTmpl" xsi:type="string">Magento_Catalog/image-preview</item>
-                            <item name="required" xsi:type="boolean">false</item>
-                            <item name="sortOrder" xsi:type="number">40</item>
-                            <item name="uploaderConfig" xsi:type="array">
-                                <item name="url" xsi:type="url" path="yoast/image/upload"/>
-                                <item name="formData" xsi:type="array">
-                                    <item name="yoast_image_key" xsi:type="string">yoast_twitter_image</item>
-                                </item>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Description</label>
+                    <dataScope>yoast_facebook_description</dataScope>
+                </settings>
+            </field>
+            <field name="yoast_facebook_image" formElement="fileUploader">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">page</item>
+                        <item name="uploaderConfig" xsi:type="array">
+                            <item name="allowedExtensions" xsi:type="string">jpg,jpeg,gif,png</item>
+                            <item name="url" xsi:type="url" path="yoastseo/image/upload"/>
+                            <item name="formData" xsi:type="array">
+                                <item name="yoast_image_key" xsi:type="string">yoast_facebook_image</item>
                             </item>
                         </item>
-                    </argument>
-                </field>
-            </fieldset>
-        </container>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Image</label>
+                    <dataScope>yoast_facebook_image</dataScope>
+                </settings>
+            </field>
+        </fieldset>
+        <fieldset name="yoast_twitter">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string"></item>
+                    <item name="collapsible" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+            <field name="yoast_twitter_title" formElement="input">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">page</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Title</label>
+                    <dataScope>yoast_twitter_title</dataScope>
+                </settings>
+            </field>
+            <field name="yoast_twitter_description" formElement="textarea">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">page</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Description</label>
+                    <dataScope>yoast_twitter_description</dataScope>
+                </settings>
+            </field>
+            <field name="yoast_twitter_image" formElement="fileUploader">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">page</item>
+                        <item name="uploaderConfig" xsi:type="array">
+                            <item name="url" xsi:type="url" path="yoastseo/image/upload"/>
+                            <item name="formData" xsi:type="array">
+                                <item name="yoast_image_key" xsi:type="string">yoast_twitter_image</item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Image</label>
+                    <dataScope>yoast_twitter_image</dataScope>
+                </settings>
+            </field>
+        </fieldset>
+        <field name="yoast_robots_instructions" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">page</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Robots</label>
+                <dataScope>yoast_robots_instructions</dataScope>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="MaxServ\YoastSeo\Model\Entity\Attribute\Source\Robots" />
+                    </settings>
+                </select>
+            </formElements>
+        </field>
     </fieldset>
 </form>

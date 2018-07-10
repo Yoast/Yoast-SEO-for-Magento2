@@ -1,0 +1,6 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="MaxServ_YoastSeo::admin" title="YoastSEO" translate="title" module="MaxServ_YoastSeo" sortOrder="100" parent="Magento_Backend::marketing" resource="MaxServ_YoastSeo::admin"/>
+        <add id="MaxServ_YoastSeo::templates" title="Analysis Templates" translate="title" module="MaxServ_YoastSeo" sortOrder="10" parent="MaxServ_YoastSeo::admin" resource="MaxServ_YoastSeo::admin" action="yoastseo/templates/index"/>
+    </menu>
+</config>

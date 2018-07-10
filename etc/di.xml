@@ -1,26 +1,87 @@
-<?xml version="1.0"?>
-<!--
-  ~ NOTICE OF LICENSE
-  ~
-  ~ This source file is subject to the General Public License (GPL 3.0).
-  ~ This license is available through the world-wide-web at this URL:
-  ~ http://opensource.org/licenses/gpl-3.0.en.php
-  ~
-  ~ DISCLAIMER
-  ~
-  ~ Do not edit or add to this file if you wish to upgrade this module to newer
-  ~ versions in the future.
-  ~
-  ~ @category    Maxserv: MaxServ_YoastSeo
-  ~ @package     Maxserv: MaxServ_YoastSeo
-  ~ @author      Vincent Hornikx <vincent.hornikx@maxserv.com>
-  ~ @copyright   Copyright (c) 2017 MaxServ (http://www.maxserv.com)
-  ~ @license     http://opensource.org/licenses/gpl-3.0.en.php General Public License (GPL 3.0)
-  ~
-  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="MaxServ\YoastSeo\Api\Data\AnalysisTemplateInterface" type="MaxServ\YoastSeo\Model\Analysis\Template" />
+    <preference for="MaxServ\YoastSeo\Api\Data\AnalysisTemplateSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+    <preference for="MaxServ\YoastSeo\Api\AnalysisTemplateRepositoryInterface" type="MaxServ\YoastSeo\Model\AnalysisTemplateRepository" />
 
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="yoastseo_analysis_templates_listing_data_source" xsi:type="string">MaxServ\YoastSeo\Model\ResourceModel\Analysis\Template\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="MaxServ\YoastSeo\Model\ResourceModel\Analysis\Template\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="const">MaxServ\YoastSeo\Api\Data\AnalysisTemplateInterface::TABLE</argument>
+            <argument name="eventPrefix" xsi:type="string">yoastseo_analysis_template_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">yoastseo_analysis_template_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">MaxServ\YoastSeo\Model\ResourceModel\Analysis\Template</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\Model\Entity\RepositoryFactory">
+        <arguments>
+            <argument name="entities" xsi:type="array">
+                <item name="MaxServ\YoastSeo\Api\Data\AnalysisTemplateInterface" xsi:type="string">MaxServ\YoastSeo\Api\AnalysisTemplateRepositoryInterface</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\MetadataPool">
+        <arguments>
+            <argument name="metadata" xsi:type="array">
+                <item name="MaxServ\YoastSeo\Api\Data\AnalysisTemplateInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="const">MaxServ\YoastSeo\Api\Data\AnalysisTemplateInterface::TABLE</item>
+                    <item name="identifierField" xsi:type="const">MaxServ\YoastSeo\Api\Data\AnalysisTemplateInterface::KEY_TEMPLATE_ID</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\Operation\ExtensionPool">
+        <arguments>
+            <argument name="extensionActions" xsi:type="array">
+                <item name="Magento\Catalog\Api\Data\ProductInterface" xsi:type="array">
+                    <item name="delete" xsi:type="array">
+                        <item name="onDeleteCreateRedirect" xsi:type="string">MaxServ\YoastSeo\EntityManager\Operation\Extension\Catalog\Product\Delete\RewriteHandler</item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\HydratorPool">
+        <arguments>
+            <argument name="hydrators" xsi:type="array">
+                <item name="MaxServ\YoastSeo\Api\Data\AnalysisTemplateInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="MaxServ\YoastSeo\Setup\UpgradeData">
+        <arguments>
+            <argument name="templates" xsi:type="array">
+                <item name="catalog_product" xsi:type="array">
+                    <item name="entity_type" xsi:type="string">catalog_product</item>
+                    <item name="content" xsi:type="string">
+                        <![CDATA[<h1>{{name reader='text'}}</h1>
+<div>{{description reader='wysiwyg'}}</div>
+<div class="gallery">{{product_images provider='product_images'}}</div>]]>
+                    </item>
+                </item>
+                <item name="catalog_category" xsi:type="array">
+                    <item name="entity_type" xsi:type="string">catalog_category</item>
+                    <item name="content" xsi:type="string">
+                        <![CDATA[<h1>{{name reader='text'}}</h1>
+<div>{{description reader='wysiwyg'}}</div>
+<div>{{landing_page reader='category_landing_page'}}</div>]]>
+                    </item>
+                </item>
+                <item name="cms_page" xsi:type="array">
+                    <item name="entity_type" xsi:type="string">cms_page</item>
+                    <item name="content" xsi:type="string">
+                        <![CDATA[<h1>{{title reader='text'}}</h1>
+<div>{{content reader='wysiwyg'}}</div>]]>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
     <virtualType name="MaxServ\YoastSeo\Model\ImageUploader" type="Magento\Catalog\Model\ImageUploader">
         <arguments>
             <argument name="baseTmpPath" xsi:type="string">yoast/tmp</argument>
@@ -33,77 +94,28 @@
             </argument>
         </arguments>
     </virtualType>
-    <type name="MaxServ\YoastSeo\Controller\Adminhtml\Image\Upload">
+    <type name="MaxServ\YoastSeo\Model\Entity\Configuration\Cms\PageConfiguration">
         <arguments>
-            <argument name="imageUploader" xsi:type="object">MaxServ\YoastSeo\Model\ImageUploader</argument>
+            <argument name="metaProvider" xsi:type="object">MaxServ\YoastSeo\Model\Entity\Configuration\Cms\PageMetaProvider</argument>
         </arguments>
     </type>
-    <type name="MaxServ\YoastSeo\Plugin\Cms\PagePlugin">
+    <type name="MaxServ\YoastSeo\Model\Entity\Configuration\Catalog\ProductConfiguration">
         <arguments>
-            <argument name="imageUploader" xsi:type="object">MaxServ\YoastSeo\Model\ImageUploader</argument>
+            <argument name="metaProvider" xsi:type="object">MaxServ\YoastSeo\Model\Entity\Configuration\Catalog\ProductMetaProvider</argument>
         </arguments>
     </type>
-    <type name="MaxServ\YoastSeo\Model\Attribute\Backend\Image">
+    <type name="MaxServ\YoastSeo\Model\Entity\Configuration\Catalog\CategoryConfiguration">
         <arguments>
-            <argument name="imageUploader" xsi:type="object">MaxServ\YoastSeo\Model\ImageUploader</argument>
+            <argument name="metaProvider" xsi:type="object">MaxServ\YoastSeo\Model\Entity\Configuration\Catalog\CategoryMetaProvider</argument>
         </arguments>
     </type>
-    <virtualType name="MaxServ\YoastSeo\Model\EntityConfiguration\Catalog\ProductConfiguration" type="MaxServ\YoastSeo\Model\EntityConfiguration">
-        <arguments>
-            <argument name="entityName" xsi:type="string">catalog_product</argument>
-            <argument name="entityLabel" xsi:type="string">Product</argument>
-            <argument name="defaultTemplate" xsi:type="string">
-                <![CDATA[<h1>{{name}}</h1>
-<p>{{description}}</p>
-<p>{{images}}</p>]]>
-            </argument>
-            <argument name="templateProcessor" xsi:type="string">MaxServ\YoastSeo\Model\EntityConfiguration\Catalog\Product\TemplateProcessor</argument>
-            <argument name="imageProvider" xsi:type="string">MaxServ\YoastSeo\Model\EntityConfiguration\Catalog\Product\ImageProvider</argument>
-            <argument name="metaProvider" xsi:type="string">MaxServ\YoastSeo\Model\EntityConfiguration\Catalog\Product\MetaProvider</argument>
-            <argument name="isRequired" xsi:type="boolean">true</argument>
-        </arguments>
-    </virtualType>
-    <virtualType name="MaxServ\YoastSeo\Model\EntityConfiguration\Catalog\CategoryConfiguration" type="MaxServ\YoastSeo\Model\EntityConfiguration">
-        <arguments>
-            <argument name="entityName" xsi:type="string">catalog_category</argument>
-            <argument name="entityLabel" xsi:type="string">Category</argument>
-            <argument name="defaultTemplate" xsi:type="string">
-                <![CDATA[<h1>{{name}}</h1>
-<p>{{description}}</p>
-<p>{{images}}</p>]]>
-            </argument>
-            <argument name="templateProcessor" xsi:type="string">MaxServ\YoastSeo\Model\EntityConfiguration\Catalog\Category\TemplateProcessor</argument>
-            <argument name="imageProvider" xsi:type="string">MaxServ\YoastSeo\Model\EntityConfiguration\Catalog\Category\ImageProvider</argument>
-            <argument name="metaProvider" xsi:type="string">MaxServ\YoastSeo\Model\EntityConfiguration\Catalog\Category\MetaProvider</argument>
-            <argument name="isRequired" xsi:type="boolean">true</argument>
-        </arguments>
-    </virtualType>
-    <virtualType name="MaxServ\YoastSeo\Model\EntityConfiguration\Cms\PageConfiguration" type="MaxServ\YoastSeo\Model\EntityConfiguration">
-        <arguments>
-            <argument name="entityName" xsi:type="string">cms_page</argument>
-            <argument name="entityLabel" xsi:type="string">CMS Page</argument>
-            <argument name="defaultTemplate" xsi:type="string">
-                <![CDATA[<h1>{{title}}</h1>
-<p>{{content}}</p>]]>
-            </argument>
-            <argument name="templateProcessor" xsi:type="string">MaxServ\YoastSeo\Model\EntityConfiguration\Cms\Page\TemplateProcessor</argument>
-            <argument name="imageProvider" xsi:type="string">MaxServ\YoastSeo\Model\EntityConfiguration\Cms\Page\ImageProvider</argument>
-            <argument name="metaProvider" xsi:type="string">MaxServ\YoastSeo\Model\EntityConfiguration\Cms\Page\MetaProvider</argument>
-            <argument name="isRequired" xsi:type="boolean">true</argument>
-        </arguments>
-    </virtualType>
     <type name="MaxServ\YoastSeo\Model\EntityConfigurationPool">
         <arguments>
             <argument name="entityConfigurations" xsi:type="array">
-                <item name="catalog_product" xsi:type="object">MaxServ\YoastSeo\Model\EntityConfiguration\Catalog\ProductConfiguration</item>
-                <item name="catalog_category" xsi:type="object">MaxServ\YoastSeo\Model\EntityConfiguration\Catalog\CategoryConfiguration</item>
-                <item name="cms_page" xsi:type="object">MaxServ\YoastSeo\Model\EntityConfiguration\Cms\PageConfiguration</item>
+                <item name="cms_page_form" xsi:type="object">MaxServ\YoastSeo\Model\Entity\Configuration\Cms\PageConfiguration</item>
+                <item name="product_form" xsi:type="object">MaxServ\YoastSeo\Model\Entity\Configuration\Catalog\ProductConfiguration</item>
+                <item name="category_form" xsi:type="object">MaxServ\YoastSeo\Model\Entity\Configuration\Catalog\CategoryConfiguration</item>
             </argument>
-        </arguments>
-    </type>
-    <type name="MaxServ\YoastSeo\Helper\Analysis\TemplatesHelper">
-        <arguments>
-            <argument name="entityConfigurationPool" xsi:type="object">MaxServ\YoastSeo\Model\EntityConfigurationPool</argument>
         </arguments>
     </type>
 </config>

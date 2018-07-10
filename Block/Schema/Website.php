@@ -1,23 +1,4 @@
 <?php
-/**
- * NOTICE OF LICENSE
- *
- * This source file is subject to the General Public License (GPL 3.0).
- * This license is available through the world-wide-web at this URL:
- * http://opensource.org/licenses/gpl-3.0.en.php
- *
- * DISCLAIMER
- *
- * Do not edit or add to this file if you wish to upgrade this module to newer
- * versions in the future.
- *
- * @category    Maxserv: MaxServ_YoastSeo
- * @package     Maxserv: MaxServ_YoastSeo
- * @author      Vincent Hornikx <vincent.hornikx@maxserv.com>
- * @copyright   Copyright (c) 2017 MaxServ (http://www.maxserv.com)
- * @license     http://opensource.org/licenses/gpl-3.0.en.php General Public License (GPL 3.0)
- *
- */
 
 namespace MaxServ\YoastSeo\Block\Schema;
 
@@ -26,7 +7,9 @@ use Magento\Store\Model\ScopeInterface;
 
 class Website extends Template
 {
-
+    /**
+     * @return string
+     */
     public function getSchema()
     {
         $schema = [
@@ -34,11 +17,13 @@ class Website extends Template
             '@type' => 'WebSite',
             'url' => $this->getBaseUrl()
         ];
-
         if ($this->isSitelinkSearchboxAvailable()) {
+            $searchUrl = $this->getUrl('catalogsearch/result');
+            $searchUrl .= '?q={search_term_string}';
+
             $schema['potentialAction'] = [
                 '@type' => 'SearchAction',
-                'target' => $this->getUrl('catalogsearch/result') . '?q={search_term_string}',
+                'target' => $searchUrl,
                 'query-input' => 'required name=search_term_string'
             ];
         }
@@ -46,8 +31,14 @@ class Website extends Template
         return json_encode($schema);
     }
 
+    /**
+     * @return bool
+     */
     public function isSitelinkSearchboxAvailable()
     {
-        return (bool)$this->_scopeConfig->getValue('web/seo/sitelink_searchbox', ScopeInterface::SCOPE_STORE);
+        return (bool)$this->_scopeConfig->getValue(
+            'yoastseo/general/enable_sitelink_searchbox',
+            ScopeInterface::SCOPE_STORES
+        );
     }
 }

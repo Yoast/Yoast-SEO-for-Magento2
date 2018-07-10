@@ -2,8 +2,10 @@
   "name": "maxserv/magento-module-yoastseo",
   "description": "Yoast SEO integration by MaxServ",
   "require": {
-    "php": "~5.6.0|7.0.2|~7.0.6|~7.1.0",
-    "magento/framework": "*"
+    "magento/framework": "^101.0.0",
+    "magento/module-catalog": "*",
+    "magento/module-cms": "*",
+    "magento/module-config": "*"
   },
   "suggest": {
   },
