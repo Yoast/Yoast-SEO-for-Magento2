@@ -102,4 +102,12 @@ class Init extends Template
 
         return $this->getData('store');
     }
+
+    /**
+     * @return string
+     */
+    public function getStoreBaseUrl()
+    {
+        return $this->getStore()->getBaseUrl();
+    }
 }

@@ -5,7 +5,7 @@
     window.yoastBoxConfig = {
         enableMetaKeywords: false,
         locale: "<?php echo $block->getLocale(); ?>",
-        baseUrl: "<?php echo $block->getBaseUrl(); ?>",
+        baseUrl: "<?php echo $block->getStoreBaseUrl(); ?>",
         configUrl: "<?php echo $block->getUrl("yoastseo/editor/config"); ?>",
         uploadUrl: "<?php echo $block->getUrl("yoastseo/image/upload"); ?>",
         wysiwygUrl: "<?php echo $block->getStoreUrl('yoastseo/render/wysiwyg'); ?>",
