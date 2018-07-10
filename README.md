@@ -5,7 +5,7 @@ We have developed this advanced SEO module in close cooperation with YOAST inc.
 It incorporates the YOAST library into Magento2.
 
 ## Requirements
-Magento 2.2.*
+Magento 2.2.* OpenSource. This version of the module has not yet been tested on Magento 2 Commerce, use at own risk!
 
 ## Installation
 This module can be installed using composer. 
@@ -18,7 +18,7 @@ composer require maxserv/magento-module-yoastseo
 #### GitHub
 If you do not have access to packagist, you need to add our GitHub repository to your composer configuration:
 ```bash
-composer config repositories.yoastseo git https://github.com/Yoast/magento-seo
+composer config repositories.yoastseo git https://github.com/Yoast/Yoast-SEO-for-Magento2
 ```
 
 #### Download
