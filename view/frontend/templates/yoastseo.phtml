@@ -56,7 +56,7 @@ if ($meta) {
         <meta name="twitter:creator" content="<?php echo $block->getTwitterCreator(); ?>"/>
     <?php endif; ?>
     <meta name="twitter:title" content="<?php echo $meta->getTwitterTitle(); ?>"/>
-    <meta name="twitter:description" content="<?php echo $meta->getTwitterDescription(); ?>"/>
+    <meta name="twitter:description" content="<?php echo strip_tags($meta->getTwitterDescription()); ?>"/>
     <?php if ($twitterImage): ?>
         <meta name="twitter:image" content="<?php echo $twitterImage; ?>"/>
     <?php endif; ?>
