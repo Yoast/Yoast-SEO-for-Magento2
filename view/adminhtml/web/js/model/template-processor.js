@@ -130,7 +130,6 @@ define([
             uiRegistry
                 .promise({index: index})
                 .done(function (field) {
-                    console.log(field, element);
                     if (field && field.value && ko.isObservable(field.value)) {
                         element.field = field;
                         field.value.subscribe(this.scheduleUpdate.bind(this));

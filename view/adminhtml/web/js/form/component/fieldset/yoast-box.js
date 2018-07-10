@@ -75,7 +75,6 @@ define([
             this.app = new YoastSEO.App({
                 snippetPreview: this.snippetPreview,
                 contentAnalysisActive: true,
-                seoAssessor: YoastSEO.magentoAssessor,
                 locale: locale,
                 targets: {
                     output: 'yoastBox-focusKeywordOutput',
