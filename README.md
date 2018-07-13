@@ -95,7 +95,7 @@ Placeholders are defined with double handlebars:
 |```<provider>```|```product_images```|
 |```<default>```|Any value|
 
-At least one of <reader>, <provider> or <default> must be configured.
+At least one of ```<reader>```, ```<provider>``` or ```<default>``` must be configured.
 
 ### Readers
 #### Text
