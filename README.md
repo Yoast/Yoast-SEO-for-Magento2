@@ -85,15 +85,17 @@ You can find the analysis templates by navigating to Marketing -> YoastSEO -> An
 The template consists of plain HTML and placeholders for attributes. 
 Placeholders are defined with double handlebars:
 ```
-{{<attribute_code> reader='<reader>'[ provider='<provider>'][ default='<default>']}}
+{{<attribute_code>[ reader='<reader>'][ provider='<provider>'][ default='<default>']}}
 ```
 
 |Part|Possible values|
 |---|---|
-|```attribute_code```|Any valid attribute code (with some exceptions)|
-|```reader```|```text```,```wysiwyg```,```cms_block```,```category_landing_page```|
-|```provider```|```product_images```|
-|```default```|Any value|
+|```<attribute_code>```|Any valid attribute code (with some exceptions)|
+|```<reader>```|```text```,```wysiwyg```,```cms_block```,```category_landing_page```|
+|```<provider>```|```product_images```|
+|```<default>```|Any value|
+
+At least one of <reader>, <provider> or <default> must be configured.
 
 ### Readers
 #### Text
