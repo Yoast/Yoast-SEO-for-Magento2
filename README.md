@@ -5,6 +5,7 @@
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Configuration](#configuration)
+- [Analysis Templates](#analysis-templates)
 
 ## Introduction
 We have developed this advanced SEO module in close cooperation with YOAST inc. 
