@@ -78,7 +78,7 @@ If for some reason you can't use composer then please follow these steps:
 You can find the configuration by navigating to Stores -> Configuration in the main menu. 
 In the configuration sections select 'YoastSEO' and then click on 'SEO Settings'.
 
-##Analysis templates
+## Analysis templates
 You can find the analysis templates by navigating to Marketing -> YoastSEO -> Analysis Templates using the main menu.
 
 ### Template format
