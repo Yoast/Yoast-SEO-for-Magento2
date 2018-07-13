@@ -42,7 +42,7 @@ You'll find the analyis tool in the edit forms of these entities:
 ### Customize analysis templates
 If you have custom attributes which contain content, we've got you covered.
 You can edit the analysis templates to include you own custom attributes.
-Read more on how to configure analysis templates [here](##analysis-templates).
+Read more on how to configure analysis templates [here](#analysis-templates).
 
 ### Create redirects for deleted products
 Normally a product URL will generate a 404 page after you delete the product.
