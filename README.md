@@ -1,10 +1,10 @@
 # Yoast SEO for Magento 2 (by MaxServ)
 
-- [Introduction](##Introduction)
-- [Features](##Features)
-- [Requirements](##Requirements)
-- [Installation](##Installation)
-- [Configuration](##Configuration)
+- [Introduction](##.Introduction)
+- [Features](##.Features)
+- [Requirements](##.Requirements)
+- [Installation](##.Installation)
+- [Configuration](##.Configuration)
 
 ## Introduction
 We have developed this advanced SEO module in close cooperation with YOAST inc. 
