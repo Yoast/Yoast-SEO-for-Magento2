@@ -124,12 +124,13 @@ The product images provider reads the product media gallery and renders the imag
 
 ###Template processing 
 For each placeholder, the template processor will try to retrieve content based on the placeholder configuration. 
-The following steps are treated in an ```if, else if, else if``` manner
+The following steps are treated in an ```if, else if, else if, else``` manner
 
 - If a form input component can be found based on the attribute code, **and** a reader has been defined, 
 the template processor will instruct the reader to process the input component's value.
 - If a form input component can be found based on the attribute code, the input component's value is returned.
 - If a form input component could exist but doesn't exist yet (JIT fieldset rendering), 
 **and** the entity already had a value for that attribute code, then that value is returned.
+- If a provider has been configured, the provider is instructed to return a value.
 - If the placeholder has a default value configured, the default value is returned.
-- 
+- A blank value is returned.
