@@ -131,6 +131,6 @@ the template processor will instruct the reader to process the input component's
 - If a form input component can be found based on the attribute code, the input component's value is returned.
 - If a form input component could exist but doesn't exist yet (JIT fieldset rendering), 
 **and** the entity already had a value for that attribute code, then that value is returned.
-- If a provider has been configured, the provider is instructed to return a value.
-- If the placeholder has a default value configured, the default value is returned.
+- If a provider has been configured, the provider is instructed to return a value. The attribute code does not have to exist.
+- If the placeholder has a default value configured, the default value is returned. The attribute code does not have to exist.
 - A blank value is returned.
