@@ -98,11 +98,11 @@ define([
                     case (this.formData.hasOwnProperty(element.index)):
                         promises.push(this.formData[element.index]);
                         break;
-                    case (element.hasOwnProperty('default')):
-                        promises.push(element.default);
-                        break;
                     case (element.hasOwnProperty('provider') && this.providers.hasOwnProperty(element.provider)):
                         promises.push(this.providers[element.provider].promise());
+                        break;
+                    case (element.hasOwnProperty('default')):
+                        promises.push(element.default);
                         break;
                     default:
                         promises.push('');
