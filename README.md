@@ -119,7 +119,7 @@ and will only render anything if the category display mode has been set to eithe
 If this is the case, this reader will pull content from the 'Add CMS Block' field in the 'Content' section of the category form. 
 
 ### Providers
-Use a provider in conjunction with a non-existent attribute code to provide data to the template processor
+Use a provider in conjunction with a nonexistent attribute code to provide data to the template processor
 which can not be read from other form fields. A provider should return plain HTML which requires no more processing. 
 
 #### Product Images 
