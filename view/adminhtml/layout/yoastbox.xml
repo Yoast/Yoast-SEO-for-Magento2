@@ -3,7 +3,7 @@
         <css src="MaxServ_YoastSeo::css/vendor/yoast-seo.min.css" />
     </head>
     <body>
-        <referenceContainer name="content">
+        <referenceContainer name="main.col">
             <block class="MaxServ\YoastSeo\Block\Adminhtml\Score" name="yoast.score" template="MaxServ_YoastSeo::score.phtml" before="-" />
         </referenceContainer>
         <referenceContainer name="before.body.end">
