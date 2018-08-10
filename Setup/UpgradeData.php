@@ -142,6 +142,7 @@ class UpgradeData implements UpgradeDataInterface
             'label' => 'Yoast Focus Keyword',
             'input' => 'text',
             'global' => 'store',
+            'group' => 'Search Engine Optimization',
             'required' => false
         ]);
 
@@ -150,6 +151,7 @@ class UpgradeData implements UpgradeDataInterface
             'label' => 'Yoast Keyword Score',
             'input' => 'text',
             'global' => 'store',
+            'group' => 'Search Engine Optimization',
             'required' => false
         ]);
 
@@ -158,6 +160,7 @@ class UpgradeData implements UpgradeDataInterface
             'label' => 'Yoast Content Score',
             'input' => 'text',
             'global' => 'store',
+            'group' => 'Search Engine Optimization',
             'required' => false
         ]);
 
@@ -167,6 +170,7 @@ class UpgradeData implements UpgradeDataInterface
             'input' => 'select',
             'source' => 'MaxServ\YoastSeo\Model\Entity\Attribute\Source\Robots',
             'global' => 'store',
+            'group' => 'Search Engine Optimization',
             'required' => false
         ]);
 
@@ -175,6 +179,7 @@ class UpgradeData implements UpgradeDataInterface
             'label' => 'Yoast Facebook Title',
             'input' => 'text',
             'global' => 'store',
+            'group' => 'Search Engine Optimization',
             'required' => false
         ]);
 
@@ -183,6 +188,7 @@ class UpgradeData implements UpgradeDataInterface
             'label' => 'Yoast Facebook Description',
             'input' => 'textarea',
             'global' => 'store',
+            'group' => 'Search Engine Optimization',
             'required' => false
         ]);
 
@@ -192,6 +198,7 @@ class UpgradeData implements UpgradeDataInterface
             'frontend' => 'Magento\Catalog\Model\Product\Attribute\Frontend\Image',
             'input' => 'media_image',
             'global' => 'store',
+            'group' => 'Search Engine Optimization',
             'required' => false
         ]);
 
@@ -208,6 +215,7 @@ class UpgradeData implements UpgradeDataInterface
             'label' => 'Yoast Twitter Description',
             'input' => 'textarea',
             'global' => 'store',
+            'group' => 'Search Engine Optimization',
             'required' => false
         ]);
 
@@ -217,6 +225,7 @@ class UpgradeData implements UpgradeDataInterface
             'frontend' => 'Magento\Catalog\Model\Product\Attribute\Frontend\Image',
             'input' => 'media_image',
             'global' => 'store',
+            'group' => 'Search Engine Optimization',
             'required' => false
         ]);
     }
@@ -232,6 +241,7 @@ class UpgradeData implements UpgradeDataInterface
             'label' => 'Yoast Focus Keyword',
             'input' => 'text',
             'global' => 'store',
+            'group' => 'Search Engine Optimization',
             'required' => false
         ]);
 
@@ -240,6 +250,7 @@ class UpgradeData implements UpgradeDataInterface
             'label' => 'Yoast Keyword Score',
             'input' => 'text',
             'global' => 'store',
+            'group' => 'Search Engine Optimization',
             'required' => false
         ]);
 
@@ -248,6 +259,7 @@ class UpgradeData implements UpgradeDataInterface
             'label' => 'Yoast Content Score',
             'input' => 'text',
             'global' => 'store',
+            'group' => 'Search Engine Optimization',
             'required' => false
         ]);
 
@@ -257,6 +269,7 @@ class UpgradeData implements UpgradeDataInterface
             'input' => 'select',
             'source' => 'MaxServ\YoastSeo\Model\Entity\Attribute\Source\Robots',
             'global' => 'store',
+            'group' => 'Search Engine Optimization',
             'required' => false
         ]);
 
@@ -265,6 +278,7 @@ class UpgradeData implements UpgradeDataInterface
             'label' => 'Yoast Facebook Title',
             'input' => 'text',
             'global' => 'store',
+            'group' => 'Search Engine Optimization',
             'required' => false
         ]);
 
@@ -273,6 +287,7 @@ class UpgradeData implements UpgradeDataInterface
             'label' => 'Yoast Facebook Description',
             'input' => 'textarea',
             'global' => 'store',
+            'group' => 'Search Engine Optimization',
             'required' => false
         ]);
 
@@ -282,6 +297,7 @@ class UpgradeData implements UpgradeDataInterface
             'frontend' => 'Magento\Catalog\Model\Product\Attribute\Frontend\Image',
             'input' => 'media_image',
             'global' => 'store',
+            'group' => 'Search Engine Optimization',
             'required' => false
         ]);
 
@@ -290,6 +306,7 @@ class UpgradeData implements UpgradeDataInterface
             'label' => 'Yoast Twitter Title',
             'input' => 'text',
             'global' => 'store',
+            'group' => 'Search Engine Optimization',
             'required' => false
         ]);
 
@@ -298,6 +315,7 @@ class UpgradeData implements UpgradeDataInterface
             'label' => 'Yoast Twitter Description',
             'input' => 'textarea',
             'global' => 'store',
+            'group' => 'Search Engine Optimization',
             'required' => false
         ]);
 
@@ -307,6 +325,7 @@ class UpgradeData implements UpgradeDataInterface
             'frontend' => 'Magento\Catalog\Model\Product\Attribute\Frontend\Image',
             'input' => 'media_image',
             'global' => 'store',
+            'group' => 'Search Engine Optimization',
             'required' => false
         ]);
     }
