@@ -3,51 +3,19 @@
 namespace MaxServ\YoastSeo\Model\ResourceModel\Analysis\Template;
 
 use Magento\Framework\App\Request\DataPersistorInterface;
-use Magento\Framework\App\RequestInterface;
-use Magento\Framework\Exception\NoSuchEntityException;
-use Magento\Framework\Filesystem\Directory\ReadInterface;
-use Magento\Store\Model\StoreManagerInterface;
 use Magento\Ui\DataProvider\AbstractDataProvider;
-use MaxServ\YoastSeo\Api\Data\AnalysisTemplateInterface;
-use MaxServ\YoastSeo\Model\ResourceModel\Analysis\Template\Collection;
-use MaxServ\YoastSeo\Model\ResourceModel\Analysis\Template\CollectionFactory;
 
 class DataProvider extends AbstractDataProvider
 {
     /**
-     * @var RequestInterface
+     * @var Collection
      */
-    protected $request;
+    protected $collection;
 
     /**
      * @var DataPersistorInterface
      */
     protected $dataPersistor;
-
-    /**
-     * @var LocationRepositoryInterface
-     */
-    protected $locationRepository;
-
-    /**
-     * @var LocationInterfaceFactory
-     */
-    protected $locationFactory;
-
-    /**
-     * @var StoreManagerInterface
-     */
-    protected $storeManager;
-
-    /**
-     * @var ReadInterface
-     */
-    protected $mediaDirectory;
-
-    /**
-     * @var Config
-     */
-    protected $config;
 
     /**
      * @var array
@@ -58,9 +26,8 @@ class DataProvider extends AbstractDataProvider
      * @param string $name
      * @param string $primaryFieldName
      * @param string $requestFieldName
-     * @param RequestInterface $request
-     * @param DataPersistorInterface $dataPersistor
      * @param CollectionFactory $collectionFactory
+     * @param DataPersistorInterface $dataPersistor
      * @param array $meta
      * @param array $data
      */
@@ -68,37 +35,47 @@ class DataProvider extends AbstractDataProvider
         $name,
         $primaryFieldName,
         $requestFieldName,
-        RequestInterface $request,
-        DataPersistorInterface $dataPersistor,
         CollectionFactory $collectionFactory,
+        DataPersistorInterface $dataPersistor,
         array $meta = [],
         array $data = []
     ) {
-        parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
-        $this->request = $request;
-        $this->dataPersistor = $dataPersistor;
-
         $this->collection = $collectionFactory->create();
+        $this->dataPersistor = $dataPersistor;
+        parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
+        $this->meta = $this->prepareMeta($this->meta);
     }
 
     /**
-     * @inheritDoc
+     * Prepares Meta
+     *
+     * @param array $meta
+     * @return array
+     */
+    public function prepareMeta(array $meta)
+    {
+        return $meta;
+    }
+
+    /**
+     * Get data
+     *
+     * @return array
      */
     public function getData()
     {
-        if (!empty($this->loadedData)) {
+        if (isset($this->loadedData)) {
             return $this->loadedData;
         }
-
-        /** @var AnalysisTemplateInterface $template */
-        foreach ($this->getCollection() as $template) {
+        $items = $this->collection->getItems();
+        /** @var \MaxServ\YoastSeo\Model\Analysis\Template $template */
+        foreach ($items as $template) {
             $this->loadedData[$template->getId()] = $template->getData();
         }
 
         $data = $this->dataPersistor->get('yoastseo_template');
         if (!empty($data)) {
-            /** @var LocationInterface $location */
-            $template = $this->locationFactory->create();
+            $template = $this->collection->getNewEmptyItem();
             $template->setData($data);
             $this->loadedData[$template->getId()] = $template->getData();
             $this->dataPersistor->clear('yoastseo_template');

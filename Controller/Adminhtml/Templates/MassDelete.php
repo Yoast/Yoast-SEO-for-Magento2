@@ -33,18 +33,18 @@ class MassDelete extends AbstractAction
      * @param Context $context
      * @param Filter $filter
      * @param AnalysisTemplateRepositoryInterface $templateRepository
-     * @param CollectionFactory $locationCollectionFactory
+     * @param CollectionFactory $templateCollectionFactory
      */
     public function __construct(
         Context $context,
         Filter $filter,
         AnalysisTemplateRepositoryInterface $templateRepository,
-        CollectionFactory $locationCollectionFactory
+        CollectionFactory $templateCollectionFactory
     ) {
         parent::__construct($context);
         $this->filter = $filter;
         $this->templateRepository = $templateRepository;
-        $this->collectionFactory = $locationCollectionFactory;
+        $this->collectionFactory = $templateCollectionFactory;
     }
 
     public function execute()

@@ -15,7 +15,7 @@
             <item name="delete" xsi:type="string">MaxServ\YoastSeo\Block\Adminhtml\Analysis\Template\Edit\DeleteButton</item>
             <item name="reset" xsi:type="string">MaxServ\YoastSeo\Block\Adminhtml\Analysis\Template\Edit\ResetButton</item>
             <item name="save" xsi:type="string">MaxServ\YoastSeo\Block\Adminhtml\Analysis\Template\Edit\SaveButton</item>
-            <item name="save_and_continue" xsi:type="string">MaxServ\YoastSeo\Block\Adminhtml\Location\Edit\SaveAndContinueButton</item>
+            <item name="save_and_continue" xsi:type="string">MaxServ\YoastSeo\Block\Adminhtml\Analysis\Edit\SaveAndContinueButton</item>
         </item>
     </argument>
     <dataSource name="yoastseo_analysis_templates_form_data_source">
