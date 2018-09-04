@@ -1,8 +1,8 @@
 # Yoast SEO for Magento 2 (by MaxServ)
 
 - [Introduction](#introduction)
-- [Features](#features)
 - [Requirements](#requirements)
+- [Features](#features)
 - [Installation](#installation)
 - [Configuration](#configuration)
 - [Analysis Templates](#analysis-templates)
