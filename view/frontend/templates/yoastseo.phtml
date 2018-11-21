@@ -5,7 +5,7 @@ use MaxServ\YoastSeo\Model\Entity\MetaProviderInterface;
 /** @var YoastSeo $block */
 /** @var MetaProviderInterface $meta */
 $meta = $block->getMetaProvider();
-$finalPrice = $block->getFinalPrice();
+$finalPrice = $meta->getProduct()->getFinalPrice();
 
 if ($meta) {
     $openGraphImage = $meta->getOpenGraphImage();
