@@ -2,7 +2,6 @@
   "name": "maxserv/magento-module-yoastseo",
   "description": "Yoast SEO integration by MaxServ",
   "require": {
-    "magento/framework": "^101.0.0",
     "magento/module-catalog": "*",
     "magento/module-cms": "*",
     "magento/module-config": "*"
