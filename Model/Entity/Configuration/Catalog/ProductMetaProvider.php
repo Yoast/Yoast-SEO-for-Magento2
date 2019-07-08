@@ -104,11 +104,7 @@ class ProductMetaProvider extends AbstractMetaProvider
     public function getImage()
     {
         if (empty($this->image)) {
-            $image = $this->imageBuilder
-                ->setProduct($this->getProduct())
-                ->setImageId('product_base_image')
-                ->setAttributes([])
-                ->create();
+            $image = $this->imageBuilder->create($this->getProduct(), 'product_base_image', []);
 
             $this->image = $image->getImageUrl();
         }
