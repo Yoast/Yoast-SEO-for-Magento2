@@ -6,5 +6,6 @@
                 <argument name="entity_type" xsi:type="string">catalog_category</argument>
             </arguments>
         </referenceBlock>
+       
     </body>
 </page>
