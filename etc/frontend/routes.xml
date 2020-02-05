@@ -3,8 +3,5 @@
         <route id="yoastseo" frontName="yoastseo">
             <module name="MaxServ_YoastSeo" />
         </route>
-        <route id="schema" frontName="schema">
-            <module name="MaxServ_YoastSeo" />
-        </route>
     </router>
 </config>
