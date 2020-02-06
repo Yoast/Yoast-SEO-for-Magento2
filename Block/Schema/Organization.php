@@ -34,7 +34,7 @@ class Organization extends Template
             '@type' => 'Organization',
             'url' => $this->getBaseUrl(),
             'name' => $this->getStoreInformation(
-                'general/store_information/company_name'
+                'general/store_information/name'
             ),
             'logo' => $this->getStoreLogo()
         ];
