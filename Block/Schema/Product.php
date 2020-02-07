@@ -210,6 +210,10 @@ class Product extends AbstractProduct
                 $highest = max($highest, $value);
                 $total += $value;
             }
+            
+           // $voteCollectionSize = $voteCollection->getSize();
+           // $voteCollectionSize === 0 ?  $voteCollectionSize = 1 : $voteCollectionSize;
+           if($voteCollection->getSize() != 0){
             $average = $total / $voteCollection->getSize();
             $reviews[] = [
                 '@type' => 'Review',
@@ -227,7 +231,22 @@ class Product extends AbstractProduct
                     'worstRating' => $lowest
                 ]
             ];
+           } else {
+            $reviews[] = [
+                '@type' => 'Review',
+                'author' => $review->getNickname(),
+                'datePublished' => date(
+                    "Y-m-d",
+                    strtotime($review->getCreatedAt())
+                ),
+                'description' => $review->getDetail(),
+                'name' => $review->getTitle()
+                
+            ];
+
+           }
         }
+
 
         return $reviews;
     }
